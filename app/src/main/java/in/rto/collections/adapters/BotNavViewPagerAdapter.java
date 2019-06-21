@@ -60,7 +60,7 @@ public class BotNavViewPagerAdapter extends FragmentPagerAdapter {
             fragments.add(new Fragment_Customer());
             fragments.add(new Reminder_Fragment());
             fragments.add(new Fragment_settings());
-            fragments.add(new Material_Fragment());
+//            fragments.add(new Material_Fragment());
         }
 
         // getSessionData();

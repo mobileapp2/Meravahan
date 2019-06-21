@@ -15,6 +15,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -249,12 +250,12 @@ public class MainDrawer_Activity extends AppCompatActivity implements Navigation
             botNavMaterial = new AHBottomNavigationItem("Vehicle", R.drawable.client_new, R.color.Gunmetal);
             botNavUsers = new AHBottomNavigationItem("Settings", R.drawable.settings_new, R.color.Gunmetal);
             botNavReminder = new AHBottomNavigationItem("Reminder", R.drawable.reminder_new, R.color.Gunmetal);
-            botNavInfo = new AHBottomNavigationItem("Information", R.drawable.information_new, R.color.Gunmetal);
+//            botNavInfo = new AHBottomNavigationItem("Information", R.drawable.information_new, R.color.Gunmetal);
 
             bottomNavigation.addItem(botNavMaterial);
             bottomNavigation.addItem(botNavReminder);
             bottomNavigation.addItem(botNavUsers);
-            bottomNavigation.addItem(botNavInfo);
+//            bottomNavigation.addItem(botNavInfo);
         }
         // Create items
 
@@ -295,183 +296,198 @@ public class MainDrawer_Activity extends AppCompatActivity implements Navigation
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (role.equals("1")) {
+        Menu nav_Menu = navigationView.getMenu();
+        switch (role) {
+            case "1":
+                nav_Menu.findItem(R.id.menu_information).setVisible(false);
 
-            if (id == R.id.menu_profile) {
-                startActivity(new Intent(context, Profile_Activity.class));
-            } else if (id == R.id.menu_pro) {
-                startActivity(new Intent(context, SelectPremiumPlan_Activity.class));
-            } else if (id == R.id.legal_info) {
-                startActivity(new Intent(context, LegalInfo_Activity.class));
-            } else if (id == R.id.menu_notification) {
-                startActivity(new Intent(context, Notification_Activity.class));
-            } else if (id == R.id.menu_masters) {
-                startActivity(new Intent(context, Masters_Activity.class));
-            } else if (id == R.id.menu_contact) {
-                startActivity(new Intent(context, ContactUs_Activity.class));
-            } else if (id == R.id.menu_faq) {
-                startActivity(new Intent(context, FAQ_Activity.class));
-            } else if (id == R.id.menu_logout) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage("Are you sure you want to log out?");
-                builder.setTitle("Alert");
-                builder.setIcon(R.drawable.ic_alert_red_24dp);
-                builder.setCancelable(false);
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        session.logoutUser();
-                    }
-                });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                AlertDialog alertD = builder.create();
-                alertD.show();
-            }
-        } else if (role.equals("2")) {
-            if (id == R.id.menu_profile) {
-                startActivity(new Intent(context, Profile_Activity.class));
-            } else if (id == R.id.menu_pro) {
-                startActivity(new Intent(context, SelectPremiumPlan_Activity.class));
-            } else if (id == R.id.menu_notification) {
-                startActivity(new Intent(context, Notification_Activity.class));
-            } else if (id == R.id.menu_masters) {
-                startActivity(new Intent(context, Masters_Activity.class));
-            } else if (id == R.id.legal_info) {
-                startActivity(new Intent(context, LegalInfo_Activity.class));
-            } else if (id == R.id.menu_contact) {
-                startActivity(new Intent(context, ContactUs_Activity.class));
-            } else if (id == R.id.menu_faq) {
-                startActivity(new Intent(context, FAQ_Activity.class));
-            } else if (id == R.id.menu_logout) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage("Are you sure you want to log out?");
-                builder.setTitle("Alert");
-                builder.setIcon(R.drawable.ic_alert_red_24dp);
-                builder.setCancelable(false);
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        session.logoutUser();
-                    }
-                });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                AlertDialog alertD = builder.create();
-                alertD.show();
-            }
-        } else if (role.equals("4")) {
-            if (id == R.id.menu_profile) {
-                startActivity(new Intent(context, Profile_Activity.class));
-            } else if (id == R.id.menu_pro) {
-                startActivity(new Intent(context, SelectPremiumPlan_Activity.class));
-            } else if (id == R.id.menu_notification) {
-                startActivity(new Intent(context, Notification_Activity.class));
-            } else if (id == R.id.menu_masters) {
-                startActivity(new Intent(context, Masters_Activity.class));
-            } else if (id == R.id.legal_info) {
-                startActivity(new Intent(context, LegalInfo_Activity.class));
-            } else if (id == R.id.menu_contact) {
-                startActivity(new Intent(context, ContactUs_Activity.class));
-            } else if (id == R.id.menu_faq) {
-                startActivity(new Intent(context, FAQ_Activity.class));
-            } else if (id == R.id.menu_logout) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage("Are you sure you want to log out?");
-                builder.setTitle("Alert");
-                builder.setIcon(R.drawable.ic_alert_red_24dp);
-                builder.setCancelable(false);
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        session.logoutUser();
-                    }
-                });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                AlertDialog alertD = builder.create();
-                alertD.show();
-            }
-        } else if (role.equals("6")) {
-            if (id == R.id.menu_profile) {
-                startActivity(new Intent(context, Profile_Activity.class));
-            } else if (id == R.id.menu_pro) {
-                startActivity(new Intent(context, SelectPremiumPlan_Activity.class));
-            } else if (id == R.id.menu_notification) {
-                startActivity(new Intent(context, Notification_Activity.class));
-            } else if (id == R.id.menu_masters) {
-                startActivity(new Intent(context, Masters_Activity.class));
-            } else if (id == R.id.menu_contact) {
-                startActivity(new Intent(context, ContactUs_Activity.class));
-            } else if (id == R.id.menu_faq) {
-                startActivity(new Intent(context, FAQ_Activity.class));
-            } else if (id == R.id.legal_info) {
-                startActivity(new Intent(context, LegalInfo_Activity.class));
-            } else if (id == R.id.menu_logout) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage("Are you sure you want to log out?");
-                builder.setTitle("Alert");
-                builder.setIcon(R.drawable.ic_alert_red_24dp);
-                builder.setCancelable(false);
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        session.logoutUser();
-                    }
-                });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                AlertDialog alertD = builder.create();
-                alertD.show();
-            }
-        } else {
-            if (id == R.id.menu_profile) {
-                startActivity(new Intent(context, Profile_Activity.class));
-            } else if (id == R.id.menu_pro) {
-                startActivity(new Intent(context, SelectPremiumPlan_Activity.class));
-            } else if (id == R.id.menu_notification) {
-                startActivity(new Intent(context, Notification_Activity.class));
-            } else if (id == R.id.menu_masters) {
-                startActivity(new Intent(context, Masters_Activity.class));
-            } else if (id == R.id.menu_contact) {
-                startActivity(new Intent(context, ContactUs_Activity.class));
-            } else if (id == R.id.menu_faq) {
-                startActivity(new Intent(context, FAQ_Activity.class));
-            } else if (id == R.id.legal_info) {
-                startActivity(new Intent(context, LegalInfo_Activity.class));
-            } else if (id == R.id.menu_logout) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage("Are you sure you want to log out?");
-                builder.setTitle("Alert");
-                builder.setIcon(R.drawable.ic_alert_red_24dp);
-                builder.setCancelable(false);
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        session.logoutUser();
-                    }
-                });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                AlertDialog alertD = builder.create();
-                alertD.show();
-            }
+                if (id == R.id.menu_profile) {
+                    startActivity(new Intent(context, Profile_Activity.class));
+                } else if (id == R.id.menu_pro) {
+                    startActivity(new Intent(context, SelectPremiumPlan_Activity.class));
+                } else if (id == R.id.legal_info) {
+                    startActivity(new Intent(context, LegalInfo_Activity.class));
+                } else if (id == R.id.menu_notification) {
+                    startActivity(new Intent(context, Notification_Activity.class));
+                } else if (id == R.id.menu_masters) {
+                    startActivity(new Intent(context, Masters_Activity.class));
+                } else if (id == R.id.menu_contact) {
+                    startActivity(new Intent(context, ContactUs_Activity.class));
+                } else if (id == R.id.menu_faq) {
+                    startActivity(new Intent(context, FAQ_Activity.class));
+                } else if (id == R.id.menu_logout) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage("Are you sure you want to log out?");
+                    builder.setTitle("Alert");
+                    builder.setIcon(R.drawable.ic_alert_red_24dp);
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            session.logoutUser();
+                        }
+                    });
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog alertD = builder.create();
+                    alertD.show();
+                }
+                break;
+            case "2":
+                nav_Menu.findItem(R.id.menu_information).setVisible(false);
+
+                if (id == R.id.menu_profile) {
+                    startActivity(new Intent(context, Profile_Activity.class));
+                } else if (id == R.id.menu_pro) {
+                    startActivity(new Intent(context, SelectPremiumPlan_Activity.class));
+                } else if (id == R.id.menu_notification) {
+                    startActivity(new Intent(context, Notification_Activity.class));
+                } else if (id == R.id.menu_masters) {
+                    startActivity(new Intent(context, Masters_Activity.class));
+                } else if (id == R.id.legal_info) {
+                    startActivity(new Intent(context, LegalInfo_Activity.class));
+                } else if (id == R.id.menu_contact) {
+                    startActivity(new Intent(context, ContactUs_Activity.class));
+                } else if (id == R.id.menu_faq) {
+                    startActivity(new Intent(context, FAQ_Activity.class));
+                } else if (id == R.id.menu_logout) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage("Are you sure you want to log out?");
+                    builder.setTitle("Alert");
+                    builder.setIcon(R.drawable.ic_alert_red_24dp);
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            session.logoutUser();
+                        }
+                    });
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog alertD = builder.create();
+                    alertD.show();
+                }
+                break;
+            case "4":
+                nav_Menu.findItem(R.id.menu_information).setVisible(false);
+                if (id == R.id.menu_profile) {
+                    startActivity(new Intent(context, Profile_Activity.class));
+                } else if (id == R.id.menu_pro) {
+                    startActivity(new Intent(context, SelectPremiumPlan_Activity.class));
+                } else if (id == R.id.menu_notification) {
+                    startActivity(new Intent(context, Notification_Activity.class));
+                } else if (id == R.id.menu_masters) {
+                    startActivity(new Intent(context, Masters_Activity.class));
+                } else if (id == R.id.legal_info) {
+                    startActivity(new Intent(context, LegalInfo_Activity.class));
+                } else if (id == R.id.menu_contact) {
+                    startActivity(new Intent(context, ContactUs_Activity.class));
+                } else if (id == R.id.menu_faq) {
+                    startActivity(new Intent(context, FAQ_Activity.class));
+                } else if (id == R.id.menu_logout) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage("Are you sure you want to log out?");
+                    builder.setTitle("Alert");
+                    builder.setIcon(R.drawable.ic_alert_red_24dp);
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            session.logoutUser();
+                        }
+                    });
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog alertD = builder.create();
+                    alertD.show();
+                }
+                break;
+            case "6":
+                nav_Menu.findItem(R.id.menu_information).setVisible(false);
+                if (id == R.id.menu_profile) {
+                    startActivity(new Intent(context, Profile_Activity.class));
+                } else if (id == R.id.menu_pro) {
+                    startActivity(new Intent(context, SelectPremiumPlan_Activity.class));
+                } else if (id == R.id.menu_notification) {
+                    startActivity(new Intent(context, Notification_Activity.class));
+                } else if (id == R.id.menu_masters) {
+                    startActivity(new Intent(context, Masters_Activity.class));
+                } else if (id == R.id.menu_contact) {
+                    startActivity(new Intent(context, ContactUs_Activity.class));
+                } else if (id == R.id.menu_faq) {
+                    startActivity(new Intent(context, FAQ_Activity.class));
+                } else if (id == R.id.legal_info) {
+                    startActivity(new Intent(context, LegalInfo_Activity.class));
+                } else if (id == R.id.menu_logout) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage("Are you sure you want to log out?");
+                    builder.setTitle("Alert");
+                    builder.setIcon(R.drawable.ic_alert_red_24dp);
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            session.logoutUser();
+                        }
+                    });
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog alertD = builder.create();
+                    alertD.show();
+                }
+                break;
+            default:
+                if (id == R.id.menu_profile) {
+                    startActivity(new Intent(context, Profile_Activity.class));
+                } else if (id == R.id.menu_pro) {
+                    startActivity(new Intent(context, SelectPremiumPlan_Activity.class));
+                } else if (id == R.id.menu_notification) {
+                    startActivity(new Intent(context, Notification_Activity.class));
+                } else if (id == R.id.menu_masters) {
+                    startActivity(new Intent(context, Masters_Activity.class));
+                } else if (id == R.id.menu_contact) {
+                    startActivity(new Intent(context, ContactUs_Activity.class));
+                } else if (id == R.id.menu_faq) {
+                    startActivity(new Intent(context, FAQ_Activity.class));
+                } else if (id == R.id.legal_info) {
+                    startActivity(new Intent(context, LegalInfo_Activity.class));
+                } else if (id == R.id.menu_information) {
+                    startActivity(new Intent(context, Material_Activity.class));
+                } else if (id == R.id.menu_logout) {
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage("Are you sure you want to log out?");
+                    builder.setTitle("Alert");
+                    builder.setIcon(R.drawable.ic_alert_red_24dp);
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            session.logoutUser();
+                        }
+                    });
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog alertD = builder.create();
+                    alertD.show();
+                }
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerlayout);

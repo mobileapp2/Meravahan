@@ -63,6 +63,9 @@
             android:name=".activities.ClientCode"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activities.Material_Activity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activities.RtoAgent_Activity" />
         <activity android:name=".activities.VehicleDealer_Activity" />
         <activity android:name=".activities.Add_Client_Activity" />
@@ -163,7 +166,7 @@
         <activity android:name=".activities.ViewImportCustomerOtherVehicle_Activity" />
         <activity android:name=".activities.ImportVehicleOtherCustomer_Activity" />
         <activity android:name=".activities.LinkCustomerOther_Activity" />
-        <activity android:name=".activities.SelectPremiumPlan_Activity"></activity>
+        <activity android:name=".activities.SelectPremiumPlan_Activity" />
     </application>
 
 </manifest>
