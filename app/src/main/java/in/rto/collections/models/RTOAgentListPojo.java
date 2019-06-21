@@ -21,10 +21,10 @@ public class RTOAgentListPojo implements Serializable {
     private String insurance_policy_no;
     private String insurance_renewal_date;
     private String tax_paid_up_to;
-     private String permit_valid_upto;
-     private String state_permit_valid_upto;
+    private String permit_valid_upto;
+    private String state_permit_valid_upto;
     private String national_permit_valid_upto;
-     private String puc_renewal_date;
+    private String puc_renewal_date;
     private String fittness_valid_upto;
     private String remark;
     private String description;
@@ -52,6 +52,7 @@ public class RTOAgentListPojo implements Serializable {
     public void setIsimport(String isimport) {
         this.isimport = isimport;
     }
+
     public String getIsimport() {
         return isimport;
     }
@@ -59,9 +60,11 @@ public class RTOAgentListPojo implements Serializable {
     public void setIsshowto_dealer(String isshowto_dealer) {
         this.isshowto_dealer = isshowto_dealer;
     }
+
     public String getIsshowto_dealer() {
         return isshowto_dealer;
     }
+
     public String getCreaterName() {
         return createrName;
     }
@@ -73,6 +76,7 @@ public class RTOAgentListPojo implements Serializable {
     public void setIsshowto_customer(String isshowto_customer) {
         this.isshowto_customer = isshowto_customer;
     }
+
     public String getIsshowto_customer() {
         return isshowto_customer;
     }
@@ -81,6 +85,7 @@ public class RTOAgentListPojo implements Serializable {
     public void setImportR(String importR) {
         this.importR = importR;
     }
+
     public String getImportR() {
         return importR;
     }
@@ -102,9 +107,18 @@ public class RTOAgentListPojo implements Serializable {
     public void setState_id(String state_id) {
         this.state_id = state_id;
     }
-    public  String getStateId(){return state_id;}
-    public  String getStateName(){return state_name;}
-    public void setStateName(String state_name){ this.state_name = state_name; }
+
+    public String getStateId() {
+        return state_id;
+    }
+
+    public String getStateName() {
+        return state_name;
+    }
+
+    public void setStateName(String state_name) {
+        this.state_name = state_name;
+    }
 
 
     public String getVehicle_no() {
@@ -190,7 +204,7 @@ public class RTOAgentListPojo implements Serializable {
         this.national_permit_valid_upto = national_permit_valid_upto;
     }
 
- public String getClient_id() {
+    public String getClient_id() {
         return client_id;
     }
 
@@ -339,13 +353,12 @@ public class RTOAgentListPojo implements Serializable {
     }
 
 
-
-
     public static class DocumentListPojo implements Serializable {
         private String document;
         private String document_id;
         private String name;
         private String doc_name;
+
         public String getDocument() {
             return document;
         }
@@ -353,6 +366,7 @@ public class RTOAgentListPojo implements Serializable {
         public void setDocument(String document) {
             this.document = document;
         }
+
         public String getDocument_id() {
             return document_id;
         }
@@ -360,6 +374,7 @@ public class RTOAgentListPojo implements Serializable {
         public void setDocument_id(String document_id) {
             this.document_id = document_id;
         }
+
         public String getName() {
             return name;
         }
@@ -386,7 +401,7 @@ public class RTOAgentListPojo implements Serializable {
     public static class OtherDatesListPojo implements Serializable {
         private String other_date;
         private String other_date_id;
-        private  String text;
+        private String text;
 
         public String getOther_date() {
             return other_date;
@@ -403,9 +418,6 @@ public class RTOAgentListPojo implements Serializable {
         public void setOther_date_id(String other_date_id) {
             this.other_date_id = other_date_id;
         }
-
-
-
 
 
         public String getText() {

@@ -18,14 +18,14 @@ public class BankerDetailsPojo implements Serializable {
     private String vehicle_dealer_name;
     private String loan_amount;
     private String loan_account_number;
-    private String 	installment_amount;
+    private String installment_amount;
     private String date_to_section;
     private String installment_start_date;
-    private String 	installment_end_date;
+    private String installment_end_date;
     private String frequency_id;
     private String frequency;
     private String remark;
-    private String 	vehicle_number;
+    private String vehicle_number;
     private String date_of_purchase;
     private String description;
     private String doc_name;
@@ -68,6 +68,7 @@ public class BankerDetailsPojo implements Serializable {
     public void setIsimport(String isimport) {
         this.isimport = isimport;
     }
+
     public String getIsimport() {
         return isimport;
     }
@@ -75,9 +76,11 @@ public class BankerDetailsPojo implements Serializable {
     public void setIsshowto_dealer(String isshowto_dealer) {
         this.isshowto_dealer = isshowto_dealer;
     }
+
     public String getIsshowto_dealer() {
         return isshowto_dealer;
     }
+
     public String getCreaterName() {
         return createrName;
     }
@@ -89,6 +92,7 @@ public class BankerDetailsPojo implements Serializable {
     public void setIsshowto_customer(String isshowto_customer) {
         this.isshowto_customer = isshowto_customer;
     }
+
     public String getIsshowto_customer() {
         return isshowto_customer;
     }
@@ -97,6 +101,7 @@ public class BankerDetailsPojo implements Serializable {
     public void setImportR(String importR) {
         this.importR = importR;
     }
+
     public String getImportR() {
         return importR;
     }
@@ -118,9 +123,18 @@ public class BankerDetailsPojo implements Serializable {
     public void setBank_id(String bank_id) {
         this.bank_id = bank_id;
     }
-    public  String getBank_id(){return bank_id;}
-    public  String getBank_name(){return bank_name;}
-    public void setBank_name(String bank_name){ this.bank_name = bank_name; }
+
+    public String getBank_id() {
+        return bank_id;
+    }
+
+    public String getBank_name() {
+        return bank_name;
+    }
+
+    public void setBank_name(String bank_name) {
+        this.bank_name = bank_name;
+    }
 
 
     public String getVehicle_no() {
@@ -338,13 +352,12 @@ public class BankerDetailsPojo implements Serializable {
     }
 
 
-
-
     public static class DocumentListPojo implements Serializable {
         private String document;
         private String document_id;
         private String name;
         private String doc_name;
+
         public String getDocument() {
             return document;
         }
@@ -352,6 +365,7 @@ public class BankerDetailsPojo implements Serializable {
         public void setDocument(String document) {
             this.document = document;
         }
+
         public String getDocument_id() {
             return document_id;
         }
@@ -359,6 +373,7 @@ public class BankerDetailsPojo implements Serializable {
         public void setDocument_id(String document_id) {
             this.document_id = document_id;
         }
+
         public String getName() {
             return name;
         }
@@ -385,7 +400,7 @@ public class BankerDetailsPojo implements Serializable {
     public static class OtherDatesListPojo implements Serializable {
         private String other_date;
         private String other_date_id;
-        private  String text;
+        private String text;
 
         public String getOther_date() {
             return other_date;
@@ -402,9 +417,6 @@ public class BankerDetailsPojo implements Serializable {
         public void setOther_date_id(String other_date_id) {
             this.other_date_id = other_date_id;
         }
-
-
-
 
 
         public String getText() {

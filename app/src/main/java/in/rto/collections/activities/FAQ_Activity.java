@@ -1,16 +1,14 @@
 package in.rto.collections.activities;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,17 +17,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.rto.collections.R;
-import in.rto.collections.fragments.Reminder_Fragment;
 import in.rto.collections.fragments.RtoAgent_Faq_Fragment;
-import in.rto.collections.fragments.Self_Fragment;
 import in.rto.collections.fragments.VehicleDealer_Faq_Fragment;
-import in.rto.collections.fragments.Vehicle_Customer_Fragment;
 import in.rto.collections.fragments.customer_Faq_Fragment;
 
 public class FAQ_Activity extends FragmentActivity {
     private Context context;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +35,7 @@ public class FAQ_Activity extends FragmentActivity {
         setupToolbar();
         setEventListner();
     }
+
     private void init() {
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tl_tabnames);
@@ -46,6 +43,7 @@ public class FAQ_Activity extends FragmentActivity {
 
         viewPager.setOffscreenPageLimit(3);
     }
+
     protected void setupToolbar() {
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle("FAQ's");
@@ -79,7 +77,7 @@ public class FAQ_Activity extends FragmentActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new RtoAgent_Faq_Fragment(), "RTO AGENT");
         adapter.addFrag(new VehicleDealer_Faq_Fragment(), "VEHICLE DEALER");
-         adapter.addFrag(new customer_Faq_Fragment(), "CUSTOMER");
+        adapter.addFrag(new customer_Faq_Fragment(), "CUSTOMER");
         viewPager.setAdapter(adapter);
     }
 
@@ -141,7 +139,6 @@ public class FAQ_Activity extends FragmentActivity {
             return mFragmentTitleList.get(position);
         }
     }
-
 
 
 }

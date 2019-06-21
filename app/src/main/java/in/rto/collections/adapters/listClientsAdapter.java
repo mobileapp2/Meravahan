@@ -12,7 +12,6 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,8 +55,7 @@ public class listClientsAdapter extends BaseAdapter implements Filterable {
     }
 
     public ClientMainListPojo getSelected() {
-        for (int i = 0; i<arrayList.size();i++)
-        {
+        for (int i = 0; i < arrayList.size(); i++) {
             if (arrayList.get(i).isChecked())
                 return arrayList.get(i);
         }
@@ -66,12 +64,12 @@ public class listClientsAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-       // Log.i(TAG, "getView() enter");
+        // Log.i(TAG, "getView() enter");
         final ViewHolder holder;
 
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.item_listview_multiple,  parent, false);
+            convertView = inflater.inflate(R.layout.item_listview_multiple, parent, false);
             holder.textView = (TextView) convertView.findViewById(R.id.alertTextView);
             holder.alertCheckbox = (CheckBox) convertView.findViewById(R.id.alertCheckbox);
 
@@ -90,27 +88,24 @@ public class listClientsAdapter extends BaseAdapter implements Filterable {
             public void onClick(View v) {
                 selected = position;
                 arrayList.get(position).setChecked(true);
-                for (int i=0;i<arrayList.size();i++)
-                {
+                for (int i = 0; i < arrayList.size(); i++) {
                     if (i != position)
-                     arrayList.get(i).setChecked(false);
+                        arrayList.get(i).setChecked(false);
                 }
                 notifyDataSetChanged();
             }
         });
-     if (data.isChecked())
-      {
-    holder.textView.setTypeface(null, Typeface.BOLD);
-    holder.alertCheckbox.setChecked(true);
-    //holder.textView.setTextColor(R.color.colorPrimary);
+        if (data.isChecked()) {
+            holder.textView.setTypeface(null, Typeface.BOLD);
+            holder.alertCheckbox.setChecked(true);
+            //holder.textView.setTextColor(R.color.colorPrimary);
 
-      }
-      notifyDataSetChanged();
+        }
+        notifyDataSetChanged();
 
 
         return convertView;
     }
-
 
 
     @SuppressLint("DefaultLocale")
@@ -149,7 +144,7 @@ public class listClientsAdapter extends BaseAdapter implements Filterable {
                 } else {
                     constraint = constraint.toString().toLowerCase();
                     for (int i = 0; i < mOriginalValues.size(); i++) {
-                       // Log.i(TAG, "Filter : " + mOriginalValues.get(i).getName() + " -> " + mOriginalValues.get(i).isSelected());
+                        // Log.i(TAG, "Filter : " + mOriginalValues.get(i).getName() + " -> " + mOriginalValues.get(i).isSelected());
                         String data = mOriginalValues.get(i).getName();
                         if (data.toLowerCase().contains(constraint.toString())) {
                             FilteredArrList.add(mOriginalValues.get(i));

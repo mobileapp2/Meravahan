@@ -17,8 +17,8 @@ public class TyreDetailsPojo implements Serializable {
     private String description;
     private String tyre_no;
     private String tyre_replacement_date;
-    private  String tyre_remounding_date;
-    private  String purchase_date;
+    private String tyre_remounding_date;
+    private String purchase_date;
     private String updated_by;
     private String created_by;
     private String created_at;
@@ -38,9 +38,18 @@ public class TyreDetailsPojo implements Serializable {
     public void setState_id(String state_id) {
         this.state_id = state_id;
     }
-    public  String getStateId(){return state_id;}
-    public  String getStateName(){return state_name;}
-    public void setStateName(String state_name){ this.state_name = state_name; }
+
+    public String getStateId() {
+        return state_id;
+    }
+
+    public String getStateName() {
+        return state_name;
+    }
+
+    public void setStateName(String state_name) {
+        this.state_name = state_name;
+    }
 
     public void type_id(String type_id) {
         this.type_id = type_id;
@@ -185,11 +194,10 @@ public class TyreDetailsPojo implements Serializable {
     }
 
 
-
-
     public static class DocumentListPojo implements Serializable {
         private String document;
         private String document_id;
+
         public String getDocument() {
             return document;
         }
@@ -197,6 +205,7 @@ public class TyreDetailsPojo implements Serializable {
         public void setDocument(String document) {
             this.document = document;
         }
+
         public String getDocument_id() {
             return document_id;
         }
@@ -214,7 +223,7 @@ public class TyreDetailsPojo implements Serializable {
     public static class OtherDatesListPojo implements Serializable {
         private String other_date;
         private String other_date_id;
-        private  String text;
+        private String text;
 
         public String getOther_date() {
             return other_date;
@@ -231,9 +240,6 @@ public class TyreDetailsPojo implements Serializable {
         public void setOther_date_id(String other_date_id) {
             this.other_date_id = other_date_id;
         }
-
-
-
 
 
         public String getText() {

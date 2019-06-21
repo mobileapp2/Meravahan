@@ -5,29 +5,25 @@ public class FrequencyPojo {
 
     private String feq;
 
-    public String getId ()
-    {
+    public String getId() {
         return id;
     }
 
-    public void setId (String id)
-    {
+    public void setId(String id) {
         this.id = id;
     }
-    public String getFeq ()
-    {
+
+    public String getFeq() {
         return feq;
     }
 
-    public void setFeq (String feq)
-    {
+    public void setFeq(String feq) {
         this.feq = feq;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
 
-        return "ClassPojo [id = "+id+", feq = "+feq+"]";
+        return "ClassPojo [id = " + id + ", feq = " + feq + "]";
     }
 }

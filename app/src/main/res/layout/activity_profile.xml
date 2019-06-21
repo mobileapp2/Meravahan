@@ -146,27 +146,31 @@
                         android:textSize="14sp" />
 
                 </android.support.design.widget.TextInputLayout>
+
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:orientation="horizontal"
                         android:weightSum="1">
-                    <EditText
-                        android:id="@+id/edt_refferal_code"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.8"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:hint="Refferal Code"
-                        android:longClickable="false"
-                        android:singleLine="true"
-                        android:textColor="@color/darkgrey"
-                        android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/edt_refferal_code"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.8"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:hint="Refferal Code"
+                            android:longClickable="false"
+                            android:singleLine="true"
+                            android:textColor="@color/darkgrey"
+                            android:textSize="14sp" />
+
                         <ImageView
                             android:layout_width="0dp"
                             android:layout_height="30dp"
@@ -175,7 +179,7 @@
                             android:layout_weight="0.2"
                             android:src="@drawable/share"
                             android:tint="@color/black"
-                            android:id="@+id/img_share"/>
+                            android:id="@+id/img_share" />
                     </LinearLayout>
                 </android.support.design.widget.TextInputLayout>
 
@@ -223,8 +227,7 @@
                         android:gravity="center"
                         android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
-                        android:textStyle="bold"
-                      />
+                        android:textStyle="bold" />
 
 
                 </LinearLayout>
@@ -264,8 +267,7 @@
                         android:gravity="center"
                         android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
-                        android:textStyle="bold"
-                       />
+                        android:textStyle="bold" />
 
 
                 </LinearLayout>
@@ -305,7 +307,7 @@
                         android:gravity="center"
                         android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
 
                 </LinearLayout>

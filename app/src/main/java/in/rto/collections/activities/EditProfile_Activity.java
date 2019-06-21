@@ -10,13 +10,13 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -64,9 +64,9 @@ public class EditProfile_Activity extends Activity {
     private UserSessionManager session;
     private ScrollView scrollView;
     private LinearLayout ll_parent;
-    private ImageView img_save, imv_profile,img_share;
-    private String user_id, photo, name, alias, mobile, email, password, is_email_verified,refferal_code;
-    private EditText edt_name, edt_aliasname, edt_mobile, edt_email, edt_changepassword,edt_refferal_code;
+    private ImageView img_save, imv_profile, img_share;
+    private String user_id, photo, name, alias, mobile, email, password, is_email_verified, refferal_code;
+    private EditText edt_name, edt_aliasname, edt_mobile, edt_email, edt_changepassword, edt_refferal_code;
 
     private Uri photoURI;
     private final int CAMERA_REQUEST = 100;
@@ -172,10 +172,10 @@ public class EditProfile_Activity extends Activity {
         img_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message = "Sign up using my code("+refferal_code+") on the MERAVAHAN App & get reward points.\r\nhttps://play.google.com/store/apps/details?id=in.rto.collections&hl=en\r\nHurry it doesn't get better than this!\r\nDownload the MERAVAHAN App NOW!";
+                String message = "Sign up using my code(" + refferal_code + ") on the MERAVAHAN App & get reward points.\r\nhttps://play.google.com/store/apps/details?id=in.rto.collections&hl=en\r\nHurry it doesn't get better than this!\r\nDownload the MERAVAHAN App NOW!";
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT,message);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, message);
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
             }

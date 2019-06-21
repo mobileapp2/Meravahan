@@ -8,10 +8,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -54,14 +54,14 @@ public class ViewCustomer extends Activity {
     private Context context;
     private ScrollView scrollView;
     private LinearLayout ll_parent;
-    private LinearLayout ll_servicedates, ll_documents,ll_Otherdates;
-    private ImageView btn_addservicedates, btn_adddocuments,btn_addotherdates;
-    private EditText edt_state, edt_vehicleno, edt_clientname, edt_vehicleownername, edt_rtoagent,edt_vehicledealer,
+    private LinearLayout ll_servicedates, ll_documents, ll_Otherdates;
+    private ImageView btn_addservicedates, btn_adddocuments, btn_addotherdates;
+    private EditText edt_state, edt_vehicleno, edt_clientname, edt_vehicleownername, edt_rtoagent, edt_vehicledealer,
             edt_description, edt_type, edt_engineno, edt_chassisno, edt_insurancepolicyno, edt_renewaldate,
-            edt_purcasedate, edt_temregno, edt_remark,edt_hypothecatedto,edt_taxvalidupto, edt_permitvalidupto,
-            edt_satepermitvalidupto,nationalpermitvalidupto,pucrenewaldate,fitnessvalidupto,edt_bank, edt_branch, edt_borrowername,
-             edt_loanamount, edt_accountnumber, edt_sactiondate, edt_installmentanount, edt_startdate,
-            edt_enddate, edt_frequency,edt_selectVehicleImage;
+            edt_purcasedate, edt_temregno, edt_remark, edt_hypothecatedto, edt_taxvalidupto, edt_permitvalidupto,
+            edt_satepermitvalidupto, nationalpermitvalidupto, pucrenewaldate, fitnessvalidupto, edt_bank, edt_branch, edt_borrowername,
+            edt_loanamount, edt_accountnumber, edt_sactiondate, edt_installmentanount, edt_startdate,
+            edt_enddate, edt_frequency, edt_selectVehicleImage;
     private ImageView img_save;
     private List<LinearLayout> serviceDatesLayoutsList;
     private ArrayList<ClientMainListPojo> clientList;
@@ -71,12 +71,13 @@ public class ViewCustomer extends Activity {
     private ArrayList<TypePojo> typelist;
     private ArrayList<StatePojo> statelist;
     private UserSessionManager session;
-    private String user_id,callType;
+    private String user_id, callType;
     private Uri photoURI;
     private File file, customerPicFolder;
     private CustomerPojo customerPojo;
     private ImageView img_delete, img_edit;
-    private LinearLayout bank_details,bank_feild;
+    private LinearLayout bank_details, bank_feild;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -159,14 +160,14 @@ public class ViewCustomer extends Activity {
     }
 
     private void setDefaults() {
-        customerPojo  = (CustomerPojo) getIntent().getSerializableExtra("customerDetails");
+        customerPojo = (CustomerPojo) getIntent().getSerializableExtra("customerDetails");
 
-       // edt_clientname.setText(customerPojo.getClient_name());
+        // edt_clientname.setText(customerPojo.getClient_name());
         edt_chassisno.setText(customerPojo.getChassis_no());
         edt_state.setText(customerPojo.getStateName());
         edt_description.setText(customerPojo.getDescription());
         edt_renewaldate.setText(changeDateFormat("yyyy-MM-dd",
-                "dd/MM/yyyy",customerPojo.getInsurance_renewal_date()));
+                "dd/MM/yyyy", customerPojo.getInsurance_renewal_date()));
         edt_purcasedate.setText(changeDateFormat("yyyy-MM-dd",
                 "dd/MM/yyyy",
                 customerPojo.getPurchase_date()));
@@ -202,7 +203,7 @@ public class ViewCustomer extends Activity {
         edt_bank.setText(customerPojo.getBank_name());
         edt_branch.setText(customerPojo.getBranch_name());
         edt_sactiondate.setText(changeDateFormat("yyyy-MM-dd",
-                "dd/MM/yyyy",customerPojo.getDate_to_section()));
+                "dd/MM/yyyy", customerPojo.getDate_to_section()));
         edt_enddate.setText(changeDateFormat("yyyy-MM-dd",
                 "dd/MM/yyyy",
                 customerPojo.getInstallment_end_date()));
@@ -257,9 +258,7 @@ public class ViewCustomer extends Activity {
         }
 
 
-
-
-        ArrayList< CustomerPojo.DocumentListPojo> documentsList = new ArrayList<>();
+        ArrayList<CustomerPojo.DocumentListPojo> documentsList = new ArrayList<>();
         documentsList = customerPojo.getDocument();
 
         if (documentsList.size() != 0) {
@@ -318,13 +317,12 @@ public class ViewCustomer extends Activity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 int id = item.getItemId();
-                if(id == R.id.img_edit){
+                if (id == R.id.img_edit) {
                     Intent intent = new Intent(context, EditCustomer_Activity.class);
                     intent.putExtra("customerDetails", customerPojo);
                     context.startActivity(intent);
                     finish();
-                }
-                else if(id == R.id.img_delete){
+                } else if (id == R.id.img_delete) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                     builder.setMessage("Are you sure you want to delete this item?");
                     builder.setTitle("Alert");
@@ -356,11 +354,9 @@ public class ViewCustomer extends Activity {
         });
 
 
-
-
         // callType = getIntent().getStringExtra("TYPE");
         img_delete = findViewById(R.id.img_delete);
-       img_edit = findViewById(R.id.img_edit);
+        img_edit = findViewById(R.id.img_edit);
 
 
         mToolbar.setTitle("Vehicle Details");
@@ -564,8 +560,6 @@ public class ViewCustomer extends Activity {
             }
         }
     }
-
-
 
 
 }

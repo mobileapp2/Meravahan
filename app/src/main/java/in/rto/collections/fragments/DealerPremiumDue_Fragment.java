@@ -58,7 +58,7 @@ public class DealerPremiumDue_Fragment extends Fragment {
     private LinearLayoutManager layoutManager;
     private UserSessionManager session;
     private int mYear, mMonth, mDay;
-    private String user_id, date,role;
+    private String user_id, date, role;
     private ArrayList<EventListPojo> premiumDueList;
     private String id = "", message = "", whatsappPicUrl = "", whatsappPic = "";
     private EditText edt_date, dialog_edt_whatsappmessage;
@@ -220,7 +220,7 @@ public class DealerPremiumDue_Fragment extends Fragment {
                             (DealerPremiumDue_Fragment.GetEventListAdapter.MyViewHolder) rv_premiumdue.findViewHolderForAdapterPosition(i);
 
                     if (((CheckBox) v).isChecked()) {
-                       // myViewHolder.cb_wish.setChecked(true);
+                        // myViewHolder.cb_wish.setChecked(true);
                         premiumDueList.get(i).setChecked(true);
                         fab_wish_whatsapp.setVisibility(View.VISIBLE);
                         fab_wish_sms.setVisibility(View.VISIBLE);
@@ -542,9 +542,6 @@ public class DealerPremiumDue_Fragment extends Fragment {
             }
         }
     }
-
-
-
 
 
     private void sendSMS(String message, String singleReceiverID) {

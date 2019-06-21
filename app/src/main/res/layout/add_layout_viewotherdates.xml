@@ -64,7 +64,7 @@
         android:onClick="removeMaturityDates"
         android:src="@drawable/icon_cross"
         android:tint="@color/black"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 
 </LinearLayout>

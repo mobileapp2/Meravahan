@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -106,7 +105,7 @@
                             android:longClickable="false"
                             android:textColor="@color/black"
                             android:textSize="14sp"
-                            android:inputType="textCapCharacters"/>
+                            android:inputType="textCapCharacters" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -185,8 +184,7 @@
                             android:gravity="center_vertical"
                             android:hint="Description"
                             android:textColor="@color/black"
-                            android:textSize="14sp"
-                            />
+                            android:textSize="14sp" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -326,6 +324,7 @@
                             android:textSize="14sp" />
 
                     </android.support.design.widget.TextInputLayout>
+
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -365,6 +364,7 @@
                             android:textSize="14sp" />
 
                     </android.support.design.widget.TextInputLayout>
+
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -384,6 +384,7 @@
                             android:textSize="14sp" />
 
                     </android.support.design.widget.TextInputLayout>
+
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -403,7 +404,6 @@
                             android:textSize="14sp" />
 
                     </android.support.design.widget.TextInputLayout>
-
 
 
                     <android.support.design.widget.TextInputLayout
@@ -435,7 +435,7 @@
                             android:id="@+id/is_show_dealer"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="Share With Vehicle Dealer"/>
+                            android:text="Share With Vehicle Dealer" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -449,14 +449,16 @@
                             android:id="@+id/is_show_customer"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="Share With Customer"/>
+                            android:text="Share With Customer" />
 
                     </android.support.design.widget.TextInputLayout>
+
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp">
+
                         <EditText
                             android:id="@+id/edt_selectvehicle"
                             android:layout_width="match_parent"
@@ -507,7 +509,7 @@
                         android:layout_gravity="end"
                         android:src="@drawable/icon_add"
                         android:tint="@color/black"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
 
                 </LinearLayout>
 

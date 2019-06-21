@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -26,17 +25,18 @@ import in.rto.collections.utilities.Utilities;
 import in.rto.collections.utilities.WebServiceCalls;
 
 public class Tem_Registration_Activity extends Activity {
-TextView tem_reg;
-private String val, title;
-private Context context;
+    TextView tem_reg;
+    private String val, title;
+    private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tem__registration);
         context = Tem_Registration_Activity.this;
         tem_reg = findViewById(R.id.tem_reg);
-        val =  getIntent().getStringExtra("type");
-       new GetInformation().execute();
+        val = getIntent().getStringExtra("type");
+        new GetInformation().execute();
         setUpToolbar();
     }
 
@@ -93,18 +93,18 @@ private Context context;
                                 RTOAgentPojo summary = new RTOAgentPojo();
                                 JSONObject jsonObj = jsonarr.getJSONObject(i);
                                 if (!jsonObj.getString("description").equals("")) {
-                                 String text =  jsonObj.getString("description");
-                                 title =  jsonObj.getString("name");
+                                    String text = jsonObj.getString("description");
+                                    title = jsonObj.getString("name");
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                        tem_reg.setText(Html.fromHtml(text,Html.FROM_HTML_MODE_COMPACT));
+                                        tem_reg.setText(Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT));
                                     } else {
                                         tem_reg.setText(Html.fromHtml(text));
                                     }
 
-                                   // tem_reg.setText(Html.fromHtml(text).toString());
+                                    // tem_reg.setText(Html.fromHtml(text).toString());
 
 
-                                 //tem_reg.setText(Html.fromHtml(text).toString());
+                                    //tem_reg.setText(Html.fromHtml(text).toString());
                                     setUpToolbar();
                                 }
                             }

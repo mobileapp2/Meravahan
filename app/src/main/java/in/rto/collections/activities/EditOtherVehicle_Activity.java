@@ -12,13 +12,12 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -56,10 +55,7 @@ import droidninja.filepicker.FilePickerConst;
 import in.rto.collections.R;
 import in.rto.collections.adapters.listClientsAdapter;
 import in.rto.collections.fragments.Fragment_Other_Vehicle_Details;
-import in.rto.collections.fragments.Fragment_vehicle_dealer;
 import in.rto.collections.models.ClientMainListPojo;
-import in.rto.collections.models.FrequencyPojo;
-import in.rto.collections.models.RTOAgentPojo;
 import in.rto.collections.models.StatePojo;
 import in.rto.collections.models.TypePojo;
 import in.rto.collections.models.VehicleDealerListPojo;
@@ -78,12 +74,12 @@ public class EditOtherVehicle_Activity extends Activity {
     private ScrollView scrollView;
     private LinearLayout ll_parent;
     private static final int CAMERA_REQUEST = 100;
-    private LinearLayout ll_servicedates, ll_documents,ll_Otherdates,ll_wheeldates;
-    private ImageView btn_addservicedates, btn_adddocuments,btn_addotherdates,btn_addwheeldates;
+    private LinearLayout ll_servicedates, ll_documents, ll_Otherdates, ll_wheeldates;
+    private ImageView btn_addservicedates, btn_adddocuments, btn_addotherdates, btn_addwheeldates;
     private static final int GALLERY_REQUEST = 200;
     private EditText edt_state, edt_vehicleno, edt_clientname, edt_vehicleownername,
             edt_description, edt_type,
-              edt_remark;
+            edt_remark;
 
     private int mYear, mMonth, mDay;
     private int mYear1, mMonth1, mDay1;
@@ -99,13 +95,13 @@ public class EditOtherVehicle_Activity extends Activity {
     private ArrayList<TypePojo> typelist;
     private ArrayList<StatePojo> statelist;
     private UserSessionManager session;
-    private String companyAliasName = "",documentType;
-    private String user_id, stateId, clientId="0", typeId,rtoId,id,serviceDateId="0",otherDateId="0",wheeldateId="0",documentId;
+    private String companyAliasName = "", documentType;
+    private String user_id, stateId, clientId = "0", typeId, rtoId, id, serviceDateId = "0", otherDateId = "0", wheeldateId = "0", documentId;
     private String[] PERMISSIONS = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
     private Uri photoURI;
     private VehicleDealerListPojo vehicaldealerdetails;
     private File photoFile, vehicledealerPicFolder;
-    private String isshowtocustomer ;
+    private String isshowtocustomer;
     private CheckBox isshow_to_customer;
 
     @Override
@@ -118,6 +114,7 @@ public class EditOtherVehicle_Activity extends Activity {
         setDefaults();
         setEventHandler();
     }
+
     private void init() {
         context = EditOtherVehicle_Activity.this;
         session = new UserSessionManager(context);
@@ -165,6 +162,7 @@ public class EditOtherVehicle_Activity extends Activity {
             e.printStackTrace();
         }
     }
+
     private void setDefaults() {
         Calendar cal = Calendar.getInstance();
         mYear = cal.get(Calendar.YEAR);
@@ -184,7 +182,6 @@ public class EditOtherVehicle_Activity extends Activity {
         mDay3 = cal.get(Calendar.DAY_OF_MONTH);
 
 
-
         typelist = new ArrayList<>();
         clientList = new ArrayList<>();
         statelist = new ArrayList<>();
@@ -192,14 +189,13 @@ public class EditOtherVehicle_Activity extends Activity {
         otherLayoutsList = new ArrayList<>();
         documentsLayoutsList = new ArrayList<>();
         wheelLayoutsList = new ArrayList<>();
-        vehicaldealerdetails  = (VehicleDealerListPojo) getIntent().getSerializableExtra("vehicleDetails");
+        vehicaldealerdetails = (VehicleDealerListPojo) getIntent().getSerializableExtra("vehicleDetails");
 
         id = vehicaldealerdetails.getId();
         stateId = vehicaldealerdetails.getStateId();
         clientId = vehicaldealerdetails.getClient_id();
         typeId = vehicaldealerdetails.getType_id();
         rtoId = vehicaldealerdetails.getRto_agent_id();
-
 
 
         edt_clientname.setText(vehicaldealerdetails.getClient_name());
@@ -213,7 +209,7 @@ public class EditOtherVehicle_Activity extends Activity {
 
         if (vehicaldealerdetails.getIsshowto_customer().equals("1")) {
             isshow_to_customer.setChecked(true);
-        } else{
+        } else {
             isshow_to_customer.setChecked(false);
         }
 
@@ -281,9 +277,7 @@ public class EditOtherVehicle_Activity extends Activity {
         }
 
 
-
-
-        ArrayList< VehicleDealerListPojo.DocumentListPojo> documentsList = new ArrayList<>();
+        ArrayList<VehicleDealerListPojo.DocumentListPojo> documentsList = new ArrayList<>();
         documentsList = vehicaldealerdetails.getDocument();
 
         if (documentsList.size() != 0) {
@@ -303,6 +297,7 @@ public class EditOtherVehicle_Activity extends Activity {
         }
 
     }
+
     @SuppressLint("ClickableViewAccessibility")
     private void setEventHandler() {
 
@@ -433,6 +428,7 @@ public class EditOtherVehicle_Activity extends Activity {
         });
 
     }
+
     private void submitData() {
 
         if (edt_state.getText().toString().trim().equals("")) {
@@ -512,7 +508,7 @@ public class EditOtherVehicle_Activity extends Activity {
 
         if (isshow_to_customer.isChecked()) {
             isshowtocustomer = "1";
-        } else{
+        } else {
             isshowtocustomer = "0";
         }
         JsonArray serviceDatesJSONArray = new JsonArray();
@@ -601,7 +597,7 @@ public class EditOtherVehicle_Activity extends Activity {
         mainObj.addProperty("state", stateId);
         mainObj.addProperty("client_name", clientId);
         mainObj.addProperty("vehicle_owner", edt_vehicleownername.getText().toString().trim());
-        mainObj.addProperty("rto_agent",rtoId);
+        mainObj.addProperty("rto_agent", rtoId);
         mainObj.addProperty("v_type", typeId);
         mainObj.add("documents", documentJSONArray);
         mainObj.addProperty("remark", edt_remark.getText().toString().trim());
@@ -623,6 +619,7 @@ public class EditOtherVehicle_Activity extends Activity {
 
 
     }
+
     public class UpdateOtherVehicleDetails extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 
@@ -740,6 +737,7 @@ public class EditOtherVehicle_Activity extends Activity {
             }
         }
     }
+
     private void stateListDialog(final ArrayList<StatePojo> statelist) {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
         builderSingle.setTitle("Select State");
@@ -774,6 +772,7 @@ public class EditOtherVehicle_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetClientList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -836,6 +835,7 @@ public class EditOtherVehicle_Activity extends Activity {
             }
         }
     }
+
     private void clientListDialog(final ArrayList<ClientMainListPojo> clientList) {
         final listClientsAdapter[] adapter = new listClientsAdapter[1];
 
@@ -906,12 +906,12 @@ public class EditOtherVehicle_Activity extends Activity {
         builderSingle.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ClientMainListPojo  selected_client = adapter[0].getSelected();
+                ClientMainListPojo selected_client = adapter[0].getSelected();
                 if (selected_client != null) {
 
                     edt_clientname.setText(selected_client.getName());
                     clientId = selected_client.getId();
-                }else{
+                } else {
                     Utilities.showSnackBar(ll_parent, "Please select client");
 
                 }
@@ -935,6 +935,7 @@ public class EditOtherVehicle_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetTypeList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -996,6 +997,7 @@ public class EditOtherVehicle_Activity extends Activity {
             }
         }
     }
+
     private void typeListDialog(final ArrayList<TypePojo> typelist) {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
         builderSingle.setTitle("Select Type");
@@ -1030,6 +1032,7 @@ public class EditOtherVehicle_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
         img_save = findViewById(R.id.img_save);
@@ -1042,6 +1045,7 @@ public class EditOtherVehicle_Activity extends Activity {
             }
         });
     }
+
     public void selectDate(View view) {
         final EditText edt_servicedate = (EditText) view;
         final EditText edt_otheredate = (EditText) view;
@@ -1084,6 +1088,7 @@ public class EditOtherVehicle_Activity extends Activity {
         dpd1.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         dpd1.show();
     }
+
     public void selectDocuments(View view) {
         documentType = "selectedImage";
         if (doesAppNeedPermissions()) {
@@ -1179,6 +1184,7 @@ public class EditOtherVehicle_Activity extends Activity {
         }
 
     }
+
     public void removeDocument(View view) {
         ll_documents.removeView((View) view.getParent());
         documentsLayoutsList.remove(view.getParent());
@@ -1215,6 +1221,7 @@ public class EditOtherVehicle_Activity extends Activity {
             }
         }
     }
+
     private class UploadProductPhoto extends AsyncTask<File, Integer, String> {
         ProgressDialog pd;
 
@@ -1260,7 +1267,7 @@ public class EditOtherVehicle_Activity extends Activity {
                     if (type.equalsIgnoreCase("Success")) {
                         JSONObject Obj1 = mainObj.getJSONObject("result");
                         String document_name = Obj1.getString("name");
-                        if(documentType.equals("selectedImage")) {
+                        if (documentType.equals("selectedImage")) {
                             edt_selectdocuments.setText(document_name);
                         }
 
@@ -1275,7 +1282,6 @@ public class EditOtherVehicle_Activity extends Activity {
             }
         }
     }
-
 
 
     void savefile(Uri sourceuri) {
@@ -1316,16 +1322,17 @@ public class EditOtherVehicle_Activity extends Activity {
         otherLayoutsList.remove(view.getParent());
     }
 
-    public  void deleteDocument(View view){
+    public void deleteDocument(View view) {
         ll_documents.removeView((View) view.getParent());
         documentsLayoutsList.remove(view.getParent());
     }
 
-    public  void removeserviceDates(View view){
+    public void removeserviceDates(View view) {
         ll_servicedates.removeView((View) view.getParent());
         serviceDatesLayoutsList.remove(view.getParent());
     }
-    public  void removeWheelDates(View view){
+
+    public void removeWheelDates(View view) {
         ll_wheeldates.removeView((View) view.getParent());
         wheelLayoutsList.remove(view.getParent());
     }

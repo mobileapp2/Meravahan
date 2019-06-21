@@ -53,6 +53,7 @@ public class Fragment_tyre extends Fragment {
         setEventHandlers();
         return rootView;
     }
+
     private void init(View rootView) {
         session = new UserSessionManager(context);
         fab_add_tyre = rootView.findViewById(R.id.fab_add_tyre);
@@ -86,6 +87,7 @@ public class Fragment_tyre extends Fragment {
             e.printStackTrace();
         }
     }
+
     private void setEventHandlers() {
         fab_add_tyre.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,7 +179,6 @@ public class Fragment_tyre extends Fragment {
                                     otherDatesListPojos.add(otherdateobj);
                                 }
                                 tyreDetailslist.setOther_date(otherDatesListPojos);
-
 
 
                                 ArrayList<TyreDetailsPojo.DocumentListPojo> documentsList = new ArrayList<>();

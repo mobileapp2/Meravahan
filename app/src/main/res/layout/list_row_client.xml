@@ -10,17 +10,17 @@
     card_view:cardElevation="3dp"
     android:layout_marginLeft="7dp"
     android:layout_marginRight="7dp"
-    android:layout_marginTop="7dp"
-    >
+    android:layout_marginTop="7dp">
+
     <LinearLayout
         android:id="@+id/main_layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_toEndOf="@+id/layoutImage"
-        android:layout_toRightOf="@+id/layoutImage"
+        android:layout_toRightOf="@+id/layoutImage">
         >
-        >
+
         <LinearLayout
             android:id="@+id/main_layout"
             android:layout_width="match_parent"
@@ -29,8 +29,7 @@
             android:layout_marginBottom="10dp"
             android:orientation="vertical"
             android:layout_toEndOf="@+id/layoutImage"
-            android:layout_toRightOf="@+id/layoutImage"
-            >
+            android:layout_toRightOf="@+id/layoutImage">
 
             <TextView
                 android:id="@+id/tv_clientname"
@@ -45,15 +44,16 @@
                 android:textColor="@color/darkgrey"
                 android:textSize="16dp"
                 android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/placeholder_bg"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginTop="5dp"
-                ></View>
+                android:layout_marginTop="5dp"></View>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -63,6 +63,7 @@
                 android:layout_marginBottom="0dp"
                 android:layout_marginLeft="5dp"
                 android:layout_gravity="right">
+
                 <ImageView
                     android:id="@+id/imv_call"
                     android:layout_width="27dp"
@@ -71,9 +72,8 @@
                     android:layout_marginLeft="5dp"
                     android:gravity="center"
                     android:textColor="@color/colorPrimary"
-                   android:src="@drawable/call"
-                    android:tint="@color/black"
-                    />
+                    android:src="@drawable/call"
+                    android:tint="@color/black" />
 
                 <ImageView
                     android:id="@+id/imv_sms"
@@ -84,8 +84,7 @@
                     android:layout_marginLeft="15dp"
                     android:gravity="center"
                     android:tint="@color/black"
-                    android:src="@drawable/sms"
-                    />
+                    android:src="@drawable/sms" />
 
                 <ImageView
                     android:id="@+id/imv_whatsapp"
@@ -96,8 +95,8 @@
                     android:text="Whatsapp"
                     android:gravity="center"
                     android:textColor="@color/colorPrimary"
-                    android:src="@drawable/whatsapp"
-                    />
+                    android:src="@drawable/whatsapp" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="20dp"

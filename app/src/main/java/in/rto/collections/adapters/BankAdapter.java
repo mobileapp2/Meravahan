@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -25,22 +24,18 @@ import org.json.JSONObject;
 import java.util.List;
 
 import in.rto.collections.R;
-import in.rto.collections.activities.ClientCode;
 import in.rto.collections.activities.Master_Bank;
-import in.rto.collections.adapters.getClientCodeLIstAdapter;
 import in.rto.collections.models.BankPojo;
-import in.rto.collections.models.ClientCodePojo;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.UserSessionManager;
 import in.rto.collections.utilities.Utilities;
 import in.rto.collections.utilities.WebServiceCalls;
 
-public class BankAdapter  extends RecyclerView.Adapter<BankAdapter.MyViewHolder> {
+public class BankAdapter extends RecyclerView.Adapter<BankAdapter.MyViewHolder> {
     private List<BankPojo> resultArrayList;
     private Context context;
     private UserSessionManager session;
     private String user_id;
-
 
 
     public BankAdapter(Context context, List<BankPojo> resultArrayList) {
@@ -159,6 +154,7 @@ public class BankAdapter  extends RecyclerView.Adapter<BankAdapter.MyViewHolder>
             ll_mainlayout = view.findViewById(R.id.ll_mainlayout);
         }
     }
+
     public class EditBank extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 

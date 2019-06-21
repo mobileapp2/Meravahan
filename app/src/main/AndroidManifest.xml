@@ -126,7 +126,7 @@
         <activity android:name=".activities.Import_Banker_Dealer_Activity" />
         <activity android:name=".activities.LinkDealerBanker_Activity" />
         <activity android:name=".activities.NotificationBirthdaySettings_Activity" />
-        <activity android:name=".activities.LegalInfo_Activity"/>
+        <activity android:name=".activities.LegalInfo_Activity" />
         <activity
             android:name=".ccavenue.CCAvenueWebViewActivity"
             android:label="CC Avenue Payment"

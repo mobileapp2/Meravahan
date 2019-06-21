@@ -6,6 +6,7 @@
     android:background="@color/placeholder_bg"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,6 +44,7 @@
         card_view:cardUseCompatPadding="true"
         android:focusableInTouchMode="true"
         android:focusable="true">
+
         <SearchView
             android:id="@+id/searchView"
             android:layout_width="match_parent"
@@ -110,7 +112,7 @@
             android:src="@drawable/icon_add"
             app:backgroundTint="@color/colorPrimary"
             app:tint="@color/white"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <include
             layout="@layout/shimmer_twolines_layout"

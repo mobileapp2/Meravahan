@@ -2,7 +2,6 @@ package in.rto.collections.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -30,8 +29,9 @@ public class Reminder_Fragment extends Fragment {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private UserSessionManager session;
-    private String user_id,role;
+    private String user_id, role;
     ViewPagerAdapter adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_reminder, container, false);
@@ -79,37 +79,37 @@ public class Reminder_Fragment extends Fragment {
     }
 
     private void setupTabIcons() {
-        if(role.equals("3")) {
+        if (role.equals("3")) {
             tabLayout.setVisibility(View.GONE);
-           // tabLayout.getTabAt(0).setIcon(R.drawable.icon_premium);
-           // tabLayout.getTabAt(1).setIcon(R.drawable.icon_premium);
+            // tabLayout.getTabAt(0).setIcon(R.drawable.icon_premium);
+            // tabLayout.getTabAt(1).setIcon(R.drawable.icon_premium);
             //tabLayout.getTabAt(2).setIcon(R.drawable.icon_premium);
-           // tabLayout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(R.color.Battleship_Gray), PorterDuff.Mode.SRC_IN);
-           // tabLayout.getTabAt(1).getIcon().setColorFilter(getResources().getColor(R.color.Battleship_Gray), PorterDuff.Mode.SRC_IN);
-           // tabLayout.getTabAt(2).getIcon().setColorFilter(getResources().getColor(R.color.Battleship_Gray), PorterDuff.Mode.SRC_IN);
+            // tabLayout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(R.color.Battleship_Gray), PorterDuff.Mode.SRC_IN);
+            // tabLayout.getTabAt(1).getIcon().setColorFilter(getResources().getColor(R.color.Battleship_Gray), PorterDuff.Mode.SRC_IN);
+            // tabLayout.getTabAt(2).getIcon().setColorFilter(getResources().getColor(R.color.Battleship_Gray), PorterDuff.Mode.SRC_IN);
 
-        }else{
-           // tabLayout.getTabAt(0).setIcon(R.drawable.icon_premium);
+        } else {
+            // tabLayout.getTabAt(0).setIcon(R.drawable.icon_premium);
             //tabLayout.getTabAt(1).setIcon(R.drawable.icon_birthdays);
             //tabLayout.getTabAt(2).setIcon(R.drawable.icon_anniversaries);
 
             //tabLayout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
             //tabLayout.getTabAt(1).getIcon().setColorFilter(getResources().getColor(R.color.Battleship_Gray), PorterDuff.Mode.SRC_IN);
             //tabLayout.getTabAt(2).getIcon().setColorFilter(getResources().getColor(R.color.Battleship_Gray), PorterDuff.Mode.SRC_IN);
-       }
+        }
     }
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getChildFragmentManager());
-if(role.equals("3")) {
-    adapter.addFrag(new PremiumDueSecond_Fragment(), "VEHICLE REMINDERS");
-    //adapter.addFrag(new DealerPremiumDue_Fragment(), "Dealer Premium");
-    //adapter.addFrag(new AgentPremiumDue_Fragmen(), "Agent Premium");
-}else{
-        adapter.addFrag(new PremiumDue_Fragment(), "VEHICLE REMINDERS");
-    adapter.addFrag(new Birthday_Fragment(), "BIRTHDAY");
-    adapter.addFrag(new Anniversary_Fragment(), "ANNIVERSARY");
-}
+        if (role.equals("3")) {
+            adapter.addFrag(new PremiumDueSecond_Fragment(), "VEHICLE REMINDERS");
+            //adapter.addFrag(new DealerPremiumDue_Fragment(), "Dealer Premium");
+            //adapter.addFrag(new AgentPremiumDue_Fragmen(), "Agent Premium");
+        } else {
+            adapter.addFrag(new PremiumDue_Fragment(), "VEHICLE REMINDERS");
+            adapter.addFrag(new Birthday_Fragment(), "BIRTHDAY");
+            adapter.addFrag(new Anniversary_Fragment(), "ANNIVERSARY");
+        }
         viewPager.setAdapter(adapter);
     }
 
@@ -130,7 +130,7 @@ if(role.equals("3")) {
                 if (fragment != null) {
                     fragment.onResume();
                 }
-              //  tab.getIcon().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
+                //  tab.getIcon().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
 
             }
 

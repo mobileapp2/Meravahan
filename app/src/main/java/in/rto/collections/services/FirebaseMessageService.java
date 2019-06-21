@@ -15,11 +15,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
-
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -33,7 +30,6 @@ import java.util.Date;
 import java.util.Random;
 
 import in.rto.collections.R;
-import in.rto.collections.activities.Notification_Activity;
 import in.rto.collections.activities.SplashScreen_Activity;
 
 
@@ -114,7 +110,7 @@ public class FirebaseMessageService extends FirebaseMessagingService {
         notificationIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         Bundle data = new Bundle();
         data.putString("action", "notificationfromfcm");
-        data.putString("message_id",remoteMessage.getData().get("message_id") );
+        data.putString("message_id", remoteMessage.getData().get("message_id"));
         data.putString("type", "notification");
         notificationIntent.putExtras(data);
         if (remoteMessage.getData().get("image") != null && remoteMessage.getData().get("image").isEmpty()) {
@@ -158,7 +154,8 @@ public class FirebaseMessageService extends FirebaseMessagingService {
             data.putString("message_id",message_id );
             data.putString("type", type);
             notificationIntent.putExtras(data);
-       */ } else {
+       */
+        } else {
 
             notificationIntent = new Intent(context, SplashScreen_Activity.class);
             notificationIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -170,7 +167,7 @@ public class FirebaseMessageService extends FirebaseMessagingService {
         }
         int requestID = (int) System.currentTimeMillis();
 
-        pendingIntent = PendingIntent.getActivity((context), requestID, notificationIntent,PendingIntent.FLAG_UPDATE_CURRENT );
+        pendingIntent = PendingIntent.getActivity((context), requestID, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notification = builder
@@ -188,7 +185,7 @@ public class FirebaseMessageService extends FirebaseMessagingService {
                     .setAutoCancel(true)
                     .setContentIntent(pendingIntent)
                     .build();
-        }else{
+        } else {
             notification = builder
                     .setContentTitle(title)
                     .setContentText(msg)
@@ -219,6 +216,7 @@ public class FirebaseMessageService extends FirebaseMessagingService {
 */
 
     }
+
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
@@ -235,14 +233,14 @@ public class FirebaseMessageService extends FirebaseMessagingService {
         }
     }
 
-    public static void generatepicture(Context context, Intent notificationIntent, String title, String message, String imageUrl,String message_id) {
+    public static void generatepicture(Context context, Intent notificationIntent, String title, String message, String imageUrl, String message_id) {
         //   Log.d("ingeneratepicture", "picture");
         Intent intent;
         if (notificationIntent != null) {
             intent = notificationIntent;
         } else {
             intent = new Intent(context, SplashScreen_Activity.class);
-            notificationIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP  | Intent.FLAG_ACTIVITY_NEW_TASK);
+            notificationIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             Bundle data = new Bundle();
             data.putString("action", "notificationfromfcm");
             data.putString("message_id", message_id);
@@ -317,7 +315,7 @@ public class FirebaseMessageService extends FirebaseMessagingService {
                             .setAutoCancel(true)
                             .setContentIntent(pendingIntent)
                             .build();
-                }else{
+                } else {
                     notification = builder
                             .setContentTitle(title)
                             .setContentText(message)
@@ -351,7 +349,7 @@ public class FirebaseMessageService extends FirebaseMessagingService {
                             .setAutoCancel(true)
                             .setContentIntent(pendingIntent)
                             .build();
-                }else{
+                } else {
                     notification = builder
                             .setContentTitle(title)
                             .setContentText(message)
@@ -376,7 +374,6 @@ public class FirebaseMessageService extends FirebaseMessagingService {
 
         }
     }
-
 
 
 }

@@ -7,16 +7,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Environment;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -30,14 +26,11 @@ import android.widget.TextView;
 import com.google.gson.JsonObject;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -47,7 +40,6 @@ import in.rto.collections.R;
 import in.rto.collections.models.ClientCodePojo;
 import in.rto.collections.models.ClientMainListPojo;
 import in.rto.collections.models.NotificationPojo;
-import in.rto.collections.models.ProductInfoListPojo;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.UserSessionManager;
 import in.rto.collections.utilities.Utilities;
@@ -59,20 +51,21 @@ public class ViewNotification_Activity extends Activity {
     private Context context;
     private LinearLayout ll_parent;
     private EditText edt_productinfo;
-    private TextView send_by,send_at;
+    private TextView send_by, send_at;
     private FloatingActionButton fab_add_share;
     private NotificationPojo notificationDetails;
-    private ImageView img_delete, img_edit, imv_product,imv_download,imv_share;
+    private ImageView img_delete, img_edit, imv_product, imv_download, imv_share;
     private UserSessionManager session;
     private String user_id, document_url, document_name;
     private ArrayList<ClientMainListPojo> clientList;
     private ArrayList<ClientCodePojo> codeList;
-    private LinearLayout clientnane,clientcode;
+    private LinearLayout clientnane, clientcode;
     private EditText dialog_edt_whatsappmessage, edt_date;
     private ImageView dialog_imv_whatsapppic;
     private RecyclerView lv_checkboxlist;
-    private CheckBox cb_selectallclient,cb_notification,cb_whtasapp;
-    private  String notification="0",whatssapp="0";
+    private CheckBox cb_selectallclient, cb_notification, cb_whtasapp;
+    private String notification = "0", whatssapp = "0";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,15 +76,16 @@ public class ViewNotification_Activity extends Activity {
         setDefaults();
         setEventHandler();
     }
+
     private void init() {
         context = ViewNotification_Activity.this;
         session = new UserSessionManager(context);
         ll_parent = findViewById(R.id.ll_parent);
         imv_product = findViewById(R.id.imv_product);
         edt_productinfo = findViewById(R.id.edt_productinfo);
-        fab_add_share =findViewById(R.id.fab_add_share);
-        send_at =findViewById(R.id.send_at);
-        send_by =findViewById(R.id.send_by);
+        fab_add_share = findViewById(R.id.fab_add_share);
+        send_at = findViewById(R.id.send_at);
+        send_by = findViewById(R.id.send_by);
     }
 
     private void getSessionData() {
@@ -133,7 +127,7 @@ public class ViewNotification_Activity extends Activity {
 
         edt_productinfo.setText(notificationDetails.getMessage());
         String DateTime = changeDateFormat("yyyy-MM-dd HH:MM:SS",
-                "dd-MM-yyyy HH:MM",notificationDetails.getCreated_at());
+                "dd-MM-yyyy HH:MM", notificationDetails.getCreated_at());
         send_at.setText(DateTime);
         send_by.setText(notificationDetails.getSenderName());
     }
@@ -196,7 +190,7 @@ public class ViewNotification_Activity extends Activity {
                     share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
                     share.putExtra(Intent.EXTRA_STREAM, imageUri);
                     context.startActivity(Intent.createChooser(share, "Share !"));
-                }else{
+                } else {
                     Intent share = new Intent(Intent.ACTION_SEND);
                     share.setType("text/plain");
                     share.putExtra(Intent.EXTRA_TEXT, notificationDetails.getMessage());

@@ -6,8 +6,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -45,15 +45,16 @@ public class Add_Client_Activity extends Activity {
     private Context context;
     private ScrollView scrollView;
     private LinearLayout ll_parent;
-    private EditText edt_name, edt_alias, edt_mobile, edt_whatsapp, edt_email, edt_dob, edt_anniversary, edt_clientcode,edt_remark,edt_language;
+    private EditText edt_name, edt_alias, edt_mobile, edt_whatsapp, edt_email, edt_dob, edt_anniversary, edt_clientcode, edt_remark, edt_language;
     private int mYear, mMonth, mDay;
     private int mYear1, mMonth1, mDay1;
     private int mYear2, mMonth2, mDay2;
     private ArrayList<ClientCodePojo> clientCodeList;
     private ArrayList<LanguagePojo> languageList;
     private UserSessionManager session;
-    private String user_id, ClientCodeId = "0",languageId="0",language;
+    private String user_id, ClientCodeId = "0", languageId = "0", language;
     private ImageView img_save;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,10 +66,11 @@ public class Add_Client_Activity extends Activity {
         setEventHandler();
 
     }
+
     @Override
     protected void onPause() {
         super.onPause();
-       // hideSoftKeyboard(AddClientDetails_Activity.this);
+        // hideSoftKeyboard(AddClientDetails_Activity.this);
     }
 
     private void init() {
@@ -89,6 +91,7 @@ public class Add_Client_Activity extends Activity {
         edt_language = findViewById(R.id.edt_language);
 
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -99,6 +102,7 @@ public class Add_Client_Activity extends Activity {
             e.printStackTrace();
         }
     }
+
     private void setDefaults() {
         if (Utilities.isInternetAvailable(context)) {
             new Add_Client_Activity.GetLanguage().execute(user_id);
@@ -261,7 +265,6 @@ public class Add_Client_Activity extends Activity {
         });
 
 
-
         img_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -320,7 +323,7 @@ public class Add_Client_Activity extends Activity {
                             if (clientCodeList.size() != 0) {
                                 familyCodeDialog(clientCodeList);
                             } else {
-                               // Utilities.showAlertDialog(context, "No Record Found", "Please enter code manually", false);
+                                // Utilities.showAlertDialog(context, "No Record Found", "Please enter code manually", false);
                             }
                         }
                     } else {
@@ -332,6 +335,7 @@ public class Add_Client_Activity extends Activity {
             }
         }
     }
+
     public class GetLanguageList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -428,6 +432,7 @@ public class Add_Client_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     private void languageDialog(final ArrayList<LanguagePojo> languageList) {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
         builderSingle.setTitle("Select Language");
@@ -509,7 +514,7 @@ public class Add_Client_Activity extends Activity {
         mainObj.addProperty("user_id", user_id);
         mainObj.addProperty("whatsapp", edt_whatsapp.getText().toString().trim());
         mainObj.addProperty("remark", edt_remark.getText().toString().trim());
-        mainObj.addProperty("language_id",languageId);
+        mainObj.addProperty("language_id", languageId);
         Log.i("ClientDetailsJSON", mainObj.toString());
 
         if (Utilities.isInternetAvailable(context)) {
@@ -519,6 +524,7 @@ public class Add_Client_Activity extends Activity {
         }
 
     }
+
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
         img_save = findViewById(R.id.img_save);
@@ -531,6 +537,7 @@ public class Add_Client_Activity extends Activity {
             }
         });
     }
+
     public class AddClientDetails extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 
@@ -587,6 +594,7 @@ public class Add_Client_Activity extends Activity {
             }
         }
     }
+
     public class GetLanguage extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 

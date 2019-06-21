@@ -22,20 +22,12 @@ import org.json.JSONObject;
 import java.util.List;
 
 import in.rto.collections.R;
-import in.rto.collections.activities.EditRTOAgent_Activity;
 import in.rto.collections.activities.Edit_BankerDetails_Activity;
-import in.rto.collections.activities.Import_Vehicle_Dealer_Activity;
-import in.rto.collections.activities.LInkRTODealer_Activity;
-import in.rto.collections.activities.ViewImportVehicleDealer_Activity;
-import in.rto.collections.activities.ViewRTOAgent_Activity;
 import in.rto.collections.activities.View_Banker_details_Activity;
 import in.rto.collections.fragments.Fragment_Banker_Vehicle_Details;
 import in.rto.collections.fragments.Fragment_RTO_Agent;
-import in.rto.collections.fragments.Fragment_RTO_Dealer_Details;
-import in.rto.collections.fragments.Self_Fragment;
 import in.rto.collections.models.BankerDetailsPojo;
 import in.rto.collections.models.CustomerPojo;
-import in.rto.collections.models.RTOAgentListPojo;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.UserSessionManager;
 import in.rto.collections.utilities.Utilities;
@@ -50,11 +42,13 @@ public class GetBankerDetailsListAdapter extends RecyclerView.Adapter<GetBankerD
     BankerDetailsPojo bankerDetailsPojo;
     private UserSessionManager session;
     private String user_id;
+
     public GetBankerDetailsListAdapter(Context context, List<BankerDetailsPojo> resultArrayList, String user_id) {
         this.context = context;
         this.resultArrayList = resultArrayList;
         this.user_id = user_id;
     }
+
     @Override
     public GetBankerDetailsListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -68,7 +62,7 @@ public class GetBankerDetailsListAdapter extends RecyclerView.Adapter<GetBankerD
     public void onBindViewHolder(final GetBankerDetailsListAdapter.MyViewHolder holder, final int position) {
         bankerDetailsPojo = new BankerDetailsPojo();
         bankerDetailsPojo = resultArrayList.get(position);
-        final  BankerDetailsPojo  bankerDetailsPojo1 = bankerDetailsPojo;
+        final BankerDetailsPojo bankerDetailsPojo1 = bankerDetailsPojo;
 
         holder.tv_vehicalownername.setText(bankerDetailsPojo.getBorrower_name());
         holder.tv_renewaldate.setText(bankerDetailsPojo.getVehicle_number());
@@ -76,15 +70,15 @@ public class GetBankerDetailsListAdapter extends RecyclerView.Adapter<GetBankerD
         holder.img_link.setVisibility(View.GONE);
         holder.img_edit.setImageResource(R.drawable.edit);
         holder.img_show.setVisibility(View.VISIBLE);
-            holder.tv_identify.setVisibility(View.GONE);
-            holder.ll_mainlayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, View_Banker_details_Activity.class);
-                    intent.putExtra("bankerdetails", bankerDetailsPojo1);
-                    context.startActivity(intent);
-                }
-            });
+        holder.tv_identify.setVisibility(View.GONE);
+        holder.ll_mainlayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, View_Banker_details_Activity.class);
+                intent.putExtra("bankerdetails", bankerDetailsPojo1);
+                context.startActivity(intent);
+            }
+        });
         holder.img_show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,7 +94,7 @@ public class GetBankerDetailsListAdapter extends RecyclerView.Adapter<GetBankerD
                             .load(bankerDetailsPojo1.getVehicle_image_url())
                             .placeholder(R.drawable.img_product)
                             .into(imv_fullpic);
-                }else{
+                } else {
                     imv_fullpic.setVisibility(View.GONE);
                     imv_text.setVisibility(View.VISIBLE);
                     imv_text.setText("Image not available.");
@@ -124,7 +118,7 @@ public class GetBankerDetailsListAdapter extends RecyclerView.Adapter<GetBankerD
                         if (Utilities.isInternetAvailable(context)) {
                             new GetBankerDetailsListAdapter.DeleteBankerDetails().execute(bankerDetailsPojo.getId());
                         } else {
-                           // Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+                            // Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                         }
 
                     }
@@ -150,6 +144,7 @@ public class GetBankerDetailsListAdapter extends RecyclerView.Adapter<GetBankerD
         });
 
     }
+
     @Override
     public int getItemCount() {
         return resultArrayList.size();
@@ -278,18 +273,19 @@ public class GetBankerDetailsListAdapter extends RecyclerView.Adapter<GetBankerD
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tv_vehicalownername,tv_renewaldate,tv_identify;
+        TextView tv_vehicalownername, tv_renewaldate, tv_identify;
         private CardView ll_mainlayout;
-        ImageView img_delete,img_edit,img_vehicle,img_link,img_show;
+        ImageView img_delete, img_edit, img_vehicle, img_link, img_show;
+
         public MyViewHolder(View view) {
             super(view);
-            tv_vehicalownername = view.findViewById(R.id.tv_ownername   );
+            tv_vehicalownername = view.findViewById(R.id.tv_ownername);
             tv_renewaldate = view.findViewById(R.id.tv_renewaldate);
             ll_mainlayout = view.findViewById(R.id.ll_mainlayout);
-            img_delete =view.findViewById(R.id.img_delete);
-            img_edit =view.findViewById(R.id.img_edit);
-            img_link =view.findViewById(R.id.img_link);
-            img_vehicle =view.findViewById(R.id.img_vehicle);
+            img_delete = view.findViewById(R.id.img_delete);
+            img_edit = view.findViewById(R.id.img_edit);
+            img_link = view.findViewById(R.id.img_link);
+            img_vehicle = view.findViewById(R.id.img_vehicle);
             tv_identify = view.findViewById(R.id.tv_identify);
             img_show = view.findViewById(R.id.img_show);
         }

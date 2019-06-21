@@ -5,12 +5,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -26,12 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.rto.collections.R;
-import in.rto.collections.adapters.GetRTOAgentDetailListAdapter;
 import in.rto.collections.adapters.RTOLinkAdapter;
-import in.rto.collections.fragments.Fragment_RTO_Agent;
 import in.rto.collections.models.LinkPojo;
 import in.rto.collections.models.RTOAgentListPojo;
-import in.rto.collections.models.VehicleDealerListPojo;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.ParamsPojo;
 import in.rto.collections.utilities.UserSessionManager;
@@ -56,6 +52,7 @@ public class LinkToRTO_Activity extends Activity {
     public static int selectedposition = 0;
     private static LinkPojo linkPojo;
     private ImageView next;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +64,7 @@ public class LinkToRTO_Activity extends Activity {
         setUpToolbar();
         setEventHandlers();
     }
+
     private void init() {
         session = new UserSessionManager(context);
         fab_add_agent = findViewById(R.id.fab_add_agent);
@@ -79,7 +77,7 @@ public class LinkToRTO_Activity extends Activity {
 //        shimmer_view_container = rootView.findViewById(R.id.shimmer_view_container);
         layoutManager = new LinearLayoutManager(context);
         rto_agent_list.setLayoutManager(layoutManager);
-        linkPojo  = (LinkPojo) getIntent().getSerializableExtra("vehicleDetails");
+        linkPojo = (LinkPojo) getIntent().getSerializableExtra("vehicleDetails");
     }
 
     private void setDefault() {
@@ -104,7 +102,8 @@ public class LinkToRTO_Activity extends Activity {
             e.printStackTrace();
         }
     }
-    public  void  setUpToolbar() {
+
+    public void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle("Link To");
         mToolbar.setNavigationIcon(R.drawable.icon_backarrow_16p);
@@ -115,6 +114,7 @@ public class LinkToRTO_Activity extends Activity {
             }
         });
     }
+
     private void setEventHandlers() {
         fab_add_agent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,8 +141,8 @@ public class LinkToRTO_Activity extends Activity {
             public boolean onQueryTextSubmit(String query) {
                 searchView.clearFocus();
                 ArrayList<RTOAgentListPojo> rtoSearchedList = new ArrayList<>();
-                for (RTOAgentListPojo rto : rtoAgentListPojos ) {
-                    String contactToBeSearched = rto.getVehicle_owner().toLowerCase()+ rto.getVehicle_no().toLowerCase();
+                for (RTOAgentListPojo rto : rtoAgentListPojos) {
+                    String contactToBeSearched = rto.getVehicle_owner().toLowerCase() + rto.getVehicle_no().toLowerCase();
                     if (contactToBeSearched.contains(query.toLowerCase())) {
                         rtoSearchedList.add(rto);
                     }
@@ -154,7 +154,7 @@ public class LinkToRTO_Activity extends Activity {
                     // bindRecyclerview(contactList);
                 } else {
                     rtoAgentListToLinkPojos = rtoSearchedList;
-                    rto_agent_list.setAdapter(new RTOLinkAdapter(context, rtoSearchedList,linkPojos));
+                    rto_agent_list.setAdapter(new RTOLinkAdapter(context, rtoSearchedList, linkPojos));
 
                 }
 
@@ -166,7 +166,7 @@ public class LinkToRTO_Activity extends Activity {
                 if (!newText.equals("")) {
                     ArrayList<RTOAgentListPojo> rtoSearchedList = new ArrayList<>();
                     for (RTOAgentListPojo rto : rtoAgentListPojos) {
-                        String contactToBeSearched = rto.getVehicle_owner().toLowerCase()+rto.getVehicle_no().toLowerCase();
+                        String contactToBeSearched = rto.getVehicle_owner().toLowerCase() + rto.getVehicle_no().toLowerCase();
                         if (contactToBeSearched.contains(newText.toLowerCase())) {
                             rtoSearchedList.add(rto);
                         }
@@ -178,12 +178,12 @@ public class LinkToRTO_Activity extends Activity {
                     } else {
                         //bindRecyclerview(contactsSearchedList);
                         rtoAgentListToLinkPojos = rtoSearchedList;
-                        rto_agent_list.setAdapter(new RTOLinkAdapter(context, rtoSearchedList,linkPojos));
+                        rto_agent_list.setAdapter(new RTOLinkAdapter(context, rtoSearchedList, linkPojos));
 
                     }
                     return true;
                 } else if (newText.equals("")) {
-                    rto_agent_list.setAdapter(new RTOLinkAdapter(context, rtoAgentListPojos,linkPojos));
+                    rto_agent_list.setAdapter(new RTOLinkAdapter(context, rtoAgentListPojos, linkPojos));
                     //customer_list.setAdapter(new CustomerAdapter(context,customerPojos,user_id));
                     //bindRecyclerview(contactList);
                 }
@@ -194,14 +194,14 @@ public class LinkToRTO_Activity extends Activity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(selectedposition != -1) {
+                if (selectedposition != -1) {
                     RTOAgentListPojo rtoAgentListPojo = rtoAgentListToLinkPojos.get(selectedposition);
                     Intent intent = new Intent(context, Link_Edit_RTO.class);
                     intent.putExtra("rtoagentDetails", rtoAgentListPojo);
                     intent.putExtra("vehicleDetails", linkPojo);
                     context.startActivity(intent);
 
-                }else{
+                } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                     builder.setMessage("Please Select Record To Link.");
                     builder.setIcon(R.drawable.ic_success_24dp);
@@ -222,7 +222,7 @@ public class LinkToRTO_Activity extends Activity {
 
     }
 
-    public  static class GetRTOAgentList extends AsyncTask<String, Void, String> {
+    public static class GetRTOAgentList extends AsyncTask<String, Void, String> {
 
 
         @Override
@@ -260,7 +260,7 @@ public class LinkToRTO_Activity extends Activity {
                     message = mainObj.getString("message");
                     rtoAgentListPojos = new ArrayList<RTOAgentListPojo>();
                     linkPojos = new ArrayList<LinkPojo>();
-                    rto_agent_list.setAdapter(new RTOLinkAdapter(context, rtoAgentListPojos,linkPojos));
+                    rto_agent_list.setAdapter(new RTOLinkAdapter(context, rtoAgentListPojos, linkPojos));
                     if (type.equalsIgnoreCase("success")) {
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
@@ -295,7 +295,6 @@ public class LinkToRTO_Activity extends Activity {
                                 agentdealerMainObj.setIsshowto_dealer(jsonObj.getString("is_show_to_dealer"));
 
 
-
                                 ArrayList<RTOAgentListPojo.OtherDatesListPojo> otherDatesListPojos = new ArrayList<>();
 
                                 for (int j = 0; j < jsonObj.getJSONArray("rto_dates").length(); j++) {
@@ -306,7 +305,6 @@ public class LinkToRTO_Activity extends Activity {
                                     otherDatesListPojos.add(otherdateobj);
                                 }
                                 agentdealerMainObj.setOther_date(otherDatesListPojos);
-
 
 
                                 ArrayList<RTOAgentListPojo.DocumentListPojo> documentsList = new ArrayList<>();
@@ -331,7 +329,7 @@ public class LinkToRTO_Activity extends Activity {
                                 ll_nothingtoshow.setVisibility(View.GONE);
                             }
                             rtoAgentListToLinkPojos = rtoAgentListPojos;
-                            rto_agent_list.setAdapter(new RTOLinkAdapter(context, rtoAgentListPojos,linkPojos));
+                            rto_agent_list.setAdapter(new RTOLinkAdapter(context, rtoAgentListPojos, linkPojos));
 
                         }
                     } else if (type.equalsIgnoreCase("failure")) {

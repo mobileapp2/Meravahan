@@ -9,11 +9,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -37,7 +36,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import in.rto.collections.R;
@@ -46,7 +44,6 @@ import in.rto.collections.models.BankPojo;
 import in.rto.collections.models.BankerDetailsPojo;
 import in.rto.collections.models.BranchPojo;
 import in.rto.collections.models.ClientMainListPojo;
-import in.rto.collections.models.CustomerPojo;
 import in.rto.collections.models.FrequencyPojo;
 import in.rto.collections.models.StatePojo;
 import in.rto.collections.models.VehicleDealerPojo;
@@ -62,13 +59,13 @@ public class View_Banker_details_Activity extends Activity {
     private ScrollView scrollView;
     private LinearLayout ll_parent;
     private static final int CAMERA_REQUEST = 100;
-    private LinearLayout ll_servicedates, ll_documents,ll_Otherdates;
-    private ImageView btn_addservicedates, btn_adddocuments,btn_addotherdates;
+    private LinearLayout ll_servicedates, ll_documents, ll_Otherdates;
+    private ImageView btn_addservicedates, btn_adddocuments, btn_addotherdates;
     private static final int GALLERY_REQUEST = 200;
     private EditText edt_bank, edt_branch, edt_clientname, edt_borrowername, edt_vehicledealer,
             edt_description, edt_loanamount, edt_accountnumber, edt_sactiondate, edt_installmentanount, edt_startdate,
-            edt_enddate, edt_frequency, edt_remark,edt_vehiclenumber,purchasedate,edt_selectVehicleImage;
-    private CheckBox isshow_to_dealer,isshow_to_customer;
+            edt_enddate, edt_frequency, edt_remark, edt_vehiclenumber, purchasedate, edt_selectVehicleImage;
+    private CheckBox isshow_to_dealer, isshow_to_customer;
     private int mYear, mMonth, mDay;
     private int mYear1, mMonth1, mDay1;
     private int mYear2, mMonth2, mDay2;
@@ -77,9 +74,9 @@ public class View_Banker_details_Activity extends Activity {
     private int mYear5, mMonth5, mDay5;
     private int mYear6, mMonth6, mDay6;
     private int mYear7, mMonth7, mDay7;
-    private String isshowtocustomer , isshowtorto;
+    private String isshowtocustomer, isshowtorto;
 
-    private EditText edt_selectdocuments = null,edt_name = null;
+    private EditText edt_selectdocuments = null, edt_name = null;
     private ImageView img_save;
     private ArrayList<BankPojo> bankList;
     private ArrayList<BranchPojo> branchList;
@@ -90,12 +87,13 @@ public class View_Banker_details_Activity extends Activity {
     private ArrayList<FrequencyPojo> frequencylist;
     private UserSessionManager session;
     private String companyAliasName = "";
-    private String user_id, stateId, clientId, typeId,dealerId,statename="",bankId,branchId,frequency;
+    private String user_id, stateId, clientId, typeId, dealerId, statename = "", bankId, branchId, frequency;
     private String[] PERMISSIONS = {android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
     private Uri photoURI;
     private File file, rtoagentPicFolder;
     private BankerDetailsPojo bankerDetailsPojo;
     private ImageView img_delete, img_edit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,6 +103,7 @@ public class View_Banker_details_Activity extends Activity {
         getSessionData();
         setDefaults();
     }
+
     private void init() {
         context = View_Banker_details_Activity.this;
         session = new UserSessionManager(context);
@@ -149,6 +148,7 @@ public class View_Banker_details_Activity extends Activity {
     protected void onPause() {
         super.onPause();
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -162,12 +162,12 @@ public class View_Banker_details_Activity extends Activity {
 
     private void setDefaults() {
         documentsLayoutsList = new ArrayList<>();
-        bankerDetailsPojo  = (BankerDetailsPojo) getIntent().getSerializableExtra("bankerdetails");
+        bankerDetailsPojo = (BankerDetailsPojo) getIntent().getSerializableExtra("bankerdetails");
         edt_bank.setText(bankerDetailsPojo.getBank_name());
         edt_branch.setText(bankerDetailsPojo.getBranch_name());
         edt_description.setText(bankerDetailsPojo.getDescription());
         edt_sactiondate.setText(changeDateFormat("yyyy-MM-dd",
-                "dd/MM/yyyy",bankerDetailsPojo.getDate_to_section()));
+                "dd/MM/yyyy", bankerDetailsPojo.getDate_to_section()));
         edt_enddate.setText(changeDateFormat("yyyy-MM-dd",
                 "dd/MM/yyyy",
                 bankerDetailsPojo.getInstallment_end_date()));
@@ -191,15 +191,15 @@ public class View_Banker_details_Activity extends Activity {
         edt_selectVehicleImage.setText(bankerDetailsPojo.getVehicle_image());
         if (bankerDetailsPojo.getIsshowto_customer().equals("1")) {
             isshow_to_customer.setChecked(true);
-        } else{
+        } else {
             isshow_to_customer.setChecked(false);
         }
         if (bankerDetailsPojo.getIsshowto_dealer().equals("1")) {
             isshow_to_dealer.setChecked(true);
-        }else{
+        } else {
             isshow_to_dealer.setChecked(false);
         }
-        ArrayList< BankerDetailsPojo.DocumentListPojo> documentsList = new ArrayList<>();
+        ArrayList<BankerDetailsPojo.DocumentListPojo> documentsList = new ArrayList<>();
         documentsList = bankerDetailsPojo.getDocument();
 
         if (documentsList.size() != 0) {
@@ -227,8 +227,8 @@ public class View_Banker_details_Activity extends Activity {
         }
 
 
-
     }
+
     public void viewDocument(String url) {
 
         if (Utilities.isInternetAvailable(context)) {
@@ -246,13 +246,12 @@ public class View_Banker_details_Activity extends Activity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 int id = item.getItemId();
-                if(id == R.id.img_edit){
+                if (id == R.id.img_edit) {
                     Intent intent = new Intent(context, Edit_BankerDetails_Activity.class);
                     intent.putExtra("bankerDetails", bankerDetailsPojo);
                     context.startActivity(intent);
                     finish();
-                }
-                else if(id == R.id.img_delete){
+                } else if (id == R.id.img_delete) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                     builder.setMessage("Are you sure you want to delete this item?");
                     builder.setTitle("Alert");
@@ -282,8 +281,6 @@ public class View_Banker_details_Activity extends Activity {
                 return false;
             }
         });
-
-
 
 
         // callType = getIntent().getStringExtra("TYPE");

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -469,11 +468,13 @@
                             android:textSize="14sp" />
 
                     </android.support.design.widget.TextInputLayout>
+
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp">
+
                         <EditText
                             android:id="@+id/edt_selectvehicle"
                             android:layout_width="match_parent"
@@ -541,6 +542,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
+
                             <EditText
                                 android:id="@+id/edt_bank"
                                 android:layout_width="match_parent"
@@ -548,15 +550,16 @@
                                 android:gravity="center_vertical"
                                 android:hint="Bank"
                                 android:textColor="@color/black"
-                                android:textSize="14sp"
-                                />
+                                android:textSize="14sp" />
 
                         </android.support.design.widget.TextInputLayout>
+
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
+
                             <EditText
                                 android:id="@+id/edt_branch"
                                 android:layout_width="match_parent"
@@ -564,8 +567,7 @@
                                 android:gravity="center_vertical"
                                 android:hint="Branch"
                                 android:textColor="@color/black"
-                                android:textSize="14sp"
-                                />
+                                android:textSize="14sp" />
 
 
                         </android.support.design.widget.TextInputLayout>

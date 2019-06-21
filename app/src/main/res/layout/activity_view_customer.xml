@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,7 +19,6 @@
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             app:titleTextColor="@color/white">
-
 
 
         </android.support.v7.widget.Toolbar>
@@ -102,6 +100,7 @@
                             android:textSize="14sp" />
 
                     </android.support.design.widget.TextInputLayout>
+
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -116,7 +115,7 @@
                             android:hint="Vehicle Owner Name"
                             android:textColor="@color/black"
                             android:textSize="14sp"
-                            android:focusable="false"/>
+                            android:focusable="false" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -135,7 +134,7 @@
                             android:hint="RTO Agent"
                             android:textColor="@color/black"
                             android:textSize="14sp"
-                            android:focusable="false"/>
+                            android:focusable="false" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -153,7 +152,7 @@
                             android:hint="Vehicle Dealer Name"
                             android:textColor="@color/black"
                             android:textSize="14sp"
-                            android:focusable="false"/>
+                            android:focusable="false" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -171,8 +170,7 @@
                             android:hint="Description(company/model/color)"
                             android:textColor="@color/black"
                             android:textSize="14sp"
-                            android:focusable="false"
-                            />
+                            android:focusable="false" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -193,8 +191,7 @@
                             android:inputType="textCapWords|textNoSuggestions|textMultiLine"
                             android:longClickable="false"
                             android:textColor="@color/black"
-                            android:textSize="14sp"
-                            />
+                            android:textSize="14sp" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -212,7 +209,7 @@
                             android:hint="Engine No"
                             android:textColor="@color/black"
                             android:textSize="14sp"
-                            android:focusable="false"/>
+                            android:focusable="false" />
 
 
                     </android.support.design.widget.TextInputLayout>
@@ -231,7 +228,7 @@
                             android:hint="Chassis No"
                             android:textColor="@color/black"
                             android:textSize="14sp"
-                            android:focusable="false"/>
+                            android:focusable="false" />
 
 
                     </android.support.design.widget.TextInputLayout>
@@ -252,7 +249,7 @@
                             android:inputType="textCapWords|textNoSuggestions"
                             android:textColor="@color/black"
                             android:textSize="14sp"
-                            android:focusable="false"/>
+                            android:focusable="false" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -314,9 +311,10 @@
                             android:longClickable="false"
                             android:textColor="@color/black"
                             android:textSize="14sp"
-                            android:visibility="gone"/>
+                            android:visibility="gone" />
 
                     </android.support.design.widget.TextInputLayout>
+
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -356,6 +354,7 @@
                             android:textSize="14sp" />
 
                     </android.support.design.widget.TextInputLayout>
+
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -375,6 +374,7 @@
                             android:textSize="14sp" />
 
                     </android.support.design.widget.TextInputLayout>
+
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -430,9 +430,10 @@
                             android:hint="Temporary Registration No"
                             android:textColor="@color/black"
                             android:textSize="14sp"
-                            android:focusable="false"/>
+                            android:focusable="false" />
 
                     </android.support.design.widget.TextInputLayout>
+
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -448,10 +449,9 @@
                             android:inputType="textCapWords|textNoSuggestions|textMultiLine"
                             android:textColor="@color/black"
                             android:textSize="14sp"
-                            android:focusable="false"/>
+                            android:focusable="false" />
 
                     </android.support.design.widget.TextInputLayout>
-
 
 
                     <android.support.design.widget.TextInputLayout
@@ -469,14 +469,16 @@
                             android:inputType="textCapWords|textNoSuggestions|textMultiLine"
                             android:textColor="@color/black"
                             android:textSize="14sp"
-                            android:focusable="false"/>
+                            android:focusable="false" />
 
                     </android.support.design.widget.TextInputLayout>
+
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp">
+
                         <EditText
                             android:id="@+id/edt_selectvehicle"
                             android:layout_width="match_parent"
@@ -494,19 +496,20 @@
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
+
             <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 card_view:cardBackgroundColor="@android:color/white"
                 card_view:cardCornerRadius="0dp"
-                card_view:cardUseCompatPadding="true"
-                >
+                card_view:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:id="@+id/bank_details"
                         android:layout_width="match_parent"
@@ -530,200 +533,210 @@
                             android:padding="10dp"
                             android:src="@drawable/drop_down_arrow"
                             android:tint="@color/black"
-                            android:visibility="gone"/>
+                            android:visibility="gone" />
                     </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:id="@+id/bank_feild">
-                    <android.support.design.widget.TextInputLayout
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
-                        <EditText
-                            android:id="@+id/edt_bank"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:id="@+id/bank_feild">
+
+                        <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:hint="Bank"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:focusable="false"
-                            />
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp">
+
+                            <EditText
+                                android:id="@+id/edt_bank"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:hint="Bank"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:focusable="false" />
 
 
-                    </android.support.design.widget.TextInputLayout>
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
-                        <EditText
-                            android:id="@+id/edt_branch"
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:hint="Branch"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:focusable="false"
-                            />
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp">
+
+                            <EditText
+                                android:id="@+id/edt_branch"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:hint="Branch"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:focusable="false" />
 
 
-                    </android.support.design.widget.TextInputLayout>
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        </android.support.design.widget.TextInputLayout>
 
-                        <EditText
-                            android:id="@+id/edt_borrower"
+                        <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:hint="Name of the borrower"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:focusable="false"
-                            />
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp">
 
-                    </android.support.design.widget.TextInputLayout>
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                            <EditText
+                                android:id="@+id/edt_borrower"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:hint="Name of the borrower"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:focusable="false" />
 
-                        <EditText
-                            android:id="@+id/edt_saction"
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:hint="Date of Saction"
-                            android:textColor="@color/black"
-                            android:inputType="date"
-                            android:textSize="14sp"
-                            android:focusable="false"/>
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp">
+
+                            <EditText
+                                android:id="@+id/edt_saction"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:hint="Date of Saction"
+                                android:textColor="@color/black"
+                                android:inputType="date"
+                                android:textSize="14sp"
+                                android:focusable="false" />
 
 
-                    </android.support.design.widget.TextInputLayout>
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        </android.support.design.widget.TextInputLayout>
 
-                        <EditText
-                            android:id="@+id/edt_loanamount"
+                        <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:focusable="false"
-                            android:gravity="center_vertical"
-                            android:hint="Loan Amount "
-                            android:longClickable="false"
-                            android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp">
 
-                    </android.support.design.widget.TextInputLayout>
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                            <EditText
+                                android:id="@+id/edt_loanamount"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusable="false"
+                                android:gravity="center_vertical"
+                                android:hint="Loan Amount "
+                                android:longClickable="false"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
 
-                        <EditText
-                            android:id="@+id/edt_accountno"
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:hint="Loan Account Number"
-                            android:inputType="textCapWords|textNoSuggestions|textMultiLine"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:focusable="false"/>
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp">
 
-                    </android.support.design.widget.TextInputLayout>
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                            <EditText
+                                android:id="@+id/edt_accountno"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:hint="Loan Account Number"
+                                android:inputType="textCapWords|textNoSuggestions|textMultiLine"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:focusable="false" />
 
-                        <EditText
-                            android:id="@+id/edt_installmentamount"
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:hint="Installment Amount"
-                            android:inputType="textCapWords|textNoSuggestions|textMultiLine"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:focusable="false"/>
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp">
 
-                    </android.support.design.widget.TextInputLayout>
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                            <EditText
+                                android:id="@+id/edt_installmentamount"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:hint="Installment Amount"
+                                android:inputType="textCapWords|textNoSuggestions|textMultiLine"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:focusable="false" />
 
-                        <EditText
-                            android:id="@+id/edt_startdate"
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:hint="Installment Start Date"
-                            android:textColor="@color/black"
-                            android:inputType="date"
-                            android:textSize="14sp"
-                            android:focusable="false"/>
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp">
+
+                            <EditText
+                                android:id="@+id/edt_startdate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:hint="Installment Start Date"
+                                android:textColor="@color/black"
+                                android:inputType="date"
+                                android:textSize="14sp"
+                                android:focusable="false" />
 
 
-                    </android.support.design.widget.TextInputLayout>
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        </android.support.design.widget.TextInputLayout>
 
-                        <EditText
-                            android:id="@+id/edt_enddate"
+                        <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:hint="Installment End Date"
-                            android:textColor="@color/black"
-                            android:inputType="date"
-                            android:textSize="14sp"
-                            android:focusable="false"/>
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp">
+
+                            <EditText
+                                android:id="@+id/edt_enddate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:hint="Installment End Date"
+                                android:textColor="@color/black"
+                                android:inputType="date"
+                                android:textSize="14sp"
+                                android:focusable="false" />
 
 
-                    </android.support.design.widget.TextInputLayout>
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        </android.support.design.widget.TextInputLayout>
 
-                        <EditText
-                            android:id="@+id/edt_frequency"
+                        <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:drawableRight="@drawable/icon_dropdown"
-                            android:focusable="false"
-                            android:gravity="center_vertical"
-                            android:hint="Frequency"
-                            android:inputType="textCapWords|textNoSuggestions|textMultiLine"
-                            android:longClickable="false"
-                            android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp">
 
-                    </android.support.design.widget.TextInputLayout>
+                            <EditText
+                                android:id="@+id/edt_frequency"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawableRight="@drawable/icon_dropdown"
+                                android:focusable="false"
+                                android:gravity="center_vertical"
+                                android:hint="Frequency"
+                                android:inputType="textCapWords|textNoSuggestions|textMultiLine"
+                                android:longClickable="false"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
 
-                </LinearLayout>
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 

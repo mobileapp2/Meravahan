@@ -34,9 +34,7 @@ import java.util.List;
 
 import in.rto.collections.R;
 import in.rto.collections.activities.ViewNotification_Activity;
-import in.rto.collections.activities.ViewRTODetails_Activity;
 import in.rto.collections.models.NotificationPojo;
-import in.rto.collections.models.ProductInfoListPojo;
 
 import static in.rto.collections.utilities.Utilities.changeDateFormat;
 
@@ -45,6 +43,7 @@ public class GetNotificationListAdapter extends RecyclerView.Adapter<GetNotifica
     private List<NotificationPojo> resultArrayList;
     private Context context;
     private File file, notificationPicFolder;
+
     public GetNotificationListAdapter(Context context, List<NotificationPojo> resultArrayList) {
         this.context = context;
         this.resultArrayList = resultArrayList;
@@ -72,7 +71,7 @@ public class GetNotificationListAdapter extends RecyclerView.Adapter<GetNotifica
         NotificationPojo notificationPojo = new NotificationPojo();
         notificationPojo = resultArrayList.get(position);
         String DateTime = changeDateFormat("yyyy-MM-dd HH:MM:SS",
-                "dd-MM-yyyy HH:MM",notificationPojo.getCreated_at());
+                "dd-MM-yyyy HH:MM", notificationPojo.getCreated_at());
         holder.tv_name.setText(notificationPojo.getMessage());
         holder.tv_send_by.setText(notificationPojo.getSenderName());
         holder.tv_send_at.setText(DateTime);
@@ -82,7 +81,7 @@ public class GetNotificationListAdapter extends RecyclerView.Adapter<GetNotifica
             Picasso.with(context)
                     .load(notificationPojo.getImageurl())
                     .into(holder.imv_product);
-        }else{
+        } else {
             holder.imv_product.setVisibility(View.GONE);
             holder.imv_download.setVisibility(View.GONE);
         }
@@ -123,7 +122,7 @@ public class GetNotificationListAdapter extends RecyclerView.Adapter<GetNotifica
                     share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
                     share.putExtra(Intent.EXTRA_STREAM, imageUri);
                     context.startActivity(Intent.createChooser(share, "Share !"));
-                }else{
+                } else {
                     Intent share = new Intent(Intent.ACTION_SEND);
                     share.setType("text/plain");
                     share.putExtra(Intent.EXTRA_TEXT, finalNotificationPojo.getMessage());
@@ -147,10 +146,11 @@ public class GetNotificationListAdapter extends RecyclerView.Adapter<GetNotifica
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tv_name,tv_send_by,tv_send_at;
-        private ImageView imv_product,imv_share,imv_download;
+        private TextView tv_name, tv_send_by, tv_send_at;
+        private ImageView imv_product, imv_share, imv_download;
         CardView ll_mainlayout;
         LinearLayout gotoview;
+
         public MyViewHolder(View view) {
             super(view);
             tv_name = view.findViewById(R.id.tv_name);
@@ -163,6 +163,7 @@ public class GetNotificationListAdapter extends RecyclerView.Adapter<GetNotifica
             gotoview = view.findViewById(R.id.gotoview);
         }
     }
+
     public class DownloadDocument extends AsyncTask<String, Integer, Boolean> {
         int lenghtOfFile = -1;
         int count = 0;

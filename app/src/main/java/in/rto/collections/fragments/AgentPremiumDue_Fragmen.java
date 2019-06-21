@@ -58,7 +58,7 @@ public class AgentPremiumDue_Fragmen extends Fragment {
     private LinearLayoutManager layoutManager;
     private UserSessionManager session;
     private int mYear, mMonth, mDay;
-    private String user_id, date,role;
+    private String user_id, date, role;
     private ArrayList<EventListPojo> premiumDueList;
     private String id = "", message = "", whatsappPicUrl = "", whatsappPic = "";
     private EditText edt_date, dialog_edt_whatsappmessage;
@@ -131,7 +131,7 @@ public class AgentPremiumDue_Fragmen extends Fragment {
 
         fab_wish_whatsapp.setVisibility(View.GONE);
         fab_wish_sms.setVisibility(View.GONE);
-       // cb_checkall.setVisibility(View.GONE);
+        // cb_checkall.setVisibility(View.GONE);
     }
 
     private void setEventHandlers() {
@@ -210,7 +210,6 @@ public class AgentPremiumDue_Fragmen extends Fragment {
                 dpd1.show();
             }
         });
-
 
 
     }
@@ -518,9 +517,6 @@ public class AgentPremiumDue_Fragmen extends Fragment {
             }
         }
     }
-
-
-
 
 
     private void sendSMS(String message, String singleReceiverID) {

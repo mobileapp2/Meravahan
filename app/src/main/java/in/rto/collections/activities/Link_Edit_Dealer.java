@@ -4,7 +4,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,16 +12,14 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -61,11 +58,9 @@ import droidninja.filepicker.FilePickerBuilder;
 import droidninja.filepicker.FilePickerConst;
 import in.rto.collections.R;
 import in.rto.collections.adapters.listClientsAdapter;
-import in.rto.collections.fragments.Fragment_vehicle_dealer;
 import in.rto.collections.models.ClientMainListPojo;
 import in.rto.collections.models.FrequencyPojo;
 import in.rto.collections.models.LinkPojo;
-import in.rto.collections.models.RTOAgentListPojo;
 import in.rto.collections.models.RTOAgentPojo;
 import in.rto.collections.models.StatePojo;
 import in.rto.collections.models.TypePojo;
@@ -85,14 +80,14 @@ public class Link_Edit_Dealer extends Activity {
     private ScrollView scrollView;
     private LinearLayout ll_parent;
     private static final int CAMERA_REQUEST = 100;
-    private LinearLayout ll_servicedates, ll_documents,ll_Otherdates;
-    private ImageView btn_addservicedates, btn_adddocuments,btn_addotherdates;
+    private LinearLayout ll_servicedates, ll_documents, ll_Otherdates;
+    private ImageView btn_addservicedates, btn_adddocuments, btn_addotherdates;
     private static final int GALLERY_REQUEST = 200;
     private EditText edt_state, edt_vehicleno, edt_clientname, edt_vehicleownername, edt_rtoagent,
             edt_description, edt_type, edt_engineno, edt_chassisno, edt_insurancepolicyno, edt_renewaldate,
-            edt_purcasedate, edt_temregno, edt_remark,edt_hypothecatedto,edt_bank, edt_branch, edt_borrowername,
+            edt_purcasedate, edt_temregno, edt_remark, edt_hypothecatedto, edt_bank, edt_branch, edt_borrowername,
             edt_loanamount, edt_accountnumber, edt_sactiondate, edt_installmentanount, edt_startdate,
-            edt_enddate, edt_frequency,edt_selectVehicleImage;
+            edt_enddate, edt_frequency, edt_selectVehicleImage;
 
     private int mYear, mMonth, mDay;
     private int mYear1, mMonth1, mDay1;
@@ -105,25 +100,25 @@ public class Link_Edit_Dealer extends Activity {
     private ImageView img_save;
     private List<LinearLayout> serviceDatesLayoutsList;
     private ArrayList<ClientMainListPojo> clientList;
-    private List<LinearLayout> documentsLayoutsList,documentsLayoutsList1;
-    private List<LinearLayout> otherLayoutsList,otherLayoutsList1;
+    private List<LinearLayout> documentsLayoutsList, documentsLayoutsList1;
+    private List<LinearLayout> otherLayoutsList, otherLayoutsList1;
     private ArrayList<RTOAgentPojo> rtoagentlist;
     private ArrayList<TypePojo> typelist;
     private ArrayList<StatePojo> statelist;
     private UserSessionManager session;
-    private String companyAliasName = "",documentType;
-    private String user_id, stateId, clientId="0", typeId,rtoId,id,serviceDateId="0",frequency,otherDateId="0",documentId,rtocreatedby,vehicleId,dealerId;
+    private String companyAliasName = "", documentType;
+    private String user_id, stateId, clientId = "0", typeId, rtoId, id, serviceDateId = "0", frequency, otherDateId = "0", documentId, rtocreatedby, vehicleId, dealerId;
     private String[] PERMISSIONS = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
     private Uri photoURI;
     private VehicleDealerListPojo vehicaldealerdetails;
     private File photoFile, vehicledealerPicFolder;
-    private CheckBox isshow_to_rto,isshow_to_customer;
-    private String isshowtocustomer , isshowtorto;
+    private CheckBox isshow_to_rto, isshow_to_customer;
+    private String isshowtocustomer, isshowtorto;
     private LinkPojo linkPojo;
     private FrameLayout frameLayout;
     private FragmentManager supportFragmentManager;
     private ArrayList<FrequencyPojo> frequencylist;
-    private LinearLayout bank_details,bank_feild;
+    private LinearLayout bank_details, bank_feild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +130,7 @@ public class Link_Edit_Dealer extends Activity {
         setUpToolbar();
         setEventHandler();
     }
+
     private void init() {
         context = Link_Edit_Dealer.this;
         session = new UserSessionManager(context);
@@ -246,7 +242,7 @@ public class Link_Edit_Dealer extends Activity {
         documentsLayoutsList = new ArrayList<>();
         otherLayoutsList1 = new ArrayList<>();
         documentsLayoutsList1 = new ArrayList<>();
-        vehicaldealerdetails  = (VehicleDealerListPojo) getIntent().getSerializableExtra("vehicleDetails");
+        vehicaldealerdetails = (VehicleDealerListPojo) getIntent().getSerializableExtra("vehicleDetails");
 
         id = vehicaldealerdetails.getId();
         stateId = vehicaldealerdetails.getStateId();
@@ -259,7 +255,7 @@ public class Link_Edit_Dealer extends Activity {
         edt_state.setText(vehicaldealerdetails.getStateName());
         edt_description.setText(vehicaldealerdetails.getDescription());
         edt_renewaldate.setText(changeDateFormat("yyyy-MM-dd",
-                "dd/MM/yyyy",vehicaldealerdetails.getInsurance_renewal_date()));
+                "dd/MM/yyyy", vehicaldealerdetails.getInsurance_renewal_date()));
         edt_purcasedate.setText(changeDateFormat("yyyy-MM-dd",
                 "dd/MM/yyyy",
                 vehicaldealerdetails.getPurchase_date()));
@@ -278,12 +274,12 @@ public class Link_Edit_Dealer extends Activity {
 
         if (vehicaldealerdetails.getIsshowto_customer().equals("1")) {
             isshow_to_customer.setChecked(true);
-        } else{
+        } else {
             isshow_to_customer.setChecked(false);
         }
         if (vehicaldealerdetails.getIsshowto_rto().equals("1")) {
             isshow_to_rto.setChecked(true);
-        }else{
+        } else {
             isshow_to_rto.setChecked(false);
         }
         ArrayList<VehicleDealerListPojo.ServiceDatesListPojo> serviceDatesList = new ArrayList<>();
@@ -307,159 +303,159 @@ public class Link_Edit_Dealer extends Activity {
             //tv_ser.setText("No Maturity Dates Added");
         }
 
-        linkPojo  = (LinkPojo) getIntent().getSerializableExtra("rtoDetails");
+        linkPojo = (LinkPojo) getIntent().getSerializableExtra("rtoDetails");
         rtocreatedby = linkPojo.getCreated_by();
-        if(linkPojo.getVehiclertoId() != null) {
+        if (linkPojo.getVehiclertoId() != null) {
             vehicleId = linkPojo.getVehiclertoId();
-        }else{
+        } else {
             vehicleId = "0";
         }
-        if(linkPojo.getDealerId() != null) {
+        if (linkPojo.getDealerId() != null) {
             dealerId = linkPojo.getDealerId();
-        }else{
+        } else {
             dealerId = "0";
         }
-        if(linkPojo.getStateId() != null ){
+        if (linkPojo.getStateId() != null) {
             stateId = linkPojo.getStateId();
             edt_state.setText(linkPojo.getStateName());
-        }else{
+        } else {
             stateId = vehicaldealerdetails.getStateId();
             edt_state.setText(vehicaldealerdetails.getStateName());
         }
-        if(linkPojo.getChassis_no() != null ){
+        if (linkPojo.getChassis_no() != null) {
             edt_chassisno.setText(linkPojo.getChassis_no());
-        }else{
+        } else {
             edt_chassisno.setText(vehicaldealerdetails.getChassis_no());
         }
-        if(linkPojo.getDescription() != null ){
+        if (linkPojo.getDescription() != null) {
             edt_description.setText(linkPojo.getDescription());
-        }else{
+        } else {
             edt_description.setText(vehicaldealerdetails.getDescription());
         }
-        if(linkPojo.getVehicle_owner() != null ){
+        if (linkPojo.getVehicle_owner() != null) {
             edt_vehicleownername.setText(linkPojo.getVehicle_owner());
-        }else{
+        } else {
             edt_vehicleownername.setText(vehicaldealerdetails.getVehicle_owner());
         }
-        if(linkPojo.getInsurance_renewal_date() != null ){
+        if (linkPojo.getInsurance_renewal_date() != null) {
             edt_renewaldate.setText(linkPojo.getInsurance_renewal_date());
-        }else{
+        } else {
             edt_renewaldate.setText(changeDateFormat("yyyy-MM-dd",
                     "dd/MM/yyyy",
                     vehicaldealerdetails.getInsurance_renewal_date()));
         }
 
 
-        if(linkPojo.getEngine_no() != null ){
+        if (linkPojo.getEngine_no() != null) {
             edt_engineno.setText(linkPojo.getEngine_no());
-        }else{
+        } else {
             edt_engineno.setText(vehicaldealerdetails.getEngine_no());
         }
-        if(linkPojo.getRemark() != null ){
+        if (linkPojo.getRemark() != null) {
             edt_remark.setText(linkPojo.getRemark());
-        }else{
+        } else {
             edt_remark.setText(vehicaldealerdetails.getRemark());
         }
 
-        if(linkPojo.getType_name() != null ){
+        if (linkPojo.getType_name() != null) {
             edt_type.setText(linkPojo.getType_name());
-            if( linkPojo.getType_id() != null){
+            if (linkPojo.getType_id() != null) {
                 typeId = vehicaldealerdetails.getType_id();
-            }else{
+            } else {
                 typeId = "0";
 
             }
             typeId = linkPojo.getType_id();
-        }else{
+        } else {
             edt_type.setText(vehicaldealerdetails.getType_name());
-            if( vehicaldealerdetails.getType_id() != null){
+            if (vehicaldealerdetails.getType_id() != null) {
                 typeId = vehicaldealerdetails.getType_id();
-            }else{
+            } else {
                 typeId = "0";
             }
             typeId = vehicaldealerdetails.getType_id();
         }
-        if(linkPojo.getInsurance_policy_no() != null ){
+        if (linkPojo.getInsurance_policy_no() != null) {
             edt_insurancepolicyno.setText(linkPojo.getInsurance_policy_no());
-        }else{
+        } else {
             edt_insurancepolicyno.setText(vehicaldealerdetails.getInsurance_policy_no());
         }
-        if(linkPojo.getVehicle_no() != null ){
+        if (linkPojo.getVehicle_no() != null) {
             edt_vehicleno.setText(linkPojo.getVehicle_no());
-        }else{
+        } else {
             edt_vehicleno.setText(vehicaldealerdetails.getVehicle_no());
         }
 
-        if(linkPojo.getBank_name() != null) {
+        if (linkPojo.getBank_name() != null) {
             edt_bank.setText(linkPojo.getBank_name());
-        }else{
+        } else {
             edt_bank.setText(vehicaldealerdetails.getBank_name());
         }
 
-        if(linkPojo.getBranch_name() != null) {
+        if (linkPojo.getBranch_name() != null) {
             edt_branch.setText(linkPojo.getBranch_name());
-        }else{
+        } else {
             edt_branch.setText(vehicaldealerdetails.getBranch_name());
         }
 
-        if(linkPojo.getFrequency_id() != null) {
-            frequency= linkPojo.getFrequency_id();
+        if (linkPojo.getFrequency_id() != null) {
+            frequency = linkPojo.getFrequency_id();
             edt_frequency.setText(linkPojo.getFrequency());
-        }else{
-            if(vehicaldealerdetails.getFrequency_id() != null) {
+        } else {
+            if (vehicaldealerdetails.getFrequency_id() != null) {
                 frequency = vehicaldealerdetails.getFrequency_id();
                 edt_frequency.setText(vehicaldealerdetails.getFrequency());
-            }else{
+            } else {
                 frequency = "0";
             }
         }
-        if(linkPojo.getLoan_amount() != null ){
+        if (linkPojo.getLoan_amount() != null) {
             edt_loanamount.setText(linkPojo.getLoan_amount());
-        }else{
+        } else {
             edt_loanamount.setText(vehicaldealerdetails.getLoan_amount());
         }
-        if(linkPojo.getLoan_account_number() != null ){
+        if (linkPojo.getLoan_account_number() != null) {
             edt_accountnumber.setText(linkPojo.getLoan_account_number());
-        }else{
+        } else {
             edt_accountnumber.setText(vehicaldealerdetails.getLoan_account_number());
         }
-        if(linkPojo.getInstallment_amount() != null ){
+        if (linkPojo.getInstallment_amount() != null) {
             edt_installmentanount.setText(linkPojo.getInstallment_amount());
-        }else{
+        } else {
             edt_installmentanount.setText(vehicaldealerdetails.getInstallment_amount());
         }
-        if(linkPojo.getDate_to_section() != null ){
+        if (linkPojo.getDate_to_section() != null) {
             edt_sactiondate.setText(linkPojo.getDate_to_section());
-        }else{
+        } else {
             edt_sactiondate.setText(changeDateFormat("yyyy-MM-dd",
                     "dd/MM/yyyy",
                     vehicaldealerdetails.getDate_to_section()));
         }
-        if(linkPojo.getInstallment_start_date() != null ){
+        if (linkPojo.getInstallment_start_date() != null) {
             edt_startdate.setText(linkPojo.getInstallment_start_date());
-        }else{
+        } else {
             edt_startdate.setText(changeDateFormat("yyyy-MM-dd",
-                    "dd/MM/yyyy",vehicaldealerdetails.getInstallment_start_date()));
+                    "dd/MM/yyyy", vehicaldealerdetails.getInstallment_start_date()));
         }
-        if(linkPojo.getInstallment_end_date() != null ){
+        if (linkPojo.getInstallment_end_date() != null) {
             edt_enddate.setText(linkPojo.getInstallment_end_date());
-        }else{
+        } else {
             edt_enddate.setText(changeDateFormat("yyyy-MM-dd",
-                    "dd/MM/yyyy",vehicaldealerdetails.getInstallment_end_date()));
+                    "dd/MM/yyyy", vehicaldealerdetails.getInstallment_end_date()));
         }
-        if(linkPojo.getBorrower_name() != null ){
+        if (linkPojo.getBorrower_name() != null) {
             edt_borrowername.setText(linkPojo.getBorrower_name());
-        }else{
+        } else {
             edt_borrowername.setText(vehicaldealerdetails.getBorrower_name());
         }
-        if(linkPojo.getVehicle_image() != null ){
+        if (linkPojo.getVehicle_image() != null) {
             edt_selectVehicleImage.setText(linkPojo.getVehicle_image());
-        }else{
+        } else {
             edt_selectVehicleImage.setText(vehicaldealerdetails.getVehicle_image());
         }
         ArrayList<LinkPojo.OtherDatesListPojo> otherDatesList1 = new ArrayList<>();
         otherDatesList1 = linkPojo.getOther_date();
-        if(linkPojo.getOther_date() != null) {
+        if (linkPojo.getOther_date() != null) {
             if (otherDatesList1.size() != 0) {
                 for (int i = 0; i < otherDatesList1.size(); i++) {
                     LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -473,31 +469,31 @@ public class Link_Edit_Dealer extends Activity {
                 }
 
             }
-        }else{
-                ArrayList<VehicleDealerListPojo.OtherDatesListPojo> otherDatesList2 = new ArrayList<>();
-                otherDatesList2 = vehicaldealerdetails.getOther_date();
+        } else {
+            ArrayList<VehicleDealerListPojo.OtherDatesListPojo> otherDatesList2 = new ArrayList<>();
+            otherDatesList2 = vehicaldealerdetails.getOther_date();
 
-                if (otherDatesList2.size() != 0) {
-                    for (int i = 0; i < otherDatesList2.size(); i++) {
-                        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                        final View rowView = inflater.inflate(R.layout.add_layout_otherdates, null);
-                        otherLayoutsList.add((LinearLayout) rowView);
-                        ll_Otherdates.addView(rowView, ll_Otherdates.getChildCount());
+            if (otherDatesList2.size() != 0) {
+                for (int i = 0; i < otherDatesList2.size(); i++) {
+                    LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    final View rowView = inflater.inflate(R.layout.add_layout_otherdates, null);
+                    otherLayoutsList.add((LinearLayout) rowView);
+                    ll_Otherdates.addView(rowView, ll_Otherdates.getChildCount());
 
-                        ((EditText) otherLayoutsList.get(i).findViewById(R.id.edt_otherdate)).setText(changeDateFormat("yyyy-MM-dd",
-                                "dd/MM/yyyy",
-                                otherDatesList2.get(i).getOther_date()));
-                        ((EditText) otherLayoutsList.get(i).findViewById(R.id.edt_text)).setText(otherDatesList2.get(i).getText());
-                        otherDateId = otherDatesList2.get(i).getOther_date_id();
-                    }
-                } else {
-                    //tv_ser.setText("No Maturity Dates Added");
+                    ((EditText) otherLayoutsList.get(i).findViewById(R.id.edt_otherdate)).setText(changeDateFormat("yyyy-MM-dd",
+                            "dd/MM/yyyy",
+                            otherDatesList2.get(i).getOther_date()));
+                    ((EditText) otherLayoutsList.get(i).findViewById(R.id.edt_text)).setText(otherDatesList2.get(i).getText());
+                    otherDateId = otherDatesList2.get(i).getOther_date_id();
                 }
+            } else {
+                //tv_ser.setText("No Maturity Dates Added");
             }
+        }
 
-        ArrayList< LinkPojo.DocumentListPojo> documentsList1 = new ArrayList<>();
+        ArrayList<LinkPojo.DocumentListPojo> documentsList1 = new ArrayList<>();
         documentsList1 = linkPojo.getDocument();
-        if(linkPojo.getDocument() != null){
+        if (linkPojo.getDocument() != null) {
             if (documentsList1.size() != 0) {
                 for (int i = 0; i < documentsList1.size(); i++) {
                     LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -511,8 +507,8 @@ public class Link_Edit_Dealer extends Activity {
                     ((EditText) documentsLayoutsList1.get(i).findViewById(R.id.edt_name)).setText(documentsList1.get(i).getDocument_name());
                 }
             }
-        }else{
-            ArrayList< VehicleDealerListPojo.DocumentListPojo> documentsList2 = new ArrayList<>();
+        } else {
+            ArrayList<VehicleDealerListPojo.DocumentListPojo> documentsList2 = new ArrayList<>();
             documentsList2 = vehicaldealerdetails.getDocument();
 
             if (documentsList2.size() != 0) {
@@ -827,46 +823,45 @@ public class Link_Edit_Dealer extends Activity {
             }
 
         });
-                img_save.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if(vehicaldealerdetails.getType_id().equals(linkPojo.getType_id())){
-                            submitData();
-                        }else if(linkPojo.getType_id() == null){
-                            submitData();
-                        }
-                        else {
-                            String message = "";
-                            if(vehicaldealerdetails.getType_id() == null){
-                                message = "You are changing vehicle type none to "+linkPojo.getType_name()+". Do You want to continue?  ." ;
-                            }else if(vehicaldealerdetails.getType_id() == null && linkPojo.getType_id() == null){
-                                message =  "You are changing vehicle type none to . Do You want to continue?  .";
-                            }else{
-                                message = "You are changing vehicle type "+vehicaldealerdetails.getType_name()+" to "+linkPojo.getType_name()+". Do You want to continue?  .";
-                            }
-
-                            AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
-                            builder.setMessage(message);
-                            builder.setIcon(R.drawable.ic_success_24dp);
-                            builder.setTitle("Alert");
-                            builder.setCancelable(false);
-                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    submitData();
-                                }
-                            });
-                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.dismiss();
-                                }
-                            });
-                            AlertDialog alertD = builder.create();
-                            alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
-                            alertD.show();
-
-                        }
+        img_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (vehicaldealerdetails.getType_id().equals(linkPojo.getType_id())) {
+                    submitData();
+                } else if (linkPojo.getType_id() == null) {
+                    submitData();
+                } else {
+                    String message = "";
+                    if (vehicaldealerdetails.getType_id() == null) {
+                        message = "You are changing vehicle type none to " + linkPojo.getType_name() + ". Do You want to continue?  .";
+                    } else if (vehicaldealerdetails.getType_id() == null && linkPojo.getType_id() == null) {
+                        message = "You are changing vehicle type none to . Do You want to continue?  .";
+                    } else {
+                        message = "You are changing vehicle type " + vehicaldealerdetails.getType_name() + " to " + linkPojo.getType_name() + ". Do You want to continue?  .";
                     }
-                });
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
+                    builder.setMessage(message);
+                    builder.setIcon(R.drawable.ic_success_24dp);
+                    builder.setTitle("Alert");
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            submitData();
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog alertD = builder.create();
+                    alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
+                    alertD.show();
+
+                }
+            }
+        });
 
     }
 
@@ -904,7 +899,6 @@ public class Link_Edit_Dealer extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
-
 
 
     public class GetStateList extends AsyncTask<String, Void, String> {
@@ -967,6 +961,7 @@ public class Link_Edit_Dealer extends Activity {
             }
         }
     }
+
     private void feqListDialog(final ArrayList<FrequencyPojo> feqList) {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
         builderSingle.setTitle("Select Frequency");
@@ -1001,6 +996,7 @@ public class Link_Edit_Dealer extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetFrqList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -1036,7 +1032,7 @@ public class Link_Edit_Dealer extends Activity {
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
                     if (type.equalsIgnoreCase("success")) {
-                        frequencylist= new ArrayList<>();
+                        frequencylist = new ArrayList<>();
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
                             for (int i = 0; i < jsonarr.length(); i++) {
@@ -1099,6 +1095,7 @@ public class Link_Edit_Dealer extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetRTOAgentList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -1197,6 +1194,7 @@ public class Link_Edit_Dealer extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetTypeList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -1330,12 +1328,12 @@ public class Link_Edit_Dealer extends Activity {
         builderSingle.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ClientMainListPojo  selected_client = adapter[0].getSelected();
+                ClientMainListPojo selected_client = adapter[0].getSelected();
                 if (selected_client != null) {
 
                     edt_clientname.setText(selected_client.getName());
                     clientId = selected_client.getId();
-                }else{
+                } else {
                     Utilities.showSnackBar(ll_parent, "Please select client");
 
                 }
@@ -1359,6 +1357,7 @@ public class Link_Edit_Dealer extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetClientList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -1425,7 +1424,7 @@ public class Link_Edit_Dealer extends Activity {
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
         img_save = findViewById(R.id.img_save);
-        mToolbar.setTitle("Link TO "+vehicaldealerdetails.getVehicle_no());
+        mToolbar.setTitle("Link TO " + vehicaldealerdetails.getVehicle_no());
         mToolbar.setNavigationIcon(R.drawable.icon_backarrow_16p);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -1450,7 +1449,7 @@ public class Link_Edit_Dealer extends Activity {
             Utilities.showSnackBar(ll_parent, "Please Enter Valid Vehicle Number");
             return;
         }
-        if(!edt_bank.getText().toString().trim().equals("")){
+        if (!edt_bank.getText().toString().trim().equals("")) {
             if (edt_bank.getText().toString().trim().equals("")) {
                 Utilities.showSnackBar(ll_parent, "Please Enter Bank");
                 return;
@@ -1477,7 +1476,7 @@ public class Link_Edit_Dealer extends Activity {
 
         if (isshow_to_customer.isChecked()) {
             isshowtocustomer = "1";
-        } else{
+        } else {
             isshowtocustomer = "0";
         }
 
@@ -1488,7 +1487,7 @@ public class Link_Edit_Dealer extends Activity {
         }
 
         JsonArray otherDatesJSONArray = new JsonArray();
-        if(otherLayoutsList1.size() != 0){
+        if (otherLayoutsList1.size() != 0) {
             ArrayList<LinkPojo.OtherDatesListPojo> otherDatesList1 = new ArrayList<>();
             for (int i = 0; i < otherLayoutsList1.size(); i++) {
 
@@ -1517,7 +1516,7 @@ public class Link_Edit_Dealer extends Activity {
                 otherDatesJSONArray.add(otherDatesJSONObj);
             }
 
-        }else {
+        } else {
             ArrayList<VehicleDealerListPojo.OtherDatesListPojo> otherDatesList = new ArrayList<>();
             for (int i = 0; i < otherLayoutsList.size(); i++) {
 
@@ -1554,7 +1553,7 @@ public class Link_Edit_Dealer extends Activity {
 
         }
         JsonArray documentJSONArray = new JsonArray();
-        if(documentsLayoutsList1.size() != 0){
+        if (documentsLayoutsList1.size() != 0) {
             ArrayList<LinkPojo.DocumentListPojo> documentsList1 = new ArrayList<>();
             for (int i = 0; i < documentsLayoutsList1.size(); i++) {
 
@@ -1575,7 +1574,7 @@ public class Link_Edit_Dealer extends Activity {
                 documentJSONObj.addProperty("id", documentsList1.get(i).getDocument_id());
                 documentJSONArray.add(documentJSONObj);
             }
-        }else{
+        } else {
             ArrayList<VehicleDealerListPojo.DocumentListPojo> documentsList = new ArrayList<>();
             for (int i = 0; i < documentsLayoutsList.size(); i++) {
 
@@ -1645,7 +1644,7 @@ public class Link_Edit_Dealer extends Activity {
         mainObj.addProperty("state", stateId);
         mainObj.addProperty("client_name", clientId);
         mainObj.addProperty("vehicle_owner", edt_vehicleownername.getText().toString().trim());
-        mainObj.addProperty("rto_agent",rtoId);
+        mainObj.addProperty("rto_agent", rtoId);
         mainObj.addProperty("v_type", typeId);
         mainObj.addProperty("engine_no", edt_engineno.getText().toString().trim());
         mainObj.addProperty("chassis_no", edt_chassisno.getText().toString().trim());
@@ -1657,7 +1656,7 @@ public class Link_Edit_Dealer extends Activity {
                 edt_purcasedate.getText().toString().trim()));
         mainObj.addProperty("insu_policy_no", edt_insurancepolicyno.getText().toString().trim());
         mainObj.addProperty("tem_reg_no", edt_temregno.getText().toString().trim());
-        mainObj.addProperty("hypothecated_to",  edt_hypothecatedto.getText().toString().trim());
+        mainObj.addProperty("hypothecated_to", edt_hypothecatedto.getText().toString().trim());
         mainObj.add("documents", documentJSONArray);
         mainObj.addProperty("remark", edt_remark.getText().toString().trim());
         mainObj.addProperty("description", edt_description.getText().toString().trim());
@@ -1740,8 +1739,8 @@ public class Link_Edit_Dealer extends Activity {
                         builder.setCancelable(false);
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                Intent i = new Intent(context,MainDrawer_Activity.class);
-                                i.putExtra("linking","linking");
+                                Intent i = new Intent(context, MainDrawer_Activity.class);
+                                i.putExtra("linking", "linking");
                                 startActivity(i);
                             }
                         });
@@ -1789,6 +1788,7 @@ public class Link_Edit_Dealer extends Activity {
 
         }
     }
+
     public void selectDate(View view) {
         final EditText edt_servicedate = (EditText) view;
         final EditText edt_otheredate = (EditText) view;
@@ -1898,8 +1898,7 @@ public class Link_Edit_Dealer extends Activity {
                             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                             startActivityForResult(intent, CAMERA_REQUEST);
-                        }
-                        else if (options[item].equals("Choose from Gallery")) {
+                        } else if (options[item].equals("Choose from Gallery")) {
                             Intent intent = new Intent(Intent.ACTION_PICK);
                             intent.setType("image/*");
                             startActivityForResult(intent, GALLERY_REQUEST);
@@ -2106,9 +2105,9 @@ public class Link_Edit_Dealer extends Activity {
                     if (type.equalsIgnoreCase("Success")) {
                         JSONObject Obj1 = mainObj.getJSONObject("result");
                         String document_name = Obj1.getString("name");
-                        if(documentType.equals("selectedImage")) {
+                        if (documentType.equals("selectedImage")) {
                             edt_selectdocuments.setText(document_name);
-                        }else if(documentType.equals("vehicleImage")){
+                        } else if (documentType.equals("vehicleImage")) {
                             edt_selectVehicleImage.setText(document_name);
                         }
                     } else {
@@ -2122,7 +2121,6 @@ public class Link_Edit_Dealer extends Activity {
             }
         }
     }
-
 
 
     void savefile(Uri sourceuri) {
@@ -2163,12 +2161,12 @@ public class Link_Edit_Dealer extends Activity {
         otherLayoutsList.remove(view.getParent());
     }
 
-    public  void deleteDocument(View view){
+    public void deleteDocument(View view) {
         ll_documents.removeView((View) view.getParent());
         documentsLayoutsList.remove(view.getParent());
     }
 
-    public  void removeserviceDates(View view){
+    public void removeserviceDates(View view) {
         ll_servicedates.removeView((View) view.getParent());
         serviceDatesLayoutsList.remove(view.getParent());
     }

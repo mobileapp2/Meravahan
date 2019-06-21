@@ -39,7 +39,7 @@ public class RTO_Customer_Fragment extends Fragment {
     private FloatingActionButton fab_add_customer;
     private LinearLayoutManager layoutManager;
     private UserSessionManager session;
-    private static  String user_id;
+    private static String user_id;
 
 
     @Override
@@ -52,9 +52,10 @@ public class RTO_Customer_Fragment extends Fragment {
         setEventHandlers();
         return rootView;
     }
+
     private void init(View rootView) {
         session = new UserSessionManager(context);
-       // fab_add_customer = rootView.findViewById(R.id.fab_add_customer);
+        // fab_add_customer = rootView.findViewById(R.id.fab_add_customer);
         ll_nothingtoshow = rootView.findViewById(R.id.ll_nothingtoshow);
         customer_list = rootView.findViewById(R.id.customer);
         drawerlayout = getActivity().findViewById(R.id.drawerlayout);
@@ -86,6 +87,7 @@ public class RTO_Customer_Fragment extends Fragment {
             e.printStackTrace();
         }
     }
+
     private void setEventHandlers() {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -139,7 +141,7 @@ public class RTO_Customer_Fragment extends Fragment {
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
                     customerPojos = new ArrayList<CustomerPojo>();
-                    customer_list.setAdapter(new CustomerAdapter(context, customerPojos,user_id));
+                    customer_list.setAdapter(new CustomerAdapter(context, customerPojos, user_id));
                     if (type.equalsIgnoreCase("success")) {
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
@@ -185,7 +187,6 @@ public class RTO_Customer_Fragment extends Fragment {
                                 customerMainObj.setService_date(serviceDatesListPojos);
 
 
-
                                 ArrayList<CustomerPojo.OtherDatesListPojo> otherDatesListPojos = new ArrayList<>();
 
                                 for (int j = 0; j < jsonObj.getJSONArray("rto_dates").length(); j++) {
@@ -198,14 +199,14 @@ public class RTO_Customer_Fragment extends Fragment {
                                 customerMainObj.setOther_date(otherDatesListPojos);
 
 
-
                                 ArrayList<CustomerPojo.DocumentListPojo> documentsList = new ArrayList<>();
 
                                 for (int j = 0; j < jsonObj.getJSONArray("document").length(); j++) {
                                     CustomerPojo.DocumentListPojo documentObj = new CustomerPojo.DocumentListPojo();
                                     documentObj.setDocument(jsonObj.getJSONArray("document").getJSONObject(j).getString("document"));
                                     documentObj.setDocument_name(jsonObj.getJSONArray("document").getJSONObject(j).getString("document_name"));
-                                    documentObj.setOriginal_name(jsonObj.getJSONArray("document").getJSONObject(j).getString("original_name"));          documentsList.add(documentObj);
+                                    documentObj.setOriginal_name(jsonObj.getJSONArray("document").getJSONObject(j).getString("original_name"));
+                                    documentsList.add(documentObj);
                                 }
                                 customerMainObj.setDocument(documentsList);
                                 customerPojos.add(customerMainObj);
@@ -217,7 +218,7 @@ public class RTO_Customer_Fragment extends Fragment {
                                 customer_list.setVisibility(View.VISIBLE);
                                 ll_nothingtoshow.setVisibility(View.GONE);
                             }
-                            customer_list.setAdapter(new CustomerAdapter(context, customerPojos,user_id));
+                            customer_list.setAdapter(new CustomerAdapter(context, customerPojos, user_id));
 
                         }
                     } else if (type.equalsIgnoreCase("failure")) {
@@ -232,7 +233,6 @@ public class RTO_Customer_Fragment extends Fragment {
             }
         }
     }
-
 
 
 }

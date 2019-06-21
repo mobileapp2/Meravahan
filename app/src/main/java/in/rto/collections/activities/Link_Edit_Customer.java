@@ -12,13 +12,12 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -52,7 +51,6 @@ import java.util.List;
 import droidninja.filepicker.FilePickerBuilder;
 import droidninja.filepicker.FilePickerConst;
 import in.rto.collections.R;
-import in.rto.collections.fragments.Self_Fragment;
 import in.rto.collections.models.BankPojo;
 import in.rto.collections.models.BranchPojo;
 import in.rto.collections.models.ClientMainListPojo;
@@ -77,15 +75,15 @@ public class Link_Edit_Customer extends Activity {
     private ScrollView scrollView;
     private LinearLayout ll_parent;
     private static final int CAMERA_REQUEST = 100;
-    private LinearLayout ll_servicedates, ll_documents,ll_Otherdates;
-    private ImageView btn_addservicedates, btn_adddocuments,btn_addotherdates;
+    private LinearLayout ll_servicedates, ll_documents, ll_Otherdates;
+    private ImageView btn_addservicedates, btn_adddocuments, btn_addotherdates;
     private static final int GALLERY_REQUEST = 200;
-    private EditText edt_state, edt_vehicleno, edt_clientname, edt_vehicleownername, edt_rtoagent,edt_vehicledealer,
+    private EditText edt_state, edt_vehicleno, edt_clientname, edt_vehicleownername, edt_rtoagent, edt_vehicledealer,
             edt_description, edt_type, edt_engineno, edt_chassisno, edt_insurancepolicyno, edt_renewaldate,
-            edt_purcasedate, edt_temregno, edt_remark,edt_hypothecatedto,edt_taxvalidupto, edt_permitvalidupto,
-            edt_satepermitvalidupto,nationalpermitvalidupto,pucrenewaldate,fitnessvalidupto,edt_bank, edt_branch, edt_borrowername,
+            edt_purcasedate, edt_temregno, edt_remark, edt_hypothecatedto, edt_taxvalidupto, edt_permitvalidupto,
+            edt_satepermitvalidupto, nationalpermitvalidupto, pucrenewaldate, fitnessvalidupto, edt_bank, edt_branch, edt_borrowername,
             edt_loanamount, edt_accountnumber, edt_sactiondate, edt_installmentanount, edt_startdate,
-            edt_enddate, edt_frequency,edt_selectVehicleImage;
+            edt_enddate, edt_frequency, edt_selectVehicleImage;
 
     private int mYear, mMonth, mDay;
     private int mYear1, mMonth1, mDay1;
@@ -111,9 +109,9 @@ public class Link_Edit_Customer extends Activity {
     private ArrayList<TypePojo> typelist;
     private ArrayList<StatePojo> statelist;
     private UserSessionManager session;
-    private String companyAliasName = "",documentType;
-    private String user_id, stateId, clientId, typeId="0",id,serviceDateId="0",otherDateId="0",documentId,rtoId = "0",
-            dealerId = "0",rtocreatedby = "0",bankId = "0",branchId,frequency;
+    private String companyAliasName = "", documentType;
+    private String user_id, stateId, clientId, typeId = "0", id, serviceDateId = "0", otherDateId = "0", documentId, rtoId = "0",
+            dealerId = "0", rtocreatedby = "0", bankId = "0", branchId, frequency;
     private String[] PERMISSIONS = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
     private Uri photoURI;
     private File file, customerPicFolder;
@@ -122,7 +120,8 @@ public class Link_Edit_Customer extends Activity {
     private ArrayList<BankPojo> bankList;
     private ArrayList<BranchPojo> branchList;
     private ArrayList<FrequencyPojo> frequencylist;
-    private LinearLayout bank_details,bank_feild;
+    private LinearLayout bank_details, bank_feild;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,6 +132,7 @@ public class Link_Edit_Customer extends Activity {
         setUpToolbar();
         setEventHandler();
     }
+
     private void init() {
         context = Link_Edit_Customer.this;
         session = new UserSessionManager(context);
@@ -182,7 +182,6 @@ public class Link_Edit_Customer extends Activity {
         btn_adddocuments = findViewById(R.id.btn_adddocuments);
 
 
-
         btn_addservicedates = findViewById(R.id.btn_addservicedates);
         btn_addotherdates = findViewById(R.id.btn_addotherdates);
         btn_adddocuments = findViewById(R.id.btn_adddocuments);
@@ -203,6 +202,7 @@ public class Link_Edit_Customer extends Activity {
     protected void onPause() {
         super.onPause();
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -213,6 +213,7 @@ public class Link_Edit_Customer extends Activity {
             e.printStackTrace();
         }
     }
+
     private void setDefaults() {
         Calendar cal = Calendar.getInstance();
         mYear = cal.get(Calendar.YEAR);
@@ -273,7 +274,7 @@ public class Link_Edit_Customer extends Activity {
         otherLayoutsList1 = new ArrayList<>();
         documentsLayoutsList = new ArrayList<>();
         documentsLayoutsList1 = new ArrayList<>();
-        customerPojo  = (CustomerPojo) getIntent().getSerializableExtra("customerDetails");
+        customerPojo = (CustomerPojo) getIntent().getSerializableExtra("customerDetails");
         id = customerPojo.getId();
         stateId = customerPojo.getStateId();
         typeId = customerPojo.getType_id();
@@ -328,207 +329,207 @@ public class Link_Edit_Customer extends Activity {
         edt_frequency.setText(customerPojo.getFrequency());
         edt_borrowername.setText(customerPojo.getBorrower_name());
 
-        linkPojo  = (LinkPojo) getIntent().getSerializableExtra("rtoDetails");
+        linkPojo = (LinkPojo) getIntent().getSerializableExtra("rtoDetails");
         rtocreatedby = linkPojo.getCreated_by();
 
 
-        if(linkPojo.getStateId() != null ){
+        if (linkPojo.getStateId() != null) {
             stateId = linkPojo.getStateId();
             edt_state.setText(linkPojo.getStateName());
-        }else{
+        } else {
             stateId = customerPojo.getStateId();
             edt_state.setText(customerPojo.getStateName());
         }
-        if(linkPojo.getBank_name() != null) {
+        if (linkPojo.getBank_name() != null) {
             edt_bank.setText(linkPojo.getBank_name());
-        }else{
-                edt_bank.setText(customerPojo.getBank_name());
+        } else {
+            edt_bank.setText(customerPojo.getBank_name());
         }
 
-        if(linkPojo.getBranch_name() != null) {
+        if (linkPojo.getBranch_name() != null) {
             edt_branch.setText(linkPojo.getBranch_name());
-        }else{
-                edt_branch.setText(customerPojo.getBranch_name());
-            }
+        } else {
+            edt_branch.setText(customerPojo.getBranch_name());
+        }
 
-        if(linkPojo.getFrequency_id() != null) {
-            frequency= linkPojo.getFrequency_id();
+        if (linkPojo.getFrequency_id() != null) {
+            frequency = linkPojo.getFrequency_id();
             edt_frequency.setText(linkPojo.getFrequency());
-        }else{
-            if(customerPojo.getFrequency_id() != null) {
+        } else {
+            if (customerPojo.getFrequency_id() != null) {
                 frequency = customerPojo.getFrequency_id();
                 edt_frequency.setText(customerPojo.getFrequency());
-            }else{
+            } else {
                 frequency = "0";
             }
         }
-        if(linkPojo.getLoan_amount() != null ){
+        if (linkPojo.getLoan_amount() != null) {
             edt_loanamount.setText(linkPojo.getLoan_amount());
-        }else{
+        } else {
             edt_loanamount.setText(customerPojo.getLoan_amount());
         }
-        if(linkPojo.getLoan_account_number() != null ){
+        if (linkPojo.getLoan_account_number() != null) {
             edt_accountnumber.setText(linkPojo.getLoan_account_number());
-        }else{
+        } else {
             edt_accountnumber.setText(customerPojo.getLoan_account_number());
         }
-        if(linkPojo.getInstallment_amount() != null ){
+        if (linkPojo.getInstallment_amount() != null) {
             edt_installmentanount.setText(linkPojo.getInstallment_amount());
-        }else{
+        } else {
             edt_installmentanount.setText(customerPojo.getInstallment_amount());
         }
-        if(linkPojo.getDate_to_section() != null ){
+        if (linkPojo.getDate_to_section() != null) {
             edt_sactiondate.setText(linkPojo.getDate_to_section());
-        }else{
+        } else {
             edt_sactiondate.setText(changeDateFormat("yyyy-MM-dd",
                     "dd/MM/yyyy",
                     customerPojo.getDate_to_section()));
         }
-        if(linkPojo.getInstallment_start_date() != null ){
+        if (linkPojo.getInstallment_start_date() != null) {
             edt_startdate.setText(linkPojo.getInstallment_start_date());
-        }else{
+        } else {
             edt_startdate.setText(changeDateFormat("yyyy-MM-dd",
-                    "dd/MM/yyyy",customerPojo.getInstallment_start_date()));
+                    "dd/MM/yyyy", customerPojo.getInstallment_start_date()));
         }
-        if(linkPojo.getInstallment_end_date() != null ){
+        if (linkPojo.getInstallment_end_date() != null) {
             edt_enddate.setText(linkPojo.getInstallment_end_date());
-        }else{
+        } else {
             edt_enddate.setText(changeDateFormat("yyyy-MM-dd",
-                    "dd/MM/yyyy",customerPojo.getInstallment_end_date()));
+                    "dd/MM/yyyy", customerPojo.getInstallment_end_date()));
         }
-        if(linkPojo.getBorrower_name() != null ){
+        if (linkPojo.getBorrower_name() != null) {
             edt_borrowername.setText(linkPojo.getBorrower_name());
-        }else{
+        } else {
             edt_borrowername.setText(customerPojo.getBorrower_name());
         }
 
-        if(linkPojo.getVehiclertoId() != null) {
+        if (linkPojo.getVehiclertoId() != null) {
             rtoId = linkPojo.getVehiclertoId();
-        }else{
+        } else {
             rtoId = "0";
         }
-        if(linkPojo.getDealerId() != null) {
+        if (linkPojo.getDealerId() != null) {
             dealerId = linkPojo.getDealerId();
-        }else{
+        } else {
             dealerId = "0";
         }
 
-        if(linkPojo.getStateId() != null ){
+        if (linkPojo.getStateId() != null) {
             stateId = linkPojo.getStateId();
             edt_state.setText(linkPojo.getStateName());
-        }else{
+        } else {
             stateId = customerPojo.getStateId();
             edt_state.setText(customerPojo.getStateName());
         }
-        if(linkPojo.getChassis_no() != null ){
+        if (linkPojo.getChassis_no() != null) {
             edt_chassisno.setText(linkPojo.getChassis_no());
-        }else{
+        } else {
             edt_chassisno.setText(customerPojo.getChassis_no());
         }
-        if(linkPojo.getDescription() != null ){
+        if (linkPojo.getDescription() != null) {
             edt_description.setText(linkPojo.getDescription());
-        }else{
+        } else {
             edt_description.setText(customerPojo.getDescription());
         }
-        if(linkPojo.getVehicle_owner() != null ){
+        if (linkPojo.getVehicle_owner() != null) {
             edt_vehicleownername.setText(linkPojo.getVehicle_owner());
-        }else{
+        } else {
             edt_vehicleownername.setText(customerPojo.getVehicle_owner());
         }
-        if(linkPojo.getInsurance_renewal_date() != null ){
+        if (linkPojo.getInsurance_renewal_date() != null) {
             edt_renewaldate.setText(linkPojo.getInsurance_renewal_date());
-        }else{
+        } else {
             edt_renewaldate.setText(changeDateFormat("yyyy-MM-dd",
                     "dd/MM/yyyy",
                     customerPojo.getInsurance_renewal_date()));
         }
-        if(linkPojo.getPurchase_date() != null ){
+        if (linkPojo.getPurchase_date() != null) {
             edt_purcasedate.setText(linkPojo.getPurchase_date());
-        }else{
+        } else {
             edt_purcasedate.setText(changeDateFormat("yyyy-MM-dd",
                     "dd/MM/yyyy",
                     customerPojo.getPurchase_date()));
         }
-        if(linkPojo.getTax_paid_up_to() != null ){
+        if (linkPojo.getTax_paid_up_to() != null) {
             edt_taxvalidupto.setText(linkPojo.getTax_paid_up_to());
-        }else{
+        } else {
             edt_taxvalidupto.setText(changeDateFormat("yyyy-MM-dd",
                     "dd/MM/yyyy",
                     customerPojo.getTax_paid_up_to()));
         }
-        if(linkPojo.getPermit_valid_upto() != null ){
+        if (linkPojo.getPermit_valid_upto() != null) {
             edt_permitvalidupto.setText(linkPojo.getPermit_valid_upto());
-        }else{
+        } else {
             edt_permitvalidupto.setText(changeDateFormat("yyyy-MM-dd",
                     "dd/MM/yyyy", customerPojo.getPermit_valid_upto()));
         }
-        if(linkPojo.getState_permit_valid_upto() != null ){
+        if (linkPojo.getState_permit_valid_upto() != null) {
             edt_satepermitvalidupto.setText(linkPojo.getState_permit_valid_upto());
-        }else{
+        } else {
             edt_satepermitvalidupto.setText(changeDateFormat("yyyy-MM-dd",
                     "dd/MM/yyyy",
                     customerPojo.getState_permit_valid_upto()));
         }
-        if(linkPojo.getNational_permit_valid_upto() != null ){
+        if (linkPojo.getNational_permit_valid_upto() != null) {
             nationalpermitvalidupto.setText(linkPojo.getNational_permit_valid_upto());
-        }else{
+        } else {
             nationalpermitvalidupto.setText(changeDateFormat("yyyy-MM-dd",
                     "dd/MM/yyyy", customerPojo.getNational_permit_valid_upto()));
         }
-        if(linkPojo.getPuc_renewal_date() != null ){
+        if (linkPojo.getPuc_renewal_date() != null) {
             pucrenewaldate.setText(linkPojo.getPuc_renewal_date());
-        }else{
+        } else {
 
             pucrenewaldate.setText(changeDateFormat("yyyy-MM-dd",
                     "dd/MM/yyyy",
                     customerPojo.getPuc_renewal_date()));
         }
-        if(linkPojo.getFittness_valid_upto() != null ){
+        if (linkPojo.getFittness_valid_upto() != null) {
             fitnessvalidupto.setText(linkPojo.getFittness_valid_upto());
-        }else{
+        } else {
             fitnessvalidupto.setText(changeDateFormat("yyyy-MM-dd",
                     "dd/MM/yyyy", customerPojo.getFittness_valid_upto()));
         }
-        if(linkPojo.getEngine_no() != null ){
+        if (linkPojo.getEngine_no() != null) {
             edt_engineno.setText(linkPojo.getEngine_no());
-        }else{
+        } else {
             edt_engineno.setText(customerPojo.getEngine_no());
         }
-        if(linkPojo.getRemark() != null ){
+        if (linkPojo.getRemark() != null) {
             edt_remark.setText(linkPojo.getRemark());
-        }else{
+        } else {
             edt_remark.setText(customerPojo.getRemark());
         }
-        if(linkPojo.getHypothecated_to() != null ){
+        if (linkPojo.getHypothecated_to() != null) {
             edt_hypothecatedto.setText(linkPojo.getHypothecated_to());
-        }else{
+        } else {
             edt_hypothecatedto.setText(customerPojo.getHypothecated_to());
         }
-        if(linkPojo.getType_name() != null ){
+        if (linkPojo.getType_name() != null) {
             edt_type.setText(linkPojo.getType_name());
             typeId = linkPojo.getType_id();
-        }else{
+        } else {
             edt_type.setText(customerPojo.getType_name());
             typeId = customerPojo.getType_id();
         }
-        if(linkPojo.getInsurance_policy_no() != null ){
+        if (linkPojo.getInsurance_policy_no() != null) {
             edt_insurancepolicyno.setText(linkPojo.getInsurance_policy_no());
-        }else{
+        } else {
             edt_insurancepolicyno.setText(customerPojo.getInsurance_policy_no());
         }
-        if(linkPojo.getVehicle_no() != null ){
+        if (linkPojo.getVehicle_no() != null) {
             edt_vehicleno.setText(linkPojo.getVehicle_no());
-        }else{
+        } else {
             edt_vehicleno.setText(customerPojo.getVehicle_no());
         }
-        if(linkPojo.getVehicle_image() != null ){
+        if (linkPojo.getVehicle_image() != null) {
             edt_selectVehicleImage.setText(linkPojo.getVehicle_image());
-        }else{
+        } else {
             edt_selectVehicleImage.setText(customerPojo.getVehicle_image());
         }
         ArrayList<LinkPojo.ServiceDatesListPojo> serviceDatesList1 = new ArrayList<>();
         serviceDatesList1 = linkPojo.getService_date();
-        if(linkPojo.getService_date() != null) {
+        if (linkPojo.getService_date() != null) {
             if (serviceDatesList1.size() != 0) {
                 for (int i = 0; i < serviceDatesList1.size(); i++) {
                     LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -542,32 +543,32 @@ public class Link_Edit_Customer extends Activity {
 
                 }
             }
-        }else{
-                ArrayList<CustomerPojo.ServiceDatesListPojo> serviceDatesList = new ArrayList<>();
-                serviceDatesList = customerPojo.getService_date();
+        } else {
+            ArrayList<CustomerPojo.ServiceDatesListPojo> serviceDatesList = new ArrayList<>();
+            serviceDatesList = customerPojo.getService_date();
 
-                if (serviceDatesList.size() != 0) {
-                    for (int i = 0; i < serviceDatesList.size(); i++) {
-                        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                        final View rowView = inflater.inflate(R.layout.add_layout_viewservicedates, null);
-                        serviceDatesLayoutsList.add((LinearLayout) rowView);
-                        ll_servicedates.addView(rowView, ll_servicedates.getChildCount());
+            if (serviceDatesList.size() != 0) {
+                for (int i = 0; i < serviceDatesList.size(); i++) {
+                    LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    final View rowView = inflater.inflate(R.layout.add_layout_viewservicedates, null);
+                    serviceDatesLayoutsList.add((LinearLayout) rowView);
+                    ll_servicedates.addView(rowView, ll_servicedates.getChildCount());
 
-                        ((EditText) serviceDatesLayoutsList.get(i).findViewById(R.id.edt_servicedate)).setText(changeDateFormat("yyyy-MM-dd",
-                                "dd/MM/yyyy",
-                                serviceDatesList.get(i).getService_date()));
-                        ((EditText) serviceDatesLayoutsList.get(i).findViewById(R.id.edt_km)).setText(serviceDatesList.get(i).getText());
-                        serviceDateId = serviceDatesList.get(i).getService_date_id();
+                    ((EditText) serviceDatesLayoutsList.get(i).findViewById(R.id.edt_servicedate)).setText(changeDateFormat("yyyy-MM-dd",
+                            "dd/MM/yyyy",
+                            serviceDatesList.get(i).getService_date()));
+                    ((EditText) serviceDatesLayoutsList.get(i).findViewById(R.id.edt_km)).setText(serviceDatesList.get(i).getText());
+                    serviceDateId = serviceDatesList.get(i).getService_date_id();
 
-                    }
-                } else {
-                    //tv_ser.setText("No Maturity Dates Added");
                 }
+            } else {
+                //tv_ser.setText("No Maturity Dates Added");
             }
+        }
 
         ArrayList<LinkPojo.OtherDatesListPojo> otherDatesList1 = new ArrayList<>();
         otherDatesList1 = linkPojo.getOther_date();
-        if(linkPojo.getOther_date() != null) {
+        if (linkPojo.getOther_date() != null) {
             if (otherDatesList1.size() != 0) {
                 for (int i = 0; i < otherDatesList1.size(); i++) {
                     LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -581,31 +582,31 @@ public class Link_Edit_Customer extends Activity {
                 }
 
             }
-        }else{
-                ArrayList<CustomerPojo.OtherDatesListPojo> otherDatesList = new ArrayList<>();
-                otherDatesList = customerPojo.getOther_date();
+        } else {
+            ArrayList<CustomerPojo.OtherDatesListPojo> otherDatesList = new ArrayList<>();
+            otherDatesList = customerPojo.getOther_date();
 
-                if (otherDatesList.size() != 0) {
-                    for (int i = 0; i < otherDatesList.size(); i++) {
-                        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                        final View rowView = inflater.inflate(R.layout.add_layout_otherdates, null);
-                        otherLayoutsList.add((LinearLayout) rowView);
-                        ll_Otherdates.addView(rowView, ll_Otherdates.getChildCount());
+            if (otherDatesList.size() != 0) {
+                for (int i = 0; i < otherDatesList.size(); i++) {
+                    LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    final View rowView = inflater.inflate(R.layout.add_layout_otherdates, null);
+                    otherLayoutsList.add((LinearLayout) rowView);
+                    ll_Otherdates.addView(rowView, ll_Otherdates.getChildCount());
 
-                        ((EditText) otherLayoutsList.get(i).findViewById(R.id.edt_otherdate)).setText(changeDateFormat("yyyy-MM-dd",
-                                "dd/MM/yyyy",
-                                otherDatesList.get(i).getOther_date()));
-                        ((EditText) otherLayoutsList.get(i).findViewById(R.id.edt_text)).setText(otherDatesList.get(i).getText());
-                        otherDateId = otherDatesList.get(i).getOther_date_id();
-                    }
-                } else {
-                    //tv_ser.setText("No Maturity Dates Added");
+                    ((EditText) otherLayoutsList.get(i).findViewById(R.id.edt_otherdate)).setText(changeDateFormat("yyyy-MM-dd",
+                            "dd/MM/yyyy",
+                            otherDatesList.get(i).getOther_date()));
+                    ((EditText) otherLayoutsList.get(i).findViewById(R.id.edt_text)).setText(otherDatesList.get(i).getText());
+                    otherDateId = otherDatesList.get(i).getOther_date_id();
                 }
+            } else {
+                //tv_ser.setText("No Maturity Dates Added");
             }
+        }
 
-        ArrayList< LinkPojo.DocumentListPojo> documentsList1 = new ArrayList<>();
+        ArrayList<LinkPojo.DocumentListPojo> documentsList1 = new ArrayList<>();
         documentsList1 = linkPojo.getDocument();
-        if(linkPojo.getDocument() != null){
+        if (linkPojo.getDocument() != null) {
             if (documentsList1.size() != 0) {
                 for (int i = 0; i < documentsList1.size(); i++) {
                     LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -619,8 +620,8 @@ public class Link_Edit_Customer extends Activity {
                     ((EditText) documentsLayoutsList1.get(i).findViewById(R.id.edt_name)).setText(documentsList1.get(i).getDocument_name());
                 }
             }
-        }else{
-            ArrayList< CustomerPojo.DocumentListPojo> documentsList = new ArrayList<>();
+        } else {
+            ArrayList<CustomerPojo.DocumentListPojo> documentsList = new ArrayList<>();
             documentsList = customerPojo.getDocument();
 
             if (documentsList.size() != 0) {
@@ -641,6 +642,7 @@ public class Link_Edit_Customer extends Activity {
         }
 
     }
+
     @SuppressLint("ClickableViewAccessibility")
     private void setEventHandler() {
         bank_details.setOnClickListener(new View.OnClickListener() {
@@ -1086,22 +1088,21 @@ public class Link_Edit_Customer extends Activity {
         });
 
 
-
         img_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(customerPojo.getType_id().equals(linkPojo.getType_id())){
+                if (customerPojo.getType_id().equals(linkPojo.getType_id())) {
                     submitData();
-                }else if(linkPojo.getType_id() == null){
+                } else if (linkPojo.getType_id() == null) {
                     submitData();
-                }else {
+                } else {
                     String message = "";
-                    if(customerPojo.getType_id() == null){
-                        message = "You are changing vehicle type none to "+linkPojo.getType_name()+". Do You want to continue?  ." ;
-                    }else if(customerPojo.getType_id() == null && linkPojo.getType_id() == null){
-                        message =  "You are changing vehicle type none to . Do You want to continue?  .";
-                    }else{
-                        message = "You are changing vehicle type "+customerPojo.getType_name()+" to "+linkPojo.getType_name()+". Do You want to continue?  .";
+                    if (customerPojo.getType_id() == null) {
+                        message = "You are changing vehicle type none to " + linkPojo.getType_name() + ". Do You want to continue?  .";
+                    } else if (customerPojo.getType_id() == null && linkPojo.getType_id() == null) {
+                        message = "You are changing vehicle type none to . Do You want to continue?  .";
+                    } else {
+                        message = "You are changing vehicle type " + customerPojo.getType_name() + " to " + linkPojo.getType_name() + ". Do You want to continue?  .";
                     }
                     AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                     builder.setMessage(message);
@@ -1127,6 +1128,7 @@ public class Link_Edit_Customer extends Activity {
         });
 
     }
+
     private void bankListDialog(final ArrayList<BankPojo> bankList) {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
         builderSingle.setTitle("Select Bank");
@@ -1224,6 +1226,7 @@ public class Link_Edit_Customer extends Activity {
             }
         }
     }
+
     private void branchListDialog(final ArrayList<BranchPojo> branchList) {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
         builderSingle.setTitle("Select Branch");
@@ -1258,6 +1261,7 @@ public class Link_Edit_Customer extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetBranchList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -1293,7 +1297,7 @@ public class Link_Edit_Customer extends Activity {
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
                     if (type.equalsIgnoreCase("success")) {
-                        branchList= new ArrayList<>();
+                        branchList = new ArrayList<>();
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
                             for (int i = 0; i < jsonarr.length(); i++) {
@@ -1355,6 +1359,7 @@ public class Link_Edit_Customer extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetFrqList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -1390,7 +1395,7 @@ public class Link_Edit_Customer extends Activity {
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
                     if (type.equalsIgnoreCase("success")) {
-                        frequencylist= new ArrayList<>();
+                        frequencylist = new ArrayList<>();
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
                             for (int i = 0; i < jsonarr.length(); i++) {
@@ -1549,6 +1554,7 @@ public class Link_Edit_Customer extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetRTOAgentList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -1647,6 +1653,7 @@ public class Link_Edit_Customer extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetTypeList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -1712,7 +1719,7 @@ public class Link_Edit_Customer extends Activity {
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
         img_save = findViewById(R.id.img_save);
-        mToolbar.setTitle("Link to "+customerPojo.getVehicle_no());
+        mToolbar.setTitle("Link to " + customerPojo.getVehicle_no());
         mToolbar.setNavigationIcon(R.drawable.icon_backarrow_16p);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -1738,7 +1745,7 @@ public class Link_Edit_Customer extends Activity {
             Utilities.showSnackBar(ll_parent, "Please Enter Valid Vehicle Number");
             return;
         }
-        if(!edt_bank.getText().toString().trim().equals("")){
+        if (!edt_bank.getText().toString().trim().equals("")) {
             if (edt_bank.getText().toString().trim().equals("")) {
                 Utilities.showSnackBar(ll_parent, "Please Enter Bank");
                 return;
@@ -1763,76 +1770,76 @@ public class Link_Edit_Customer extends Activity {
         }
 
         JsonArray serviceDatesJSONArray = new JsonArray();
-      if(serviceDatesLayoutsList1.size() != 0){
-          ArrayList<LinkPojo.ServiceDatesListPojo> serviceDatesList = new ArrayList<>();
-          for (int i = 0; i < serviceDatesLayoutsList1.size(); i++) {
+        if (serviceDatesLayoutsList1.size() != 0) {
+            ArrayList<LinkPojo.ServiceDatesListPojo> serviceDatesList = new ArrayList<>();
+            for (int i = 0; i < serviceDatesLayoutsList1.size(); i++) {
 
-              if (!((EditText) serviceDatesLayoutsList1.get(i).findViewById(R.id.edt_servicedate)).getText().toString().trim().equals("")) {
-                  if (!((EditText) serviceDatesLayoutsList1.get(i).findViewById(R.id.edt_servicedate)).getText().toString().trim().equals("")) {
+                if (!((EditText) serviceDatesLayoutsList1.get(i).findViewById(R.id.edt_servicedate)).getText().toString().trim().equals("")) {
+                    if (!((EditText) serviceDatesLayoutsList1.get(i).findViewById(R.id.edt_servicedate)).getText().toString().trim().equals("")) {
 
-                      LinkPojo.ServiceDatesListPojo serviceDateObj = new LinkPojo.ServiceDatesListPojo();
-                      serviceDateObj.setService_date_id("0");
+                        LinkPojo.ServiceDatesListPojo serviceDateObj = new LinkPojo.ServiceDatesListPojo();
+                        serviceDateObj.setService_date_id("0");
 
-                      serviceDateObj.setService_date(changeDateFormat("dd/MM/yyyy", "yyyy-MM-dd",
-                              ((EditText) serviceDatesLayoutsList1.get(i).findViewById(R.id.edt_servicedate)).getText().toString().trim()));
-                      serviceDateObj.setText(((EditText) serviceDatesLayoutsList1.get(i).findViewById(R.id.edt_km)).getText().toString().trim());
+                        serviceDateObj.setService_date(changeDateFormat("dd/MM/yyyy", "yyyy-MM-dd",
+                                ((EditText) serviceDatesLayoutsList1.get(i).findViewById(R.id.edt_servicedate)).getText().toString().trim()));
+                        serviceDateObj.setText(((EditText) serviceDatesLayoutsList1.get(i).findViewById(R.id.edt_km)).getText().toString().trim());
 
-                      serviceDatesList.add(serviceDateObj);
-                  }
-              } else {
-                  ((EditText) serviceDatesLayoutsList.get(i).findViewById(R.id.edt_servicedate)).setError("Enter Date");
-                  return;
-              }
-          }
-
-
-          for (int i = 0; i < serviceDatesList.size(); i++) {
-              JsonObject serviceDatesJSONObj = new JsonObject();
-              serviceDatesJSONObj.addProperty("date", serviceDatesList.get(i).getService_date());
-              serviceDatesJSONObj.addProperty("id", serviceDatesList.get(i).getService_date_id());
-              serviceDatesJSONObj.addProperty("text", serviceDatesList.get(i).getText());
-              serviceDatesJSONArray.add(serviceDatesJSONObj);
-          }
-      }else{
-          ArrayList<CustomerPojo.ServiceDatesListPojo> serviceDatesList = new ArrayList<>();
-          for (int i = 0; i < serviceDatesLayoutsList.size(); i++) {
-
-              if (!((EditText) serviceDatesLayoutsList.get(i).findViewById(R.id.edt_servicedate)).getText().toString().trim().equals("")) {
-                  if (!((EditText) serviceDatesLayoutsList.get(i).findViewById(R.id.edt_servicedate)).getText().toString().trim().equals("")) {
-
-                      CustomerPojo.ServiceDatesListPojo serviceDateObj = new CustomerPojo.ServiceDatesListPojo();
-
-                      if (i < serviceDatesList.size()) {
-                          serviceDateObj.setService_date_id(serviceDateId);
-                      } else {
-                          serviceDateObj.setService_date_id("0");
-                      }
-
-                      serviceDateObj.setService_date(changeDateFormat("dd/MM/yyyy", "yyyy-MM-dd",
-                              ((EditText) serviceDatesLayoutsList.get(i).findViewById(R.id.edt_servicedate)).getText().toString().trim()));
-                      serviceDateObj.setText(((EditText) serviceDatesLayoutsList.get(i).findViewById(R.id.edt_km)).getText().toString().trim());
-
-                      serviceDatesList.add(serviceDateObj);
-                  }
-              } else {
-                  ((EditText) serviceDatesLayoutsList.get(i).findViewById(R.id.edt_servicedate)).setError("Enter Date");
-                  return;
-              }
-          }
+                        serviceDatesList.add(serviceDateObj);
+                    }
+                } else {
+                    ((EditText) serviceDatesLayoutsList.get(i).findViewById(R.id.edt_servicedate)).setError("Enter Date");
+                    return;
+                }
+            }
 
 
-          for (int i = 0; i < serviceDatesList.size(); i++) {
-              JsonObject serviceDatesJSONObj = new JsonObject();
-              serviceDatesJSONObj.addProperty("date", serviceDatesList.get(i).getService_date());
-              serviceDatesJSONObj.addProperty("id", serviceDatesList.get(i).getService_date_id());
-              serviceDatesJSONObj.addProperty("text", serviceDatesList.get(i).getText());
-              serviceDatesJSONArray.add(serviceDatesJSONObj);
-          }
+            for (int i = 0; i < serviceDatesList.size(); i++) {
+                JsonObject serviceDatesJSONObj = new JsonObject();
+                serviceDatesJSONObj.addProperty("date", serviceDatesList.get(i).getService_date());
+                serviceDatesJSONObj.addProperty("id", serviceDatesList.get(i).getService_date_id());
+                serviceDatesJSONObj.addProperty("text", serviceDatesList.get(i).getText());
+                serviceDatesJSONArray.add(serviceDatesJSONObj);
+            }
+        } else {
+            ArrayList<CustomerPojo.ServiceDatesListPojo> serviceDatesList = new ArrayList<>();
+            for (int i = 0; i < serviceDatesLayoutsList.size(); i++) {
 
-      }
+                if (!((EditText) serviceDatesLayoutsList.get(i).findViewById(R.id.edt_servicedate)).getText().toString().trim().equals("")) {
+                    if (!((EditText) serviceDatesLayoutsList.get(i).findViewById(R.id.edt_servicedate)).getText().toString().trim().equals("")) {
+
+                        CustomerPojo.ServiceDatesListPojo serviceDateObj = new CustomerPojo.ServiceDatesListPojo();
+
+                        if (i < serviceDatesList.size()) {
+                            serviceDateObj.setService_date_id(serviceDateId);
+                        } else {
+                            serviceDateObj.setService_date_id("0");
+                        }
+
+                        serviceDateObj.setService_date(changeDateFormat("dd/MM/yyyy", "yyyy-MM-dd",
+                                ((EditText) serviceDatesLayoutsList.get(i).findViewById(R.id.edt_servicedate)).getText().toString().trim()));
+                        serviceDateObj.setText(((EditText) serviceDatesLayoutsList.get(i).findViewById(R.id.edt_km)).getText().toString().trim());
+
+                        serviceDatesList.add(serviceDateObj);
+                    }
+                } else {
+                    ((EditText) serviceDatesLayoutsList.get(i).findViewById(R.id.edt_servicedate)).setError("Enter Date");
+                    return;
+                }
+            }
+
+
+            for (int i = 0; i < serviceDatesList.size(); i++) {
+                JsonObject serviceDatesJSONObj = new JsonObject();
+                serviceDatesJSONObj.addProperty("date", serviceDatesList.get(i).getService_date());
+                serviceDatesJSONObj.addProperty("id", serviceDatesList.get(i).getService_date_id());
+                serviceDatesJSONObj.addProperty("text", serviceDatesList.get(i).getText());
+                serviceDatesJSONArray.add(serviceDatesJSONObj);
+            }
+
+        }
 
         JsonArray otherDatesJSONArray = new JsonArray();
-        if(otherLayoutsList1.size() != 0){
+        if (otherLayoutsList1.size() != 0) {
             ArrayList<LinkPojo.OtherDatesListPojo> otherDatesList1 = new ArrayList<>();
             for (int i = 0; i < otherLayoutsList1.size(); i++) {
 
@@ -1840,7 +1847,7 @@ public class Link_Edit_Customer extends Activity {
                     if (!((EditText) otherLayoutsList1.get(i).findViewById(R.id.edt_otherdate)).getText().toString().trim().equals("")) {
 
                         LinkPojo.OtherDatesListPojo otherDateObj = new LinkPojo.OtherDatesListPojo();
-                            otherDateObj.setOther_date_id("0");
+                        otherDateObj.setOther_date_id("0");
 
                         otherDateObj.setOther_date(changeDateFormat("dd/MM/yyyy", "yyyy-MM-dd",
                                 ((EditText) otherLayoutsList1.get(i).findViewById(R.id.edt_otherdate)).getText().toString().trim()));
@@ -1862,7 +1869,7 @@ public class Link_Edit_Customer extends Activity {
                 otherDatesJSONArray.add(otherDatesJSONObj);
             }
 
-        }else {
+        } else {
             ArrayList<CustomerPojo.OtherDatesListPojo> otherDatesList = new ArrayList<>();
             for (int i = 0; i < otherLayoutsList.size(); i++) {
 
@@ -1899,7 +1906,7 @@ public class Link_Edit_Customer extends Activity {
 
         }
         JsonArray documentJSONArray = new JsonArray();
-        if(documentsLayoutsList1.size() != 0){
+        if (documentsLayoutsList1.size() != 0) {
             ArrayList<LinkPojo.DocumentListPojo> documentsList1 = new ArrayList<>();
             for (int i = 0; i < documentsLayoutsList1.size(); i++) {
 
@@ -1920,7 +1927,7 @@ public class Link_Edit_Customer extends Activity {
                 documentJSONObj.addProperty("id", documentsList1.get(i).getDocument_id());
                 documentJSONArray.add(documentJSONObj);
             }
-        }else{
+        } else {
             ArrayList<CustomerPojo.DocumentListPojo> documentsList = new ArrayList<>();
             for (int i = 0; i < documentsLayoutsList.size(); i++) {
 
@@ -1945,7 +1952,7 @@ public class Link_Edit_Customer extends Activity {
                 documentJSONObj.addProperty("id", documentsList.get(i).getDocument_id());
                 documentJSONArray.add(documentJSONObj);
             }
-      }
+        }
 
 
         JsonObject mainObj = new JsonObject();
@@ -1954,8 +1961,8 @@ public class Link_Edit_Customer extends Activity {
         mainObj.addProperty("type", "linkRtoToCustomer");
         mainObj.addProperty("state", stateId);
         mainObj.addProperty("Name_of_the_Vehicle_Owner", edt_vehicleownername.getText().toString().trim());
-        mainObj.addProperty("RTO_Agent",edt_rtoagent.getText().toString().trim());
-        mainObj.addProperty("vehicle_dealer",edt_vehicledealer.getText().toString().trim());
+        mainObj.addProperty("RTO_Agent", edt_rtoagent.getText().toString().trim());
+        mainObj.addProperty("vehicle_dealer", edt_vehicledealer.getText().toString().trim());
         mainObj.addProperty("rtotype", typeId);
         mainObj.addProperty("c_Type", typeId);
         mainObj.addProperty("Engine_No", edt_engineno.getText().toString().trim());
@@ -1992,7 +1999,7 @@ public class Link_Edit_Customer extends Activity {
                 fitnessvalidupto.getText().toString().trim()));
         mainObj.addProperty("Insurance_Policy_No", edt_insurancepolicyno.getText().toString().trim());
         mainObj.addProperty("Temporary_Registration_No", edt_temregno.getText().toString().trim());
-        mainObj.addProperty("Hypothecated_to",  edt_hypothecatedto.getText().toString().trim());
+        mainObj.addProperty("Hypothecated_to", edt_hypothecatedto.getText().toString().trim());
         mainObj.add("documents", documentJSONArray);
         mainObj.addProperty("Remark", edt_remark.getText().toString().trim());
         mainObj.addProperty("Vehicle_No", edt_vehicleno.getText().toString().trim());
@@ -2024,7 +2031,6 @@ public class Link_Edit_Customer extends Activity {
         mainObj.addProperty("end_date", changeDateFormat("dd/MM/yyyy",
                 "yyyy/MM/dd",
                 edt_enddate.getText().toString().trim()));
-
 
 
         if (Utilities.isInternetAvailable(context)) {
@@ -2066,7 +2072,7 @@ public class Link_Edit_Customer extends Activity {
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
                     if (type.equalsIgnoreCase("success")) {
-                      //  new Self_Fragment.GetCustomerList().execute(user_id);
+                        //  new Self_Fragment.GetCustomerList().execute(user_id);
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                         builder.setMessage("Customer Details Saved Successfully.");
@@ -2075,8 +2081,8 @@ public class Link_Edit_Customer extends Activity {
                         builder.setCancelable(false);
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                              //  new Self_Fragment.GetCustomerList().execute(user_id);
-                                startActivity(new Intent(context,MainDrawer_Activity.class));
+                                //  new Self_Fragment.GetCustomerList().execute(user_id);
+                                startActivity(new Intent(context, MainDrawer_Activity.class));
                                 finish();
                             }
                         });
@@ -2124,6 +2130,7 @@ public class Link_Edit_Customer extends Activity {
 
         }
     }
+
     public void selectDate(View view) {
         final EditText edt_servicedate = (EditText) view;
         final EditText edt_otheredate = (EditText) view;
@@ -2234,8 +2241,7 @@ public class Link_Edit_Customer extends Activity {
                             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                             startActivityForResult(intent, CAMERA_REQUEST);
-                        }
-                        else if (options[item].equals("Choose from Gallery")) {
+                        } else if (options[item].equals("Choose from Gallery")) {
                             Intent intent = new Intent(Intent.ACTION_PICK);
                             intent.setType("image/*");
                             startActivityForResult(intent, GALLERY_REQUEST);
@@ -2441,9 +2447,9 @@ public class Link_Edit_Customer extends Activity {
                     if (type.equalsIgnoreCase("Success")) {
                         JSONObject Obj1 = mainObj.getJSONObject("result");
                         String document_name = Obj1.getString("name");
-                        if(documentType.equals("selectedImage")) {
+                        if (documentType.equals("selectedImage")) {
                             edt_selectdocuments.setText(document_name);
-                        }else if(documentType.equals("vehicleImage")){
+                        } else if (documentType.equals("vehicleImage")) {
                             edt_selectVehicleImage.setText(document_name);
                         }
                     } else {
@@ -2457,7 +2463,6 @@ public class Link_Edit_Customer extends Activity {
             }
         }
     }
-
 
 
     void savefile(Uri sourceuri) {
@@ -2498,12 +2503,12 @@ public class Link_Edit_Customer extends Activity {
         otherLayoutsList.remove(view.getParent());
     }
 
-    public  void deleteDocument(View view){
+    public void deleteDocument(View view) {
         ll_documents.removeView((View) view.getParent());
         documentsLayoutsList.remove(view.getParent());
     }
 
-    public  void removeserviceDates(View view){
+    public void removeserviceDates(View view) {
         ll_servicedates.removeView((View) view.getParent());
         serviceDatesLayoutsList.remove(view.getParent());
     }

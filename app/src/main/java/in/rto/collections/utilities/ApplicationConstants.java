@@ -67,4 +67,4 @@ public class ApplicationConstants {
     public static final String FAQAPI = "https://meravahan.in/Apis/faq.php";
     public static final String OTHERVEHICLEDEALER = "https://meravahan.in/Apis/other_vehicle_details.php";
     public static final String PLANLISTAPI = "https://meravahan.in/Apis/buy_plan.php";
- }
+}

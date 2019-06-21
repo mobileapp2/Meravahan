@@ -5,11 +5,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -29,9 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.rto.collections.R;
-import in.rto.collections.adapters.BankAdapter;
 import in.rto.collections.adapters.BranchAdapter;
-import in.rto.collections.models.BankPojo;
 import in.rto.collections.models.BranchPojo;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.ParamsPojo;
@@ -50,6 +47,7 @@ public class Master_branch_details extends Activity {
     private FloatingActionButton fab_add_branch;
     private UserSessionManager session;
     private String user_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +58,7 @@ public class Master_branch_details extends Activity {
         setEventHandlers();
         setUpToolbar();
     }
+
     private void init() {
         context = Master_branch_details.this;
         branchlist = findViewById(R.id.branchlist);
@@ -71,6 +70,7 @@ public class Master_branch_details extends Activity {
         layoutManager = new LinearLayoutManager(context);
         branchlist.setLayoutManager(layoutManager);
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -81,6 +81,7 @@ public class Master_branch_details extends Activity {
             e.printStackTrace();
         }
     }
+
     private void setDefault() {
         if (Utilities.isNetworkAvailable(context)) {
             new Master_branch_details.GetBranchList().execute(user_id);
@@ -130,7 +131,7 @@ public class Master_branch_details extends Activity {
                                 }
                             }
 
-                            new Master_branch_details.AddBranch().execute(edt_branch.getText().toString().trim(),edt_address.getText().toString().trim(), user_id);
+                            new Master_branch_details.AddBranch().execute(edt_branch.getText().toString().trim(), edt_address.getText().toString().trim(), user_id);
                         } else {
                             Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                         }
@@ -144,7 +145,7 @@ public class Master_branch_details extends Activity {
                 });
 
                 final AlertDialog alertD = builder.create();
-                LinearLayout ll=new LinearLayout(context);
+                LinearLayout ll = new LinearLayout(context);
                 ll.setOrientation(LinearLayout.VERTICAL);
                 ll.addView(edt_branch);
                 ll.addView(edt_address);
@@ -178,6 +179,7 @@ public class Master_branch_details extends Activity {
 
 
     }
+
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle("Branch");
@@ -191,8 +193,7 @@ public class Master_branch_details extends Activity {
     }
 
 
-
-    public static class GetBranchList  extends AsyncTask<String , Void ,String> {
+    public static class GetBranchList extends AsyncTask<String, Void, String> {
         private ArrayList<BranchPojo> branchPojos;
 
         @Override
@@ -204,6 +205,7 @@ public class Master_branch_details extends Activity {
 //            shimmer_view_container.setVisibility(View.VISIBLE);
 //            shimmer_view_container.startShimmer();
         }
+
         @Override
         protected String doInBackground(String... params) {
             String res = "[]";
@@ -213,6 +215,7 @@ public class Master_branch_details extends Activity {
             res = WebServiceCalls.FORMDATAAPICall(ApplicationConstants.MASTERAPI, param);
             return res.trim();
         }
+
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
@@ -261,6 +264,7 @@ public class Master_branch_details extends Activity {
         }
 
     }
+
     public class AddBranch extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 

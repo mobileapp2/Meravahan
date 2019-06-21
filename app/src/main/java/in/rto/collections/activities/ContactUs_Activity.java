@@ -9,21 +9,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageView;
 
 import in.rto.collections.R;
 import in.rto.collections.utilities.Utilities;
 
 public class ContactUs_Activity extends Activity {
-    private FloatingActionButton img_call,img_whatsapp;
+    private FloatingActionButton img_call, img_whatsapp;
     private static Context context;
 
     @Override
@@ -34,14 +32,14 @@ public class ContactUs_Activity extends Activity {
         setEventHandlers();
         setUpToolbar();
     }
-    private void init()
-    {
+
+    private void init() {
         context = ContactUs_Activity.this;
         img_call = findViewById(R.id.img_call);
         img_whatsapp = findViewById(R.id.img_whatsapp);
     }
-    private void setEventHandlers()
-    {
+
+    private void setEventHandlers() {
         img_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +59,7 @@ public class ContactUs_Activity extends Activity {
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.cancel();
                             context.startActivity(new Intent(Intent.ACTION_CALL,
-                                    Uri.parse("tel:9021158214" )));
+                                    Uri.parse("tel:9021158214")));
                         }
                     });
                     alertDialogBuilder.setNegativeButton(
@@ -80,17 +78,18 @@ public class ContactUs_Activity extends Activity {
             @Override
             public void onClick(View v) {
 
-                Intent sendIntent =new Intent("android.intent.action.MAIN");
+                Intent sendIntent = new Intent("android.intent.action.MAIN");
                 sendIntent.setComponent(new ComponentName("com.whatsapp", "com.whatsapp.Conversation"));
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.setType("text/plain");
-                sendIntent.putExtra(Intent.EXTRA_TEXT,"");
-                sendIntent.putExtra("jid", "9021158214" +"@s.whatsapp.net");
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "");
+                sendIntent.putExtra("jid", "9021158214" + "@s.whatsapp.net");
                 sendIntent.setPackage("com.whatsapp");
                 startActivity(sendIntent);
             }
         });
     }
+
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle("Contact Us");

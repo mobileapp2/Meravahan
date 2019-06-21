@@ -33,6 +33,7 @@ public class Fragment_Customer extends Fragment {
         setEventListner();
         return rootView;
     }
+
     private void init(View rootView) {
         viewPager = rootView.findViewById(R.id.viewPager);
         tabLayout = rootView.findViewById(R.id.tl_tabnames);
@@ -56,13 +57,13 @@ public class Fragment_Customer extends Fragment {
     }
 
     private void setupTabIcons() {
-       // tabLayout.getTabAt(0).setIcon(R.drawable.icon_birthdays);
-       // tabLayout.getTabAt(1).setIcon(R.drawable.icon_anniversaries);
+        // tabLayout.getTabAt(0).setIcon(R.drawable.icon_birthdays);
+        // tabLayout.getTabAt(1).setIcon(R.drawable.icon_anniversaries);
 //        tabLayout.getTabAt(2).setIcon(R.drawable.icon_premium);
 
-       // tabLayout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
-       // tabLayout.getTabAt(1).getIcon().setColorFilter(getResources().getColor(R.color.Battleship_Gray), PorterDuff.Mode.SRC_IN);
-      //  tabLayout.getTabAt(2).getIcon().setColorFilter(getResources().getColor(R.color.Battleship_Gray), PorterDuff.Mode.SRC_IN);
+        // tabLayout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
+        // tabLayout.getTabAt(1).getIcon().setColorFilter(getResources().getColor(R.color.Battleship_Gray), PorterDuff.Mode.SRC_IN);
+        //  tabLayout.getTabAt(2).getIcon().setColorFilter(getResources().getColor(R.color.Battleship_Gray), PorterDuff.Mode.SRC_IN);
 
     }
 
@@ -70,7 +71,7 @@ public class Fragment_Customer extends Fragment {
         Reminder_Fragment.ViewPagerAdapter adapter = new Reminder_Fragment.ViewPagerAdapter(getChildFragmentManager());
         adapter.addFrag(new Self_Fragment(), "OWN");
         adapter.addFrag(new Vehicle_Customer_Fragment(), "IMPORT");
-       // adapter.addFrag(new RTO_Customer_Fragment(), "RTO AGENT");
+        // adapter.addFrag(new RTO_Customer_Fragment(), "RTO AGENT");
         viewPager.setAdapter(adapter);
     }
 
@@ -87,13 +88,13 @@ public class Fragment_Customer extends Fragment {
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-              //  tab.getIcon().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
+                //  tab.getIcon().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
 
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-             //   tab.getIcon().setColorFilter(getResources().getColor(R.color.Battleship_Gray), PorterDuff.Mode.SRC_IN);
+                //   tab.getIcon().setColorFilter(getResources().getColor(R.color.Battleship_Gray), PorterDuff.Mode.SRC_IN);
             }
 
             @Override
@@ -132,8 +133,6 @@ public class Fragment_Customer extends Fragment {
             return mFragmentTitleList.get(position);
         }
     }
-
-
 
 
 }

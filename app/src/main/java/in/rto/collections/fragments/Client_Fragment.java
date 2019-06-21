@@ -14,7 +14,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
@@ -64,7 +63,7 @@ public class Client_Fragment extends Fragment {
 
     public void onResume() {
 
-       // getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        // getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         setDefault();
         super.onResume();
     }
@@ -103,6 +102,7 @@ public class Client_Fragment extends Fragment {
             e.printStackTrace();
         }
     }
+
     private void setEventHandlers() {
         fab_add_client.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,7 +129,7 @@ public class Client_Fragment extends Fragment {
             public boolean onQueryTextSubmit(String query) {
                 searchView.clearFocus();
                 ArrayList<ClientMainListPojo> contactsSearchedList = new ArrayList<>();
-                for (ClientMainListPojo client :  clientList) {
+                for (ClientMainListPojo client : clientList) {
                     String contactToBeSearched = client.getName().toLowerCase();
                     if (contactToBeSearched.contains(query.toLowerCase())) {
                         contactsSearchedList.add(client);
@@ -139,11 +139,11 @@ public class Client_Fragment extends Fragment {
 
                 if (contactsSearchedList.size() == 0) {
                     //Utilities.showAlertDialog(context, "Fail", "No Such Client Found", false);
-                    rv_clientlist.setAdapter(new GetClientListAdapter(context,contactsSearchedList ));
-                  //  searchView.setQuery("", false);
+                    rv_clientlist.setAdapter(new GetClientListAdapter(context, contactsSearchedList));
+                    //  searchView.setQuery("", false);
                     // bindRecyclerview(contactList);
                 } else {
-                    rv_clientlist.setAdapter(new GetClientListAdapter(context,contactsSearchedList ));
+                    rv_clientlist.setAdapter(new GetClientListAdapter(context, contactsSearchedList));
                 }
 
                 return true;
@@ -161,17 +161,17 @@ public class Client_Fragment extends Fragment {
                     }
 
                     if (contactsSearchedList.size() == 0) {
-                        rv_clientlist.setAdapter(new GetClientListAdapter(context,contactsSearchedList));
-                       // Utilities.showMessageString(context, "No Such Client Found");
+                        rv_clientlist.setAdapter(new GetClientListAdapter(context, contactsSearchedList));
+                        // Utilities.showMessageString(context, "No Such Client Found");
 
                     } else {
                         //bindRecyclerview(contactsSearchedList);
-                        rv_clientlist.setAdapter(new GetClientListAdapter(context,contactsSearchedList));
+                        rv_clientlist.setAdapter(new GetClientListAdapter(context, contactsSearchedList));
                     }
                     return true;
                 } else if (newText.equals("")) {
-                    rv_clientlist.setAdapter(new GetClientListAdapter(context,clientList));
-                            //bindRecyclerview(contactList);
+                    rv_clientlist.setAdapter(new GetClientListAdapter(context, clientList));
+                    //bindRecyclerview(contactList);
                 }
                 return true;
             }

@@ -8,10 +8,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -54,12 +54,12 @@ public class ViewImportRTOCustomer_Activity extends Activity {
     private Context context;
     private ScrollView scrollView;
     private LinearLayout ll_parent;
-    private LinearLayout ll_servicedates, ll_documents,ll_Otherdates;
-    private ImageView btn_addservicedates, btn_adddocuments,btn_addotherdates;
-    private EditText edt_state, edt_vehicleno, edt_clientname, edt_vehicleownername, edt_rtoagent,edt_vehicledealer,
+    private LinearLayout ll_servicedates, ll_documents, ll_Otherdates;
+    private ImageView btn_addservicedates, btn_adddocuments, btn_addotherdates;
+    private EditText edt_state, edt_vehicleno, edt_clientname, edt_vehicleownername, edt_rtoagent, edt_vehicledealer,
             edt_description, edt_type, edt_engineno, edt_chassisno, edt_insurancepolicyno, edt_renewaldate,
-            edt_purcasedate, edt_temregno, edt_remark,edt_hypothecatedto,edt_taxvalidupto, edt_permitvalidupto,
-            edt_satepermitvalidupto,nationalpermitvalidupto,pucrenewaldate,fitnessvalidupto,edt_selectVehicleImage;
+            edt_purcasedate, edt_temregno, edt_remark, edt_hypothecatedto, edt_taxvalidupto, edt_permitvalidupto,
+            edt_satepermitvalidupto, nationalpermitvalidupto, pucrenewaldate, fitnessvalidupto, edt_selectVehicleImage;
     private ImageView img_save;
     private List<LinearLayout> serviceDatesLayoutsList;
     private ArrayList<ClientMainListPojo> clientList;
@@ -69,11 +69,12 @@ public class ViewImportRTOCustomer_Activity extends Activity {
     private ArrayList<TypePojo> typelist;
     private ArrayList<StatePojo> statelist;
     private UserSessionManager session;
-    private String user_id,callType;
+    private String user_id, callType;
     private Uri photoURI;
     private File file, customerPicFolder;
     private CustomerPojo customerPojo;
     private ImageView img_delete, img_edit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +85,7 @@ public class ViewImportRTOCustomer_Activity extends Activity {
         setDefaults();
         setEventHandler();
     }
+
     private void init() {
         context = ViewImportRTOCustomer_Activity.this;
         session = new UserSessionManager(context);
@@ -142,14 +144,14 @@ public class ViewImportRTOCustomer_Activity extends Activity {
     }
 
     private void setDefaults() {
-        customerPojo  = (CustomerPojo) getIntent().getSerializableExtra("customerDetails");
+        customerPojo = (CustomerPojo) getIntent().getSerializableExtra("customerDetails");
 
         // edt_clientname.setText(customerPojo.getClient_name());
         edt_chassisno.setText(customerPojo.getChassis_no());
         edt_state.setText(customerPojo.getStateName());
         edt_description.setText(customerPojo.getDescription());
         edt_renewaldate.setText(changeDateFormat("yyyy-MM-dd",
-                "dd/MM/yyyy",customerPojo.getInsurance_renewal_date()));
+                "dd/MM/yyyy", customerPojo.getInsurance_renewal_date()));
 
         edt_taxvalidupto.setText(changeDateFormat("yyyy-MM-dd",
                 "dd/MM/yyyy",
@@ -222,9 +224,7 @@ public class ViewImportRTOCustomer_Activity extends Activity {
         }
 
 
-
-
-        ArrayList< CustomerPojo.DocumentListPojo> documentsList = new ArrayList<>();
+        ArrayList<CustomerPojo.DocumentListPojo> documentsList = new ArrayList<>();
         documentsList = customerPojo.getDocument();
 
         if (documentsList.size() != 0) {
@@ -268,13 +268,13 @@ public class ViewImportRTOCustomer_Activity extends Activity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 int id = item.getItemId();
-                if(id == R.id.img_edit){
+                if (id == R.id.img_edit) {
                     if (Utilities.isInternetAvailable(context)) {
                         new ViewImportRTOCustomer_Activity.isImportDetails().execute(customerPojo.getId());
                     } else {
                         Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                     }
-                }else if(id == R.id.img_link){
+                } else if (id == R.id.img_link) {
                     if (Utilities.isInternetAvailable(context)) {
                         Intent intent = new Intent(context, LinkCustomerRto_Activity.class);
                         intent.putExtra("customerDetails", customerPojo);
@@ -283,7 +283,7 @@ public class ViewImportRTOCustomer_Activity extends Activity {
                     } else {
                         Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                     }
-                }else if(id == R.id.img_delete){
+                } else if (id == R.id.img_delete) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                     builder.setMessage("Are you sure you want to delete this item?");
                     builder.setTitle("Alert");
@@ -313,8 +313,6 @@ public class ViewImportRTOCustomer_Activity extends Activity {
                 return false;
             }
         });
-
-
 
 
         // callType = getIntent().getStringExtra("TYPE");
@@ -591,7 +589,6 @@ public class ViewImportRTOCustomer_Activity extends Activity {
             }
         }
     }
-
 
 
 }

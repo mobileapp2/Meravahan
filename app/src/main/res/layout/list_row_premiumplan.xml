@@ -104,7 +104,7 @@
                 android:text="Clients"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
         </LinearLayout>
 

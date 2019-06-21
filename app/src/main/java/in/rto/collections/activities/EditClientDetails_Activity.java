@@ -6,8 +6,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -47,7 +47,7 @@ public class EditClientDetails_Activity extends Activity {
     private Context context;
     private ScrollView scrollView;
     private LinearLayout ll_parent;
-    private EditText edt_name, edt_alias, edt_mobile, edt_whatsapp, edt_email, edt_dob, edt_anniversary, edt_clientcode,edt_remark,edt_language;
+    private EditText edt_name, edt_alias, edt_mobile, edt_whatsapp, edt_email, edt_dob, edt_anniversary, edt_clientcode, edt_remark, edt_language;
     private int mYear, mMonth, mDay;
     private int mYear1, mMonth1, mDay1;
     private int mYear2, mMonth2, mDay2;
@@ -55,8 +55,9 @@ public class EditClientDetails_Activity extends Activity {
     private ArrayList<ClientCodePojo> clientCodeList;
     private ArrayList<LanguagePojo> languageList;
     private UserSessionManager session;
-    private String user_id, clientCodeId = "0", clientCode = "",languageId="0",language;
+    private String user_id, clientCodeId = "0", clientCode = "", languageId = "0", language;
     private ImageView img_save;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +74,7 @@ public class EditClientDetails_Activity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-       // hideSoftKeyboard(EditClientDetails_Activity.this);
+        // hideSoftKeyboard(EditClientDetails_Activity.this);
     }
 
     private void init() {
@@ -346,9 +347,9 @@ public class EditClientDetails_Activity extends Activity {
             }
         }
         JsonObject mainObj = new JsonObject();
-      //  if (!clientCode.equals(edt_clientcode.getText().toString().trim())) {
-           // clientCodeId = "0";
-       // }
+        //  if (!clientCode.equals(edt_clientcode.getText().toString().trim())) {
+        // clientCodeId = "0";
+        // }
 
         mainObj.addProperty("type", "update");
         mainObj.addProperty("name", edt_name.getText().toString().trim());
@@ -362,12 +363,12 @@ public class EditClientDetails_Activity extends Activity {
                 "yyyy-MM-dd",
                 edt_anniversary.getText().toString().trim()));
         mainObj.addProperty("client_code_id", clientCodeId);
-       // mainObj.addProperty("family_code", edt_clientcode.getText().toString().trim());
+        // mainObj.addProperty("family_code", edt_clientcode.getText().toString().trim());
         mainObj.addProperty("id", clientDetails.getId());
         mainObj.addProperty("user_id", user_id);
         mainObj.addProperty("whatsapp", edt_whatsapp.getText().toString().trim());
         mainObj.addProperty("remark", edt_remark.getText().toString().trim());
-        mainObj.addProperty("language_id",languageId);
+        mainObj.addProperty("language_id", languageId);
         Log.i("ClientDetailsJSON", mainObj.toString());
 
         if (Utilities.isInternetAvailable(context)) {
@@ -444,7 +445,7 @@ public class EditClientDetails_Activity extends Activity {
                             }
                         }
                     } else {
-                       // Utilities.showAlertDialog(context, "No Record Found", "Please enter code manually", false);
+                        // Utilities.showAlertDialog(context, "No Record Found", "Please enter code manually", false);
                     }
                 }
             } catch (Exception e) {
@@ -521,7 +522,7 @@ public class EditClientDetails_Activity extends Activity {
 
                         new Client_Fragment.GetClientList().execute(user_id);
                         //new LifeInsurance_Fragment.GetLifeInsurance().execute(user_id);
-                       // new GeneralInsurance_Fragment.GetGeneralInsurance().execute(user_id);
+                        // new GeneralInsurance_Fragment.GetGeneralInsurance().execute(user_id);
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                         builder.setMessage("Client Details Updated Successfully.");
@@ -546,6 +547,7 @@ public class EditClientDetails_Activity extends Activity {
             }
         }
     }
+
     public class GetLanguageList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -607,6 +609,7 @@ public class EditClientDetails_Activity extends Activity {
             }
         }
     }
+
     private void languageDialog(final ArrayList<LanguagePojo> languageList) {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
         builderSingle.setTitle("Select Language");

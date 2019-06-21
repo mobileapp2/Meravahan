@@ -12,12 +12,12 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -54,7 +54,6 @@ import java.util.List;
 import droidninja.filepicker.FilePickerBuilder;
 import droidninja.filepicker.FilePickerConst;
 import in.rto.collections.R;
-import in.rto.collections.adapters.GetRTOAgentDetailListAdapter;
 import in.rto.collections.adapters.listClientsAdapter;
 import in.rto.collections.fragments.Fragment_RTO_Agent;
 import in.rto.collections.models.ClientMainListPojo;
@@ -77,14 +76,14 @@ public class AddRTOAgent_Activity extends Activity {
     private ScrollView scrollView;
     private LinearLayout ll_parent;
     private static final int CAMERA_REQUEST = 100;
-    private LinearLayout ll_servicedates, ll_documents,ll_Otherdates;
-    private ImageView btn_addservicedates, btn_adddocuments,btn_addotherdates;
+    private LinearLayout ll_servicedates, ll_documents, ll_Otherdates;
+    private ImageView btn_addservicedates, btn_adddocuments, btn_addotherdates;
     private static final int GALLERY_REQUEST = 200;
     private EditText edt_state, edt_vehicleno, edt_clientname, edt_vehicleownername, edt_vehicledealer,
             edt_description, edt_type, edt_engineno, edt_chassisno, edt_insurancepolicyno, edt_renewaldate,
-            edt_taxvalidupto, edt_permitvalidupto, edt_remark,edt_satepermitvalidupto,nationalpermitvalidupto,
-            pucrenewaldate,fitnessvalidupto;
-    private CheckBox isshow_to_dealer,isshow_to_customer;
+            edt_taxvalidupto, edt_permitvalidupto, edt_remark, edt_satepermitvalidupto, nationalpermitvalidupto,
+            pucrenewaldate, fitnessvalidupto;
+    private CheckBox isshow_to_dealer, isshow_to_customer;
     private int mYear, mMonth, mDay;
     private int mYear1, mMonth1, mDay1;
     private int mYear2, mMonth2, mDay2;
@@ -93,9 +92,9 @@ public class AddRTOAgent_Activity extends Activity {
     private int mYear5, mMonth5, mDay5;
     private int mYear6, mMonth6, mDay6;
     private int mYear7, mMonth7, mDay7;
-    private String isshowtocustomer , isshowtorto,documentType;
+    private String isshowtocustomer, isshowtorto, documentType;
 
-    private EditText edt_selectdocuments = null,edt_name = null,edt_selectVehicleImage;
+    private EditText edt_selectdocuments = null, edt_name = null, edt_selectVehicleImage;
     private ImageView img_save;
     private ArrayList<ClientMainListPojo> clientList;
     private List<LinearLayout> documentsLayoutsList;
@@ -105,10 +104,11 @@ public class AddRTOAgent_Activity extends Activity {
     private ArrayList<StatePojo> statelist;
     private UserSessionManager session;
     private String companyAliasName = "";
-    private String user_id, stateId, clientId, typeId,dealerId,statename="";
+    private String user_id, stateId, clientId, typeId, dealerId, statename = "";
     private String[] PERMISSIONS = {android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
     private Uri photoURI;
     private File photoFile, rtoagentPicFolder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,6 +119,7 @@ public class AddRTOAgent_Activity extends Activity {
         setDefaults();
         setEventHandler();
     }
+
     private void init() {
         context = AddRTOAgent_Activity.this;
         session = new UserSessionManager(context);
@@ -167,6 +168,7 @@ public class AddRTOAgent_Activity extends Activity {
     protected void onPause() {
         super.onPause();
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -227,6 +229,7 @@ public class AddRTOAgent_Activity extends Activity {
         documentsLayoutsList = new ArrayList<>();
 
     }
+
     @SuppressLint("ClickableViewAccessibility")
     private void setEventHandler() {
 
@@ -341,7 +344,7 @@ public class AddRTOAgent_Activity extends Activity {
 
                 try {
                     dpd1.getDatePicker().setCalendarViewShown(false);
-                   // dpd1.getDatePicker().setMinDate(c.getTimeInMillis());
+                    // dpd1.getDatePicker().setMinDate(c.getTimeInMillis());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -373,7 +376,7 @@ public class AddRTOAgent_Activity extends Activity {
 
                 try {
                     dpd1.getDatePicker().setCalendarViewShown(false);
-                   // dpd1.getDatePicker().setMinDate(c.getTimeInMillis());
+                    // dpd1.getDatePicker().setMinDate(c.getTimeInMillis());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -403,7 +406,7 @@ public class AddRTOAgent_Activity extends Activity {
 
                 try {
                     dpd1.getDatePicker().setCalendarViewShown(false);
-                   // dpd1.getDatePicker().setMinDate(c.getTimeInMillis());
+                    // dpd1.getDatePicker().setMinDate(c.getTimeInMillis());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -433,7 +436,7 @@ public class AddRTOAgent_Activity extends Activity {
 
                 try {
                     dpd1.getDatePicker().setCalendarViewShown(false);
-                   // dpd1.getDatePicker().setMinDate(c.getTimeInMillis());
+                    // dpd1.getDatePicker().setMinDate(c.getTimeInMillis());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -501,7 +504,6 @@ public class AddRTOAgent_Activity extends Activity {
             }
 
         });
-
 
 
         btn_addotherdates.setOnClickListener(new View.OnClickListener() {
@@ -684,6 +686,7 @@ public class AddRTOAgent_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetVehicleDealerList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -782,6 +785,7 @@ public class AddRTOAgent_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetTypeList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -913,12 +917,12 @@ public class AddRTOAgent_Activity extends Activity {
         builderSingle.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ClientMainListPojo  selected_client = adapter[0].getSelected();
+                ClientMainListPojo selected_client = adapter[0].getSelected();
                 if (selected_client != null) {
 
                     edt_clientname.setText(selected_client.getName());
                     clientId = selected_client.getId();
-                }else{
+                } else {
                     Utilities.showSnackBar(ll_parent, "Please select client");
 
                 }
@@ -942,6 +946,7 @@ public class AddRTOAgent_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetClientList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -1058,7 +1063,7 @@ public class AddRTOAgent_Activity extends Activity {
 
         if (isshow_to_customer.isChecked()) {
             isshowtocustomer = "1";
-        } else{
+        } else {
             isshowtocustomer = "0";
         }
 
@@ -1106,7 +1111,7 @@ public class AddRTOAgent_Activity extends Activity {
         mainObj.addProperty("state", stateId);
         mainObj.addProperty("client_name", clientId);
         mainObj.addProperty("vehicle_owner_name", edt_vehicleownername.getText().toString().trim());
-        mainObj.addProperty("vehicle_dealer",dealerId);
+        mainObj.addProperty("vehicle_dealer", dealerId);
         mainObj.addProperty("rtotype", typeId);
         mainObj.addProperty("description", edt_description.getText().toString().trim());
         mainObj.addProperty("engine_no", edt_engineno.getText().toString().trim());
@@ -1248,6 +1253,7 @@ public class AddRTOAgent_Activity extends Activity {
 
         }
     }
+
     public void selectDate(View view) {
         final EditText edt_otheredate = (EditText) view;
         DatePickerDialog dpd2 = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
@@ -1270,6 +1276,7 @@ public class AddRTOAgent_Activity extends Activity {
         dpd2.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         dpd2.show();
     }
+
     public void selectVehicleImage(View view) {
         documentType = "vehicleImage";
         if (doesAppNeedPermissions()) {
@@ -1336,8 +1343,7 @@ public class AddRTOAgent_Activity extends Activity {
                             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                             startActivityForResult(intent, CAMERA_REQUEST);
-                        }
-                        else if (options[item].equals("Choose from Gallery")) {
+                        } else if (options[item].equals("Choose from Gallery")) {
                             Intent intent = new Intent(Intent.ACTION_PICK);
                             intent.setType("image/*");
                             startActivityForResult(intent, GALLERY_REQUEST);
@@ -1432,8 +1438,7 @@ public class AddRTOAgent_Activity extends Activity {
                             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                             startActivityForResult(intent, CAMERA_REQUEST);
-                        }
-                        else if (options[item].equals("Choose from Gallery")) {
+                        } else if (options[item].equals("Choose from Gallery")) {
                             Intent intent = new Intent(Intent.ACTION_PICK);
                             intent.setType("image/*");
                             startActivityForResult(intent, GALLERY_REQUEST);
@@ -1538,11 +1543,11 @@ public class AddRTOAgent_Activity extends Activity {
                         JSONObject Obj1 = mainObj.getJSONObject("result");
                         String document_name = Obj1.getString("name");
                         String original_name = Obj1.getString("orignal_name");
-                        if(documentType.equals("selectedImage")) {
+                        if (documentType.equals("selectedImage")) {
                             edt_selectdocuments.setText(document_name);
                             edt_name = ((EditText) findViewById(R.id.edt_name));
                             edt_name.setText(original_name);
-                        }else if(documentType.equals("vehicleImage")){
+                        } else if (documentType.equals("vehicleImage")) {
                             edt_selectVehicleImage.setText(document_name);
                         }
 
@@ -1557,7 +1562,6 @@ public class AddRTOAgent_Activity extends Activity {
             }
         }
     }
-
 
 
     void savefile(Uri sourceuri) {
@@ -1597,7 +1601,7 @@ public class AddRTOAgent_Activity extends Activity {
         otherLayoutsList.remove(view.getParent());
     }
 
-    public  void deleteDocument(View view){
+    public void deleteDocument(View view) {
         ll_documents.removeView((View) view.getParent());
         documentsLayoutsList.remove(view.getParent());
     }

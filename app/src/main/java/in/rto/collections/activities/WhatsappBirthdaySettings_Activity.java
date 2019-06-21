@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
@@ -19,7 +20,6 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -70,6 +70,7 @@ public class WhatsappBirthdaySettings_Activity extends Activity {
     private ProgressDialog pd;
     private final int CAMERA_REQUEST = 100;
     private final int GALLERY_REQUEST = 200;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -169,7 +170,7 @@ public class WhatsappBirthdaySettings_Activity extends Activity {
                         } else {
                             if (Utilities.isNetworkAvailable(context)) {
                                 new AddBirthSMSSettings().execute(dialog_edt_whatsappmessage.getText().toString().trim(), user_id);
-                               // new AddBirthWhatsAppSettings().execute(dialog_edt_whatsappmessage.getText().toString().trim(), user_id, whatsappPic);
+                                // new AddBirthWhatsAppSettings().execute(dialog_edt_whatsappmessage.getText().toString().trim(), user_id, whatsappPic);
                             } else {
                                 Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                             }
@@ -378,7 +379,7 @@ public class WhatsappBirthdaySettings_Activity extends Activity {
             super.onPreExecute();
             pd.setMessage("Please wait ...");
             pd.setCancelable(false);
-           // pd.show();
+            // pd.show();
         }
 
         @Override
@@ -405,7 +406,7 @@ public class WhatsappBirthdaySettings_Activity extends Activity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             try {
-              //  pd.dismiss();
+                //  pd.dismiss();
 
                 if (result != null && result.length() > 0 && !result.equalsIgnoreCase("[]")) {
                     JSONObject mainObj = new JSONObject(result);
@@ -431,6 +432,7 @@ public class WhatsappBirthdaySettings_Activity extends Activity {
             }
         }
     }
+
     public class AddBirthSMSSettings extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 
@@ -575,7 +577,6 @@ public class WhatsappBirthdaySettings_Activity extends Activity {
 
         }
     }
-
 
 
 }

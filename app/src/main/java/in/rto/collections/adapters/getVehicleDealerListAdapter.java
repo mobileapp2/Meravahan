@@ -85,14 +85,14 @@ public class getVehicleDealerListAdapter extends RecyclerView.Adapter<getVehicle
                 edt_alias.setHint("Alias");
                 final EditText edt_mobile = new EditText(context);
                 edt_mobile.setHint("Mobile");
-                edt_mobile.setInputType(InputType.TYPE_CLASS_NUMBER );
-                edt_mobile.setInputType(InputType.TYPE_CLASS_NUMBER );
+                edt_mobile.setInputType(InputType.TYPE_CLASS_NUMBER);
+                edt_mobile.setInputType(InputType.TYPE_CLASS_NUMBER);
                 InputFilter[] filterArray = new InputFilter[1];
                 filterArray[0] = new InputFilter.LengthFilter(10);
                 edt_mobile.setFilters(filterArray);
                 final EditText edt_landlineno = new EditText(context);
                 edt_landlineno.setHint("Landline No.");
-                edt_landlineno.setInputType(InputType.TYPE_CLASS_NUMBER );
+                edt_landlineno.setInputType(InputType.TYPE_CLASS_NUMBER);
                 edt_name.setText(finalvehicledealerListDetails.getName());
                 edt_name.setSelection(finalvehicledealerListDetails.getName().length());
                 edt_alias.setText(finalvehicledealerListDetails.getAlias());
@@ -109,9 +109,9 @@ public class getVehicleDealerListAdapter extends RecyclerView.Adapter<getVehicle
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         if (Utilities.isInternetAvailable(context)) {
-                            new getVehicleDealerListAdapter.EditRtoAgent().execute(edt_name.getText().toString().trim(),edt_alias.getText().toString().trim(),
+                            new getVehicleDealerListAdapter.EditRtoAgent().execute(edt_name.getText().toString().trim(), edt_alias.getText().toString().trim(),
                                     user_id,
-                                    finalvehicledealerListDetails.getId(),edt_mobile.getText().toString().trim(),edt_landlineno.getText().toString().trim());
+                                    finalvehicledealerListDetails.getId(), edt_mobile.getText().toString().trim(), edt_landlineno.getText().toString().trim());
                         } else {
                             Utilities.showMessageString(context, "Please Check Internet Connection");
                         }
@@ -136,7 +136,7 @@ public class getVehicleDealerListAdapter extends RecyclerView.Adapter<getVehicle
 
                 final AlertDialog alertD = builder.create();
 
-                LinearLayout ll=new LinearLayout(context);
+                LinearLayout ll = new LinearLayout(context);
                 ll.setOrientation(LinearLayout.VERTICAL);
                 ll.addView(edt_name);
                 ll.addView(edt_alias);
@@ -174,7 +174,6 @@ public class getVehicleDealerListAdapter extends RecyclerView.Adapter<getVehicle
     }
 
 
-
     @Override
     public int getItemCount() {
         return resultArrayList.size();
@@ -196,7 +195,7 @@ public class getVehicleDealerListAdapter extends RecyclerView.Adapter<getVehicle
         }
     }
 
-    public class EditRtoAgent  extends AsyncTask<String, Void, String> {
+    public class EditRtoAgent extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
 
@@ -223,6 +222,7 @@ public class getVehicleDealerListAdapter extends RecyclerView.Adapter<getVehicle
             res = WebServiceCalls.JSONAPICall(ApplicationConstants.MASTERAPI, obj.toString());
             return res.trim();
         }
+
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);

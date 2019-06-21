@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.JsonObject;
@@ -38,7 +37,6 @@ import in.rto.collections.activities.ViewImportCustomerBanker_Activity;
 import in.rto.collections.activities.ViewImportCustomerOtherVehicle_Activity;
 import in.rto.collections.activities.ViewImportCustomerVehicle_Activity;
 import in.rto.collections.activities.ViewImportRTOCustomer_Activity;
-import in.rto.collections.fragments.RTO_Customer_Fragment;
 import in.rto.collections.fragments.Self_Fragment;
 import in.rto.collections.fragments.Vehicle_Customer_Fragment;
 import in.rto.collections.models.CustomerPojo;
@@ -49,14 +47,14 @@ import in.rto.collections.utilities.WebServiceCalls;
 
 public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyViewHolder> {
 
-        private List<CustomerPojo> resultArrayList;
-        private Context context;
-        private  String user_id;
-        private String role_id;
+    private List<CustomerPojo> resultArrayList;
+    private Context context;
+    private String user_id;
+    private String role_id;
     private UserSessionManager session;
 
 
-    public CustomerAdapter(Context context, List<CustomerPojo> resultArrayList,String user_id) {
+    public CustomerAdapter(Context context, List<CustomerPojo> resultArrayList, String user_id) {
         this.context = context;
         this.resultArrayList = resultArrayList;
         this.user_id = user_id;
@@ -84,10 +82,10 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
         CustomerPojo customerPojo = new CustomerPojo();
         customerPojo = resultArrayList.get(position);
         final CustomerPojo finalcustomerPojo = customerPojo;
-        if(customerPojo.getImportR().equals("ImportBanker")){
+        if (customerPojo.getImportR().equals("ImportBanker")) {
             holder.tv_vehicalownername.setText(customerPojo.getBorrower_name());
             holder.tv_renewaldate.setText(customerPojo.getVehicle_no());
-        }else {
+        } else {
             holder.tv_vehicalownername.setText(customerPojo.getVehicle_owner());
             holder.tv_renewaldate.setText(customerPojo.getVehicle_no());
             if (customerPojo.getType_id().equals("1")) {
@@ -104,37 +102,37 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
                 holder.img_vehicle.setImageResource(R.drawable.other);
             }
         }
-        if(customerPojo.getImportR().equals("ImportAgent")) {
-         holder.img_link.setVisibility(View.VISIBLE);
-         holder.img_edit.setImageResource(R.drawable.import_r);
-         holder.img_link.setImageResource(R.drawable.link);
-         holder.tv_identify.setText("Created By - "+ customerPojo.getCreaterName()+" (RTO Agent)");
+        if (customerPojo.getImportR().equals("ImportAgent")) {
+            holder.img_link.setVisibility(View.VISIBLE);
+            holder.img_edit.setImageResource(R.drawable.import_r);
+            holder.img_link.setImageResource(R.drawable.link);
+            holder.tv_identify.setText("Created By - " + customerPojo.getCreaterName() + " (RTO Agent)");
             holder.ll_mainlayout.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(context, ViewImportRTOCustomer_Activity.class);
-            intent.putExtra("customerDetails", finalcustomerPojo);
-            context.startActivity(intent);
-        }
-    });
-}else if(customerPojo.getImportR().equals("ImportDealer")){
-             holder.img_edit.setImageResource(R.drawable.import_r);
-             holder.img_link.setImageResource(R.drawable.link);
-             holder.img_link.setVisibility(View.VISIBLE);
-             holder.tv_identify.setText("Created By - "+ customerPojo.getCreaterName()+" (Vehicle Dealer)");
-             holder.ll_mainlayout.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-             Intent intent = new Intent(context, ViewImportCustomerVehicle_Activity.class);
-             intent.putExtra("customerDetails", finalcustomerPojo);
-             context.startActivity(intent);
-        }
-    });
-}else if(customerPojo.getImportR().equals("ImportOther")){
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ViewImportRTOCustomer_Activity.class);
+                    intent.putExtra("customerDetails", finalcustomerPojo);
+                    context.startActivity(intent);
+                }
+            });
+        } else if (customerPojo.getImportR().equals("ImportDealer")) {
             holder.img_edit.setImageResource(R.drawable.import_r);
             holder.img_link.setImageResource(R.drawable.link);
             holder.img_link.setVisibility(View.VISIBLE);
-            holder.tv_identify.setText("Created By - "+ customerPojo.getCreaterName()+" (Other)");
+            holder.tv_identify.setText("Created By - " + customerPojo.getCreaterName() + " (Vehicle Dealer)");
+            holder.ll_mainlayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ViewImportCustomerVehicle_Activity.class);
+                    intent.putExtra("customerDetails", finalcustomerPojo);
+                    context.startActivity(intent);
+                }
+            });
+        } else if (customerPojo.getImportR().equals("ImportOther")) {
+            holder.img_edit.setImageResource(R.drawable.import_r);
+            holder.img_link.setImageResource(R.drawable.link);
+            holder.img_link.setVisibility(View.VISIBLE);
+            holder.tv_identify.setText("Created By - " + customerPojo.getCreaterName() + " (Other)");
             holder.ll_mainlayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -143,178 +141,178 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
                     context.startActivity(intent);
                 }
             });
-        }else if(customerPojo.getImportR().equals("ImportBanker")){
-         holder.img_edit.setImageResource(R.drawable.import_r);
-         holder.img_link.setImageResource(R.drawable.link);
-         holder.img_link.setVisibility(View.VISIBLE);
-         holder.tv_identify.setText("Created By - "+ customerPojo.getCreaterName()+" (Banker)");
-         holder.ll_mainlayout.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 Intent intent = new Intent(context, ViewImportCustomerBanker_Activity.class);
-                 intent.putExtra("bankerdetails", finalcustomerPojo);
-                 context.startActivity(intent);
-             }
-         });
-     }else{
-         holder.img_edit.setImageResource(R.drawable.edit);
-         holder.tv_identify.setText("");
-         holder.tv_identify.setVisibility(View.GONE);
-         holder.img_link.setVisibility(View.GONE);
-         holder.img_show.setVisibility(View.VISIBLE);
-         holder.ll_mainlayout.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(context, ViewCustomer.class);
-            intent.putExtra("customerDetails", finalcustomerPojo);
-            context.startActivity(intent);
+        } else if (customerPojo.getImportR().equals("ImportBanker")) {
+            holder.img_edit.setImageResource(R.drawable.import_r);
+            holder.img_link.setImageResource(R.drawable.link);
+            holder.img_link.setVisibility(View.VISIBLE);
+            holder.tv_identify.setText("Created By - " + customerPojo.getCreaterName() + " (Banker)");
+            holder.ll_mainlayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ViewImportCustomerBanker_Activity.class);
+                    intent.putExtra("bankerdetails", finalcustomerPojo);
+                    context.startActivity(intent);
+                }
+            });
+        } else {
+            holder.img_edit.setImageResource(R.drawable.edit);
+            holder.tv_identify.setText("");
+            holder.tv_identify.setVisibility(View.GONE);
+            holder.img_link.setVisibility(View.GONE);
+            holder.img_show.setVisibility(View.VISIBLE);
+            holder.ll_mainlayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ViewCustomer.class);
+                    intent.putExtra("customerDetails", finalcustomerPojo);
+                    context.startActivity(intent);
+                }
+            });
         }
-    });
-   }
         final CustomerPojo finalCustomerPojo = customerPojo;
         holder.img_delete.setOnClickListener(new View.OnClickListener() {
-       @Override
-       public void onClick(View v) {
-           if(finalCustomerPojo.getImportR().equals("ImportAgent")) {
-               AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
-               builder.setMessage("Are you sure you want to delete this item?");
-               builder.setTitle("Alert");
-               builder.setIcon(R.drawable.ic_alert_red_24dp);
-               builder.setCancelable(false);
-               builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                   public void onClick(DialogInterface dialog, int id) {
+            @Override
+            public void onClick(View v) {
+                if (finalCustomerPojo.getImportR().equals("ImportAgent")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
+                    builder.setMessage("Are you sure you want to delete this item?");
+                    builder.setTitle("Alert");
+                    builder.setIcon(R.drawable.ic_alert_red_24dp);
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
 
-                       if (Utilities.isInternetAvailable(context)) {
-                           new CustomerAdapter.DeleteCustomerDetails1().execute(finalCustomerPojo.getId());
-                       } else {
-                          // Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
-                       }
+                            if (Utilities.isInternetAvailable(context)) {
+                                new CustomerAdapter.DeleteCustomerDetails1().execute(finalCustomerPojo.getId());
+                            } else {
+                                // Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+                            }
 
-                   }
-               });
-               builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                   @Override
-                   public void onClick(DialogInterface dialog, int which) {
-                       dialog.dismiss();
-                   }
-               });
-               AlertDialog alertD = builder.create();
-               alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
-               alertD.show();
-   }else if(finalCustomerPojo.getImportR().equals("ImportDealer")){
-               AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
-               builder.setMessage("Are you sure you want to delete this item?");
-               builder.setTitle("Alert");
-               builder.setIcon(R.drawable.ic_alert_red_24dp);
-               builder.setCancelable(false);
-               builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                   public void onClick(DialogInterface dialog, int id) {
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog alertD = builder.create();
+                    alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
+                    alertD.show();
+                } else if (finalCustomerPojo.getImportR().equals("ImportDealer")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
+                    builder.setMessage("Are you sure you want to delete this item?");
+                    builder.setTitle("Alert");
+                    builder.setIcon(R.drawable.ic_alert_red_24dp);
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
 
-                       if (Utilities.isInternetAvailable(context)) {
-                           new CustomerAdapter.DeleteCustomerDetails().execute(finalCustomerPojo.getId());
-                       } else {
-                           //Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
-                       }
+                            if (Utilities.isInternetAvailable(context)) {
+                                new CustomerAdapter.DeleteCustomerDetails().execute(finalCustomerPojo.getId());
+                            } else {
+                                //Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+                            }
 
-                   }
-               });
-               builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                   @Override
-                   public void onClick(DialogInterface dialog, int which) {
-                       dialog.dismiss();
-                   }
-               });
-               AlertDialog alertD = builder.create();
-               alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
-               alertD.show();
-       }else if(finalCustomerPojo.getImportR().equals("ImportOther")){
-               AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
-               builder.setMessage("Are you sure you want to delete this item?");
-               builder.setTitle("Alert");
-               builder.setIcon(R.drawable.ic_alert_red_24dp);
-               builder.setCancelable(false);
-               builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                   public void onClick(DialogInterface dialog, int id) {
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog alertD = builder.create();
+                    alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
+                    alertD.show();
+                } else if (finalCustomerPojo.getImportR().equals("ImportOther")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
+                    builder.setMessage("Are you sure you want to delete this item?");
+                    builder.setTitle("Alert");
+                    builder.setIcon(R.drawable.ic_alert_red_24dp);
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
 
-                       if (Utilities.isInternetAvailable(context)) {
-                           new CustomerAdapter.DeleteCustomerDetails3().execute(finalCustomerPojo.getId());
-                       } else {
-                           //Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
-                       }
+                            if (Utilities.isInternetAvailable(context)) {
+                                new CustomerAdapter.DeleteCustomerDetails3().execute(finalCustomerPojo.getId());
+                            } else {
+                                //Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+                            }
 
-                   }
-               });
-               builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                   @Override
-                   public void onClick(DialogInterface dialog, int which) {
-                       dialog.dismiss();
-                   }
-               });
-               AlertDialog alertD = builder.create();
-               alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
-               alertD.show();
-           }else if(finalCustomerPojo.getImportR().equals("ImportBanker")){
-               AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
-               builder.setMessage("Are you sure you want to delete this item?");
-               builder.setTitle("Alert");
-               builder.setIcon(R.drawable.ic_alert_red_24dp);
-               builder.setCancelable(false);
-               builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                   public void onClick(DialogInterface dialog, int id) {
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog alertD = builder.create();
+                    alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
+                    alertD.show();
+                } else if (finalCustomerPojo.getImportR().equals("ImportBanker")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
+                    builder.setMessage("Are you sure you want to delete this item?");
+                    builder.setTitle("Alert");
+                    builder.setIcon(R.drawable.ic_alert_red_24dp);
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
 
-                       if (Utilities.isInternetAvailable(context)) {
-                           new CustomerAdapter.DeleteBankerDetails().execute(finalCustomerPojo.getId());
-                       } else {
-                           //Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
-                       }
+                            if (Utilities.isInternetAvailable(context)) {
+                                new CustomerAdapter.DeleteBankerDetails().execute(finalCustomerPojo.getId());
+                            } else {
+                                //Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+                            }
 
-                   }
-               });
-               builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                   @Override
-                   public void onClick(DialogInterface dialog, int which) {
-                       dialog.dismiss();
-                   }
-               });
-               AlertDialog alertD = builder.create();
-               alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
-               alertD.show();
-           }else{
-               AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
-               builder.setMessage("Are you sure you want to delete this item?");
-               builder.setTitle("Alert");
-               builder.setIcon(R.drawable.ic_alert_red_24dp);
-               builder.setCancelable(false);
-               builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                   public void onClick(DialogInterface dialog, int id) {
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog alertD = builder.create();
+                    alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
+                    alertD.show();
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
+                    builder.setMessage("Are you sure you want to delete this item?");
+                    builder.setTitle("Alert");
+                    builder.setIcon(R.drawable.ic_alert_red_24dp);
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
 
-                       if (Utilities.isInternetAvailable(context)) {
-                           new CustomerAdapter.DeleteCustomerDetails2().execute(finalCustomerPojo.getId());
-                       } else {
-                          // Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
-                       }
+                            if (Utilities.isInternetAvailable(context)) {
+                                new CustomerAdapter.DeleteCustomerDetails2().execute(finalCustomerPojo.getId());
+                            } else {
+                                // Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+                            }
 
-                   }
-               });
-               builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                   @Override
-                   public void onClick(DialogInterface dialog, int which) {
-                       dialog.dismiss();
-                   }
-               });
-               AlertDialog alertD = builder.create();
-               alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
-               alertD.show();
-           }
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog alertD = builder.create();
+                    alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
+                    alertD.show();
+                }
 
-       }
-   });
+            }
+        });
 
         holder.img_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(finalCustomerPojo.getImportR().equals("ImportAgent")) {
-                    if(finalCustomerPojo.getIsimport().equals("1")) {
+                if (finalCustomerPojo.getImportR().equals("ImportAgent")) {
+                    if (finalCustomerPojo.getIsimport().equals("1")) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                         builder.setMessage("This record is already imported. Do you really want to import this record?");
                         builder.setIcon(R.drawable.ic_success_24dp);
@@ -334,13 +332,13 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
                         AlertDialog alertD = builder.create();
                         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
                         alertD.show();
-                    }else{
+                    } else {
                         Intent intent = new Intent(context, ImportRTOCustomer_Activity.class);
                         intent.putExtra("customerDetails", finalCustomerPojo);
                         context.startActivity(intent);
                     }
-                }else if(finalCustomerPojo.getImportR().equals("ImportDealer")){
-                    if(finalCustomerPojo.getIsimport().equals("1")) {
+                } else if (finalCustomerPojo.getImportR().equals("ImportDealer")) {
+                    if (finalCustomerPojo.getIsimport().equals("1")) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                         builder.setMessage("This record is already imported. Do you realy want to import this record?");
                         builder.setIcon(R.drawable.ic_success_24dp);
@@ -360,13 +358,13 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
                         AlertDialog alertD = builder.create();
                         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
                         alertD.show();
-                    }else{
+                    } else {
                         Intent intent = new Intent(context, ImportVehicleCustomer_Activity.class);
                         intent.putExtra("customerDetails", finalCustomerPojo);
                         context.startActivity(intent);
                     }
-                }else if(finalCustomerPojo.getImportR().equals("ImportBanker")){
-                    if(finalCustomerPojo.getIsimport().equals("1")) {
+                } else if (finalCustomerPojo.getImportR().equals("ImportBanker")) {
+                    if (finalCustomerPojo.getIsimport().equals("1")) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                         builder.setMessage("This record is already imported. Do you realy want to import this record?");
                         builder.setIcon(R.drawable.ic_success_24dp);
@@ -386,13 +384,13 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
                         AlertDialog alertD = builder.create();
                         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
                         alertD.show();
-                    }else{
+                    } else {
                         Intent intent = new Intent(context, Import_Banker_Customer_Activity.class);
                         intent.putExtra("customerDetails", finalCustomerPojo);
                         context.startActivity(intent);
                     }
-                }else if(finalCustomerPojo.getImportR().equals("ImportOther")){
-                  if(finalCustomerPojo.getIsimport().equals("1")) {
+                } else if (finalCustomerPojo.getImportR().equals("ImportOther")) {
+                    if (finalCustomerPojo.getIsimport().equals("1")) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                         builder.setMessage("This record is already imported. Do you realy want to import this record?");
                         builder.setIcon(R.drawable.ic_success_24dp);
@@ -412,13 +410,12 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
                         AlertDialog alertD = builder.create();
                         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
                         alertD.show();
-                    }else{
+                    } else {
                         Intent intent = new Intent(context, ImportVehicleOtherCustomer_Activity.class);
                         intent.putExtra("customerDetails", finalCustomerPojo);
                         context.startActivity(intent);
                     }
-                }
-                else{
+                } else {
                     Intent intent = new Intent(context, EditCustomer_Activity.class);
                     intent.putExtra("customerDetails", finalCustomerPojo);
                     context.startActivity(intent);
@@ -428,19 +425,19 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
         holder.img_link.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(finalCustomerPojo.getImportR().equals("ImportDealer")){
+                if (finalCustomerPojo.getImportR().equals("ImportDealer")) {
                     Intent intent = new Intent(context, LinkCustomerDealer_Activity.class);
                     intent.putExtra("customerDetails", finalCustomerPojo);
                     context.startActivity(intent);
-                }else if(finalCustomerPojo.getImportR().equals("ImportAgent")){
+                } else if (finalCustomerPojo.getImportR().equals("ImportAgent")) {
                     Intent intent = new Intent(context, LinkCustomerRto_Activity.class);
                     intent.putExtra("customerDetails", finalCustomerPojo);
                     context.startActivity(intent);
-                }else if(finalCustomerPojo.getImportR().equals("ImportBanker")){
+                } else if (finalCustomerPojo.getImportR().equals("ImportBanker")) {
                     Intent intent = new Intent(context, LinkCustomerBanker_Activity.class);
                     intent.putExtra("customerDetails", finalCustomerPojo);
                     context.startActivity(intent);
-                }else if(finalCustomerPojo.getImportR().equals("ImportOther")){
+                } else if (finalCustomerPojo.getImportR().equals("ImportOther")) {
                     Intent intent = new Intent(context, LinkCustomerOther_Activity.class);
                     intent.putExtra("customerDetails", finalCustomerPojo);
                     context.startActivity(intent);
@@ -463,7 +460,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
                             .load(finalCustomerPojo.getVehicle_image_url())
                             .placeholder(R.drawable.img_product)
                             .into(imv_fullpic);
-                }else{
+                } else {
                     imv_fullpic.setVisibility(View.GONE);
                     imv_text.setVisibility(View.VISIBLE);
                     imv_text.setText("Image not available.");
@@ -474,7 +471,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
             }
         });
 
- }
+    }
 
     @Override
     public int getItemCount() {
@@ -483,22 +480,24 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tv_vehicalownername,tv_renewaldate,tv_identify;
+        TextView tv_vehicalownername, tv_renewaldate, tv_identify;
         private CardView ll_mainlayout;
-        ImageView img_delete,img_edit,img_vehicle,img_link,img_show;
+        ImageView img_delete, img_edit, img_vehicle, img_link, img_show;
+
         public MyViewHolder(View view) {
             super(view);
-            tv_vehicalownername = view.findViewById(R.id.tv_ownername   );
+            tv_vehicalownername = view.findViewById(R.id.tv_ownername);
             tv_renewaldate = view.findViewById(R.id.tv_renewaldate);
             ll_mainlayout = view.findViewById(R.id.ll_mainlayout);
-            img_delete =view.findViewById(R.id.img_delete);
-            img_edit =view.findViewById(R.id.img_edit);
-            img_link =view.findViewById(R.id.img_link);
-            img_vehicle =view.findViewById(R.id.img_vehicle);
+            img_delete = view.findViewById(R.id.img_delete);
+            img_edit = view.findViewById(R.id.img_edit);
+            img_link = view.findViewById(R.id.img_link);
+            img_vehicle = view.findViewById(R.id.img_vehicle);
             tv_identify = view.findViewById(R.id.tv_identify);
             img_show = view.findViewById(R.id.img_show);
         }
     }
+
     public class DeleteBankerDetails extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 
@@ -594,8 +593,8 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
                     if (type.equalsIgnoreCase("success")) {
 
                         new Vehicle_Customer_Fragment.GetCustomerList().execute(user_id);
-                        new Vehicle_Customer_Fragment.GetCustomerList1().execute(user_id,role_id);
-                        new Vehicle_Customer_Fragment.GetBankerList().execute(user_id,role_id);
+                        new Vehicle_Customer_Fragment.GetCustomerList1().execute(user_id, role_id);
+                        new Vehicle_Customer_Fragment.GetBankerList().execute(user_id, role_id);
                         new Vehicle_Customer_Fragment.GetOtherVehicleList().execute(user_id);
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
@@ -620,6 +619,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
             }
         }
     }
+
     public class DeleteCustomerDetails1 extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 
@@ -655,8 +655,8 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
                     if (type.equalsIgnoreCase("success")) {
 
                         new Vehicle_Customer_Fragment.GetCustomerList().execute(user_id);
-                        new Vehicle_Customer_Fragment.GetCustomerList1().execute(user_id,role_id);
-                        new Vehicle_Customer_Fragment.GetBankerList().execute(user_id,role_id);
+                        new Vehicle_Customer_Fragment.GetCustomerList1().execute(user_id, role_id);
+                        new Vehicle_Customer_Fragment.GetBankerList().execute(user_id, role_id);
                         new Vehicle_Customer_Fragment.GetOtherVehicleList().execute(user_id);
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
@@ -716,7 +716,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
                     message = mainObj.getString("message");
                     if (type.equalsIgnoreCase("success")) {
 
-                      new Self_Fragment.GetCustomerList().execute(user_id);
+                        new Self_Fragment.GetCustomerList().execute(user_id);
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                         builder.setMessage("Vehicle Details Deleted Successfully");
@@ -740,6 +740,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
             }
         }
     }
+
     public class DeleteCustomerDetails3 extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 
@@ -775,8 +776,8 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyView
                     if (type.equalsIgnoreCase("success")) {
 
                         new Vehicle_Customer_Fragment.GetCustomerList().execute(user_id);
-                        new Vehicle_Customer_Fragment.GetCustomerList1().execute(user_id,role_id);
-                        new Vehicle_Customer_Fragment.GetBankerList().execute(user_id,role_id);
+                        new Vehicle_Customer_Fragment.GetCustomerList1().execute(user_id, role_id);
+                        new Vehicle_Customer_Fragment.GetBankerList().execute(user_id, role_id);
                         new Vehicle_Customer_Fragment.GetOtherVehicleList().execute(user_id);
                         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                         builder.setMessage("Vehicle Details Deleted Successfully");

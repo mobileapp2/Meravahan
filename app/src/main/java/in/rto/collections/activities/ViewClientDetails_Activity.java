@@ -6,8 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +22,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import in.rto.collections.R;
-import in.rto.collections.fragments.Client_Fragment;
 import in.rto.collections.models.ClientMainListPojo;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.UserSessionManager;
@@ -35,11 +34,12 @@ public class ViewClientDetails_Activity extends Activity {
     private Context context;
     private ScrollView scrollView;
     private LinearLayout ll_parent;
-    private EditText edt_name, edt_alias, edt_mobile, edt_whatsapp, edt_email, edt_dob, edt_anniversary, edt_ClientCode,edt_remark,edt_language;
+    private EditText edt_name, edt_alias, edt_mobile, edt_whatsapp, edt_email, edt_dob, edt_anniversary, edt_ClientCode, edt_remark, edt_language;
     private ClientMainListPojo clientDetails;
     private ImageView img_delete, img_edit;
     private UserSessionManager session;
     private String user_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +50,9 @@ public class ViewClientDetails_Activity extends Activity {
         setDefaults();
         setEventHandler();
 
-    } private void init() {
+    }
+
+    private void init() {
         context = ViewClientDetails_Activity.this;
         session = new UserSessionManager(context);
         scrollView = findViewById(R.id.scrollView);
@@ -105,44 +107,44 @@ public class ViewClientDetails_Activity extends Activity {
 
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
-         mToolbar.inflateMenu(R.menu.list_menu);
-         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-             @Override
-             public boolean onMenuItemClick(MenuItem item) {
-                 int id = item.getItemId();
-                 if(id == R.id.img_edit){
-                     Intent intent = new Intent(context, EditClientDetails_Activity.class);
-                     intent.putExtra("clientDetails", clientDetails);
-                     context.startActivity(intent);
-                     finish();
-                 }else if(id == R.id.img_delete){
-                     AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
-                     builder.setMessage("Are you sure you want to delete this item?");
-                     builder.setTitle("Alert");
-                     builder.setIcon(R.drawable.ic_alert_red_24dp);
-                     builder.setCancelable(false);
-                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                         public void onClick(DialogInterface dialog, int id) {
-                             if (Utilities.isInternetAvailable(context)) {
-                                 new DeleteClientDetails().execute(user_id, clientDetails.getId());
-                             } else {
-                                 Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
-                             }
-                         }
-                     });
-                     builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                         @Override
-                         public void onClick(DialogInterface dialog, int which) {
-                             dialog.dismiss();
-                         }
-                     });
-                     AlertDialog alertD = builder.create();
-                     alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
-                     alertD.show();
-                 }
-                 return false;
-             }
-         });
+        mToolbar.inflateMenu(R.menu.list_menu);
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                int id = item.getItemId();
+                if (id == R.id.img_edit) {
+                    Intent intent = new Intent(context, EditClientDetails_Activity.class);
+                    intent.putExtra("clientDetails", clientDetails);
+                    context.startActivity(intent);
+                    finish();
+                } else if (id == R.id.img_delete) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
+                    builder.setMessage("Are you sure you want to delete this item?");
+                    builder.setTitle("Alert");
+                    builder.setIcon(R.drawable.ic_alert_red_24dp);
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            if (Utilities.isInternetAvailable(context)) {
+                                new DeleteClientDetails().execute(user_id, clientDetails.getId());
+                            } else {
+                                Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+                            }
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog alertD = builder.create();
+                    alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
+                    alertD.show();
+                }
+                return false;
+            }
+        });
         img_delete = findViewById(R.id.img_delete);
         img_edit = findViewById(R.id.img_edit);
         mToolbar.setTitle("Client Details");
@@ -190,7 +192,7 @@ public class ViewClientDetails_Activity extends Activity {
                     message = mainObj.getString("message");
                     if (type.equalsIgnoreCase("success")) {
 
-                       // new Client_Fragment.GetClientList().execute(user_id);
+                        // new Client_Fragment.GetClientList().execute(user_id);
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                         builder.setMessage("Client Details Deleted Successfully");

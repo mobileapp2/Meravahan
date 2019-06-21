@@ -5,10 +5,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -47,6 +47,7 @@ public class ClientCode extends Activity {
     private FloatingActionButton fab_add_code;
     private UserSessionManager session;
     private String user_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -59,17 +60,19 @@ public class ClientCode extends Activity {
         setEventHandlers();
         setUpToolbar();
     }
+
     private void init() {
-      context = ClientCode.this;
-      codelist = findViewById(R.id.codelist);
-      ll_nothingtoshow = findViewById(R.id.ll_nothingtoshow);
-      swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
-      ll_parent = findViewById(R.id.ll_parent);
-      fab_add_code = findViewById(R.id.fab_add_clientcode);
-      session = new UserSessionManager(context);
-      layoutManager = new LinearLayoutManager(context);
-      codelist.setLayoutManager(layoutManager);
+        context = ClientCode.this;
+        codelist = findViewById(R.id.codelist);
+        ll_nothingtoshow = findViewById(R.id.ll_nothingtoshow);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        ll_parent = findViewById(R.id.ll_parent);
+        fab_add_code = findViewById(R.id.fab_add_clientcode);
+        session = new UserSessionManager(context);
+        layoutManager = new LinearLayoutManager(context);
+        codelist.setLayoutManager(layoutManager);
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -80,6 +83,7 @@ public class ClientCode extends Activity {
             e.printStackTrace();
         }
     }
+
     private void setDefault() {
         if (Utilities.isNetworkAvailable(context)) {
             new GetClientCodeList().execute(user_id);
@@ -87,7 +91,7 @@ public class ClientCode extends Activity {
             Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
             swipeRefreshLayout.setRefreshing(false);
             ll_nothingtoshow.setVisibility(View.VISIBLE);
-           codelist.setVisibility(View.GONE);
+            codelist.setVisibility(View.GONE);
         }
     }
 
@@ -160,6 +164,7 @@ public class ClientCode extends Activity {
 
 
     }
+
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle("Client Code");
@@ -173,19 +178,19 @@ public class ClientCode extends Activity {
     }
 
 
-
-    public static class GetClientCodeList  extends AsyncTask<String , Void ,String> {
+    public static class GetClientCodeList extends AsyncTask<String, Void, String> {
         private ArrayList<ClientCodePojo> clientcodelist;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-           // ll_nothingtoshow.setVisibility(View.GONE);
+            // ll_nothingtoshow.setVisibility(View.GONE);
             //codelist.setVisibility(View.GONE);
             swipeRefreshLayout.setRefreshing(true);
 //            shimmer_view_container.setVisibility(View.VISIBLE);
 //            shimmer_view_container.startShimmer();
         }
+
         @Override
         protected String doInBackground(String... params) {
             String res = "[]";
@@ -195,6 +200,7 @@ public class ClientCode extends Activity {
             res = WebServiceCalls.FORMDATAAPICall(ApplicationConstants.MASTERAPI, param);
             return res.trim();
         }
+
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
@@ -242,6 +248,7 @@ public class ClientCode extends Activity {
         }
 
     }
+
     public class AddClientCode extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 

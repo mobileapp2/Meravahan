@@ -12,13 +12,12 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -77,15 +76,15 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
     private ScrollView scrollView;
     private LinearLayout ll_parent;
     private static final int CAMERA_REQUEST = 100;
-    private LinearLayout ll_servicedates, ll_documents,ll_Otherdates;
-    private ImageView btn_addservicedates, btn_adddocuments,btn_addotherdates;
+    private LinearLayout ll_servicedates, ll_documents, ll_Otherdates;
+    private ImageView btn_addservicedates, btn_adddocuments, btn_addotherdates;
     private static final int GALLERY_REQUEST = 200;
-    private EditText edt_state, edt_vehicleno, edt_clientname, edt_vehicleownername, edt_rtoagent,edt_vehicledealer,
+    private EditText edt_state, edt_vehicleno, edt_clientname, edt_vehicleownername, edt_rtoagent, edt_vehicledealer,
             edt_description, edt_type, edt_engineno, edt_chassisno, edt_insurancepolicyno, edt_renewaldate,
-            edt_purcasedate, edt_temregno, edt_remark,edt_hypothecatedto,edt_taxvalidupto, edt_permitvalidupto,
-            edt_satepermitvalidupto,nationalpermitvalidupto,pucrenewaldate,fitnessvalidupto,edt_bank, edt_branch, edt_borrowername,
+            edt_purcasedate, edt_temregno, edt_remark, edt_hypothecatedto, edt_taxvalidupto, edt_permitvalidupto,
+            edt_satepermitvalidupto, nationalpermitvalidupto, pucrenewaldate, fitnessvalidupto, edt_bank, edt_branch, edt_borrowername,
             edt_loanamount, edt_accountnumber, edt_sactiondate, edt_installmentanount, edt_startdate,
-            edt_enddate, edt_frequency,edt_selectVehicleImage;
+            edt_enddate, edt_frequency, edt_selectVehicleImage;
 
     private int mYear, mMonth, mDay;
     private int mYear1, mMonth1, mDay1;
@@ -108,8 +107,8 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
     private ArrayList<TypePojo> typelist;
     private ArrayList<StatePojo> statelist;
     private UserSessionManager session;
-    private String companyAliasName = "",documentType;
-    private String user_id, stateId, clientId, typeId,rtoId,statename,id,serviceDateId,otherDateId,createdId, bankId="0",branchId,frequency;
+    private String companyAliasName = "", documentType;
+    private String user_id, stateId, clientId, typeId, rtoId, statename, id, serviceDateId, otherDateId, createdId, bankId = "0", branchId, frequency;
     private String[] PERMISSIONS = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
     private Uri photoURI;
     private File photoFile, customerPicFolder;
@@ -117,7 +116,8 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
     private ArrayList<BankPojo> bankList;
     private ArrayList<BranchPojo> branchList;
     private ArrayList<FrequencyPojo> frequencylist;
-    private LinearLayout bank_details,bank_feild;
+    private LinearLayout bank_details, bank_feild;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,6 +128,7 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
         setDefaults();
         setEventHandler();
     }
+
     private void init() {
         context = ImportVehicleOtherCustomer_Activity.this;
         session = new UserSessionManager(context);
@@ -174,7 +175,6 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
         bank_feild = findViewById(R.id.bank_feild);
 
 
-
         btn_addservicedates = findViewById(R.id.btn_addservicedates);
         btn_addotherdates = findViewById(R.id.btn_addotherdates);
         btn_adddocuments = findViewById(R.id.btn_adddocuments);
@@ -195,6 +195,7 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
     protected void onPause() {
         super.onPause();
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -259,7 +260,7 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
         serviceDatesLayoutsList = new ArrayList<>();
         otherLayoutsList = new ArrayList<>();
         documentsLayoutsList = new ArrayList<>();
-        customerPojo  = (CustomerPojo) getIntent().getSerializableExtra("customerDetails");
+        customerPojo = (CustomerPojo) getIntent().getSerializableExtra("customerDetails");
         id = customerPojo.getId();
         stateId = customerPojo.getStateId();
         typeId = customerPojo.getType_id();
@@ -317,9 +318,7 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
         }
 
 
-
-
-        ArrayList< CustomerPojo.DocumentListPojo> documentsList = new ArrayList<>();
+        ArrayList<CustomerPojo.DocumentListPojo> documentsList = new ArrayList<>();
         documentsList = customerPojo.getDocument();
 
         if (documentsList.size() != 0) {
@@ -339,6 +338,7 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
             // tv_documents.setText("No Documents Added");
         }
     }
+
     @SuppressLint("ClickableViewAccessibility")
     private void setEventHandler() {
         bank_details.setOnClickListener(new View.OnClickListener() {
@@ -380,7 +380,6 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
                 }
             }
         });
-
 
 
         edt_renewaldate.setOnClickListener(new View.OnClickListener() {
@@ -770,7 +769,6 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
         });
 
 
-
         img_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -916,6 +914,7 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetRTOAgentList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -1014,6 +1013,7 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetTypeList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -1075,6 +1075,7 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
             }
         }
     }
+
     private void bankListDialog(final ArrayList<BankPojo> bankList) {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
         builderSingle.setTitle("Select Bank");
@@ -1172,6 +1173,7 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
             }
         }
     }
+
     private void branchListDialog(final ArrayList<BranchPojo> branchList) {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
         builderSingle.setTitle("Select Branch");
@@ -1206,6 +1208,7 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetBranchList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -1241,7 +1244,7 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
                     if (type.equalsIgnoreCase("success")) {
-                        branchList= new ArrayList<>();
+                        branchList = new ArrayList<>();
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
                             for (int i = 0; i < jsonarr.length(); i++) {
@@ -1303,6 +1306,7 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetFrqList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -1338,7 +1342,7 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
                     if (type.equalsIgnoreCase("success")) {
-                        frequencylist= new ArrayList<>();
+                        frequencylist = new ArrayList<>();
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
                             for (int i = 0; i < jsonarr.length(); i++) {
@@ -1395,7 +1399,7 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
             return;
         }
 
-        if(!edt_bank.getText().toString().trim().equals("")){
+        if (!edt_bank.getText().toString().trim().equals("")) {
             if (edt_bank.getText().toString().trim().equals("")) {
                 Utilities.showSnackBar(ll_parent, "Please Enter Bank");
                 return;
@@ -1504,8 +1508,8 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
         mainObj.addProperty("type", "add");
         mainObj.addProperty("state", stateId);
         mainObj.addProperty("Name_of_the_Vehicle_Owner", edt_vehicleownername.getText().toString().trim());
-        mainObj.addProperty("RTO_Agent",edt_rtoagent.getText().toString().trim());
-        mainObj.addProperty("vehicle_dealer",edt_vehicledealer.getText().toString().trim());
+        mainObj.addProperty("RTO_Agent", edt_rtoagent.getText().toString().trim());
+        mainObj.addProperty("vehicle_dealer", edt_vehicledealer.getText().toString().trim());
         mainObj.addProperty("rtotype", typeId);
         mainObj.addProperty("c_Type", typeId);
         mainObj.addProperty("Engine_No", edt_engineno.getText().toString().trim());
@@ -1542,7 +1546,7 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
                 fitnessvalidupto.getText().toString().trim()));
         mainObj.addProperty("Insurance_Policy_No", edt_insurancepolicyno.getText().toString().trim());
         mainObj.addProperty("Temporary_Registration_No", edt_temregno.getText().toString().trim());
-        mainObj.addProperty("Hypothecated_to",  edt_hypothecatedto.getText().toString().trim());
+        mainObj.addProperty("Hypothecated_to", edt_hypothecatedto.getText().toString().trim());
         mainObj.add("documents", documentJSONArray);
         mainObj.addProperty("Remark", edt_remark.getText().toString().trim());
         mainObj.addProperty("Vehicle_No", edt_vehicleno.getText().toString().trim());
@@ -1656,6 +1660,7 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
 
         }
     }
+
     public void selectDate(View view) {
         final EditText edt_servicedate = (EditText) view;
         final EditText edt_otheredate = (EditText) view;
@@ -1699,6 +1704,7 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
         dpd1.show();
 
     }
+
     public void selectVehicleImage(View view) {
         documentType = "vehicleImage";
         if (doesAppNeedPermissions()) {
@@ -1765,8 +1771,7 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
                             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                             startActivityForResult(intent, CAMERA_REQUEST);
-                        }
-                        else if (options[item].equals("Choose from Gallery")) {
+                        } else if (options[item].equals("Choose from Gallery")) {
                             Intent intent = new Intent(Intent.ACTION_PICK);
                             intent.setType("image/*");
                             startActivityForResult(intent, GALLERY_REQUEST);
@@ -1973,9 +1978,9 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
                     if (type.equalsIgnoreCase("Success")) {
                         JSONObject Obj1 = mainObj.getJSONObject("result");
                         String document_name = Obj1.getString("name");
-                        if(documentType.equals("selectedImage")) {
+                        if (documentType.equals("selectedImage")) {
                             edt_selectdocuments.setText(document_name);
-                        }else if(documentType.equals("vehicleImage")){
+                        } else if (documentType.equals("vehicleImage")) {
                             edt_selectVehicleImage.setText(document_name);
                         }
 
@@ -1990,7 +1995,6 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
             }
         }
     }
-
 
 
     void savefile(Uri sourceuri) {
@@ -2031,12 +2035,12 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
         otherLayoutsList.remove(view.getParent());
     }
 
-    public  void deleteDocument(View view){
+    public void deleteDocument(View view) {
         ll_documents.removeView((View) view.getParent());
         documentsLayoutsList.remove(view.getParent());
     }
 
-    public  void removeserviceDates(View view){
+    public void removeserviceDates(View view) {
         ll_servicedates.removeView((View) view.getParent());
         serviceDatesLayoutsList.remove(view.getParent());
     }
@@ -2093,6 +2097,7 @@ public class ImportVehicleOtherCustomer_Activity extends Activity {
             }
         }
     }
+
     public class IsImport extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 

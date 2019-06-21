@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -62,6 +61,7 @@ public class GetProductInfoListAdapter extends RecyclerView.Adapter<GetProductIn
         private TextView tv_name;
         private ImageView imv_product;
         CardView ll_mainlayout;
+
         public MyViewHolder(View view) {
             super(view);
             tv_name = view.findViewById(R.id.tv_name);

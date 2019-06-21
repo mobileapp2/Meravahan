@@ -1,172 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout android:orientation="vertical" tools:context=".activities.ContactUs_Activity" android:layout_height="match_parent" android:layout_width="match_parent" xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/resauto" xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout android:orientation="vertical"
+    tools:context=".activities.ContactUs_Activity"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/resauto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <android.support.design.widget.AppBarLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay">
+    <android.support.design.widget.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar android:layout_height="wrap_content" android:layout_width="match_parent" app:titleTextColor="@color/white" android:minHeight="?attr/actionBarSize" android:background="?attr/colorPrimary" android:id="@+id/toolbar"/>
+        <android.support.v7.widget.Toolbar
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            app:titleTextColor="@color/white"
+            android:minHeight="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:id="@+id/toolbar" />
 
     </android.support.design.widget.AppBarLayout>
-    <android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp"
-    android:layout_marginBottom="50dp"
-    >
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="10dp"
-        android:gravity="center_horizontal">
+        android:padding="10dp"
+        android:layout_marginBottom="50dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/logo_new" />
-
-        <TextView
-            android:id="@+id/appversion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Version"
-            android:textSize="18sp"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/colorPrimary" />
-
-
-
-
-        <LinearLayout
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="1dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="15dp"
-            android:gravity="center_horizontal"
-            android:background="@color/white" >
+            android:layout_margin="10dp"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/logo_new" />
 
             <TextView
-                android:id="@+id/termsandcond"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:text="Terms and Conditions"
-                android:textSize="16sp"
-                android:textColor="@color/white"
-                android:clickable="true"
-                android:paddingRight="5dp"
-                android:paddingLeft="10dp"
-                android:gravity="center_vertical"
-                android:background="@color/colorPrimary"
-                android:drawableRight="@drawable/ic_chevron_right"
-                android:drawableTint="@color/white"/>
-            <TextView
-                android:id="@+id/privacy_policy"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:text="Privacy Policy"
-                android:textSize="16sp"
-                android:textColor="@color/white"
-                android:clickable="true"
-                android:paddingRight="5dp"
-                android:paddingLeft="10dp"
-                android:layout_marginTop="1dp"
-                android:gravity="center_vertical"
-                android:background="@color/colorPrimary"
-                android:drawableRight="@drawable/ic_chevron_right"
-                android:drawableTint="@color/white"/>
-
-            <TextView
-                android:id="@+id/social_media_policy"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:text="Social Media Policy"
-                android:textSize="16sp"
-                android:textColor="@color/white"
-                android:clickable="true"
-                android:paddingRight="5dp"
-                android:paddingLeft="10dp"
-                android:layout_marginTop="1dp"
-                android:gravity="center_vertical"
-                android:background="@color/colorPrimary"
-                android:drawableRight="@drawable/ic_chevron_right"
-                android:drawableTint="@color/white"/>
+                android:id="@+id/appversion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Version"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorPrimary" />
 
 
-            <TextView
-                android:id="@+id/ip_policy"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:text="IP Policy"
-                android:textSize="16sp"
-                android:textColor="@color/white"
-                android:clickable="true"
-                android:paddingRight="5dp"
-                android:paddingLeft="10dp"
-                android:layout_marginTop="1dp"
-                android:gravity="center_vertical"
-                android:background="@color/colorPrimary"
-                android:drawableRight="@drawable/ic_chevron_right"
-                android:drawableTint="@color/white"/>
+                android:layout_height="wrap_content"
+                android:elevation="1dp"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="15dp"
+                android:gravity="center_horizontal"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/termsandcond"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:text="Terms and Conditions"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:clickable="true"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:background="@color/colorPrimary"
+                    android:drawableRight="@drawable/ic_chevron_right"
+                    android:drawableTint="@color/white" />
+
+                <TextView
+                    android:id="@+id/privacy_policy"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:text="Privacy Policy"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:clickable="true"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center_vertical"
+                    android:background="@color/colorPrimary"
+                    android:drawableRight="@drawable/ic_chevron_right"
+                    android:drawableTint="@color/white" />
+
+                <TextView
+                    android:id="@+id/social_media_policy"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:text="Social Media Policy"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:clickable="true"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center_vertical"
+                    android:background="@color/colorPrimary"
+                    android:drawableRight="@drawable/ic_chevron_right"
+                    android:drawableTint="@color/white" />
 
 
-            <TextView
-                android:id="@+id/id_grievance"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:text="Grievance"
-                android:textSize="16sp"
-                android:textColor="@color/white"
-                android:clickable="true"
-                android:paddingRight="5dp"
-                android:paddingLeft="10dp"
-                android:layout_marginTop="1dp"
-                android:gravity="center_vertical"
-                android:background="@color/colorPrimary"
-                android:drawableRight="@drawable/ic_chevron_right"
-                android:drawableTint="@color/white"/>
+                <TextView
+                    android:id="@+id/ip_policy"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:text="IP Policy"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:clickable="true"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center_vertical"
+                    android:background="@color/colorPrimary"
+                    android:drawableRight="@drawable/ic_chevron_right"
+                    android:drawableTint="@color/white" />
 
-            <TextView
-                android:id="@+id/id_appDisclaimer"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:text="Mobile App Disclaimer"
-                android:textSize="16sp"
-                android:textColor="@color/white"
-                android:clickable="true"
-                android:paddingRight="5dp"
-                android:paddingLeft="10dp"
-                android:layout_marginTop="1dp"
-                android:gravity="center_vertical"
-                android:background="@color/colorPrimary"
-                android:drawableRight="@drawable/ic_chevron_right"
-                android:drawableTint="@color/white"/>
 
-            <TextView
-                android:id="@+id/id_userAgreement"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:text="User Agreement"
-                android:textSize="16sp"
-                android:textColor="@color/white"
-                android:clickable="true"
-                android:paddingRight="5dp"
-                android:paddingLeft="10dp"
-                android:layout_marginTop="1dp"
-                android:gravity="center_vertical"
-                android:background="@color/colorPrimary"
-                android:drawableRight="@drawable/ic_chevron_right"
-                android:drawableTint="@color/white"/>
+                <TextView
+                    android:id="@+id/id_grievance"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:text="Grievance"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:clickable="true"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center_vertical"
+                    android:background="@color/colorPrimary"
+                    android:drawableRight="@drawable/ic_chevron_right"
+                    android:drawableTint="@color/white" />
+
+                <TextView
+                    android:id="@+id/id_appDisclaimer"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:text="Mobile App Disclaimer"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:clickable="true"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center_vertical"
+                    android:background="@color/colorPrimary"
+                    android:drawableRight="@drawable/ic_chevron_right"
+                    android:drawableTint="@color/white" />
+
+                <TextView
+                    android:id="@+id/id_userAgreement"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:text="User Agreement"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:clickable="true"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center_vertical"
+                    android:background="@color/colorPrimary"
+                    android:drawableRight="@drawable/ic_chevron_right"
+                    android:drawableTint="@color/white" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
-
-</android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

@@ -18,9 +18,7 @@
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
-            app:titleTextColor="@color/white"
-            >
-        </android.support.v7.widget.Toolbar>
+            app:titleTextColor="@color/white"></android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -295,7 +293,7 @@
 
             </android.support.v7.widget.CardView>
 
-       </LinearLayout>
+        </LinearLayout>
 
     </ScrollView>
 

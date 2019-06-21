@@ -31,8 +31,9 @@ public class Settings_Activity extends Activity {
     private UserSessionManager session;
     String user_id;
     LinearLayout ll_parent;
-    private SwitchCompat switchBirthdayWhatsappButton,switchBirthdaySMSButton,switchAnnniWhatsappButton,switchAnnniSMSButton,switchPremiumDueButton;
-    int birthSMS,birthWhatsapp,anniSMS,anniWhatsapp,due;
+    private SwitchCompat switchBirthdayWhatsappButton, switchBirthdaySMSButton, switchAnnniWhatsappButton, switchAnnniSMSButton, switchPremiumDueButton;
+    int birthSMS, birthWhatsapp, anniSMS, anniWhatsapp, due;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,7 @@ public class Settings_Activity extends Activity {
         setEventHandler();
         setUpToolbar();
     }
+
     private void init() {
 
         context = Settings_Activity.this;
@@ -53,8 +55,9 @@ public class Settings_Activity extends Activity {
         switchBirthdaySMSButton = findViewById(R.id.switchBirthdaySMSButton);
         switchAnnniWhatsappButton = findViewById(R.id.switchAnnniWhatsappButton);
         switchAnnniSMSButton = findViewById(R.id.switchAnnniSMSButton);
-       // switchPremiumDueButton = findViewById(R.id.switchPremiumDueButton);
+        // switchPremiumDueButton = findViewById(R.id.switchPremiumDueButton);
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -65,6 +68,7 @@ public class Settings_Activity extends Activity {
             e.printStackTrace();
         }
     }
+
     private void setEventHandler() {
         switchBirthdayWhatsappButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -73,13 +77,12 @@ public class Settings_Activity extends Activity {
                 String checked;
                 if (isChecked) {
                     checked = "1";
-                    if (birthWhatsapp == 2)
-                    {
+                    if (birthWhatsapp == 2) {
                         checked = "0";
                         switchBirthdayWhatsappButton.setChecked(false);
                         showAlertDialog("birthWhats");
                     }
-                }else {
+                } else {
                     checked = "0";
                 }
                 new updateBirthdayWhatsApp().execute(checked);
@@ -92,13 +95,12 @@ public class Settings_Activity extends Activity {
                 String checked;
                 if (isChecked) {
                     checked = "1";
-                    if (birthSMS == 2)
-                    {
+                    if (birthSMS == 2) {
                         checked = "0";
                         switchBirthdaySMSButton.setChecked(false);
                         showAlertDialog("birthSMS");
                     }
-                }else {
+                } else {
                     checked = "0";
                 }
 
@@ -112,14 +114,14 @@ public class Settings_Activity extends Activity {
                 String checked;
                 if (isChecked) {
                     checked = "1";
-                    if (anniWhatsapp == 2)
-                    {
+                    if (anniWhatsapp == 2) {
                         checked = "0";
                         switchAnnniWhatsappButton.setChecked(false);
                         showAlertDialog("anniWhats");
                     }
-                } else{
-                    checked = "0";}
+                } else {
+                    checked = "0";
+                }
                 new updateAnniversaryWhatsApp().execute(checked);
             }
         });
@@ -130,15 +132,15 @@ public class Settings_Activity extends Activity {
                 String checked;
                 if (isChecked) {
                     checked = "1";
-                    if (anniSMS == 2)
-                    {
+                    if (anniSMS == 2) {
                         checked = "0";
                         switchAnnniSMSButton.setChecked(false);
                         showAlertDialog("anniSMS");
 
                     }
-                } else{
-                    checked = "0";}
+                } else {
+                    checked = "0";
+                }
                 new updateAnniversarySMS().execute(checked);
             }
         });
@@ -177,341 +179,339 @@ public class Settings_Activity extends Activity {
         });
     }
 
-public void showAlertDialog(final String type)
-{
-    AlertDialog.Builder alertDialog = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
-    alertDialog.setTitle("Alert");
-    alertDialog.setMessage("There are no default settings to send automated messages. Please add settings !");
-    alertDialog.setIcon(R.drawable.ic_alert_red_24dp);
-    alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+    public void showAlertDialog(final String type) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
+        alertDialog.setTitle("Alert");
+        alertDialog.setMessage("There are no default settings to send automated messages. Please add settings !");
+        alertDialog.setIcon(R.drawable.ic_alert_red_24dp);
+        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
-        public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which) {
 
-            switch (type)
-            {
-                case "birthWhats" : startActivity(new Intent(context, WhatsappBirthdaySettings_Activity.class));
-                    break;
-                case "birthSMS"   : startActivity(new Intent(context, SMSBirthdaySettings_Activity.class));
-                    break;
-                case "anniWhats"  : startActivity(new Intent(context, WhatsappAnniversarySettings_Activity.class));
-                    break;
-                case "anniSMS"    : startActivity(new Intent(context, SMSAnniversarySettings_Activity.class));
-                    break;
+                switch (type) {
+                    case "birthWhats":
+                        startActivity(new Intent(context, WhatsappBirthdaySettings_Activity.class));
+                        break;
+                    case "birthSMS":
+                        startActivity(new Intent(context, SMSBirthdaySettings_Activity.class));
+                        break;
+                    case "anniWhats":
+                        startActivity(new Intent(context, WhatsappAnniversarySettings_Activity.class));
+                        break;
+                    case "anniSMS":
+                        startActivity(new Intent(context, SMSAnniversarySettings_Activity.class));
+                        break;
 
+                }
             }
-        }
-    });
-    alertDialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+        });
+        alertDialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alertD = alertDialog.create();
+        alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
+        alertD.show();
+    }
+
+    public class updateBirthdayWhatsApp extends AsyncTask<String, Void, String> {
+        ProgressDialog pd;
+
         @Override
-        public void onClick(DialogInterface dialog, int which) {
-            dialog.dismiss();
-        }
-    });
-    AlertDialog alertD = alertDialog.create();
-    alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
-    alertD.show();
-}
-
-public class updateBirthdayWhatsApp extends AsyncTask<String, Void, String> {
-    ProgressDialog pd;
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
+        protected void onPreExecute() {
+            super.onPreExecute();
             /*pd = new ProgressDialog(context, R.style.CustomDialogTheme);
             pd.setMessage("Please wait ...");
             pd.setCancelable(false);
             pd.show();*/
-    }
+        }
 
-    @Override
-    protected String doInBackground(String... params) {
-        String res = "[]";
-        JsonObject obj = new JsonObject();
-        obj.addProperty("type", "addauomatedBirthWhats");
-        obj.addProperty("user_id", user_id);
-        obj.addProperty("setting", params[0]);
-        res = WebServiceCalls.JSONAPICall(ApplicationConstants.SETTINGSAPI, obj.toString());
-        return res.trim();
-    }
+        @Override
+        protected String doInBackground(String... params) {
+            String res = "[]";
+            JsonObject obj = new JsonObject();
+            obj.addProperty("type", "addauomatedBirthWhats");
+            obj.addProperty("user_id", user_id);
+            obj.addProperty("setting", params[0]);
+            res = WebServiceCalls.JSONAPICall(ApplicationConstants.SETTINGSAPI, obj.toString());
+            return res.trim();
+        }
 
-    @Override
-    protected void onPostExecute(String result) {
-        super.onPostExecute(result);
-        String type = "", message = "";
-        try {
-            // pd.dismiss();
-            if (!result.equals("")) {
-                JSONObject mainObj = new JSONObject(result);
-                type = mainObj.getString("type");
-                message = mainObj.getString("message");
-                if (type.equalsIgnoreCase("success")) {
-                    if (Utilities.isInternetAvailable(context)) {
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            String type = "", message = "";
+            try {
+                // pd.dismiss();
+                if (!result.equals("")) {
+                    JSONObject mainObj = new JSONObject(result);
+                    type = mainObj.getString("type");
+                    message = mainObj.getString("message");
+                    if (type.equalsIgnoreCase("success")) {
+                        if (Utilities.isInternetAvailable(context)) {
 
+                        } else {
+                            // Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+                        }
                     } else {
-                       // Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+                        Utilities.showAlertDialog(context, "Alert", message, false);
                     }
-                } else {
-                    Utilities.showAlertDialog(context, "Alert", message, false);
-                }
 
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
-}
-public class updateBirthdaySMS extends AsyncTask<String, Void, String> {
-    ProgressDialog pd;
 
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
+    public class updateBirthdaySMS extends AsyncTask<String, Void, String> {
+        ProgressDialog pd;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
            /* pd = new ProgressDialog(context, R.style.CustomDialogTheme);
             pd.setMessage("Please wait ...");
             pd.setCancelable(false);
             pd.show();*/
-    }
+        }
 
-    @Override
-    protected String doInBackground(String... params) {
-        String res = "[]";
-        JsonObject obj = new JsonObject();
-        obj.addProperty("type", "addauomatedBirthSMS");
-        obj.addProperty("user_id", user_id);
-        obj.addProperty("setting", params[0]);
-        res = WebServiceCalls.JSONAPICall(ApplicationConstants.SETTINGSAPI, obj.toString());
-        return res.trim();
-    }
+        @Override
+        protected String doInBackground(String... params) {
+            String res = "[]";
+            JsonObject obj = new JsonObject();
+            obj.addProperty("type", "addauomatedBirthSMS");
+            obj.addProperty("user_id", user_id);
+            obj.addProperty("setting", params[0]);
+            res = WebServiceCalls.JSONAPICall(ApplicationConstants.SETTINGSAPI, obj.toString());
+            return res.trim();
+        }
 
-    @Override
-    protected void onPostExecute(String result) {
-        super.onPostExecute(result);
-        String type = "", message = "";
-        try {
-            //   pd.dismiss();
-            if (!result.equals("")) {
-                JSONObject mainObj = new JSONObject(result);
-                type = mainObj.getString("type");
-                message = mainObj.getString("message");
-                if (type.equalsIgnoreCase("success")) {
-                    if (Utilities.isInternetAvailable(context)) {
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            String type = "", message = "";
+            try {
+                //   pd.dismiss();
+                if (!result.equals("")) {
+                    JSONObject mainObj = new JSONObject(result);
+                    type = mainObj.getString("type");
+                    message = mainObj.getString("message");
+                    if (type.equalsIgnoreCase("success")) {
+                        if (Utilities.isInternetAvailable(context)) {
 
+                        } else {
+                            Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+                        }
                     } else {
-                        Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+                        Utilities.showAlertDialog(context, "Alert", message, false);
                     }
-                } else {
-                    Utilities.showAlertDialog(context, "Alert", message, false);
-                }
 
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
-}
-public class updateAnniversaryWhatsApp extends AsyncTask<String, Void, String> {
-    ProgressDialog pd;
 
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
+    public class updateAnniversaryWhatsApp extends AsyncTask<String, Void, String> {
+        ProgressDialog pd;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
             /*pd = new ProgressDialog(context, R.style.CustomDialogTheme);
             pd.setMessage("Please wait ...");
             pd.setCancelable(false);
             pd.show();*/
-    }
+        }
 
-    @Override
-    protected String doInBackground(String... params) {
-        String res = "[]";
-        JsonObject obj = new JsonObject();
-        obj.addProperty("type", "addauomatedAnniWhats");
-        obj.addProperty("user_id", user_id);
-        obj.addProperty("setting", params[0]);
-        res = WebServiceCalls.JSONAPICall(ApplicationConstants.SETTINGSAPI, obj.toString());
-        return res.trim();
-    }
+        @Override
+        protected String doInBackground(String... params) {
+            String res = "[]";
+            JsonObject obj = new JsonObject();
+            obj.addProperty("type", "addauomatedAnniWhats");
+            obj.addProperty("user_id", user_id);
+            obj.addProperty("setting", params[0]);
+            res = WebServiceCalls.JSONAPICall(ApplicationConstants.SETTINGSAPI, obj.toString());
+            return res.trim();
+        }
 
-    @Override
-    protected void onPostExecute(String result) {
-        super.onPostExecute(result);
-        String type = "", message = "";
-        try {
-            //pd.dismiss();
-            if (!result.equals("")) {
-                JSONObject mainObj = new JSONObject(result);
-                type = mainObj.getString("type");
-                message = mainObj.getString("message");
-                if (type.equalsIgnoreCase("success")) {
-                    if (Utilities.isInternetAvailable(context)) {
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            String type = "", message = "";
+            try {
+                //pd.dismiss();
+                if (!result.equals("")) {
+                    JSONObject mainObj = new JSONObject(result);
+                    type = mainObj.getString("type");
+                    message = mainObj.getString("message");
+                    if (type.equalsIgnoreCase("success")) {
+                        if (Utilities.isInternetAvailable(context)) {
 
+                        } else {
+                            Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+                        }
                     } else {
-                        Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+                        Utilities.showAlertDialog(context, "Alert", message, false);
                     }
-                } else {
-                    Utilities.showAlertDialog(context, "Alert", message, false);
-                }
 
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
-}
-public class updateAnniversarySMS extends AsyncTask<String, Void, String> {
-    ProgressDialog pd;
 
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
+    public class updateAnniversarySMS extends AsyncTask<String, Void, String> {
+        ProgressDialog pd;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
             /*pd = new ProgressDialog(context, R.style.CustomDialogTheme);
             pd.setMessage("Please wait ...");
             pd.setCancelable(false);
             pd.show();*/
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String res = "[]";
+            JsonObject obj = new JsonObject();
+            obj.addProperty("type", "addauomatedAnniSMS");
+            obj.addProperty("user_id", user_id);
+            obj.addProperty("setting", params[0]);
+            res = WebServiceCalls.JSONAPICall(ApplicationConstants.SETTINGSAPI, obj.toString());
+            return res.trim();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            String type = "", message = "";
+            try {
+                //  pd.dismiss();
+                if (!result.equals("")) {
+                    JSONObject mainObj = new JSONObject(result);
+                    type = mainObj.getString("type");
+                    message = mainObj.getString("message");
+                    if (type.equalsIgnoreCase("success")) {
+                        if (Utilities.isInternetAvailable(context)) {
+
+                        } else {
+                            Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+                        }
+                    } else {
+                        Utilities.showAlertDialog(context, "Alert", message, false);
+                    }
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    @Override
-    protected String doInBackground(String... params) {
-        String res = "[]";
-        JsonObject obj = new JsonObject();
-        obj.addProperty("type", "addauomatedAnniSMS");
-        obj.addProperty("user_id", user_id);
-        obj.addProperty("setting", params[0]);
-        res = WebServiceCalls.JSONAPICall(ApplicationConstants.SETTINGSAPI, obj.toString());
-        return res.trim();
-    }
+    public class getSettings extends AsyncTask<String, Void, String> {
+        ProgressDialog pd;
 
-    @Override
-    protected void onPostExecute(String result) {
-        super.onPostExecute(result);
-        String type = "", message = "";
-        try {
-            //  pd.dismiss();
-            if (!result.equals("")) {
-                JSONObject mainObj = new JSONObject(result);
-                type = mainObj.getString("type");
-                message = mainObj.getString("message");
-                if (type.equalsIgnoreCase("success")) {
-                    if (Utilities.isInternetAvailable(context)) {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd = new ProgressDialog(context, R.style.CustomDialogTheme);
+            pd.setMessage("Please wait ...");
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String res = "[]";
+            JsonObject obj = new JsonObject();
+            obj.addProperty("type", "getAutomatedSettings");
+            obj.addProperty("user_id", user_id);
+
+            res = WebServiceCalls.JSONAPICall(ApplicationConstants.SETTINGSAPI, obj.toString());
+            return res.trim();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            String type = "", message = "";
+            try {
+                pd.dismiss();
+                if (!result.equals("")) {
+                    JSONObject mainObj = new JSONObject(result);
+                    type = mainObj.getString("type");
+                    message = mainObj.getString("message");
+                    if (type.equalsIgnoreCase("success")) {
+                        JSONObject data = mainObj.getJSONObject("result");
+                        if (data.getString("birthsms").equals("1")) {
+                            birthSMS = 0;
+                            switchBirthdaySMSButton.setChecked(true);
+                        } else if (data.getString("birthsms").equals("2")) {
+                            birthSMS = 2;
+                        } else {
+                            birthSMS = 0;
+                            switchBirthdaySMSButton.setChecked(false);
+                        }
+
+
+                        if (data.getString("birthapp").equals("1")) {
+                            birthWhatsapp = 0;
+                            switchBirthdayWhatsappButton.setChecked(true);
+                        } else if (data.getString("birthapp").equals("2")) {
+                            birthWhatsapp = 2;
+                        } else {
+                            birthWhatsapp = 0;
+                            switchBirthdayWhatsappButton.setChecked(false);
+                        }
+
+                        if (data.getString("annisms").equals("1")) {
+                            anniSMS = 0;
+                            switchAnnniSMSButton.setChecked(true);
+                        } else if (data.getString("annisms").equals("2")) {
+                            anniSMS = 2;
+                        } else {
+                            anniSMS = 0;
+                            switchAnnniSMSButton.setChecked(false);
+                        }
+
+                        if (data.getString("anniapp").equals("1")) {
+                            anniWhatsapp = 0;
+                            switchAnnniWhatsappButton.setChecked(true);
+                        } else if (data.getString("anniapp").equals("2")) {
+                            anniWhatsapp = 2;
+                        } else {
+                            anniWhatsapp = 0;
+                            switchAnnniWhatsappButton.setChecked(false);
+                        }
+
+                        if (data.getString("due").equals("1")) {
+                            due = 0;
+                            switchPremiumDueButton.setChecked(true);
+                        } else if (data.getString("due").equals("2")) {
+                            due = 2;
+                        } else {
+                            due = 0;
+                            switchPremiumDueButton.setChecked(false);
+                        }
 
                     } else {
-                        Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+                        Utilities.showAlertDialog(context, "Alert", message, false);
                     }
-                } else {
-                    Utilities.showAlertDialog(context, "Alert", message, false);
-                }
 
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
-}
-public class getSettings extends AsyncTask<String, Void, String> {
-    ProgressDialog pd;
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        pd = new ProgressDialog(context, R.style.CustomDialogTheme);
-        pd.setMessage("Please wait ...");
-        pd.setCancelable(false);
-        pd.show();
-    }
-
-    @Override
-    protected String doInBackground(String... params) {
-        String res = "[]";
-        JsonObject obj = new JsonObject();
-        obj.addProperty("type", "getAutomatedSettings");
-        obj.addProperty("user_id", user_id);
-
-        res = WebServiceCalls.JSONAPICall(ApplicationConstants.SETTINGSAPI, obj.toString());
-        return res.trim();
-    }
-
-    @Override
-    protected void onPostExecute(String result) {
-        super.onPostExecute(result);
-        String type = "", message = "";
-        try {
-            pd.dismiss();
-            if (!result.equals("")) {
-                JSONObject mainObj = new JSONObject(result);
-                type = mainObj.getString("type");
-                message = mainObj.getString("message");
-                if (type.equalsIgnoreCase("success")) {
-                    JSONObject data = mainObj.getJSONObject("result");
-                    if (data.getString("birthsms").equals("1")) {
-                        birthSMS = 0;
-                        switchBirthdaySMSButton.setChecked(true);
-                    }else if(data.getString("birthsms").equals("2"))
-                    {
-                        birthSMS = 2;
-                    }
-                    else{
-                        birthSMS = 0;
-                        switchBirthdaySMSButton.setChecked(false);
-                    }
-
-
-                    if (data.getString("birthapp").equals("1")) {
-                        birthWhatsapp = 0;
-                        switchBirthdayWhatsappButton.setChecked(true);
-                    }else if (data.getString("birthapp").equals("2"))
-                    {
-                        birthWhatsapp = 2;
-                    }
-                    else{
-                        birthWhatsapp = 0;
-                        switchBirthdayWhatsappButton.setChecked(false);
-                    }
-
-                    if (data.getString("annisms").equals("1")) {
-                        anniSMS = 0;
-                        switchAnnniSMSButton.setChecked(true);
-                    }else if(data.getString("annisms").equals("2"))
-                    {
-                        anniSMS = 2;
-                    }
-                    else {
-                        anniSMS = 0;
-                        switchAnnniSMSButton.setChecked(false);
-                    }
-
-                    if (data.getString("anniapp").equals("1")) {
-                        anniWhatsapp = 0;
-                        switchAnnniWhatsappButton.setChecked(true);
-                    }else if (data.getString("anniapp").equals("2"))
-                    {
-                        anniWhatsapp = 2;
-                    }
-                    else{
-                        anniWhatsapp = 0;
-                        switchAnnniWhatsappButton.setChecked(false);}
-
-                    if (data.getString("due").equals("1")) {
-                        due = 0;
-                        switchPremiumDueButton.setChecked(true);
-                    }else if (data.getString("due").equals("2"))
-                    {
-                        due = 2;
-                    }
-                    else{
-                        due = 0;
-                        switchPremiumDueButton.setChecked(false);}
-
-                } else {
-                    Utilities.showAlertDialog(context, "Alert", message, false);
-                }
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-}
 }
 
 

@@ -26,8 +26,6 @@ import java.util.List;
 import in.rto.collections.R;
 import in.rto.collections.activities.AddCustomer_Activity;
 import in.rto.collections.adapters.CustomerAdapter;
-import in.rto.collections.adapters.GetClientListAdapter;
-import in.rto.collections.models.ClientMainListPojo;
 import in.rto.collections.models.CustomerPojo;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.ParamsPojo;
@@ -44,9 +42,10 @@ public class Self_Fragment extends Fragment {
     private FloatingActionButton fab_add_customer;
     private LinearLayoutManager layoutManager;
     private UserSessionManager session;
-    private static  String user_id;
+    private static String user_id;
     private SearchView searchView;
-    private static  ArrayList<CustomerPojo> customerPojos;
+    private static ArrayList<CustomerPojo> customerPojos;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_self, container, false);
@@ -92,13 +91,14 @@ public class Self_Fragment extends Fragment {
             e.printStackTrace();
         }
     }
+
     private void setEventHandlers() {
         fab_add_customer.setOnClickListener(new View.OnClickListener() {
 
-          public void onClick(View view) {
-               startActivity(new Intent(context, AddCustomer_Activity.class));
-           }
-      });
+            public void onClick(View view) {
+                startActivity(new Intent(context, AddCustomer_Activity.class));
+            }
+        });
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -119,17 +119,17 @@ public class Self_Fragment extends Fragment {
             public boolean onQueryTextSubmit(String query) {
                 searchView.clearFocus();
                 ArrayList<CustomerPojo> customerSearchedList = new ArrayList<>();
-                for (CustomerPojo customer :  customerPojos) {
-                    String contactToBeSearched = customer.getVehicle_owner().toLowerCase()+ customer.getVehicle_no().toLowerCase();
+                for (CustomerPojo customer : customerPojos) {
+                    String contactToBeSearched = customer.getVehicle_owner().toLowerCase() + customer.getVehicle_no().toLowerCase();
                     if (contactToBeSearched.contains(query.toLowerCase())) {
                         customerSearchedList.add(customer);
                     }
                 }
 
                 if (customerSearchedList.size() == 0) {
-                    customer_list.setAdapter(new CustomerAdapter(context, customerSearchedList,user_id));
+                    customer_list.setAdapter(new CustomerAdapter(context, customerSearchedList, user_id));
                 } else {
-                    customer_list.setAdapter(new CustomerAdapter(context, customerSearchedList,user_id));
+                    customer_list.setAdapter(new CustomerAdapter(context, customerSearchedList, user_id));
                 }
 
                 return true;
@@ -140,22 +140,22 @@ public class Self_Fragment extends Fragment {
                 if (!newText.equals("")) {
                     ArrayList<CustomerPojo> customerSearchedList = new ArrayList<>();
                     for (CustomerPojo customer : customerPojos) {
-                        String contactToBeSearched = customer.getVehicle_owner().toLowerCase()+customer.getVehicle_no().toLowerCase();
+                        String contactToBeSearched = customer.getVehicle_owner().toLowerCase() + customer.getVehicle_no().toLowerCase();
                         if (contactToBeSearched.contains(newText.toLowerCase())) {
                             customerSearchedList.add(customer);
                         }
                     }
                     if (customerSearchedList.size() == 0) {
-                        customer_list.setAdapter(new CustomerAdapter(context,customerSearchedList,user_id));
+                        customer_list.setAdapter(new CustomerAdapter(context, customerSearchedList, user_id));
                         //   searchView.setQuery("", false);
                         //   bindRecyclerview(contactList);
                     } else {
                         //bindRecyclerview(contactsSearchedList);
-                        customer_list.setAdapter(new CustomerAdapter(context,customerSearchedList,user_id));
+                        customer_list.setAdapter(new CustomerAdapter(context, customerSearchedList, user_id));
                     }
                     return true;
                 } else if (newText.equals("")) {
-                    customer_list.setAdapter(new CustomerAdapter(context,customerPojos,user_id));
+                    customer_list.setAdapter(new CustomerAdapter(context, customerPojos, user_id));
                     //bindRecyclerview(contactList);
                 }
                 return true;
@@ -202,7 +202,7 @@ public class Self_Fragment extends Fragment {
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
                     customerPojos = new ArrayList<CustomerPojo>();
-                    customer_list.setAdapter(new CustomerAdapter(context, customerPojos,user_id));
+                    customer_list.setAdapter(new CustomerAdapter(context, customerPojos, user_id));
                     if (type.equalsIgnoreCase("success")) {
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
@@ -262,7 +262,6 @@ public class Self_Fragment extends Fragment {
                                 customerMainObj.setService_date(serviceDatesListPojos);
 
 
-
                                 ArrayList<CustomerPojo.OtherDatesListPojo> otherDatesListPojos = new ArrayList<>();
 
                                 for (int j = 0; j < jsonObj.getJSONArray("other_customer_dates").length(); j++) {
@@ -273,7 +272,6 @@ public class Self_Fragment extends Fragment {
                                     otherDatesListPojos.add(otherdateobj);
                                 }
                                 customerMainObj.setOther_date(otherDatesListPojos);
-
 
 
                                 ArrayList<CustomerPojo.DocumentListPojo> documentsList = new ArrayList<>();
@@ -295,7 +293,7 @@ public class Self_Fragment extends Fragment {
                                 customer_list.setVisibility(View.VISIBLE);
                                 ll_nothingtoshow.setVisibility(View.GONE);
                             }
-                            customer_list.setAdapter(new CustomerAdapter(context, customerPojos,user_id));
+                            customer_list.setAdapter(new CustomerAdapter(context, customerPojos, user_id));
 
                         }
                     } else if (type.equalsIgnoreCase("failure")) {

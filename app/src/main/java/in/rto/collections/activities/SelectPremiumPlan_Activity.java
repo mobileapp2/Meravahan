@@ -5,10 +5,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -49,11 +48,12 @@ public class SelectPremiumPlan_Activity extends Activity {
     private LinearLayoutManager layoutManager;
     private LinearLayout ll_nothingtoshow;
     private UserSessionManager session;
-    private String user_id,role_id;
+    private String user_id, role_id;
     private ProgressDialog pd;
     private static int lastSelectedPosition = -1;
     private ArrayList<PremiumPlanModel> plansList;
     Integer randomNum;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +64,7 @@ public class SelectPremiumPlan_Activity extends Activity {
         setEventHandlers();
         setUpToolbar();
     }
+
     private void init() {
         context = SelectPremiumPlan_Activity.this;
         session = new UserSessionManager(context);
@@ -196,12 +197,12 @@ public class SelectPremiumPlan_Activity extends Activity {
                             fab_next.setVisibility(View.VISIBLE);
                             rv_planlist.setAdapter(new PremiumPlansListAdapter(context, plansList));
 
-                        }else{
+                        } else {
                             ll_nothingtoshow.setVisibility(View.VISIBLE);
                             rv_planlist.setVisibility(View.GONE);
                             fab_next.setVisibility(View.GONE);
                         }
-                    }else{
+                    } else {
                         ll_nothingtoshow.setVisibility(View.VISIBLE);
                         rv_planlist.setVisibility(View.GONE);
                         fab_next.setVisibility(View.GONE);

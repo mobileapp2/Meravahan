@@ -243,6 +243,7 @@
                             android:textSize="14sp" />
 
                     </android.support.design.widget.TextInputLayout>
+
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -276,7 +277,7 @@
                             android:layout_height="wrap_content"
                             android:clickable="false"
                             android:digits=" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                           android:gravity="center_vertical"
+                            android:gravity="center_vertical"
                             android:hint="Remark"
                             android:inputType="textCapWords|textNoSuggestions"
                             android:padding="10dp"

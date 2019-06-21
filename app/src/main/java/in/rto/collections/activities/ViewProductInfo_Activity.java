@@ -16,17 +16,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -37,7 +34,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.rto.collections.R;
-import in.rto.collections.adapters.getClientCodeLIstAdapter;
 import in.rto.collections.models.ClientCodePojo;
 import in.rto.collections.models.ClientMainListPojo;
 import in.rto.collections.models.ProductInfoListPojo;
@@ -59,11 +55,12 @@ public class ViewProductInfo_Activity extends Activity {
     private String user_id, document_url, document_name;
     private ArrayList<ClientMainListPojo> clientList;
     private ArrayList<ClientCodePojo> codeList;
-    private LinearLayout clientnane,clientcode;
+    private LinearLayout clientnane, clientcode;
 
     private RecyclerView lv_checkboxlist;
-    private CheckBox cb_selectallclient,cb_notification,cb_whtasapp,cb_sms;
-    private  String notification="0",whatssapp="0",sms="0";
+    private CheckBox cb_selectallclient, cb_notification, cb_whtasapp, cb_sms;
+    private String notification = "0", whatssapp = "0", sms = "0";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -588,10 +585,10 @@ public class ViewProductInfo_Activity extends Activity {
         cb_notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(cb_notification.isChecked()){
+                if (cb_notification.isChecked()) {
                     cb_notification.setChecked(true);
                     notification = "1";
-                }else{
+                } else {
                     cb_notification.setChecked(false);
                     notification = "0";
                 }
@@ -600,10 +597,10 @@ public class ViewProductInfo_Activity extends Activity {
         cb_whtasapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(cb_whtasapp.isChecked()){
+                if (cb_whtasapp.isChecked()) {
                     cb_whtasapp.setChecked(true);
                     whatssapp = "1";
-                }else{
+                } else {
                     cb_whtasapp.setChecked(false);
                     whatssapp = "0";
                 }
@@ -612,10 +609,10 @@ public class ViewProductInfo_Activity extends Activity {
         cb_sms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(cb_sms.isChecked()){
+                if (cb_sms.isChecked()) {
                     cb_sms.setChecked(true);
                     sms = "1";
-                }else{
+                } else {
                     cb_sms.setChecked(false);
                     sms = "0";
                 }
@@ -644,7 +641,7 @@ public class ViewProductInfo_Activity extends Activity {
                         clientIdJSONArray.add(childObj);
                     }
                     if (Utilities.isInternetAvailable(context)) {
-                        if(whatssapp.equals("1")) {
+                        if (whatssapp.equals("1")) {
                             JsonObject mainObj = new JsonObject();
                             mainObj.addProperty("type", "shareProduct");
                             mainObj.add("client-id", clientIdJSONArray);
@@ -652,7 +649,7 @@ public class ViewProductInfo_Activity extends Activity {
                             mainObj.addProperty("user_id", user_id);
                             new ShareProductDetails().execute(mainObj.toString());
                         }
-                        if(sms.equals("1")) {
+                        if (sms.equals("1")) {
                             JsonObject mainObj = new JsonObject();
                             mainObj.addProperty("type", "smsProduct");
                             mainObj.add("client-id", clientIdJSONArray);
@@ -660,7 +657,7 @@ public class ViewProductInfo_Activity extends Activity {
                             mainObj.addProperty("user_id", user_id);
                             new ShareProductDetails().execute(mainObj.toString());
                         }
-                        if(notification.equals("1")){
+                        if (notification.equals("1")) {
                             JsonObject mainObj = new JsonObject();
                             mainObj.addProperty("type", "NotificationProduct");
                             mainObj.add("client-id", clientIdJSONArray);
@@ -728,10 +725,10 @@ public class ViewProductInfo_Activity extends Activity {
         cb_notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(cb_notification.isChecked()){
+                if (cb_notification.isChecked()) {
                     cb_notification.setChecked(true);
                     notification = "1";
-                }else{
+                } else {
                     cb_notification.setChecked(false);
                     notification = "0";
                 }
@@ -740,10 +737,10 @@ public class ViewProductInfo_Activity extends Activity {
         cb_whtasapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(cb_whtasapp.isChecked()){
+                if (cb_whtasapp.isChecked()) {
                     cb_whtasapp.setChecked(true);
                     whatssapp = "1";
-                }else{
+                } else {
                     cb_whtasapp.setChecked(false);
                     whatssapp = "0";
                 }
@@ -752,10 +749,10 @@ public class ViewProductInfo_Activity extends Activity {
         cb_sms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(cb_sms.isChecked()){
+                if (cb_sms.isChecked()) {
                     cb_sms.setChecked(true);
                     sms = "1";
-                }else{
+                } else {
                     cb_sms.setChecked(false);
                     sms = "0";
                 }
@@ -789,7 +786,7 @@ public class ViewProductInfo_Activity extends Activity {
 
 
                     if (Utilities.isInternetAvailable(context)) {
-                        if(whatssapp.equals("1")) {
+                        if (whatssapp.equals("1")) {
                             JsonObject mainObj = new JsonObject();
                             mainObj.addProperty("type", "shareProductCode");
                             mainObj.add("code-id", clientIdJSONArray);
@@ -797,7 +794,7 @@ public class ViewProductInfo_Activity extends Activity {
                             mainObj.addProperty("user_id", user_id);
                             new ShareProductDetails().execute(mainObj.toString());
                         }
-                        if(sms.equals("1")) {
+                        if (sms.equals("1")) {
                             JsonObject mainObj = new JsonObject();
                             mainObj.addProperty("type", "smsProductCode");
                             mainObj.add("code-id", clientIdJSONArray);
@@ -805,7 +802,7 @@ public class ViewProductInfo_Activity extends Activity {
                             mainObj.addProperty("user_id", user_id);
                             new ShareProductDetails().execute(mainObj.toString());
                         }
-                        if(notification.equals("1")){
+                        if (notification.equals("1")) {
                             JsonObject mainObj = new JsonObject();
                             mainObj.addProperty("type", "NotificationProductCode");
                             mainObj.add("code-id", clientIdJSONArray);
@@ -904,6 +901,7 @@ public class ViewProductInfo_Activity extends Activity {
             return true;
         }
     }
+
     public class CodeListAdapter extends RecyclerView.Adapter<CodeListAdapter.MyViewHolder> {
 
         @Override

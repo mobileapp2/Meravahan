@@ -5,10 +5,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -49,6 +49,7 @@ public class VehicleDealer_Activity extends Activity {
     private FloatingActionButton fab_add_vehicledealer;
     private UserSessionManager session;
     private String user_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +72,7 @@ public class VehicleDealer_Activity extends Activity {
         layoutManager = new LinearLayoutManager(context);
         vehicledealerdetails.setLayoutManager(layoutManager);
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -81,6 +83,7 @@ public class VehicleDealer_Activity extends Activity {
             e.printStackTrace();
         }
     }
+
     private void setDefault() {
         if (Utilities.isNetworkAvailable(context)) {
             new VehicleDealer_Activity.GetVehicleDealerList().execute(user_id);
@@ -91,6 +94,7 @@ public class VehicleDealer_Activity extends Activity {
             vehicledealerdetails.setVisibility(View.GONE);
         }
     }
+
     private void setEventHandlers() {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -116,14 +120,14 @@ public class VehicleDealer_Activity extends Activity {
                 edt_alias.setHint("Email");
                 final EditText edt_mobile = new EditText(context);
                 edt_mobile.setHint("Mobile*");
-                edt_mobile.setInputType(InputType.TYPE_CLASS_NUMBER );
-                edt_mobile.setInputType(InputType.TYPE_CLASS_NUMBER );
+                edt_mobile.setInputType(InputType.TYPE_CLASS_NUMBER);
+                edt_mobile.setInputType(InputType.TYPE_CLASS_NUMBER);
                 InputFilter[] filterArray = new InputFilter[1];
                 filterArray[0] = new InputFilter.LengthFilter(10);
                 edt_mobile.setFilters(filterArray);
                 final EditText edt_landlineno = new EditText(context);
                 edt_landlineno.setHint("Landline No");
-                edt_landlineno.setInputType(InputType.TYPE_CLASS_NUMBER );
+                edt_landlineno.setInputType(InputType.TYPE_CLASS_NUMBER);
 
                 float dpi = context.getResources().getDisplayMetrics().density;
                 AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
@@ -141,7 +145,7 @@ public class VehicleDealer_Activity extends Activity {
                                 Utilities.showSnackBar(ll_parent, "Please Enter Mobile No.");
                                 return;
                             }
-                            new VehicleDealer_Activity.AddVehicleDealer().execute(edt_name.getText().toString().trim(), edt_alias.getText().toString().trim(),user_id,edt_mobile.getText().toString().trim(),edt_landlineno.getText().toString().trim());
+                            new VehicleDealer_Activity.AddVehicleDealer().execute(edt_name.getText().toString().trim(), edt_alias.getText().toString().trim(), user_id, edt_mobile.getText().toString().trim(), edt_landlineno.getText().toString().trim());
                         } else {
                             Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                         }
@@ -156,7 +160,7 @@ public class VehicleDealer_Activity extends Activity {
 
 
                 final AlertDialog alertD = builder.create();
-                LinearLayout ll=new LinearLayout(context);
+                LinearLayout ll = new LinearLayout(context);
                 ll.setOrientation(LinearLayout.VERTICAL);
                 ll.addView(edt_name);
                 ll.addView(edt_alias);
@@ -197,7 +201,7 @@ public class VehicleDealer_Activity extends Activity {
 
     }
 
-    private class AddVehicleDealer extends AsyncTask<String , Void , String> {
+    private class AddVehicleDealer extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 
         @Override
@@ -208,12 +212,13 @@ public class VehicleDealer_Activity extends Activity {
             pd.setCancelable(false);
             pd.show();
         }
+
         @Override
         protected String doInBackground(String... params) {
             String res = "[]";
             JsonObject obj = new JsonObject();
             obj.addProperty("type", "addVehicleDealer");
-                obj.addProperty("name", params[0]);
+            obj.addProperty("name", params[0]);
             obj.addProperty("alias", params[1]);
             obj.addProperty("user_id", params[2]);
             obj.addProperty("mobile", params[3]);
@@ -253,7 +258,7 @@ public class VehicleDealer_Activity extends Activity {
         }
     }
 
-    public static class GetVehicleDealerList extends AsyncTask<String , Void , String> {
+    public static class GetVehicleDealerList extends AsyncTask<String, Void, String> {
         private ArrayList<VehicleDealerPojo> vehicledealerlist;
 
         @Override
@@ -265,6 +270,7 @@ public class VehicleDealer_Activity extends Activity {
 //            shimmer_view_container.setVisibility(View.VISIBLE);
 //            shimmer_view_container.startShimmer();
         }
+
         @Override
         protected String doInBackground(String... params) {
             String res = "[]";
@@ -274,6 +280,7 @@ public class VehicleDealer_Activity extends Activity {
             res = WebServiceCalls.FORMDATAAPICall(ApplicationConstants.MASTERAPI, param);
             return res.trim();
         }
+
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
@@ -337,7 +344,6 @@ public class VehicleDealer_Activity extends Activity {
             }
         });
     }
-
 
 
 }

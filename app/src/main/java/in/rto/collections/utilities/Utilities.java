@@ -110,6 +110,7 @@ public class Utilities {
     public static void showMessageString(Context context, String msg) {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
+
     @SuppressWarnings("deprecation")
     public static void showAlertDialog(Context context, String title,
                                        String message, Boolean status) {
@@ -178,9 +179,10 @@ public class Utilities {
         return android.text.Html.fromHtml(html).toString().trim();
 
     }
-    public static void buildDialogForSmsValidation(Context context,int total){
+
+    public static void buildDialogForSmsValidation(Context context, int total) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage("You can not send  "+total+" message(s) as it exceeds your allowed limit. To increase limit, buy a plan .");
+        builder.setMessage("You can not send  " + total + " message(s) as it exceeds your allowed limit. To increase limit, buy a plan .");
         builder.setIcon(R.drawable.ic_alert_red_24dp);
         builder.setTitle("Failure");
         builder.setCancelable(false);

@@ -6,10 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -31,10 +30,8 @@ import java.util.List;
 
 import in.rto.collections.R;
 import in.rto.collections.models.ClientMainListPojo;
-import in.rto.collections.models.CustomerPojo;
 import in.rto.collections.models.LinkPojo;
 import in.rto.collections.models.RTOAgentListPojo;
-import in.rto.collections.models.RTOAgentPojo;
 import in.rto.collections.models.StatePojo;
 import in.rto.collections.models.TypePojo;
 import in.rto.collections.models.VehicleDealerPojo;
@@ -48,20 +45,20 @@ public class LInkRTODealer_Activity extends Activity {
     private ScrollView scrollView;
     private LinearLayout ll_parent;
     private static final int CAMERA_REQUEST = 100;
-    private LinearLayout ll_servicedates, ll_documents,ll_Otherdates;
-    private ImageView btn_addservicedates, btn_adddocuments,btn_addotherdates;
+    private LinearLayout ll_servicedates, ll_documents, ll_Otherdates;
+    private ImageView btn_addservicedates, btn_adddocuments, btn_addotherdates;
     private static final int GALLERY_REQUEST = 200;
     private TextView edt_state, edt_vehicleno, edt_clientname, edt_vehicleownername, edt_vehicledealer,
             edt_description, edt_type, edt_engineno, edt_chassisno, edt_insurancepolicyno, edt_renewaldate,
-            edt_taxvalidupto, edt_permitvalidupto, edt_remark,edt_satepermitvalidupto,nationalpermitvalidupto,
-            pucrenewaldate,fitnessvalidupto,edt_selectVehicleImage;
-    private CheckBox chkname, chkvehicleno, chkvehicleownername, chkrtoname,chkdescription,
+            edt_taxvalidupto, edt_permitvalidupto, edt_remark, edt_satepermitvalidupto, nationalpermitvalidupto,
+            pucrenewaldate, fitnessvalidupto, edt_selectVehicleImage;
+    private CheckBox chkname, chkvehicleno, chkvehicleownername, chkrtoname, chkdescription,
             chktype, chkengineno, chkchassisno, chkpolicyno, chkrenewaldate, chkroadtax,
-            chkpurchase,chktemreg,chkhypothecated,chkremark,chkservice,chkother,chkdocument,chkvehicleimage;
-    private CardView statecard, vehiclenocard, ownernamecard, rtonamecard, vehicledealercard,descriptioncard,
+            chkpurchase, chktemreg, chkhypothecated, chkremark, chkservice, chkother, chkdocument, chkvehicleimage;
+    private CardView statecard, vehiclenocard, ownernamecard, rtonamecard, vehicledealercard, descriptioncard,
             typecard, enginenocard, chassisnocard, policynocard, renewaldatecard, roadtaxcard,
-            permitcard, statepermitcard, nationalpermitcard,puccard,fitnesscard,purchasecard,temregcard,hypothecatedcard,remarkcard,servicecard,
-            othercard,documentcard,vehicleimagecard;
+            permitcard, statepermitcard, nationalpermitcard, puccard, fitnesscard, purchasecard, temregcard, hypothecatedcard, remarkcard, servicecard,
+            othercard, documentcard, vehicleimagecard;
     private int mYear, mMonth, mDay;
     private int mYear1, mMonth1, mDay1;
     private int mYear2, mMonth2, mDay2;
@@ -72,7 +69,7 @@ public class LInkRTODealer_Activity extends Activity {
     private int mYear7, mMonth7, mDay7;
 
 
-    private EditText edt_selectdocuments = null,edt_name = null;
+    private EditText edt_selectdocuments = null, edt_name = null;
     private ImageView img_save;
     private ArrayList<ClientMainListPojo> clientList;
     private List<LinearLayout> documentsLayoutsList;
@@ -82,14 +79,15 @@ public class LInkRTODealer_Activity extends Activity {
     private ArrayList<StatePojo> statelist;
     private UserSessionManager session;
     private String companyAliasName = "";
-    private String user_id, stateId, clientId, typeId,dealerId,otherId,documentId,id,createdId="0";
+    private String user_id, stateId, clientId, typeId, dealerId, otherId, documentId, id, createdId = "0";
     private String[] PERMISSIONS = {android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
     private Uri photoURI;
     private File photoFile, rtoagentPicFolder;
     private RTOAgentListPojo rtoAgentListPojo;
-    private String isshowtocustomer , isshowtorto;
-    private static  ArrayList<LinkPojo> linkPojos;
+    private String isshowtocustomer, isshowtorto;
+    private static ArrayList<LinkPojo> linkPojos;
     private LinkPojo linkMainObj;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,7 +118,7 @@ public class LInkRTODealer_Activity extends Activity {
         edt_selectVehicleImage = findViewById(R.id.edt_selectvehicle);
         ll_Otherdates = findViewById(R.id.ll_otherdates);
         ll_documents = findViewById(R.id.ll_documents);
-        img_save =findViewById(R.id.img_save);
+        img_save = findViewById(R.id.img_save);
         chkname = findViewById(R.id.chkstate);
         chkchassisno = findViewById(R.id.chkchassisno);
         chkdescription = findViewById(R.id.chkdescription);
@@ -169,7 +167,7 @@ public class LInkRTODealer_Activity extends Activity {
         btn_addotherdates = findViewById(R.id.btn_addotherdates);
         btn_adddocuments = findViewById(R.id.btn_adddocuments);
         vehicleimagecard = findViewById(R.id.vehicleimagecard);
-        rtoagentPicFolder = new File(Environment.getExternalStorageDirectory() +  "/RTO/" + "RTODaler");
+        rtoagentPicFolder = new File(Environment.getExternalStorageDirectory() + "/RTO/" + "RTODaler");
         if (!rtoagentPicFolder.exists())
             rtoagentPicFolder.mkdirs();
 
@@ -185,6 +183,7 @@ public class LInkRTODealer_Activity extends Activity {
     protected void onPause() {
         super.onPause();
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -236,7 +235,7 @@ public class LInkRTODealer_Activity extends Activity {
         statelist = new ArrayList<>();
         otherLayoutsList = new ArrayList<>();
         documentsLayoutsList = new ArrayList<>();
-        rtoAgentListPojo  = (RTOAgentListPojo) getIntent().getSerializableExtra("rtoDetails");
+        rtoAgentListPojo = (RTOAgentListPojo) getIntent().getSerializableExtra("rtoDetails");
         id = rtoAgentListPojo.getId();
         stateId = rtoAgentListPojo.getStateId();
         typeId = rtoAgentListPojo.getType_id();
@@ -247,7 +246,7 @@ public class LInkRTODealer_Activity extends Activity {
         edt_state.setText(rtoAgentListPojo.getStateName());
         edt_description.setText(rtoAgentListPojo.getDescription());
         edt_renewaldate.setText(changeDateFormat("yyyy-MM-dd",
-                "dd/MM/yyyy",rtoAgentListPojo.getInsurance_renewal_date()));
+                "dd/MM/yyyy", rtoAgentListPojo.getInsurance_renewal_date()));
 
         edt_engineno.setText(rtoAgentListPojo.getEngine_no());
         edt_insurancepolicyno.setText(rtoAgentListPojo.getInsurance_policy_no());
@@ -300,14 +299,14 @@ public class LInkRTODealer_Activity extends Activity {
     }
 
 
-    public void setEventHandler(){
+    public void setEventHandler() {
         chassisnocard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(chkchassisno.isChecked()) {
+                if (chkchassisno.isChecked()) {
                     chkchassisno.setChecked(false);
                     chassisnocard.setBackgroundColor(getResources().getColor(android.R.color.white));
-                }else{
+                } else {
                     chkchassisno.setChecked(true);
                     chassisnocard.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
                 }
@@ -316,10 +315,10 @@ public class LInkRTODealer_Activity extends Activity {
         statecard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(chkname.isChecked()) {
+                if (chkname.isChecked()) {
                     chkname.setChecked(false);
                     statecard.setBackgroundColor(getResources().getColor(android.R.color.white));
-                }else{
+                } else {
                     chkname.setChecked(true);
                     statecard.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
                 }
@@ -328,10 +327,10 @@ public class LInkRTODealer_Activity extends Activity {
         vehiclenocard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(chkvehicleno.isChecked()) {
+                if (chkvehicleno.isChecked()) {
                     chkvehicleno.setChecked(false);
                     vehiclenocard.setBackgroundColor(getResources().getColor(android.R.color.white));
-                }else{
+                } else {
                     chkvehicleno.setChecked(true);
                     vehiclenocard.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
                 }
@@ -340,10 +339,10 @@ public class LInkRTODealer_Activity extends Activity {
         ownernamecard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(chkvehicleownername.isChecked()) {
+                if (chkvehicleownername.isChecked()) {
                     chkvehicleownername.setChecked(false);
                     ownernamecard.setBackgroundColor(getResources().getColor(android.R.color.white));
-                }else{
+                } else {
                     chkvehicleownername.setChecked(true);
                     ownernamecard.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
                 }
@@ -352,10 +351,10 @@ public class LInkRTODealer_Activity extends Activity {
         rtonamecard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(chkrtoname.isChecked()) {
+                if (chkrtoname.isChecked()) {
                     chkrtoname.setChecked(false);
                     rtonamecard.setBackgroundColor(getResources().getColor(android.R.color.white));
-                }else{
+                } else {
                     chkrtoname.setChecked(true);
                     rtonamecard.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
                 }
@@ -365,10 +364,10 @@ public class LInkRTODealer_Activity extends Activity {
         descriptioncard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(chkdescription.isChecked()) {
+                if (chkdescription.isChecked()) {
                     chkdescription.setChecked(false);
                     descriptioncard.setBackgroundColor(getResources().getColor(android.R.color.white));
-                }else{
+                } else {
                     chkdescription.setChecked(true);
                     descriptioncard.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
                 }
@@ -377,10 +376,10 @@ public class LInkRTODealer_Activity extends Activity {
         typecard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(chktype.isChecked()) {
+                if (chktype.isChecked()) {
                     chktype.setChecked(false);
                     typecard.setBackgroundColor(getResources().getColor(android.R.color.white));
-                }else{
+                } else {
                     chktype.setChecked(true);
                     typecard.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
                 }
@@ -389,10 +388,10 @@ public class LInkRTODealer_Activity extends Activity {
         enginenocard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(chkengineno.isChecked()) {
+                if (chkengineno.isChecked()) {
                     chkengineno.setChecked(false);
                     enginenocard.setBackgroundColor(getResources().getColor(android.R.color.white));
-                }else{
+                } else {
                     chkengineno.setChecked(true);
                     enginenocard.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
                 }
@@ -401,10 +400,10 @@ public class LInkRTODealer_Activity extends Activity {
         chassisnocard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(chkchassisno.isChecked()) {
+                if (chkchassisno.isChecked()) {
                     chkchassisno.setChecked(false);
                     chassisnocard.setBackgroundColor(getResources().getColor(android.R.color.white));
-                }else{
+                } else {
                     chkchassisno.setChecked(true);
                     chassisnocard.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
                 }
@@ -413,10 +412,10 @@ public class LInkRTODealer_Activity extends Activity {
         policynocard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(chkpolicyno.isChecked()) {
+                if (chkpolicyno.isChecked()) {
                     chkpolicyno.setChecked(false);
                     policynocard.setBackgroundColor(getResources().getColor(android.R.color.white));
-                }else{
+                } else {
                     chkpolicyno.setChecked(true);
                     policynocard.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
                 }
@@ -425,10 +424,10 @@ public class LInkRTODealer_Activity extends Activity {
         renewaldatecard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(chkrenewaldate.isChecked()) {
+                if (chkrenewaldate.isChecked()) {
                     chkrenewaldate.setChecked(false);
                     renewaldatecard.setBackgroundColor(getResources().getColor(android.R.color.white));
-                }else{
+                } else {
                     chkrenewaldate.setChecked(true);
                     renewaldatecard.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
                 }
@@ -439,10 +438,10 @@ public class LInkRTODealer_Activity extends Activity {
         hypothecatedcard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(chkhypothecated.isChecked()) {
+                if (chkhypothecated.isChecked()) {
                     chkhypothecated.setChecked(false);
                     hypothecatedcard.setBackgroundColor(getResources().getColor(android.R.color.white));
-                }else{
+                } else {
                     chkhypothecated.setChecked(true);
                     hypothecatedcard.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
                 }
@@ -451,10 +450,10 @@ public class LInkRTODealer_Activity extends Activity {
         temregcard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(chktemreg.isChecked()) {
+                if (chktemreg.isChecked()) {
                     chktemreg.setChecked(false);
                     temregcard.setBackgroundColor(getResources().getColor(android.R.color.white));
-                }else{
+                } else {
                     chktemreg.setChecked(true);
                     temregcard.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
                 }
@@ -463,10 +462,10 @@ public class LInkRTODealer_Activity extends Activity {
         remarkcard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(chkremark.isChecked()) {
+                if (chkremark.isChecked()) {
                     chkremark.setChecked(false);
                     remarkcard.setBackgroundColor(getResources().getColor(android.R.color.white));
-                }else{
+                } else {
                     chkremark.setChecked(true);
                     remarkcard.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
                 }
@@ -476,10 +475,10 @@ public class LInkRTODealer_Activity extends Activity {
         othercard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(chkother.isChecked()) {
+                if (chkother.isChecked()) {
                     chkother.setChecked(false);
                     othercard.setBackgroundColor(getResources().getColor(android.R.color.white));
-                }else{
+                } else {
                     chkother.setChecked(true);
                     othercard.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
                 }
@@ -488,10 +487,10 @@ public class LInkRTODealer_Activity extends Activity {
         documentcard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(chkdocument.isChecked()) {
+                if (chkdocument.isChecked()) {
                     chkdocument.setChecked(false);
                     documentcard.setBackgroundColor(getResources().getColor(android.R.color.white));
-                }else{
+                } else {
                     chkdocument.setChecked(true);
                     documentcard.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
                 }
@@ -500,10 +499,10 @@ public class LInkRTODealer_Activity extends Activity {
         vehicleimagecard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(chkvehicleimage.isChecked()) {
+                if (chkvehicleimage.isChecked()) {
                     chkvehicleimage.setChecked(false);
                     vehicleimagecard.setBackgroundColor(getResources().getColor(android.R.color.white));
-                }else{
+                } else {
                     chkvehicleimage.setChecked(true);
                     vehicleimagecard.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
                 }
@@ -517,54 +516,54 @@ public class LInkRTODealer_Activity extends Activity {
                 linkMainObj.setDealerId(id);
                 linkMainObj.setCreated_by(createdId);
 
-                if(chkchassisno.isChecked()) {
+                if (chkchassisno.isChecked()) {
                     linkMainObj.setChassis_no(rtoAgentListPojo.getChassis_no());
                 }
 
-                if(chkvehicleimage.isChecked()) {
+                if (chkvehicleimage.isChecked()) {
                     linkMainObj.setVehicle_image(rtoAgentListPojo.getVehicle_image());
                     linkMainObj.setVehicle_image_url(rtoAgentListPojo.getVehicle_image_url());
                 }
-                if(chkvehicleownername.isChecked()){
+                if (chkvehicleownername.isChecked()) {
                     linkMainObj.setVehicle_owner(rtoAgentListPojo.getVehicle_owner());
                 }
-                if(chkvehicleno.isChecked()){
+                if (chkvehicleno.isChecked()) {
                     linkMainObj.setVehicle_no(rtoAgentListPojo.getVehicle_no());
                 }
 
-                if(chktype.isChecked()){
+                if (chktype.isChecked()) {
                     linkMainObj.setType_id(rtoAgentListPojo.getType_id());
                     linkMainObj.setType_name(rtoAgentListPojo.getType_name());
                 }
-                if(chkrenewaldate.isChecked()){
+                if (chkrenewaldate.isChecked()) {
                     linkMainObj.setInsurance_renewal_date(changeDateFormat("yyyy-MM-dd",
-                            "dd/MM/yyyy",rtoAgentListPojo.getInsurance_renewal_date()));
+                            "dd/MM/yyyy", rtoAgentListPojo.getInsurance_renewal_date()));
                 }
-                if(chkremark.isChecked()){
+                if (chkremark.isChecked()) {
                     linkMainObj.setRemark(rtoAgentListPojo.getRemark());
                 }
-                if(chkpolicyno.isChecked()){
+                if (chkpolicyno.isChecked()) {
                     linkMainObj.setInsurance_policy_no(rtoAgentListPojo.getInsurance_policy_no());
                 }
-                if(chkengineno.isChecked()){
+                if (chkengineno.isChecked()) {
                     linkMainObj.setEngine_no(rtoAgentListPojo.getEngine_no());
                 }
-                if(chkdescription.isChecked()){
+                if (chkdescription.isChecked()) {
                     linkMainObj.setDescription(rtoAgentListPojo.getDescription());
                 }
-                if(chkname.isChecked()){
+                if (chkname.isChecked()) {
                     linkMainObj.setState_id(rtoAgentListPojo.getStateId());
                     linkMainObj.setStateName(rtoAgentListPojo.getStateName());
                 }
 
-                if(chkother.isChecked()){
+                if (chkother.isChecked()) {
                     ArrayList<RTOAgentListPojo.OtherDatesListPojo> otherDatesListPojos = new ArrayList<>();
                     otherDatesListPojos = rtoAgentListPojo.getOther_date();
                     ArrayList<LinkPojo.OtherDatesListPojo> otherDatesListPojoArrayList = new ArrayList<>();
                     for (int j = 0; j < otherDatesListPojos.size(); j++) {
                         LinkPojo.OtherDatesListPojo otherdateobj = new LinkPojo.OtherDatesListPojo();
                         otherdateobj.setOther_date(changeDateFormat("yyyy-MM-dd",
-                                "dd/MM/yyyy",otherDatesListPojos.get(j).getOther_date()));
+                                "dd/MM/yyyy", otherDatesListPojos.get(j).getOther_date()));
                         otherdateobj.setText(otherDatesListPojos.get(j).getText());
                         otherdateobj.setOther_date_id(otherDatesListPojos.get(j).getOther_date_id());
                         otherDatesListPojoArrayList.add(otherdateobj);
@@ -572,7 +571,7 @@ public class LInkRTODealer_Activity extends Activity {
                     linkMainObj.setOther_date(otherDatesListPojoArrayList);
                 }
 
-                if(chkdocument.isChecked()){
+                if (chkdocument.isChecked()) {
                     ArrayList<RTOAgentListPojo.DocumentListPojo> documentListPojos = new ArrayList<>();
                     documentListPojos = rtoAgentListPojo.getDocument();
                     ArrayList<LinkPojo.DocumentListPojo> documentsList = new ArrayList<>();
@@ -588,9 +587,9 @@ public class LInkRTODealer_Activity extends Activity {
 
                 }
 
-    Intent intent = new Intent(context, LinkToRTO_Activity.class);
-    intent.putExtra("vehicleDetails", linkMainObj);
-    context.startActivity(intent);
+                Intent intent = new Intent(context, LinkToRTO_Activity.class);
+                intent.putExtra("vehicleDetails", linkMainObj);
+                context.startActivity(intent);
 
 
             }
@@ -598,7 +597,7 @@ public class LInkRTODealer_Activity extends Activity {
 
     }
 
-    public  void  setUpToolbar() {
+    public void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle("Linking");
         mToolbar.setNavigationIcon(R.drawable.icon_backarrow_16p);

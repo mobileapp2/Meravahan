@@ -7,13 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
-import in.rto.collections.R;
-import in.rto.collections.models.EventListPojo;
-import in.rto.collections.models.RTOAgentListPojo;
-
 
 import java.util.HashMap;
 import java.util.List;
+
+import in.rto.collections.R;
+import in.rto.collections.models.EventListPojo;
 
 public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
 
@@ -47,7 +46,7 @@ public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
 
-       // final String childText = (String) getChild(groupPosition, childPosition);
+        // final String childText = (String) getChild(groupPosition, childPosition);
 
         EventListPojo ch = (EventListPojo) getChild(groupPosition, childPosition);
         if (convertView == null) {
@@ -65,7 +64,7 @@ public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
 
         textViewChild.setText(ch.getClient_name());
         textViewChild2.setText(ch.getVehicle_no());
-        textViewChild1.setText("Reminder For - "+ch.getDescription());
+        textViewChild1.setText("Reminder For - " + ch.getDescription());
         return convertView;
     }
 

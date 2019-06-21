@@ -8,11 +8,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -41,7 +40,6 @@ import java.util.List;
 import in.rto.collections.R;
 import in.rto.collections.fragments.Fragment_Other_Vehicle_Details;
 import in.rto.collections.models.ClientMainListPojo;
-import in.rto.collections.models.RTOAgentPojo;
 import in.rto.collections.models.StatePojo;
 import in.rto.collections.models.TypePojo;
 import in.rto.collections.models.VehicleDealerListPojo;
@@ -57,11 +55,11 @@ public class ShowOtherVehicleDetails_Activity extends Activity {
     private Context context;
     private ScrollView scrollView;
     private LinearLayout ll_parent;
-    private LinearLayout ll_servicedates, ll_documents,ll_Otherdates,ll_wheeldates;
-    private ImageView btn_addservicedates, btn_adddocuments,btn_addotherdates,btn_addwheeldates;
+    private LinearLayout ll_servicedates, ll_documents, ll_Otherdates, ll_wheeldates;
+    private ImageView btn_addservicedates, btn_adddocuments, btn_addotherdates, btn_addwheeldates;
     private EditText edt_state, edt_vehicleno, edt_clientname, edt_vehicleownername,
             edt_description, edt_type,
-              edt_remark;
+            edt_remark;
     private ImageView img_save;
     private List<LinearLayout> serviceDatesLayoutsList;
     private ArrayList<ClientMainListPojo> clientList;
@@ -71,7 +69,7 @@ public class ShowOtherVehicleDetails_Activity extends Activity {
     private ArrayList<TypePojo> typelist;
     private ArrayList<StatePojo> statelist;
     private UserSessionManager session;
-    private String user_id,callType,role;
+    private String user_id, callType, role;
     private Uri photoURI;
     private File file, vehicledealerPicFolder;
     private VehicleDealerListPojo vehicaldealerdetails;
@@ -89,6 +87,7 @@ public class ShowOtherVehicleDetails_Activity extends Activity {
         setDefaults();
         setEventHandler();
     }
+
     private void init() {
         context = ShowOtherVehicleDetails_Activity.this;
         session = new UserSessionManager(context);
@@ -123,6 +122,7 @@ public class ShowOtherVehicleDetails_Activity extends Activity {
         }
 
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -134,8 +134,9 @@ public class ShowOtherVehicleDetails_Activity extends Activity {
             e.printStackTrace();
         }
     }
+
     private void setDefaults() {
-        vehicaldealerdetails  = (VehicleDealerListPojo) getIntent().getSerializableExtra("vehicleDetails");
+        vehicaldealerdetails = (VehicleDealerListPojo) getIntent().getSerializableExtra("vehicleDetails");
 
         edt_clientname.setText(vehicaldealerdetails.getClient_name());
         edt_state.setText(vehicaldealerdetails.getStateName());
@@ -147,7 +148,7 @@ public class ShowOtherVehicleDetails_Activity extends Activity {
         edt_vehicleno.setText(vehicaldealerdetails.getVehicle_no());
         if (vehicaldealerdetails.getIsshowto_customer().equals("1")) {
             isshow_to_customer.setChecked(true);
-        } else{
+        } else {
             isshow_to_customer.setChecked(false);
         }
         ArrayList<VehicleDealerListPojo.ServiceDatesListPojo> serviceDatesList = new ArrayList<>();
@@ -210,9 +211,7 @@ public class ShowOtherVehicleDetails_Activity extends Activity {
         }
 
 
-
-
-        ArrayList< VehicleDealerListPojo.DocumentListPojo> documentsList = new ArrayList<>();
+        ArrayList<VehicleDealerListPojo.DocumentListPojo> documentsList = new ArrayList<>();
         documentsList = vehicaldealerdetails.getDocument();
 
         if (documentsList.size() != 0) {
@@ -240,6 +239,7 @@ public class ShowOtherVehicleDetails_Activity extends Activity {
         }
 
     }
+
     public void viewDocument(String url) {
 
         if (Utilities.isInternetAvailable(context)) {
@@ -249,9 +249,11 @@ public class ShowOtherVehicleDetails_Activity extends Activity {
         }
 
     }
+
     private void setEventHandler() {
 
     }
+
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
         mToolbar.inflateMenu(R.menu.list_menu);
@@ -303,6 +305,7 @@ public class ShowOtherVehicleDetails_Activity extends Activity {
             }
         });
     }
+
     public class DownloadDocument extends AsyncTask<String, Integer, Boolean> {
         int lenghtOfFile = -1;
         int count = 0;
@@ -433,6 +436,7 @@ public class ShowOtherVehicleDetails_Activity extends Activity {
             }
         }
     }
+
     public class DeleteOtherVehicleDetails1 extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 

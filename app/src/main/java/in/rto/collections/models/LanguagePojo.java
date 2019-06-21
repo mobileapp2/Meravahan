@@ -5,29 +5,25 @@ public class LanguagePojo {
 
     private String language;
 
-    public String getId ()
-    {
+    public String getId() {
         return id;
     }
 
-    public void setId (String id)
-    {
+    public void setId(String id) {
         this.id = id;
     }
-    public String getLanguage ()
-    {
+
+    public String getLanguage() {
         return language;
     }
 
-    public void setLanguage (String language)
-    {
+    public void setLanguage(String language) {
         this.language = language;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
 
-        return "ClassPojo [id = "+id+", language = "+language+"]";
+        return "ClassPojo [id = " + id + ", language = " + language + "]";
     }
 }

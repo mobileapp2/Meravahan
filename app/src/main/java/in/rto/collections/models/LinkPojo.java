@@ -35,9 +35,9 @@ public class LinkPojo implements Serializable {
     private String vehicle_image_url;
 
     private String hypothecated_to;
-    private  String importV;
-    private  String importR;
-    private  String isimport;
+    private String importV;
+    private String importR;
+    private String isimport;
     private String remark;
     private String description;
     private String updated_by;
@@ -52,10 +52,10 @@ public class LinkPojo implements Serializable {
     private String borrower_name;
     private String loan_amount;
     private String loan_account_number;
-    private String 	installment_amount;
+    private String installment_amount;
     private String date_to_section;
     private String installment_start_date;
-    private String 	installment_end_date;
+    private String installment_end_date;
     private String frequency_id;
     private String frequency;
 
@@ -79,16 +79,23 @@ public class LinkPojo implements Serializable {
     public void setVehicle_image_url(String vehicle_image_url) {
         this.vehicle_image_url = vehicle_image_url;
     }
+
     public String getId() {
         return id;
     }
 
-    public String getDealerId() {return dealerId;}
+    public String getDealerId() {
+        return dealerId;
+    }
+
     public void setDealerId(String dealerId) {
         this.dealerId = dealerId;
     }
 
-    public String getVehiclertoId() {return vehiclertoId;}
+    public String getVehiclertoId() {
+        return vehiclertoId;
+    }
+
     public void setVehiclertoId(String vehiclertoId) {
         this.vehiclertoId = vehiclertoId;
     }
@@ -124,9 +131,18 @@ public class LinkPojo implements Serializable {
     public void setState_id(String state_id) {
         this.state_id = state_id;
     }
-    public  String getStateId(){return state_id;}
-    public  String getStateName(){return state_name;}
-    public void setStateName(String state_name){ this.state_name = state_name; }
+
+    public String getStateId() {
+        return state_id;
+    }
+
+    public String getStateName() {
+        return state_name;
+    }
+
+    public void setStateName(String state_name) {
+        this.state_name = state_name;
+    }
 
     public void type_id(String type_id) {
         this.type_id = type_id;
@@ -155,6 +171,7 @@ public class LinkPojo implements Serializable {
     public void setRto_agent_name(String rto_agent_name) {
         this.rto_agent_name = rto_agent_name;
     }
+
     public String getVehicle_dealer_name() {
         return vehicle_dealer_name;
     }
@@ -194,6 +211,7 @@ public class LinkPojo implements Serializable {
     public void setFittness_valid_upto(String fittness_valid_upto) {
         this.fittness_valid_upto = fittness_valid_upto;
     }
+
     public String getPuc_renewal_date() {
         return puc_renewal_date;
     }
@@ -386,11 +404,17 @@ public class LinkPojo implements Serializable {
         this.bank_id = bank_id;
     }
 
-    public  String getBank_id(){return bank_id;}
+    public String getBank_id() {
+        return bank_id;
+    }
 
-    public  String getBank_name(){return bank_name;}
+    public String getBank_name() {
+        return bank_name;
+    }
 
-    public void setBank_name(String bank_name){ this.bank_name = bank_name; }
+    public void setBank_name(String bank_name) {
+        this.bank_name = bank_name;
+    }
 
     public String getBorrower_name() {
         return borrower_name;
@@ -457,6 +481,7 @@ public class LinkPojo implements Serializable {
     public void setService_date(ArrayList<LinkPojo.ServiceDatesListPojo> service_date) {
         this.service_date = service_date;
     }
+
     public ArrayList<LinkPojo.OtherDatesListPojo> getOther_date() {
         return other_date;
     }
@@ -475,8 +500,8 @@ public class LinkPojo implements Serializable {
 
     public static class ServiceDatesListPojo implements Serializable {
         private String service_date;
-        private  String service_date_id;
-        private  String text;
+        private String service_date_id;
+        private String text;
 
         public String getService_date() {
             return service_date;
@@ -504,12 +529,10 @@ public class LinkPojo implements Serializable {
     }
 
 
-
-
     public static class OtherDatesListPojo implements Serializable {
         private String other_date;
         private String other_date_id;
-        private  String text;
+        private String text;
 
         public String getOther_date() {
             return other_date;
@@ -528,9 +551,6 @@ public class LinkPojo implements Serializable {
         }
 
 
-
-
-
         public String getText() {
             return text;
         }
@@ -541,12 +561,12 @@ public class LinkPojo implements Serializable {
     }
 
 
-
     public static class DocumentListPojo implements Serializable {
         private String document;
         private String document_id;
         private String document_name;
         private String original_name;
+
         public String getDocument() {
             return document;
         }
@@ -554,6 +574,7 @@ public class LinkPojo implements Serializable {
         public void setDocument(String document) {
             this.document = document;
         }
+
         public String getDocument_id() {
             return document_id;
         }
@@ -561,6 +582,7 @@ public class LinkPojo implements Serializable {
         public void setOriginal_name(String original_name) {
             this.original_name = original_name;
         }
+
         public String getOriginal_name() {
             return original_name;
         }
@@ -568,6 +590,7 @@ public class LinkPojo implements Serializable {
         public void setDocument_name(String document_name) {
             this.document_name = document_name;
         }
+
         public String getDocument_name() {
             return document_name;
         }

@@ -8,10 +8,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -55,13 +55,13 @@ public class ViewVehicleDetails_Activity extends Activity {
     private Context context;
     private ScrollView scrollView;
     private LinearLayout ll_parent;
-    private LinearLayout ll_servicedates, ll_documents,ll_Otherdates;
-    private ImageView btn_addservicedates, btn_adddocuments,btn_addotherdates;
+    private LinearLayout ll_servicedates, ll_documents, ll_Otherdates;
+    private ImageView btn_addservicedates, btn_adddocuments, btn_addotherdates;
     private EditText edt_state, edt_vehicleno, edt_clientname, edt_vehicleownername, edt_rtoagent,
             edt_description, edt_type, edt_engineno, edt_chassisno, edt_insurancepolicyno, edt_renewaldate,
-            edt_purcasedate, edt_temregno, edt_remark,edt_hypothecatedto,edt_bank, edt_branch, edt_borrowername,
-    edt_loanamount, edt_accountnumber, edt_sactiondate, edt_installmentanount, edt_startdate,
-    edt_enddate, edt_frequency,edt_selectVehicleImage;
+            edt_purcasedate, edt_temregno, edt_remark, edt_hypothecatedto, edt_bank, edt_branch, edt_borrowername,
+            edt_loanamount, edt_accountnumber, edt_sactiondate, edt_installmentanount, edt_startdate,
+            edt_enddate, edt_frequency, edt_selectVehicleImage;
     private ImageView img_save;
     private List<LinearLayout> serviceDatesLayoutsList;
     private ArrayList<ClientMainListPojo> clientList;
@@ -71,13 +71,14 @@ public class ViewVehicleDetails_Activity extends Activity {
     private ArrayList<TypePojo> typelist;
     private ArrayList<StatePojo> statelist;
     private UserSessionManager session;
-    private String user_id,callType,role;
+    private String user_id, callType, role;
     private Uri photoURI;
     private File file, vehicledealerPicFolder;
     private VehicleDealerListPojo vehicaldealerdetails;
     private ImageView img_delete, img_edit;
-    private CheckBox isshow_to_rto,isshow_to_customer;
-    private LinearLayout bank_details,bank_feild;
+    private CheckBox isshow_to_rto, isshow_to_customer;
+    private LinearLayout bank_details, bank_feild;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +92,7 @@ public class ViewVehicleDetails_Activity extends Activity {
 
 
     }
+
     private void init() {
         context = ViewVehicleDetails_Activity.this;
         session = new UserSessionManager(context);
@@ -161,14 +163,14 @@ public class ViewVehicleDetails_Activity extends Activity {
     }
 
     private void setDefaults() {
-        vehicaldealerdetails  = (VehicleDealerListPojo) getIntent().getSerializableExtra("vehicleDetails");
+        vehicaldealerdetails = (VehicleDealerListPojo) getIntent().getSerializableExtra("vehicleDetails");
 
         edt_clientname.setText(vehicaldealerdetails.getClient_name());
         edt_chassisno.setText(vehicaldealerdetails.getChassis_no());
         edt_state.setText(vehicaldealerdetails.getStateName());
         edt_description.setText(vehicaldealerdetails.getDescription());
         edt_renewaldate.setText(changeDateFormat("yyyy-MM-dd",
-                "dd/MM/yyyy",vehicaldealerdetails.getInsurance_renewal_date()));
+                "dd/MM/yyyy", vehicaldealerdetails.getInsurance_renewal_date()));
         edt_purcasedate.setText(changeDateFormat("yyyy-MM-dd",
                 "dd/MM/yyyy",
                 vehicaldealerdetails.getPurchase_date()));
@@ -188,18 +190,18 @@ public class ViewVehicleDetails_Activity extends Activity {
         edt_selectVehicleImage.setText(vehicaldealerdetails.getVehicle_image());
         if (vehicaldealerdetails.getIsshowto_customer().equals("1")) {
             isshow_to_customer.setChecked(true);
-        } else{
+        } else {
             isshow_to_customer.setChecked(false);
         }
         if (vehicaldealerdetails.getIsshowto_rto().equals("1")) {
             isshow_to_rto.setChecked(true);
-        }else{
+        } else {
             isshow_to_rto.setChecked(false);
         }
         edt_bank.setText(vehicaldealerdetails.getBank_name());
         edt_branch.setText(vehicaldealerdetails.getBranch_name());
         edt_sactiondate.setText(changeDateFormat("yyyy-MM-dd",
-                "dd/MM/yyyy",vehicaldealerdetails.getDate_to_section()));
+                "dd/MM/yyyy", vehicaldealerdetails.getDate_to_section()));
         edt_enddate.setText(changeDateFormat("yyyy-MM-dd",
                 "dd/MM/yyyy",
                 vehicaldealerdetails.getInstallment_end_date()));
@@ -223,7 +225,7 @@ public class ViewVehicleDetails_Activity extends Activity {
                 ((EditText) serviceDatesLayoutsList.get(i).findViewById(R.id.edt_servicedate)).setText(changeDateFormat("yyyy-MM-dd",
                         "dd/MM/yyyy",
                         serviceDatesList.get(i).getService_date()));
-              ((EditText) serviceDatesLayoutsList.get(i).findViewById(R.id.edt_km)).setText(serviceDatesList.get(i).getText());
+                ((EditText) serviceDatesLayoutsList.get(i).findViewById(R.id.edt_km)).setText(serviceDatesList.get(i).getText());
 
             }
         } else {
@@ -252,9 +254,7 @@ public class ViewVehicleDetails_Activity extends Activity {
         }
 
 
-
-
-        ArrayList< VehicleDealerListPojo.DocumentListPojo> documentsList = new ArrayList<>();
+        ArrayList<VehicleDealerListPojo.DocumentListPojo> documentsList = new ArrayList<>();
         documentsList = vehicaldealerdetails.getDocument();
 
         if (documentsList.size() != 0) {
@@ -278,11 +278,10 @@ public class ViewVehicleDetails_Activity extends Activity {
                 });
             }
         } else {
-           // tv_documents.setText("No Documents Added");
+            // tv_documents.setText("No Documents Added");
         }
 
     }
-
 
 
     public void viewDocument(String url) {
@@ -294,6 +293,7 @@ public class ViewVehicleDetails_Activity extends Activity {
         }
 
     }
+
     private void setEventHandler() {
         bank_details.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -306,61 +306,60 @@ public class ViewVehicleDetails_Activity extends Activity {
             }
         });
     }
+
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
 
-        if(!role.equals("3"))
+        if (!role.equals("3")) {
+            mToolbar.inflateMenu(R.menu.list_menu);
+            mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    int id = item.getItemId();
+                    if (id == R.id.img_edit) {
+                        Intent intent = new Intent(context, EditVehicleDealer_Activity.class);
+                        intent.putExtra("vehicleDetails", vehicaldealerdetails);
+                        context.startActivity(intent);
+                        finish();
+                    } else if (id == R.id.img_delete) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
+                        builder.setMessage("Are you sure you want to delete this item?");
+                        builder.setTitle("Alert");
+                        builder.setIcon(R.drawable.ic_alert_red_24dp);
+                        builder.setCancelable(false);
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
 
-    {
-        mToolbar.inflateMenu(R.menu.list_menu);
-        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                int id = item.getItemId();
-                if (id == R.id.img_edit) {
-                    Intent intent = new Intent(context, EditVehicleDealer_Activity.class);
-                    intent.putExtra("vehicleDetails", vehicaldealerdetails);
-                    context.startActivity(intent);
-                    finish();
-                } else if (id == R.id.img_delete) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
-                    builder.setMessage("Are you sure you want to delete this item?");
-                    builder.setTitle("Alert");
-                    builder.setIcon(R.drawable.ic_alert_red_24dp);
-                    builder.setCancelable(false);
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
+                                if (Utilities.isInternetAvailable(context)) {
+                                    new DeleteVehicleDealerDetails().execute(vehicaldealerdetails.getId());
+                                } else {
+                                    Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+                                }
 
-                            if (Utilities.isInternetAvailable(context)) {
-                                new DeleteVehicleDealerDetails().execute(vehicaldealerdetails.getId());
-                            } else {
-                                Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                             }
-
-                        }
-                    });
-                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-                    AlertDialog alertD = builder.create();
-                    alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
-                    alertD.show();
+                        });
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        AlertDialog alertD = builder.create();
+                        alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
+                        alertD.show();
+                    }
+                    return false;
                 }
-                return false;
-            }
-        });
-    }
+            });
+        }
         mToolbar.setTitle("Vehicle Details");
         mToolbar.setNavigationIcon(R.drawable.icon_backarrow_16p);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            finish();
-        }
-    });
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     public class DownloadDocument extends AsyncTask<String, Integer, Boolean> {
@@ -554,8 +553,6 @@ public class ViewVehicleDetails_Activity extends Activity {
             }
         }
     }
-
-
 
 
 }

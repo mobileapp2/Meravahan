@@ -190,7 +190,7 @@ public class getClientCodeLIstAdapter extends RecyclerView.Adapter<getClientCode
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
                     if (type.equalsIgnoreCase("success")) {
-                       // new Clients_Fragment.GetClientList().execute(user_id);
+                        // new Clients_Fragment.GetClientList().execute(user_id);
                         new ClientCode.GetClientCodeList().execute(user_id);
                     } else {
                         Utilities.showAlertDialog(context, "Alert", message, false);

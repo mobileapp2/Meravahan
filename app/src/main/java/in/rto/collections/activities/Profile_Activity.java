@@ -34,10 +34,10 @@ import in.rto.collections.utilities.WebServiceCalls;
 public class Profile_Activity extends Activity {
     private Context context;
     private UserSessionManager session;
-    private EditText edt_name, edt_aliasname, edt_mobile, edt_email,edt_refferal_code;
-    private String user_id, photo, name, alias, mobile, email, password, is_email_verified,refferal_code;
+    private EditText edt_name, edt_aliasname, edt_mobile, edt_email, edt_refferal_code;
+    private String user_id, photo, name, alias, mobile, email, password, is_email_verified, refferal_code;
     private ProgressDialog pd;
-    private ImageView imv_profile, img_finish, img_edit,img_share;
+    private ImageView imv_profile, img_finish, img_edit, img_share;
     private CoordinatorLayout ll_parent;
     private TextView tv_messagecount, tv_whatsappcount, tv_memorycount;
 
@@ -168,10 +168,10 @@ public class Profile_Activity extends Activity {
         img_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message = "Signup on Meravahan mobile app with Referral code "+refferal_code+" and get 3 vehicles entry free.\r\n \nI recommend you to use Meravahan mobile app for hassle free vehicle managment. Download from https://play.google.com/store/apps/details?id=in.rto.collections&hl=en";
+                String message = "Signup on Meravahan mobile app with Referral code " + refferal_code + " and get 3 vehicles entry free.\r\n \nI recommend you to use Meravahan mobile app for hassle free vehicle managment. Download from https://play.google.com/store/apps/details?id=in.rto.collections&hl=en";
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT,message);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, message);
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
             }
@@ -298,6 +298,7 @@ public class Profile_Activity extends Activity {
             }
         }
     }
+
     public class getCounts extends AsyncTask<String, Void, String> {
 
         @Override
@@ -328,9 +329,9 @@ public class Profile_Activity extends Activity {
                     if (type.equalsIgnoreCase("success")) {
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         JSONObject obj = jsonarr.getJSONObject(0);
-                        tv_messagecount.setText(obj.getString("smsCount")+" / "+obj.getString("maxSMSLimit"));
-                        tv_whatsappcount.setText(obj.getString("whatsappCount")+" / "+obj.getString("maxWhatsAppLimit"));
-                        tv_memorycount.setText(obj.getString("usedSize")+" / "+obj.getString("maxSize"));
+                        tv_messagecount.setText(obj.getString("smsCount") + " / " + obj.getString("maxSMSLimit"));
+                        tv_whatsappcount.setText(obj.getString("whatsappCount") + " / " + obj.getString("maxWhatsAppLimit"));
+                        tv_memorycount.setText(obj.getString("usedSize") + " / " + obj.getString("maxSize"));
                     }
 
                 }

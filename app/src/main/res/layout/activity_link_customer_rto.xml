@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -49,31 +48,30 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-               >
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                   <android.support.v7.widget.CardView
+                    <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                       android:layout_marginRight="5dp"
-                       android:layout_marginLeft="5dp"
-                        >
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="Select Data"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="Select Data"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
                     </android.support.v7.widget.CardView>
 
                     <android.support.v7.widget.CardView
@@ -86,42 +84,44 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/statecard"
-                      >
+                        android:id="@+id/statecard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp"
                             android:weightSum="1">
-                        <CheckBox
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0"
-                            android:id="@+id/chkstate"
-                            android:visibility="gone"
-                          />
+
+                            <CheckBox
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0"
+                                android:id="@+id/chkstate"
+                                android:visibility="gone" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="State  :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
+                                android:textColor="@color/black" />
 
-                        <TextView
-                            android:id="@+id/edt_state"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:hint="State "
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_weight="0.6"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"/>
+                            <TextView
+                                android:id="@+id/edt_state"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:hint="State "
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:layout_weight="0.6"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -132,43 +132,46 @@
                         android:layout_marginTop="2dp"
                         android:layout_marginRight="5dp"
                         android:layout_marginLeft="5dp"
-                        android:id="@+id/vehiclenocard"
-                        >
+                        android:id="@+id/vehiclenocard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp"
                             android:layout_height="wrap_content"
                             android:weightSum="1">
-                        <CheckBox
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0"
-                            android:id="@+id/chkvehicleno"
-                            android:visibility="gone"
-                            />
+
+                            <CheckBox
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0"
+                                android:id="@+id/chkvehicleno"
+                                android:visibility="gone" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Vehicle no  :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
-                        <TextView
-                            android:id="@+id/edt_vehicleno"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:hint="Vehicle no "
-                            android:longClickable="false"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_weight="0.6"
-                            android:focusable="false"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"/>
-                       </LinearLayout>
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/edt_vehicleno"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:hint="Vehicle no "
+                                android:longClickable="false"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:layout_weight="0.6"
+                                android:focusable="false"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp" />
+                        </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -179,43 +182,46 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/ownercard"
-                        >
+                        android:id="@+id/ownercard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
-                        <CheckBox
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0"
-                            android:id="@+id/chkvehicleownername"
-                            android:visibility="gone"
-                            />
+
+                            <CheckBox
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0"
+                                android:id="@+id/chkvehicleownername"
+                                android:visibility="gone" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Vehicle Owner Name :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
-                        <TextView
-                            android:id="@+id/edt_vehicleownername"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:hint="Vehicle Owner Name"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_weight="0.6"
-                            android:focusable="false"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"/>
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/edt_vehicleownername"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:hint="Vehicle Owner Name"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:layout_weight="0.6"
+                                android:focusable="false"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
-                   <android.support.v7.widget.CardView
+
+                    <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="0dp"
@@ -225,43 +231,46 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/vehicledealercard"
-                        >
+                        android:id="@+id/vehicledealercard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
-                        <CheckBox
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0"
-                            android:id="@+id/chkvehicledealer"
-                            android:visibility="gone"
-                            />
+
+                            <CheckBox
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0"
+                                android:id="@+id/chkvehicledealer"
+                                android:visibility="gone" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Vehicle Dealer Name:"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
-                        <TextView
-                            android:id="@+id/edt_vehicledealer"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:hint="Vehicle Dealer Name"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_weight="0.6"
-                            android:focusable="false"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"/>
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/edt_vehicledealer"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:hint="Vehicle Dealer Name"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:layout_weight="0.6"
+                                android:focusable="false"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
-                   <android.support.v7.widget.CardView
+
+                    <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="2dp"
@@ -271,44 +280,46 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/descriptioncard"
-                        >
+                        android:id="@+id/descriptioncard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
-                        <CheckBox
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0"
-                            android:id="@+id/chkdescription"
-                            android:visibility="gone"
-                            />
+
+                            <CheckBox
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0"
+                                android:id="@+id/chkdescription"
+                                android:visibility="gone" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Description :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
-                        <TextView
-                            android:id="@+id/edt_description"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:hint="Description"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_weight="0.6"
-                            android:focusable="false"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            />
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/edt_description"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:hint="Description"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:layout_weight="0.6"
+                                android:focusable="false"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
-                   <android.support.v7.widget.CardView
+
+                    <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="2dp"
@@ -318,44 +329,46 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/typecard"
-                        >
+                        android:id="@+id/typecard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
-                        <CheckBox
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0"
-                            android:id="@+id/chktype"
-                            android:visibility="gone"
-                            />
+
+                            <CheckBox
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0"
+                                android:id="@+id/chktype"
+                                android:visibility="gone" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Type :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
-                        <TextView
-                            android:id="@+id/edt_type"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:focusable="false"
-                            android:gravity="center_vertical"
-                            android:hint="Type"
-                            android:longClickable="false"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_weight="0.6"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            />
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/edt_type"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:focusable="false"
+                                android:gravity="center_vertical"
+                                android:hint="Type"
+                                android:longClickable="false"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:layout_weight="0.6"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -366,43 +379,46 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/enginenocard"
-                        >
+                        android:id="@+id/enginenocard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
-                        <CheckBox
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0"
-                            android:visibility="gone"
-                            android:id="@+id/chkengineno"
-                            />
+
+                            <CheckBox
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0"
+                                android:visibility="gone"
+                                android:id="@+id/chkengineno" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Engine No :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
-                        <TextView
-                            android:id="@+id/edt_engineno"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:hint="Engine No"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_weight="0.6"
-                            android:focusable="false"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"/>
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/edt_engineno"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:hint="Engine No"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:layout_weight="0.6"
+                                android:focusable="false"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp" />
                         </LinearLayout>
 
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -413,44 +429,47 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/chassisnocard"
-                        >
+                        android:id="@+id/chassisnocard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
-                        <CheckBox
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0"
-                            android:visibility="gone"
-                            android:id="@+id/chkchassisno"
-                            android:buttonTint="@color/white"
-                            />
+
+                            <CheckBox
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0"
+                                android:visibility="gone"
+                                android:id="@+id/chkchassisno"
+                                android:buttonTint="@color/white" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Chassis No :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
-                        <TextView
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:id="@+id/edt_chassisno"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:hint="Chassis No"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_weight="0.6"
-                            android:focusable="false"/>
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:id="@+id/edt_chassisno"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:hint="Chassis No"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:layout_weight="0.6"
+                                android:focusable="false" />
 
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -461,42 +480,45 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/policynocard"
-                        >
+                        android:id="@+id/policynocard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
-                        <CheckBox
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0"
-                            android:id="@+id/chkpolicyno"
-                            android:visibility="gone"
-                            />
+
+                            <CheckBox
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0"
+                                android:id="@+id/chkpolicyno"
+                                android:visibility="gone" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Insurance Policy No :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
-                        <TextView
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:id="@+id/edt_insurancepolicyno"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:hint="Insurance Policy No"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_weight="0.6"
-                            android:focusable="false"/>
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:id="@+id/edt_insurancepolicyno"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:hint="Insurance Policy No"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:layout_weight="0.6"
+                                android:focusable="false" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -507,43 +529,46 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/renewaldatecard"
-                        >
+                        android:id="@+id/renewaldatecard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
-                        <CheckBox
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0"
-                            android:visibility="gone"
-                            android:id="@+id/chkrenewaldate"
-                            />
+
+                            <CheckBox
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0"
+                                android:visibility="gone"
+                                android:id="@+id/chkrenewaldate" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Renewal Date :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
-                        <TextView
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:id="@+id/edt_renewaldate"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:hint="Renewal Date"
-                            android:longClickable="false"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_weight="0.6"
-                            android:focusable="false"/>
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:id="@+id/edt_renewaldate"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:hint="Renewal Date"
+                                android:longClickable="false"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:layout_weight="0.6"
+                                android:focusable="false" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -554,43 +579,46 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/roadtaxcard"
-                        >
+                        android:id="@+id/roadtaxcard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
-                        <CheckBox
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="0"
-                            android:id="@+id/chkroadtax"
-                            android:visibility="gone"
-                            />
+
+                            <CheckBox
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_weight="0"
+                                android:id="@+id/chkroadtax"
+                                android:visibility="gone" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:text="Road Tax Paid Upto :"
                                 android:gravity="center_vertical"
                                 android:textColor="@color/black"
-                                android:layout_weight="0.4"/>
-                        <TextView
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:id="@+id/edt_taxpaidupto"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:hint="Road Tax Paid Upto"
-                            android:longClickable="false"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_weight="0.6"
-                            android:focusable="false"/>
+                                android:layout_weight="0.4" />
+
+                            <TextView
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:id="@+id/edt_taxpaidupto"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:hint="Road Tax Paid Upto"
+                                android:longClickable="false"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:layout_weight="0.6"
+                                android:focusable="false" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -601,44 +629,46 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/permitcard"
-                        >
+                        android:id="@+id/permitcard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
-                        <CheckBox
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0"
-                            android:visibility="gone"
-                            android:id="@+id/chkpermit"
-                            />
+
+                            <CheckBox
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0"
+                                android:visibility="gone"
+                                android:id="@+id/chkpermit" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Permit Valid Upto :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
-                        <TextView
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:id="@+id/edt_permitvalidupto"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:focusable="false"
-                            android:gravity="center_vertical"
-                            android:hint="Permit Valid Upto"
-                            android:longClickable="false"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_weight="0.6"
-                          />
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:id="@+id/edt_permitvalidupto"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:focusable="false"
+                                android:gravity="center_vertical"
+                                android:hint="Permit Valid Upto"
+                                android:longClickable="false"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:layout_weight="0.6" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -649,44 +679,46 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/statepermitcard"
-                        >
+                        android:id="@+id/statepermitcard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
-                        <CheckBox
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0"
-                            android:id="@+id/chkstatepermit"
-                            android:visibility="gone"
-                            />
+
+                            <CheckBox
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0"
+                                android:id="@+id/chkstatepermit"
+                                android:visibility="gone" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="State Permit Valid Upto :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
-                        <TextView
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:id="@+id/edt_statepermitvalidupto"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:focusable="false"
-                            android:gravity="center_vertical"
-                            android:hint="State Permit Valid Upto"
-                            android:longClickable="false"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_weight="0.6"
-                           />
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:id="@+id/edt_statepermitvalidupto"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:focusable="false"
+                                android:gravity="center_vertical"
+                                android:hint="State Permit Valid Upto"
+                                android:longClickable="false"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:layout_weight="0.6" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -697,43 +729,46 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/nationalpermitcard"
-                        >
+                        android:id="@+id/nationalpermitcard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
-                        <CheckBox
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0"
-                            android:visibility="gone"
-                            android:id="@+id/chknationalpermit"
-                            />
+
+                            <CheckBox
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0"
+                                android:visibility="gone"
+                                android:id="@+id/chknationalpermit" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="National Permit Valid Upto :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
-                        <TextView
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:id="@+id/edt_nationalpermitvalidupto"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:focusable="false"
-                            android:gravity="center_vertical"
-                            android:hint="National Permit Valid Upto"
-                            android:longClickable="false"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_weight="0.6"/>
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:id="@+id/edt_nationalpermitvalidupto"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:focusable="false"
+                                android:gravity="center_vertical"
+                                android:hint="National Permit Valid Upto"
+                                android:longClickable="false"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:layout_weight="0.6" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -744,43 +779,46 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/puccard"
-                        >
+                        android:id="@+id/puccard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
-                        <CheckBox
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0"
-                            android:visibility="gone"
-                            android:id="@+id/chkpuc"
-                            />
+
+                            <CheckBox
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0"
+                                android:visibility="gone"
+                                android:id="@+id/chkpuc" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="PUC Renewal Date :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
-                        <TextView
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:id="@+id/edt_pucrenewaldate"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:focusable="false"
-                            android:gravity="center_vertical"
-                            android:hint="PUC Renewal Date"
-                            android:longClickable="false"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_weight="0.6"/>
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:id="@+id/edt_pucrenewaldate"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:focusable="false"
+                                android:gravity="center_vertical"
+                                android:hint="PUC Renewal Date"
+                                android:longClickable="false"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:layout_weight="0.6" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -791,44 +829,47 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/fitnesscard"
-                        >
+                        android:id="@+id/fitnesscard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
-                        <CheckBox
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0"
-                            android:visibility="gone"
-                            android:id="@+id/chkfitness"
-                            />
+
+                            <CheckBox
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0"
+                                android:visibility="gone"
+                                android:id="@+id/chkfitness" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Fitness Valid Upto :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
-                        <TextView
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:id="@+id/edt_fitnessvalidupto"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:focusable="false"
-                            android:gravity="center_vertical"
-                            android:hint="Fitness Valid Upto"
-                            android:longClickable="false"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_weight="0.6"/>
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:id="@+id/edt_fitnessvalidupto"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:focusable="false"
+                                android:gravity="center_vertical"
+                                android:hint="Fitness Valid Upto"
+                                android:longClickable="false"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:layout_weight="0.6" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
-                   <android.support.v7.widget.CardView
+
+                    <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="2dp"
@@ -838,42 +879,45 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/remarkcard"
-                        >
+                        android:id="@+id/remarkcard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
-                        <CheckBox
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0"
-                            android:visibility="gone"
-                            android:id="@+id/chkremark"
-                            />
+
+                            <CheckBox
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0"
+                                android:visibility="gone"
+                                android:id="@+id/chkremark" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Remark :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
-                        <TextView
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:id="@+id/edt_remark"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:hint="Remark"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_weight="0.6"
-                            android:focusable="false"/>
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:id="@+id/edt_remark"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:hint="Remark"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:layout_weight="0.6"
+                                android:focusable="false" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -884,27 +928,30 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/vehicleimagecard"
-                        >
+                        android:id="@+id/vehicleimagecard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
+
                             <CheckBox
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0"
                                 android:id="@+id/chkvehicleimage"
-                                android:visibility="gone"/>
+                                android:visibility="gone" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Remark :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
+                                android:textColor="@color/black" />
+
                             <TextView
                                 android:id="@+id/edt_selectvehicle"
                                 android:layout_width="match_parent"
@@ -924,7 +971,8 @@
                 </LinearLayout>
 
             </LinearLayout>
-           <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -932,38 +980,41 @@
                 card_view:cardCornerRadius="0dp"
                 card_view:cardUseCompatPadding="true"
                 android:id="@+id/othercard"
-               android:layout_marginBottom="2dp"
-               android:layout_marginTop="2dp"
-               android:layout_marginRight="2dp"
-               android:layout_marginLeft="5dp">
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="5dp">
 
                 <LinearLayout
                     android:id="@+id/ll_otherdates"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="1"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp">
-                    <CheckBox
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:visibility="gone"
-                        android:id="@+id/chkother"
-                        />
-                    <TextView
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="Other Dates"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                        android:weightSum="1"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp">
+
+                        <CheckBox
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:visibility="gone"
+                            android:id="@+id/chkother" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="Other Dates"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
                     <ImageView
                         android:id="@+id/btn_addotherdates"
                         android:layout_width="30dp"
@@ -971,7 +1022,7 @@
                         android:layout_gravity="end"
                         android:src="@drawable/icon_add"
                         android:tint="@color/black"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
@@ -996,28 +1047,31 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="1"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp">
-                    <CheckBox
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:visibility="gone"
-                        android:id="@+id/chkdocument"
-                        />
-                    <TextView
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="Attact Documents"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                        android:weightSum="1"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp">
+
+                        <CheckBox
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:visibility="gone"
+                            android:id="@+id/chkdocument" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="Attact Documents"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
                     <ImageView
                         android:id="@+id/btn_adddocuments"
                         android:layout_width="30dp"
@@ -1025,7 +1079,7 @@
                         android:layout_gravity="end"
                         android:src="@drawable/icon_add"
                         android:tint="@color/black"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
 
                 </LinearLayout>
 

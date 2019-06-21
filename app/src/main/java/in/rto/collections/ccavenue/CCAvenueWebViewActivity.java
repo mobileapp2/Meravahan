@@ -367,7 +367,7 @@ public class CCAvenueWebViewActivity extends AppCompatActivity {
 //                        alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
 //                        alertD.show();
                         if (Utilities.isInternetAvailable(CCAvenueWebViewActivity.this)) {
-                           new UpdateCounts().execute(JSONString);
+                            new UpdateCounts().execute(JSONString);
 
                         } else {
                             Utilities.showMessageString(CCAvenueWebViewActivity.this, "Please Check Internet Connection");

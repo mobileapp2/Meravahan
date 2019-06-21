@@ -44,7 +44,6 @@
         </LinearLayout>
 
 
-
         <include
             layout="@layout/shimmer_twolines_layout"
             android:layout_width="match_parent"

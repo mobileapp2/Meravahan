@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -29,16 +28,18 @@ public class DL_Information_Activity extends Activity {
     TextView tem_reg;
     private String val, title;
     private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dl__information);
         context = DL_Information_Activity.this;
         tem_reg = findViewById(R.id.tem_reg);
-        val =  getIntent().getStringExtra("type");
+        val = getIntent().getStringExtra("type");
         new DL_Information_Activity.GetInformation().execute();
         setUpToolbar();
     }
+
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle(title);
@@ -92,10 +93,10 @@ public class DL_Information_Activity extends Activity {
                                 RTOAgentPojo summary = new RTOAgentPojo();
                                 JSONObject jsonObj = jsonarr.getJSONObject(i);
                                 if (!jsonObj.getString("description").equals("")) {
-                                    String text =  jsonObj.getString("description");
-                                    title =  jsonObj.getString("name");
+                                    String text = jsonObj.getString("description");
+                                    title = jsonObj.getString("name");
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                        tem_reg.setText(Html.fromHtml(text,Html.FROM_HTML_MODE_COMPACT));
+                                        tem_reg.setText(Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT));
                                     } else {
                                         tem_reg.setText(Html.fromHtml(text));
                                     }

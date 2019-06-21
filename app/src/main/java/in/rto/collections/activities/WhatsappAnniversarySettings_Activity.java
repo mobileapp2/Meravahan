@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
@@ -19,7 +20,6 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -171,7 +171,7 @@ public class WhatsappAnniversarySettings_Activity extends Activity {
                         } else {
                             if (Utilities.isNetworkAvailable(context)) {
                                 new AddAnniSMSSettings().execute(dialog_edt_whatsappmessage.getText().toString().trim(), user_id);
-                              //  new AddAnniWhatsAppSettings().execute(dialog_edt_whatsappmessage.getText().toString().trim(), user_id, whatsappPic);
+                                //  new AddAnniWhatsAppSettings().execute(dialog_edt_whatsappmessage.getText().toString().trim(), user_id, whatsappPic);
                             } else {
                                 Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                             }
@@ -407,7 +407,7 @@ public class WhatsappAnniversarySettings_Activity extends Activity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             try {
-               // pd.dismiss();
+                // pd.dismiss();
 
                 if (result != null && result.length() > 0 && !result.equalsIgnoreCase("[]")) {
                     JSONObject mainObj = new JSONObject(result);
@@ -433,6 +433,7 @@ public class WhatsappAnniversarySettings_Activity extends Activity {
             }
         }
     }
+
     public class AddAnniSMSSettings extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 
@@ -577,8 +578,6 @@ public class WhatsappAnniversarySettings_Activity extends Activity {
 
         }
     }
-
-
 
 
 }

@@ -1,20 +1,11 @@
 package in.rto.collections.activities;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
@@ -26,11 +17,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import in.rto.collections.R;
-import in.rto.collections.utilities.Utilities;
 
 public class LegalInfo_Activity extends Activity {
     WebView about_us_webView;
-    TextView termsandcond, privacy_policy, social_media_policy, ip_policy, id_grievance,id_appDisclaimer,id_userAgreement, appversion ;
+    TextView termsandcond, privacy_policy, social_media_policy, ip_policy, id_grievance, id_appDisclaimer, id_userAgreement, appversion;
     private static Context context;
 
     @Override
@@ -41,8 +31,8 @@ public class LegalInfo_Activity extends Activity {
         setEventHandlers();
         setUpToolbar();
     }
-    private void init()
-    {
+
+    private void init() {
 
 
         context = LegalInfo_Activity.this;
@@ -58,20 +48,20 @@ public class LegalInfo_Activity extends Activity {
         try {
             PackageInfo pInfo = context.getPackageManager().getPackageInfo(getPackageName(), 0);
             String version = pInfo.versionName;
-            appversion.setText("Version: " + String.valueOf( version));
+            appversion.setText("Version: " + String.valueOf(version));
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
 
     }
-    private void setEventHandlers()
-    {
+
+    private void setEventHandlers() {
 
         termsandcond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(context, android.R.style.Theme_NoTitleBar);
-                LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
                 View dialogView = inflater.inflate(R.layout.dialog_webview_fullscreen, null);
                 dialog.setView(dialogView);
@@ -116,7 +106,7 @@ public class LegalInfo_Activity extends Activity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(context, android.R.style.Theme_NoTitleBar);
-                LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
                 View dialogView = inflater.inflate(R.layout.dialog_webview_fullscreen, null);
                 dialog.setView(dialogView);
@@ -162,7 +152,7 @@ public class LegalInfo_Activity extends Activity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(context, android.R.style.Theme_NoTitleBar);
-                LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
                 View dialogView = inflater.inflate(R.layout.dialog_webview_fullscreen, null);
                 dialog.setView(dialogView);
@@ -204,11 +194,11 @@ public class LegalInfo_Activity extends Activity {
             }
         });
 
-        ip_policy .setOnClickListener(new View.OnClickListener() {
+        ip_policy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(context, android.R.style.Theme_NoTitleBar);
-                LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
                 View dialogView = inflater.inflate(R.layout.dialog_webview_fullscreen, null);
                 dialog.setView(dialogView);
@@ -254,7 +244,7 @@ public class LegalInfo_Activity extends Activity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(context, android.R.style.Theme_NoTitleBar);
-                LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
                 View dialogView = inflater.inflate(R.layout.dialog_webview_fullscreen, null);
                 dialog.setView(dialogView);
@@ -300,7 +290,7 @@ public class LegalInfo_Activity extends Activity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(context, android.R.style.Theme_NoTitleBar);
-                LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
                 View dialogView = inflater.inflate(R.layout.dialog_webview_fullscreen, null);
                 dialog.setView(dialogView);
@@ -346,7 +336,7 @@ public class LegalInfo_Activity extends Activity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(context, android.R.style.Theme_NoTitleBar);
-                LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
                 View dialogView = inflater.inflate(R.layout.dialog_webview_fullscreen, null);
                 dialog.setView(dialogView);
@@ -389,6 +379,7 @@ public class LegalInfo_Activity extends Activity {
         });
 
     }
+
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle("Legal Info");

@@ -137,6 +137,4 @@ public class Fragment_RTO_Agent_Details extends Fragment {
     }
 
 
-
-
 }

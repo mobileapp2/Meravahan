@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="@color/darkgrey" android:state_selected="true"
-        >
-        <shape android:shape="rectangle" >
+    <item android:color="@color/darkgrey" android:state_selected="true">
+        <shape android:shape="rectangle">
             <solid android:color="@color/darkgrey" />
             <!--   <corners android:radius="10dp"/>-->
             <!--<stroke-->
             <!--android:width="4dp"-->
-                <!--android:color="@color/colorPrimary" />-->
+            <!--android:color="@color/colorPrimary" />-->
             <!--<padding android:right="5dp"/>-->
             <!--<padding android:left="5dp"/>-->
 
@@ -15,13 +14,13 @@
         </shape>
     </item>
     <item android:color="@color/Gray">
-        <shape android:shape="rectangle" >
+        <shape android:shape="rectangle">
             <solid android:color="@color/Gray" />
             <!--    <corners android:radius="10dp"/>-->
 
             <!--<stroke-->
-               <!--android:width="4dp" -->
-                <!--android:color="@color/colorPrimary" />-->
+            <!--android:width="4dp" -->
+            <!--android:color="@color/colorPrimary" />-->
             <!--<padding android:right="5dp"/>-->
             <!--<padding android:left="5dp"/>-->
             <!--  <corners android:radius="10dp" />-->

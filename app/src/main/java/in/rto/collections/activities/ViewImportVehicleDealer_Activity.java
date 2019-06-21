@@ -9,15 +9,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -57,13 +56,13 @@ public class ViewImportVehicleDealer_Activity extends Activity {
     private ScrollView scrollView;
     private LinearLayout ll_parent;
     private static final int CAMERA_REQUEST = 100;
-    private LinearLayout ll_servicedates, ll_documents,ll_Otherdates;
-    private ImageView btn_addservicedates, btn_adddocuments,btn_addotherdates;
+    private LinearLayout ll_servicedates, ll_documents, ll_Otherdates;
+    private ImageView btn_addservicedates, btn_adddocuments, btn_addotherdates;
     private static final int GALLERY_REQUEST = 200;
     private EditText edt_state, edt_vehicleno, edt_clientname, edt_vehicleownername, edt_vehicledealer,
             edt_description, edt_type, edt_engineno, edt_chassisno, edt_insurancepolicyno, edt_renewaldate,
-            edt_taxvalidupto, edt_permitvalidupto, edt_remark,edt_satepermitvalidupto,nationalpermitvalidupto,
-            pucrenewaldate,fitnessvalidupto,edt_selectVehicleImage;
+            edt_taxvalidupto, edt_permitvalidupto, edt_remark, edt_satepermitvalidupto, nationalpermitvalidupto,
+            pucrenewaldate, fitnessvalidupto, edt_selectVehicleImage;
 
     private int mYear, mMonth, mDay;
     private int mYear1, mMonth1, mDay1;
@@ -85,20 +84,21 @@ public class ViewImportVehicleDealer_Activity extends Activity {
     private ArrayList<StatePojo> statelist;
     private UserSessionManager session;
     private String companyAliasName = "";
-    private String user_id, stateId, clientId, typeId,dealerId,role;
+    private String user_id, stateId, clientId, typeId, dealerId, role;
     private String[] PERMISSIONS = {android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
     private Uri photoURI;
     private File file, rtoagentPicFolder;
     private RTOAgentListPojo rtoAgentListPojo;
     private ImageView img_delete, img_edit;
-   // private CheckBox isshow_to_dealer,isshow_to_customer;
-    private String isshowtocustomer , isshowtorto;
+    // private CheckBox isshow_to_dealer,isshow_to_customer;
+    private String isshowtocustomer, isshowtorto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_import_vehicle_dealer);
 
-      //  setContentView(R.layout.activity_view_rtoagent);
+        //  setContentView(R.layout.activity_view_rtoagent);
         init();
         getSessionData();
         setUpToolbar();
@@ -137,8 +137,8 @@ public class ViewImportVehicleDealer_Activity extends Activity {
         edt_selectVehicleImage = findViewById(R.id.edt_selectvehicle);
         //isshow_to_dealer = findViewById(R.id.is_show_dealer);
         //isshow_to_customer = findViewById(R.id.is_show_customer);
-       // isshow_to_dealer.setClickable(false);
-       // isshow_to_customer.setClickable(false);
+        // isshow_to_dealer.setClickable(false);
+        // isshow_to_customer.setClickable(false);
 
         otherLayoutsList = new ArrayList<>();
         documentsLayoutsList = new ArrayList<>();
@@ -158,6 +158,7 @@ public class ViewImportVehicleDealer_Activity extends Activity {
     protected void onPause() {
         super.onPause();
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -169,6 +170,7 @@ public class ViewImportVehicleDealer_Activity extends Activity {
             e.printStackTrace();
         }
     }
+
     private void setDefaults() {
         rtoAgentListPojo = (RTOAgentListPojo) getIntent().getSerializableExtra("rtoagentDetails");
 
@@ -254,6 +256,7 @@ public class ViewImportVehicleDealer_Activity extends Activity {
             // tv_documents.setText("No Documents Added");
         }
     }
+
     private void setEventHandler() {
     }
 
@@ -270,7 +273,7 @@ public class ViewImportVehicleDealer_Activity extends Activity {
 
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
-        if(!role.equals("3")) {
+        if (!role.equals("3")) {
             mToolbar.inflateMenu(R.menu.list_import_menu);
             mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
                 @Override
@@ -283,7 +286,7 @@ public class ViewImportVehicleDealer_Activity extends Activity {
                             Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                         }
 
-                    }else if(id == R.id.img_link){
+                    } else if (id == R.id.img_link) {
                         if (Utilities.isInternetAvailable(context)) {
                             Intent intent = new Intent(context, LInkRTODealer_Activity.class);
                             intent.putExtra("rtoDetails", rtoAgentListPojo);

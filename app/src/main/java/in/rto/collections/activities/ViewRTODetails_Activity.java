@@ -8,10 +8,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -55,11 +55,11 @@ public class ViewRTODetails_Activity extends Activity {
     private Context context;
     private ScrollView scrollView;
     private LinearLayout ll_parent;
-    private LinearLayout ll_servicedates, ll_documents,ll_Otherdates;
-    private ImageView btn_addservicedates, btn_adddocuments,btn_addotherdates;
+    private LinearLayout ll_servicedates, ll_documents, ll_Otherdates;
+    private ImageView btn_addservicedates, btn_adddocuments, btn_addotherdates;
     private EditText edt_state, edt_vehicleno, edt_clientname, edt_vehicleownername, edt_rtoagent,
             edt_description, edt_type, edt_engineno, edt_chassisno, edt_insurancepolicyno, edt_renewaldate,
-            edt_purcasedate, edt_temregno, edt_remark,edt_hypothecatedto,edt_selectVehicleImage;
+            edt_purcasedate, edt_temregno, edt_remark, edt_hypothecatedto, edt_selectVehicleImage;
     private ImageView img_save;
     private List<LinearLayout> serviceDatesLayoutsList;
     private ArrayList<ClientMainListPojo> clientList;
@@ -69,12 +69,12 @@ public class ViewRTODetails_Activity extends Activity {
     private ArrayList<TypePojo> typelist;
     private ArrayList<StatePojo> statelist;
     private UserSessionManager session;
-    private String user_id,callType,role;
+    private String user_id, callType, role;
     private Uri photoURI;
     private File file, vehicledealerPicFolder;
     private VehicleDealerListPojo vehicaldealerdetails;
     private ImageView img_delete, img_edit;
-    private CheckBox isshow_to_rto,isshow_to_customer;
+    private CheckBox isshow_to_rto, isshow_to_customer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,14 +144,14 @@ public class ViewRTODetails_Activity extends Activity {
     }
 
     private void setDefaults() {
-        vehicaldealerdetails  = (VehicleDealerListPojo) getIntent().getSerializableExtra("vehicleDetails");
+        vehicaldealerdetails = (VehicleDealerListPojo) getIntent().getSerializableExtra("vehicleDetails");
 
         edt_clientname.setText(vehicaldealerdetails.getClient_name());
         edt_chassisno.setText(vehicaldealerdetails.getChassis_no());
         edt_state.setText(vehicaldealerdetails.getStateName());
         edt_description.setText(vehicaldealerdetails.getDescription());
         edt_renewaldate.setText(changeDateFormat("yyyy-MM-dd",
-                "dd/MM/yyyy",vehicaldealerdetails.getInsurance_renewal_date()));
+                "dd/MM/yyyy", vehicaldealerdetails.getInsurance_renewal_date()));
 
         edt_engineno.setText(vehicaldealerdetails.getEngine_no());
         edt_hypothecatedto.setText(vehicaldealerdetails.getHypothecated_to());
@@ -170,12 +170,12 @@ public class ViewRTODetails_Activity extends Activity {
 
         if (vehicaldealerdetails.getIsshowto_customer().equals("1")) {
             isshow_to_customer.setChecked(true);
-        } else{
+        } else {
             isshow_to_customer.setChecked(false);
         }
         if (vehicaldealerdetails.getIsshowto_rto().equals("1")) {
             isshow_to_rto.setChecked(true);
-        }else{
+        } else {
             isshow_to_rto.setChecked(false);
         }
 
@@ -219,9 +219,7 @@ public class ViewRTODetails_Activity extends Activity {
         }
 
 
-
-
-        ArrayList< VehicleDealerListPojo.DocumentListPojo> documentsList = new ArrayList<>();
+        ArrayList<VehicleDealerListPojo.DocumentListPojo> documentsList = new ArrayList<>();
         documentsList = vehicaldealerdetails.getDocument();
 
         if (documentsList.size() != 0) {
@@ -261,51 +259,51 @@ public class ViewRTODetails_Activity extends Activity {
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
 
-            mToolbar.inflateMenu(R.menu.list_import_menu);
-            mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    int id = item.getItemId();
-                    if (id == R.id.img_edit) {
-                          new ViewRTODetails_Activity.isImportDetails().execute(vehicaldealerdetails.getId());
-                    }else if(id == R.id.img_link){
-                        if (Utilities.isInternetAvailable(context)) {
-                            Intent intent = new Intent(context, LInkDealerRTO_Activity.class);
-                            intent.putExtra("vehicleDetails", vehicaldealerdetails);
-                            context.startActivity(intent);
-                        } else {
-                            Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
-                        }
-                    }else if (id == R.id.img_delete) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
-                        builder.setMessage("Are you sure you want to delete this item?");
-                        builder.setTitle("Alert");
-                        builder.setIcon(R.drawable.ic_alert_red_24dp);
-                        builder.setCancelable(false);
-                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-
-                                if (Utilities.isInternetAvailable(context)) {
-                                    new ViewRTODetails_Activity.DeleteVehicleDealerDetails().execute(vehicaldealerdetails.getId());
-                                } else {
-                                    Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
-                                }
-
-                            }
-                        });
-                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                        AlertDialog alertD = builder.create();
-                        alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
-                        alertD.show();
+        mToolbar.inflateMenu(R.menu.list_import_menu);
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                int id = item.getItemId();
+                if (id == R.id.img_edit) {
+                    new ViewRTODetails_Activity.isImportDetails().execute(vehicaldealerdetails.getId());
+                } else if (id == R.id.img_link) {
+                    if (Utilities.isInternetAvailable(context)) {
+                        Intent intent = new Intent(context, LInkDealerRTO_Activity.class);
+                        intent.putExtra("vehicleDetails", vehicaldealerdetails);
+                        context.startActivity(intent);
+                    } else {
+                        Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                     }
-                    return false;
+                } else if (id == R.id.img_delete) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
+                    builder.setMessage("Are you sure you want to delete this item?");
+                    builder.setTitle("Alert");
+                    builder.setIcon(R.drawable.ic_alert_red_24dp);
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+
+                            if (Utilities.isInternetAvailable(context)) {
+                                new ViewRTODetails_Activity.DeleteVehicleDealerDetails().execute(vehicaldealerdetails.getId());
+                            } else {
+                                Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+                            }
+
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog alertD = builder.create();
+                    alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
+                    alertD.show();
                 }
-            });
+                return false;
+            }
+        });
 
         mToolbar.setTitle("Vehicle Details");
         mToolbar.setNavigationIcon(R.drawable.icon_backarrow_16p);

@@ -26,7 +26,6 @@ import java.util.List;
 
 import in.rto.collections.R;
 import in.rto.collections.activities.Master_Bank;
-import in.rto.collections.models.BankPojo;
 import in.rto.collections.models.BranchPojo;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.UserSessionManager;
@@ -38,7 +37,6 @@ public class BranchAdapter extends RecyclerView.Adapter<BranchAdapter.MyViewHold
     private Context context;
     private UserSessionManager session;
     private String user_id;
-
 
 
     public BranchAdapter(Context context, List<BranchPojo> resultArrayList) {
@@ -90,7 +88,7 @@ public class BranchAdapter extends RecyclerView.Adapter<BranchAdapter.MyViewHold
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         if (Utilities.isInternetAvailable(context)) {
-                            new BranchAdapter.EditBranch().execute(edt_branch.getText().toString().trim(),edt_address.getText().toString().trim(),
+                            new BranchAdapter.EditBranch().execute(edt_branch.getText().toString().trim(), edt_address.getText().toString().trim(),
                                     user_id,
                                     finalbranchDetails.getId());
                         } else {
@@ -116,7 +114,7 @@ public class BranchAdapter extends RecyclerView.Adapter<BranchAdapter.MyViewHold
                 });
 
                 final AlertDialog alertD = builder.create();
-                LinearLayout ll=new LinearLayout(context);
+                LinearLayout ll = new LinearLayout(context);
                 ll.setOrientation(LinearLayout.VERTICAL);
                 ll.addView(edt_branch);
                 ll.addView(edt_address);
@@ -167,6 +165,7 @@ public class BranchAdapter extends RecyclerView.Adapter<BranchAdapter.MyViewHold
             ll_mainlayout = view.findViewById(R.id.ll_mainlayout);
         }
     }
+
     public class EditBranch extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 

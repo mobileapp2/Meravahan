@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -49,13 +48,13 @@
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -63,8 +62,8 @@
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
                         android:layout_marginRight="5dp"
-                        android:layout_marginLeft="5dp"
-                        >
+                        android:layout_marginLeft="5dp">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -85,28 +84,29 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/statecard"
-                        >
+                        android:id="@+id/statecard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
+
                             <CheckBox
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0"
                                 android:visibility="gone"
-                                android:id="@+id/chkstate"
-                                />
+                                android:id="@+id/chkstate" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="State :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
+                                android:textColor="@color/black" />
 
                             <TextView
                                 android:paddingBottom="10dp"
@@ -120,9 +120,10 @@
                                 android:longClickable="false"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
-                                android:layout_weight="0.6"/>
+                                android:layout_weight="0.6" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -133,28 +134,30 @@
                         android:layout_marginTop="2dp"
                         android:layout_marginRight="5dp"
                         android:layout_marginLeft="5dp"
-                        android:id="@+id/vehiclenocard"
-                        >
+                        android:id="@+id/vehiclenocard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
+
                             <CheckBox
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0"
                                 android:visibility="gone"
-                                android:id="@+id/chkvehicleno"
-                                />
+                                android:id="@+id/chkvehicleno" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Vehicle no :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
+                                android:textColor="@color/black" />
+
                             <TextView
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"
@@ -167,9 +170,10 @@
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:layout_weight="0.6"
-                                android:focusable="false"/>
+                                android:focusable="false" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -180,27 +184,29 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/ownercard"
-                        >
+                        android:id="@+id/ownercard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
+
                             <CheckBox
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0"
-                                android:id="@+id/chkvehicleownername"
-                                />
+                                android:id="@+id/chkvehicleownername" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Vehicle Owner Name :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
+                                android:textColor="@color/black" />
+
                             <TextView
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"
@@ -212,9 +218,10 @@
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:layout_weight="0.6"
-                                android:focusable="false"/>
+                                android:focusable="false" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -225,8 +232,8 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/rtonamecard"
-                        >
+                        android:id="@+id/rtonamecard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -239,15 +246,16 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0"
                                 android:visibility="gone"
-                                android:id="@+id/chkrtoname"
-                                />
+                                android:id="@+id/chkrtoname" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="RTO Agent Name :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
+                                android:textColor="@color/black" />
+
                             <TextView
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"
@@ -259,9 +267,10 @@
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:layout_weight="0.6"
-                                android:focusable="false"/>
+                                android:focusable="false" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -272,28 +281,30 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/descriptioncard"
-                        >
+                        android:id="@+id/descriptioncard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
+
                             <CheckBox
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0"
                                 android:visibility="gone"
-                                android:id="@+id/chkdescription"
-                                />
+                                android:id="@+id/chkdescription" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Description :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
+                                android:textColor="@color/black" />
+
                             <TextView
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"
@@ -305,10 +316,10 @@
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:layout_weight="0.6"
-                                android:focusable="false"
-                                />
+                                android:focusable="false" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -319,28 +330,30 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/typecard"
-                        >
+                        android:id="@+id/typecard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
+
                             <CheckBox
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0"
                                 android:visibility="gone"
-                                android:id="@+id/chktype"
-                                />
+                                android:id="@+id/chktype" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Type :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
+                                android:textColor="@color/black" />
+
                             <TextView
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"
@@ -353,10 +366,10 @@
                                 android:longClickable="false"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
-                                android:layout_weight="0.6"
-                                />
+                                android:layout_weight="0.6" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -367,28 +380,30 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/enginenocard"
-                        >
+                        android:id="@+id/enginenocard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
+
                             <CheckBox
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0"
                                 android:visibility="gone"
-                                android:id="@+id/chkengineno"
-                                />
+                                android:id="@+id/chkengineno" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Engine No :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
+                                android:textColor="@color/black" />
+
                             <TextView
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"
@@ -400,10 +415,11 @@
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:layout_weight="0.6"
-                                android:focusable="false"/>
+                                android:focusable="false" />
                         </LinearLayout>
 
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -414,28 +430,30 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/chassisnocard"
-                        >
+                        android:id="@+id/chassisnocard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
+
                             <CheckBox
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0"
                                 android:visibility="gone"
-                                android:id="@+id/chkchassisno"
-                                />
+                                android:id="@+id/chkchassisno" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Chassis No :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
+                                android:textColor="@color/black" />
+
                             <TextView
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"
@@ -447,10 +465,11 @@
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:layout_weight="0.6"
-                                android:focusable="false"/>
+                                android:focusable="false" />
 
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -461,27 +480,29 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/policynocard"
-                        >
+                        android:id="@+id/policynocard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
+
                             <CheckBox
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0"
-                                android:id="@+id/chkpolicyno"
-                                />
+                                android:id="@+id/chkpolicyno" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Insurance Policy No :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
+                                android:textColor="@color/black" />
+
                             <TextView
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"
@@ -493,9 +514,10 @@
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:layout_weight="0.6"
-                                android:focusable="false"/>
+                                android:focusable="false" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -506,27 +528,29 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/renewaldatecard"
-                        >
+                        android:id="@+id/renewaldatecard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
+
                             <CheckBox
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0"
-                                android:id="@+id/chkrenewaldate"
-                                />
+                                android:id="@+id/chkrenewaldate" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Renewal Date :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
+                                android:textColor="@color/black" />
+
                             <TextView
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"
@@ -539,9 +563,10 @@
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:layout_weight="0.6"
-                                android:focusable="false"/>
+                                android:focusable="false" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -552,28 +577,30 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/roadtaxcard"
-                        >
+                        android:id="@+id/roadtaxcard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
+
                             <CheckBox
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
                                 android:layout_weight="0"
                                 android:visibility="gone"
-                                android:id="@+id/chkroadtax"
-                                />
+                                android:id="@+id/chkroadtax" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Road Tax Paid Upto :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
+                                android:textColor="@color/black" />
+
                             <TextView
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"
@@ -586,10 +613,11 @@
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:layout_weight="0.6"
-                                android:focusable="false"/>
+                                android:focusable="false" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
-                   <android.support.v7.widget.CardView
+
+                    <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="2dp"
@@ -599,27 +627,29 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/temregcard"
-                        >
+                        android:id="@+id/temregcard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
+
                             <CheckBox
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0"
-                                android:id="@+id/chktemreg"
-                                />
+                                android:id="@+id/chktemreg" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Temporary Registration No:"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
+                                android:textColor="@color/black" />
+
                             <TextView
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"
@@ -631,9 +661,10 @@
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:layout_weight="0.6"
-                                android:focusable="false"/>
+                                android:focusable="false" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -644,21 +675,22 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/hypothecatedcard"
-                        >
+                        android:id="@+id/hypothecatedcard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
+
                             <CheckBox
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0"
                                 android:visibility="gone"
-                                android:id="@+id/chkhypothecated"
-                                />
+                                android:id="@+id/chkhypothecated" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
@@ -666,7 +698,8 @@
                                 android:text="Hypothecated To :"
                                 android:gravity="center_vertical"
                                 android:textColor="@color/black"
-                                android:focusable="false"/>
+                                android:focusable="false" />
+
                             <TextView
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"
@@ -679,9 +712,10 @@
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:layout_weight="0.6"
-                                android:focusable="false"/>
+                                android:focusable="false" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -692,27 +726,30 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/remarkcard"
-                        >
+                        android:id="@+id/remarkcard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
+
                             <CheckBox
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0"
                                 android:id="@+id/chkremark"
-                                android:visibility="gone"/>
+                                android:visibility="gone" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Remark :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
+                                android:textColor="@color/black" />
+
                             <TextView
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"
@@ -724,9 +761,10 @@
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:layout_weight="0.6"
-                                android:focusable="false"/>
+                                android:focusable="false" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
+
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -737,27 +775,30 @@
                         card_view:cardBackgroundColor="@android:color/white"
                         card_view:cardCornerRadius="0dp"
                         card_view:cardUseCompatPadding="true"
-                        android:id="@+id/vehicleimagecard"
-                        >
+                        android:id="@+id/vehicleimagecard">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="1"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
+
                             <CheckBox
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0"
                                 android:id="@+id/chkvehicleimage"
-                                android:visibility="gone"/>
+                                android:visibility="gone" />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.4"
                                 android:text="Vehicle Image :"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/black"/>
+                                android:textColor="@color/black" />
+
                             <TextView
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"
@@ -770,7 +811,7 @@
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:layout_weight="0.6"
-                                android:focusable="false"/>
+                                android:focusable="false" />
 
 
                         </LinearLayout>
@@ -798,19 +839,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:weightSum="1"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp">
+
                         <CheckBox
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0"
                             android:visibility="gone"
-                            android:id="@+id/chkservice"
-                            />
+                            android:id="@+id/chkservice" />
+
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -819,7 +862,7 @@
                             android:textColor="@color/black"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            android:layout_weight="0.9"/>
+                            android:layout_weight="0.9" />
                     </LinearLayout>
 
                     <ImageView
@@ -829,7 +872,7 @@
                         android:layout_gravity="end"
                         android:src="@drawable/icon_add"
                         android:tint="@color/black"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
@@ -853,19 +896,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:weightSum="1"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp">
+
                         <CheckBox
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0"
                             android:visibility="gone"
-                            android:id="@+id/chkother"
-                            />
+                            android:id="@+id/chkother" />
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -875,6 +920,7 @@
                             android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
+
                     <ImageView
                         android:id="@+id/btn_addotherdates"
                         android:layout_width="30dp"
@@ -882,7 +928,7 @@
                         android:layout_gravity="end"
                         android:src="@drawable/icon_add"
                         android:tint="@color/black"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
@@ -907,18 +953,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:weightSum="1"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp">
+
                         <CheckBox
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0"
                             android:id="@+id/chkdocument"
-                            android:visibility="gone"/>
+                            android:visibility="gone" />
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -928,6 +977,7 @@
                             android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
+
                     <ImageView
                         android:id="@+id/btn_adddocuments"
                         android:layout_width="30dp"
@@ -935,7 +985,7 @@
                         android:layout_gravity="end"
                         android:src="@drawable/icon_add"
                         android:tint="@color/black"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
 
                 </LinearLayout>
 

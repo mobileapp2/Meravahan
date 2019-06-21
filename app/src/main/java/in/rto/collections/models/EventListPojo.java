@@ -19,75 +19,61 @@ public class EventListPojo {
 
     public boolean isChecked;
 
-    public String getClient_mobile ()
-    {
+    public String getClient_mobile() {
         return client_mobile;
     }
 
-    public void setClient_mobile (String client_mobile)
-    {
+    public void setClient_mobile(String client_mobile) {
         this.client_mobile = client_mobile;
     }
 
 
-    public String getId ()
-    {
+    public String getId() {
         return id;
     }
 
-    public void setId (String id)
-    {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getVehicle_no ()
-    {
+    public String getVehicle_no() {
         return vehicle_no;
     }
 
-    public void setVehicle_no (String vehicle_no)
-    {
+    public void setVehicle_no(String vehicle_no) {
         this.vehicle_no = vehicle_no;
     }
 
 
-    public String getStatus ()
-    {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus (String status)
-    {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public String getDescription ()
-    {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription (String description)
-    {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public String getDate ()
-    {
+    public String getDate() {
         return date;
     }
 
-    public void setDate (String date)
-    {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public String getDuedate ()
-    {
+    public String getDuedate() {
         return duedate;
     }
 
-    public void setDuedate (String duedate)
-    {
+    public void setDuedate(String duedate) {
         this.duedate = duedate;
     }
 

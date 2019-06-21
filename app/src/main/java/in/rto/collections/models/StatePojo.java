@@ -5,29 +5,25 @@ public class StatePojo {
 
     private String state;
 
-    public String getId ()
-    {
+    public String getId() {
         return id;
     }
 
-    public void setId (String id)
-    {
+    public void setId(String id) {
         this.id = id;
     }
-    public String getstate ()
-    {
+
+    public String getstate() {
         return state;
     }
 
-    public void setstate (String state)
-    {
+    public void setstate(String state) {
         this.state = state;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
 
-        return "ClassPojo [id = "+id+", state = "+state+"]";
+        return "ClassPojo [id = " + id + ", state = " + state + "]";
     }
 }

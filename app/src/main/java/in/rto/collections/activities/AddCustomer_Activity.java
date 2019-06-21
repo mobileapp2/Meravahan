@@ -12,13 +12,12 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -74,18 +73,18 @@ import static in.rto.collections.utilities.Utilities.changeDateFormat;
 public class AddCustomer_Activity extends Activity {
     private Context context;
     private ScrollView scrollView;
-    private LinearLayout bank_details,bank_feild;
+    private LinearLayout bank_details, bank_feild;
     private LinearLayout ll_parent;
     private static final int CAMERA_REQUEST = 100;
-    private LinearLayout ll_servicedates, ll_documents,ll_Otherdates;
-    private ImageView btn_addservicedates, btn_adddocuments,btn_addotherdates;
+    private LinearLayout ll_servicedates, ll_documents, ll_Otherdates;
+    private ImageView btn_addservicedates, btn_adddocuments, btn_addotherdates;
     private static final int GALLERY_REQUEST = 200;
-    private EditText edt_state, edt_vehicleno, edt_clientname, edt_vehicleownername, edt_rtoagent,edt_vehicledealer,
+    private EditText edt_state, edt_vehicleno, edt_clientname, edt_vehicleownername, edt_rtoagent, edt_vehicledealer,
             edt_description, edt_type, edt_engineno, edt_chassisno, edt_insurancepolicyno, edt_renewaldate,
-            edt_purcasedate, edt_temregno, edt_remark,edt_hypothecatedto,edt_taxvalidupto, edt_permitvalidupto,
-            edt_satepermitvalidupto,nationalpermitvalidupto,pucrenewaldate,fitnessvalidupto,edt_bank, edt_branch, edt_borrowername,
+            edt_purcasedate, edt_temregno, edt_remark, edt_hypothecatedto, edt_taxvalidupto, edt_permitvalidupto,
+            edt_satepermitvalidupto, nationalpermitvalidupto, pucrenewaldate, fitnessvalidupto, edt_bank, edt_branch, edt_borrowername,
             edt_loanamount, edt_accountnumber, edt_sactiondate, edt_installmentanount, edt_startdate,
-            edt_enddate, edt_frequency,edt_selectVehicleImage;
+            edt_enddate, edt_frequency, edt_selectVehicleImage;
 
     private int mYear, mMonth, mDay;
     private int mYear1, mMonth1, mDay1;
@@ -108,8 +107,8 @@ public class AddCustomer_Activity extends Activity {
     private ArrayList<TypePojo> typelist;
     private ArrayList<StatePojo> statelist;
     private UserSessionManager session;
-    private String companyAliasName = "",documentType;
-    private String user_id, stateId, clientId, typeId,rtoId,statename, bankId="0",branchId="0",frequency="0";
+    private String companyAliasName = "", documentType;
+    private String user_id, stateId, clientId, typeId, rtoId, statename, bankId = "0", branchId = "0", frequency = "0";
     private String[] PERMISSIONS = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
     private Uri photoURI;
     private File photoFile, customerPicFolder;
@@ -186,13 +185,14 @@ public class AddCustomer_Activity extends Activity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             builder.detectFileUriExposure();
         }
-bank_feild.setVisibility(View.GONE);
+        bank_feild.setVisibility(View.GONE);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -268,18 +268,19 @@ bank_feild.setVisibility(View.GONE);
         documentsLayoutsList = new ArrayList<>();
 
     }
+
     @SuppressLint("ClickableViewAccessibility")
     private void setEventHandler() {
-bank_details.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        if (bank_feild.getVisibility() == View.VISIBLE) {
-           bank_feild.setVisibility(View.GONE);
-        } else {
-            bank_feild.setVisibility(View.VISIBLE);
-        }
-    }
-});
+        bank_details.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bank_feild.getVisibility() == View.VISIBLE) {
+                    bank_feild.setVisibility(View.GONE);
+                } else {
+                    bank_feild.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         edt_state.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -295,7 +296,7 @@ bank_details.setOnClickListener(new View.OnClickListener() {
             }
         });
 
- edt_type.setOnClickListener(new View.OnClickListener() {
+        edt_type.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (typelist.size() == 0) {
@@ -713,7 +714,6 @@ bank_details.setOnClickListener(new View.OnClickListener() {
         });
 
 
-
         img_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -727,6 +727,7 @@ bank_details.setOnClickListener(new View.OnClickListener() {
         });
 
     }
+
     private void bankListDialog(final ArrayList<BankPojo> bankList) {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
         builderSingle.setTitle("Select Bank");
@@ -824,6 +825,7 @@ bank_details.setOnClickListener(new View.OnClickListener() {
             }
         }
     }
+
     private void branchListDialog(final ArrayList<BranchPojo> branchList) {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
         builderSingle.setTitle("Select Branch");
@@ -858,6 +860,7 @@ bank_details.setOnClickListener(new View.OnClickListener() {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetBranchList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -893,7 +896,7 @@ bank_details.setOnClickListener(new View.OnClickListener() {
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
                     if (type.equalsIgnoreCase("success")) {
-                        branchList= new ArrayList<>();
+                        branchList = new ArrayList<>();
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
                             for (int i = 0; i < jsonarr.length(); i++) {
@@ -955,6 +958,7 @@ bank_details.setOnClickListener(new View.OnClickListener() {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetFrqList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -990,7 +994,7 @@ bank_details.setOnClickListener(new View.OnClickListener() {
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
                     if (type.equalsIgnoreCase("success")) {
-                        frequencylist= new ArrayList<>();
+                        frequencylist = new ArrayList<>();
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
                             for (int i = 0; i < jsonarr.length(); i++) {
@@ -1149,6 +1153,7 @@ bank_details.setOnClickListener(new View.OnClickListener() {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetRTOAgentList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -1247,6 +1252,7 @@ bank_details.setOnClickListener(new View.OnClickListener() {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetTypeList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -1337,28 +1343,28 @@ bank_details.setOnClickListener(new View.OnClickListener() {
             Utilities.showSnackBar(ll_parent, "Please Enter Valid Vehicle Number");
             return;
         }
-     if(!edt_bank.getText().toString().trim().equals("")){
-         if (edt_bank.getText().toString().trim().equals("")) {
-             Utilities.showSnackBar(ll_parent, "Please Enter Bank ");
-             return;
-         }
-         if (edt_branch.getText().toString().trim().equals("")) {
-             Utilities.showSnackBar(ll_parent, "Please Enter Branch");
-             return;
-         }
-         if (edt_startdate.getText().toString().trim().equals("")) {
-             Utilities.showSnackBar(ll_parent, "Please Select Start Date");
-             return;
-         }
-         if (edt_enddate.getText().toString().trim().equals("")) {
-             Utilities.showSnackBar(ll_parent, "Please Select End Date");
-             return;
-         }
-         if (edt_frequency.getText().toString().trim().equals("")) {
-             Utilities.showSnackBar(ll_parent, "Please Select Frequency");
-             return;
-         }
-     }
+        if (!edt_bank.getText().toString().trim().equals("")) {
+            if (edt_bank.getText().toString().trim().equals("")) {
+                Utilities.showSnackBar(ll_parent, "Please Enter Bank ");
+                return;
+            }
+            if (edt_branch.getText().toString().trim().equals("")) {
+                Utilities.showSnackBar(ll_parent, "Please Enter Branch");
+                return;
+            }
+            if (edt_startdate.getText().toString().trim().equals("")) {
+                Utilities.showSnackBar(ll_parent, "Please Select Start Date");
+                return;
+            }
+            if (edt_enddate.getText().toString().trim().equals("")) {
+                Utilities.showSnackBar(ll_parent, "Please Select End Date");
+                return;
+            }
+            if (edt_frequency.getText().toString().trim().equals("")) {
+                Utilities.showSnackBar(ll_parent, "Please Select Frequency");
+                return;
+            }
+        }
 
         ArrayList<CustomerPojo.ServiceDatesListPojo> serviceDatesList = new ArrayList<>();
         for (int i = 0; i < serviceDatesLayoutsList.size(); i++) {
@@ -1446,8 +1452,8 @@ bank_details.setOnClickListener(new View.OnClickListener() {
         mainObj.addProperty("type", "add");
         mainObj.addProperty("state", stateId);
         mainObj.addProperty("Name_of_the_Vehicle_Owner", edt_vehicleownername.getText().toString().trim());
-        mainObj.addProperty("RTO_Agent",edt_rtoagent.getText().toString().trim());
-        mainObj.addProperty("vehicle_dealer",edt_vehicledealer.getText().toString().trim());
+        mainObj.addProperty("RTO_Agent", edt_rtoagent.getText().toString().trim());
+        mainObj.addProperty("vehicle_dealer", edt_vehicledealer.getText().toString().trim());
         mainObj.addProperty("rtotype", typeId);
         mainObj.addProperty("c_Type", typeId);
         mainObj.addProperty("Engine_No", edt_engineno.getText().toString().trim());
@@ -1484,7 +1490,7 @@ bank_details.setOnClickListener(new View.OnClickListener() {
                 fitnessvalidupto.getText().toString().trim()));
         mainObj.addProperty("Insurance_Policy_No", edt_insurancepolicyno.getText().toString().trim());
         mainObj.addProperty("Temporary_Registration_No", edt_temregno.getText().toString().trim());
-        mainObj.addProperty("Hypothecated_to",  edt_hypothecatedto.getText().toString().trim());
+        mainObj.addProperty("Hypothecated_to", edt_hypothecatedto.getText().toString().trim());
         mainObj.add("documents", documentJSONArray);
         mainObj.addProperty("Remark", edt_remark.getText().toString().trim());
         mainObj.addProperty("Vehicle_No", edt_vehicleno.getText().toString().trim());
@@ -1610,6 +1616,7 @@ bank_details.setOnClickListener(new View.OnClickListener() {
 
         }
     }
+
     public void selectDate(View view) {
         final EditText edt_servicedate = (EditText) view;
         final EditText edt_otheredate = (EditText) view;
@@ -1755,6 +1762,7 @@ bank_details.setOnClickListener(new View.OnClickListener() {
         ll_documents.removeView((View) view.getParent());
         documentsLayoutsList.remove(view.getParent());
     }
+
     public void selectVehicleImage(View view) {
         documentType = "vehicleImage";
         if (doesAppNeedPermissions()) {
@@ -1821,8 +1829,7 @@ bank_details.setOnClickListener(new View.OnClickListener() {
                             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                             startActivityForResult(intent, CAMERA_REQUEST);
-                        }
-                        else if (options[item].equals("Choose from Gallery")) {
+                        } else if (options[item].equals("Choose from Gallery")) {
                             Intent intent = new Intent(Intent.ACTION_PICK);
                             intent.setType("image/*");
                             startActivityForResult(intent, GALLERY_REQUEST);
@@ -1927,9 +1934,9 @@ bank_details.setOnClickListener(new View.OnClickListener() {
                     if (type.equalsIgnoreCase("Success")) {
                         JSONObject Obj1 = mainObj.getJSONObject("result");
                         String document_name = Obj1.getString("name");
-                        if(documentType.equals("selectedImage")) {
+                        if (documentType.equals("selectedImage")) {
                             edt_selectdocuments.setText(document_name);
-                        }else if(documentType.equals("vehicleImage")){
+                        } else if (documentType.equals("vehicleImage")) {
                             edt_selectVehicleImage.setText(document_name);
                         }
 
@@ -1945,7 +1952,6 @@ bank_details.setOnClickListener(new View.OnClickListener() {
             }
         }
     }
-
 
 
     void savefile(Uri sourceuri) {
@@ -1986,12 +1992,12 @@ bank_details.setOnClickListener(new View.OnClickListener() {
         otherLayoutsList.remove(view.getParent());
     }
 
-    public  void deleteDocument(View view){
+    public void deleteDocument(View view) {
         ll_documents.removeView((View) view.getParent());
         documentsLayoutsList.remove(view.getParent());
     }
 
-    public  void removeserviceDates(View view){
+    public void removeserviceDates(View view) {
         ll_servicedates.removeView((View) view.getParent());
         serviceDatesLayoutsList.remove(view.getParent());
     }

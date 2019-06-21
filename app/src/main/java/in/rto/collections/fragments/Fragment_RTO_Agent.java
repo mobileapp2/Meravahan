@@ -25,9 +25,7 @@ import java.util.List;
 
 import in.rto.collections.R;
 import in.rto.collections.activities.AddRTOAgent_Activity;
-import in.rto.collections.adapters.CustomerAdapter;
 import in.rto.collections.adapters.GetRTOAgentDetailListAdapter;
-import in.rto.collections.models.CustomerPojo;
 import in.rto.collections.models.RTOAgentListPojo;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.ParamsPojo;
@@ -48,6 +46,7 @@ public class Fragment_RTO_Agent extends Fragment {
     private SearchView searchView;
     private static String role;
     private static ArrayList<RTOAgentListPojo> rtoAgentListPojos;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment__rto__agent, container, false);
@@ -58,6 +57,7 @@ public class Fragment_RTO_Agent extends Fragment {
         setEventHandlers();
         return rootView;
     }
+
     private void init(View rootView) {
         session = new UserSessionManager(context);
         fab_add_agent = rootView.findViewById(R.id.fab_add_agent);
@@ -93,6 +93,7 @@ public class Fragment_RTO_Agent extends Fragment {
             e.printStackTrace();
         }
     }
+
     private void setEventHandlers() {
         fab_add_agent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,17 +120,17 @@ public class Fragment_RTO_Agent extends Fragment {
             public boolean onQueryTextSubmit(String query) {
                 searchView.clearFocus();
                 ArrayList<RTOAgentListPojo> rtoSearchedList = new ArrayList<>();
-                for (RTOAgentListPojo rto : rtoAgentListPojos ) {
-                    String contactToBeSearched = rto.getVehicle_owner().toLowerCase()+ rto.getVehicle_no().toLowerCase();
+                for (RTOAgentListPojo rto : rtoAgentListPojos) {
+                    String contactToBeSearched = rto.getVehicle_owner().toLowerCase() + rto.getVehicle_no().toLowerCase();
                     if (contactToBeSearched.contains(query.toLowerCase())) {
                         rtoSearchedList.add(rto);
                     }
                 }
 
                 if (rtoSearchedList.size() == 0) {
-                    rto_agent_list.setAdapter(new GetRTOAgentDetailListAdapter(context, rtoSearchedList,user_id));
+                    rto_agent_list.setAdapter(new GetRTOAgentDetailListAdapter(context, rtoSearchedList, user_id));
                 } else {
-                    rto_agent_list.setAdapter(new GetRTOAgentDetailListAdapter(context, rtoSearchedList,user_id));
+                    rto_agent_list.setAdapter(new GetRTOAgentDetailListAdapter(context, rtoSearchedList, user_id));
 
                 }
 
@@ -141,21 +142,21 @@ public class Fragment_RTO_Agent extends Fragment {
                 if (!newText.equals("")) {
                     ArrayList<RTOAgentListPojo> rtoSearchedList = new ArrayList<>();
                     for (RTOAgentListPojo rto : rtoAgentListPojos) {
-                        String contactToBeSearched = rto.getVehicle_owner().toLowerCase()+rto.getVehicle_no().toLowerCase();
+                        String contactToBeSearched = rto.getVehicle_owner().toLowerCase() + rto.getVehicle_no().toLowerCase();
                         if (contactToBeSearched.contains(newText.toLowerCase())) {
                             rtoSearchedList.add(rto);
                         }
                     }
                     if (rtoSearchedList.size() == 0) {
-                        rto_agent_list.setAdapter(new GetRTOAgentDetailListAdapter(context, rtoSearchedList,user_id));
+                        rto_agent_list.setAdapter(new GetRTOAgentDetailListAdapter(context, rtoSearchedList, user_id));
                     } else {
                         //bindRecyclerview(contactsSearchedList);
-                        rto_agent_list.setAdapter(new GetRTOAgentDetailListAdapter(context, rtoSearchedList,user_id));
+                        rto_agent_list.setAdapter(new GetRTOAgentDetailListAdapter(context, rtoSearchedList, user_id));
 
                     }
                     return true;
                 } else if (newText.equals("")) {
-                    rto_agent_list.setAdapter(new GetRTOAgentDetailListAdapter(context, rtoAgentListPojos,user_id));
+                    rto_agent_list.setAdapter(new GetRTOAgentDetailListAdapter(context, rtoAgentListPojos, user_id));
                     //customer_list.setAdapter(new CustomerAdapter(context,customerPojos,user_id));
                     //bindRecyclerview(contactList);
                 }
@@ -165,7 +166,7 @@ public class Fragment_RTO_Agent extends Fragment {
 
     }
 
-    public  static class GetRTOAgentList extends AsyncTask<String, Void, String> {
+    public static class GetRTOAgentList extends AsyncTask<String, Void, String> {
 
 
         @Override
@@ -201,8 +202,8 @@ public class Fragment_RTO_Agent extends Fragment {
                     JSONObject mainObj = new JSONObject(result);
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
-                   rtoAgentListPojos = new ArrayList<RTOAgentListPojo>();
-                    rto_agent_list.setAdapter(new GetRTOAgentDetailListAdapter(context, rtoAgentListPojos,user_id));
+                    rtoAgentListPojos = new ArrayList<RTOAgentListPojo>();
+                    rto_agent_list.setAdapter(new GetRTOAgentDetailListAdapter(context, rtoAgentListPojos, user_id));
                     if (type.equalsIgnoreCase("success")) {
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
@@ -239,7 +240,6 @@ public class Fragment_RTO_Agent extends Fragment {
                                 agentdealerMainObj.setVehicle_image_url(jsonObj.getString("vehicleImageURL"));
 
 
-
                                 ArrayList<RTOAgentListPojo.OtherDatesListPojo> otherDatesListPojos = new ArrayList<>();
 
                                 for (int j = 0; j < jsonObj.getJSONArray("rto_dates").length(); j++) {
@@ -250,7 +250,6 @@ public class Fragment_RTO_Agent extends Fragment {
                                     otherDatesListPojos.add(otherdateobj);
                                 }
                                 agentdealerMainObj.setOther_date(otherDatesListPojos);
-
 
 
                                 ArrayList<RTOAgentListPojo.DocumentListPojo> documentsList = new ArrayList<>();
@@ -273,7 +272,7 @@ public class Fragment_RTO_Agent extends Fragment {
                                 rto_agent_list.setVisibility(View.VISIBLE);
                                 ll_nothingtoshow.setVisibility(View.GONE);
                             }
-                            rto_agent_list.setAdapter(new GetRTOAgentDetailListAdapter(context, rtoAgentListPojos,user_id));
+                            rto_agent_list.setAdapter(new GetRTOAgentDetailListAdapter(context, rtoAgentListPojos, user_id));
 
                         }
                     } else if (type.equalsIgnoreCase("failure")) {
@@ -281,10 +280,10 @@ public class Fragment_RTO_Agent extends Fragment {
                         rto_agent_list.setVisibility(View.GONE);
                     }
                 }
-           } catch (Exception e) {
+            } catch (Exception e) {
                 ll_nothingtoshow.setVisibility(View.VISIBLE);
                 rto_agent_list.setVisibility(View.GONE);
-              e.printStackTrace();
+                e.printStackTrace();
             }
         }
     }

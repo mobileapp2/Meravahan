@@ -55,10 +55,10 @@ public class VehicleDealerListPojo implements Serializable {
     private String borrower_name;
     private String loan_amount;
     private String loan_account_number;
-    private String 	installment_amount;
+    private String installment_amount;
     private String date_to_section;
     private String installment_start_date;
-    private String 	installment_end_date;
+    private String installment_end_date;
     private String frequency_id;
     private String frequency;
     private String vehicle_image;
@@ -81,9 +81,11 @@ public class VehicleDealerListPojo implements Serializable {
     public void setIsshowto_rto(String isshowto_rto) {
         this.isshowto_rto = isshowto_rto;
     }
+
     public String getIsshowto_rto() {
         return isshowto_rto;
     }
+
     public String getCreaterName() {
         return createrName;
     }
@@ -95,6 +97,7 @@ public class VehicleDealerListPojo implements Serializable {
     public void setIsshowto_customer(String isshowto_customer) {
         this.isshowto_customer = isshowto_customer;
     }
+
     public String getIsshowto_customer() {
         return isshowto_customer;
     }
@@ -134,9 +137,18 @@ public class VehicleDealerListPojo implements Serializable {
     public void setState_id(String state_id) {
         this.state_id = state_id;
     }
-    public  String getStateId(){return state_id;}
-    public  String getStateName(){return state_name;}
-    public void setStateName(String state_name){ this.state_name = state_name; }
+
+    public String getStateId() {
+        return state_id;
+    }
+
+    public String getStateName() {
+        return state_name;
+    }
+
+    public void setStateName(String state_name) {
+        this.state_name = state_name;
+    }
 
     public String getVehicle_no() {
         return vehicle_no;
@@ -342,9 +354,13 @@ public class VehicleDealerListPojo implements Serializable {
         this.frequency = frequency;
     }
 
-    public  String getBank_name(){return bank_name;}
+    public String getBank_name() {
+        return bank_name;
+    }
 
-    public void setBank_name(String bank_name){ this.bank_name = bank_name; }
+    public void setBank_name(String bank_name) {
+        this.bank_name = bank_name;
+    }
 
     public String getBorrower_name() {
         return borrower_name;
@@ -404,6 +420,7 @@ public class VehicleDealerListPojo implements Serializable {
     public void setService_date(ArrayList<ServiceDatesListPojo> service_date) {
         this.service_date = service_date;
     }
+
     public ArrayList<OtherDatesListPojo> getOther_date() {
         return other_date;
     }
@@ -411,6 +428,7 @@ public class VehicleDealerListPojo implements Serializable {
     public void setOther_date(ArrayList<OtherDatesListPojo> other_date) {
         this.other_date = other_date;
     }
+
     public String getVehicle_image() {
         return vehicle_image;
     }
@@ -426,6 +444,7 @@ public class VehicleDealerListPojo implements Serializable {
     public void setVehicle_image_url(String vehicle_image_url) {
         this.vehicle_image_url = vehicle_image_url;
     }
+
     public ArrayList<DocumentListPojo> getDocument() {
         return document;
     }
@@ -437,7 +456,7 @@ public class VehicleDealerListPojo implements Serializable {
     public static class ServiceDatesListPojo implements Serializable {
         private String service_date;
         private String text;
-        private  String service_date_id;
+        private String service_date_id;
 
         public String getService_date() {
             return service_date;
@@ -463,10 +482,11 @@ public class VehicleDealerListPojo implements Serializable {
             this.text = text;
         }
     }
+
     public static class WheelDatesListPojo implements Serializable {
         private String wheel_alignment_date;
         private String text;
-        private  String wheel_date_id;
+        private String wheel_date_id;
 
         public String getWheel_alignment_date() {
             return wheel_alignment_date;
@@ -494,11 +514,10 @@ public class VehicleDealerListPojo implements Serializable {
     }
 
 
-
     public static class OtherDatesListPojo implements Serializable {
         private String other_date;
         private String other_date_id;
-        private  String text;
+        private String text;
 
         public String getOther_date() {
             return other_date;
@@ -517,9 +536,6 @@ public class VehicleDealerListPojo implements Serializable {
         }
 
 
-
-
-
         public String getText() {
             return text;
         }
@@ -528,7 +544,6 @@ public class VehicleDealerListPojo implements Serializable {
             this.text = text;
         }
     }
-
 
 
     public static class DocumentListPojo implements Serializable {
@@ -552,6 +567,7 @@ public class VehicleDealerListPojo implements Serializable {
         public void setDocument_name(String document_name) {
             this.document_name = document_name;
         }
+
         public String getOriginal_name() {
             return original_name;
         }

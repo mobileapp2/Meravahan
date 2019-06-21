@@ -152,7 +152,7 @@ public class Login_Activity extends Activity {
         tv_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              startActivity(new Intent(context, Register_Activity.class));
+                startActivity(new Intent(context, Register_Activity.class));
             }
         });
 
@@ -298,7 +298,7 @@ public class Login_Activity extends Activity {
         } else {
             Utilities.showSnackBar(cl_parent, "Please Check Internet Connection");
         }
-      //startActivity(new Intent(context, MainDrawer_Activity.class));
+        //startActivity(new Intent(context, MainDrawer_Activity.class));
     }
 
     private void saveRegistrationID() {
@@ -332,7 +332,7 @@ public class Login_Activity extends Activity {
     private void checkPermissions() {
         if (!PermissionUtil.askPermissions(this)) {
             // permision not required or already given
-           //startService(new Intent(context, ChecklistSyncServiceHLL.class));
+            //startService(new Intent(context, ChecklistSyncServiceHLL.class));
         }
     }
 

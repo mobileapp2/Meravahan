@@ -21,7 +21,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -32,12 +31,10 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -47,11 +44,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -68,15 +62,15 @@ import static in.rto.collections.utilities.Utilities.changeDateFormat;
 public class PremiumDue_Fragment extends Fragment {
     public LinearLayout ll_parent;
     private Context context;
-    private FloatingActionButton fab_wish_whatsapp, fab_wish_sms,fab_wish_notification;
+    private FloatingActionButton fab_wish_whatsapp, fab_wish_sms, fab_wish_notification;
     private SwipeRefreshLayout swipeRefreshLayout;
     private LinearLayout ll_nothingtoshow;
-    private LinearLayoutManager layoutManager,layoutManager1;
+    private LinearLayoutManager layoutManager, layoutManager1;
     private UserSessionManager session;
     private int mYear, mMonth, mDay;
-    private String user_id, date,role,test_id,name;
-    private ArrayList<EventListPojo> premiumDueList,premiumDueListRTO;
-    private String id = "", message = "", whatsappPicUrl = "", whatsappPic = "",clientMobile="";
+    private String user_id, date, role, test_id, name;
+    private ArrayList<EventListPojo> premiumDueList, premiumDueListRTO;
+    private String id = "", message = "", whatsappPicUrl = "", whatsappPic = "", clientMobile = "";
     private EditText edt_date, dialog_edt_whatsappmessage;
     private CheckBox cb_checkall;
     private ImageView dialog_imv_whatsapppic;
@@ -109,19 +103,19 @@ public class PremiumDue_Fragment extends Fragment {
         fab_wish_sms = rootView.findViewById(R.id.fab_wish_sms);
         fab_wish_notification = rootView.findViewById(R.id.fab_wish_notification);
         ll_nothingtoshow = rootView.findViewById(R.id.ll_nothingtoshow);
-       rv_premiumdue = rootView.findViewById(R.id.rv_premiumdue);
-       // rv_premiumdue1 = rootView.findViewById(R.id.rv_premiumdue1);
-       // rv_premiumdue2 = rootView.findViewById(R.id.rv_premiumdue2);
+        rv_premiumdue = rootView.findViewById(R.id.rv_premiumdue);
+        // rv_premiumdue1 = rootView.findViewById(R.id.rv_premiumdue1);
+        // rv_premiumdue2 = rootView.findViewById(R.id.rv_premiumdue2);
         ll_parent = getActivity().findViewById(R.id.ll_parent);
 //      shimmer_view_container = rootView.findViewById(R.id.shimmer_view_container);
         swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshLayout);
         cb_checkall = rootView.findViewById(R.id.cb_checkall);
         edt_date = rootView.findViewById(R.id.edt_date);
-      //  layoutManager = new LinearLayoutManager(context);
-       // layoutManager1 = new LinearLayoutManager(context);
-       // rv_premiumdue.setLayoutManager(layoutManager);
-       // rv_premiumdue1.setLayoutManager(layoutManager1);
-       // rv_premiumdue2.setLayoutManager(layoutManager);
+        //  layoutManager = new LinearLayoutManager(context);
+        // layoutManager1 = new LinearLayoutManager(context);
+        // rv_premiumdue.setLayoutManager(layoutManager);
+        // rv_premiumdue1.setLayoutManager(layoutManager1);
+        // rv_premiumdue2.setLayoutManager(layoutManager);
 
         premiumDueList = new ArrayList<>();
         premiumDueListRTO = new ArrayList<>();
@@ -155,12 +149,14 @@ public class PremiumDue_Fragment extends Fragment {
                 "dd/MM/yyyy", Utilities.ConvertDateFormat(Utilities.dfDate, mDay, mMonth + 1, mYear)));
 
         if (Utilities.isNetworkAvailable(context)) {
-            if(role.equals("4")){
+            if (role.equals("4")) {
                 new GetBankerEventList().execute(user_id, date);
-            } if(role.equals("6")){
+            }
+            if (role.equals("6")) {
                 new GetOtherVehicleEventList().execute(user_id, date);
-            }else{
-            new GetEventList().execute(user_id, date);}
+            } else {
+                new GetEventList().execute(user_id, date);
+            }
         } else {
             Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
             swipeRefreshLayout.setRefreshing(false);
@@ -180,11 +176,12 @@ public class PremiumDue_Fragment extends Fragment {
             public void onRefresh() {
                 if (Utilities.isNetworkAvailable(context)) {
                     cb_checkall.setChecked(false);
-                    if(role.equals("4")){
+                    if (role.equals("4")) {
                         new GetBankerEventList().execute(user_id, date);
-                    } if(role.equals("6")){
+                    }
+                    if (role.equals("6")) {
                         new GetOtherVehicleEventList().execute(user_id, date);
-                    }else{
+                    } else {
                         new GetEventList().execute(user_id, date);
                     }
 
@@ -203,18 +200,14 @@ public class PremiumDue_Fragment extends Fragment {
             public void onClick(View view) {
                 JSONArray user_info = null;
                 int count = 0;
-                if (premiumDueList.size() > 0)
-                {
-                    for (int i = 0;i<premiumDueList.size();i++)
-                    {
+                if (premiumDueList.size() > 0) {
+                    for (int i = 0; i < premiumDueList.size(); i++) {
                         if (premiumDueList.get(i).isChecked)
                             count = count + 1;
                     }
                 }
-                if (premiumDueListRTO.size() > 0)
-                {
-                    for (int i = 0;i<premiumDueListRTO.size();i++)
-                    {
+                if (premiumDueListRTO.size() > 0) {
+                    for (int i = 0; i < premiumDueListRTO.size(); i++) {
                         if (premiumDueListRTO.get(i).isChecked)
                             count = count + 1;
                     }
@@ -223,17 +216,14 @@ public class PremiumDue_Fragment extends Fragment {
                     user_info = new JSONArray(session.getUserDetails().get(
                             ApplicationConstants.KEY_LOGIN_INFO));
                     JSONObject json = user_info.getJSONObject(0);
-                    if (Integer.parseInt(json.getString("whatsappCount"))+ count <= Integer.parseInt(json.getString("maxWhatsAppLimit")))
-                    {
+                    if (Integer.parseInt(json.getString("whatsappCount")) + count <= Integer.parseInt(json.getString("maxWhatsAppLimit"))) {
                         if (Utilities.isInternetAvailable(context)) {
-                            sendWhatsapp("message", "","","","","whatsapp");
+                            sendWhatsapp("message", "", "", "", "", "whatsapp");
                         } else {
                             Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                         }
-                    }
-                    else
-                    {
-                        Utilities.buildDialogForSmsValidation(context,count);
+                    } else {
+                        Utilities.buildDialogForSmsValidation(context, count);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -247,7 +237,7 @@ public class PremiumDue_Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (Utilities.isInternetAvailable(context)) {
-                    sendWhatsapp("message", "","","","","notification");
+                    sendWhatsapp("message", "", "", "", "", "notification");
                     // new GetPremiumMessage().execute(user_id, "", "WHATSAPP");
                 } else {
                     Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
@@ -260,18 +250,14 @@ public class PremiumDue_Fragment extends Fragment {
             public void onClick(View view) {
                 JSONArray user_info = null;
                 int count = 0;
-                if (premiumDueList.size() > 0)
-                {
-                    for (int i = 0;i<premiumDueList.size();i++)
-                    {
+                if (premiumDueList.size() > 0) {
+                    for (int i = 0; i < premiumDueList.size(); i++) {
                         if (premiumDueList.get(i).isChecked)
                             count = count + 1;
                     }
                 }
-                if (premiumDueListRTO.size() > 0)
-                {
-                    for (int i = 0;i<premiumDueListRTO.size();i++)
-                    {
+                if (premiumDueListRTO.size() > 0) {
+                    for (int i = 0; i < premiumDueListRTO.size(); i++) {
                         if (premiumDueListRTO.get(i).isChecked)
                             count = count + 1;
                     }
@@ -280,17 +266,14 @@ public class PremiumDue_Fragment extends Fragment {
                     user_info = new JSONArray(session.getUserDetails().get(
                             ApplicationConstants.KEY_LOGIN_INFO));
                     JSONObject json = user_info.getJSONObject(0);
-                    if (Integer.parseInt(json.getString("smsCount"))+ count <= Integer.parseInt(json.getString("maxSMSLimit")))
-                    {
+                    if (Integer.parseInt(json.getString("smsCount")) + count <= Integer.parseInt(json.getString("maxSMSLimit"))) {
                         if (Utilities.isInternetAvailable(context)) {
-                            sendSMS("", "","","");
+                            sendSMS("", "", "", "");
                         } else {
                             Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                         }
-                    }
-                    else
-                    {
-                        Utilities.buildDialogForSmsValidation(context,count);
+                    } else {
+                        Utilities.buildDialogForSmsValidation(context, count);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -317,10 +300,11 @@ public class PremiumDue_Fragment extends Fragment {
                         mDay = dayOfMonth;
 
                         if (Utilities.isNetworkAvailable(context)) {
-                            if(role.equals("4")){
+                            if (role.equals("4")) {
                                 new GetBankerEventList().execute(user_id, date);
-                            }else{
-                                new GetEventList().execute(user_id, date);}
+                            } else {
+                                new GetEventList().execute(user_id, date);
+                            }
                         } else {
                             Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                             swipeRefreshLayout.setRefreshing(false);
@@ -340,6 +324,7 @@ public class PremiumDue_Fragment extends Fragment {
             }
         });
     }
+
     public class GetBankerEventList extends AsyncTask<String, Void, String> {
 
         @Override
@@ -381,7 +366,7 @@ public class PremiumDue_Fragment extends Fragment {
 
                                 EventListPojo eventMainObj = new EventListPojo();
                                 JSONObject jsonObj = jsonarr.getJSONObject(i);
-                                eventMainObj.setId(String.valueOf( i));
+                                eventMainObj.setId(String.valueOf(i));
                                 eventMainObj.setDescription(jsonObj.getString("description"));
                                 eventMainObj.setDate(jsonObj.getString("date"));
                                 eventMainObj.setClient_id(jsonObj.getString("id"));
@@ -392,9 +377,9 @@ public class PremiumDue_Fragment extends Fragment {
                                 premiumDueList.add(eventMainObj);
                             }
                             if (premiumDueList.size() == 0) {
-                                 ll_nothingtoshow.setVisibility(View.VISIBLE);
-                                 rv_premiumdue.setVisibility(View.GONE);
-                                 cb_checkall.setVisibility(View.GONE);
+                                ll_nothingtoshow.setVisibility(View.VISIBLE);
+                                rv_premiumdue.setVisibility(View.GONE);
+                                cb_checkall.setVisibility(View.GONE);
                             } else {
                                 prepareListData();
                                 //new PremiumDue_Fragment.GetEventListRTO().execute(user_id, date);
@@ -405,9 +390,9 @@ public class PremiumDue_Fragment extends Fragment {
 
                         }
                     } else {
-                         ll_nothingtoshow.setVisibility(View.VISIBLE);
+                        ll_nothingtoshow.setVisibility(View.VISIBLE);
                         rv_premiumdue.setVisibility(View.GONE);
-                         cb_checkall.setVisibility(View.GONE);
+                        cb_checkall.setVisibility(View.GONE);
                     }
                 }
             } catch (Exception e) {
@@ -418,6 +403,7 @@ public class PremiumDue_Fragment extends Fragment {
             }
         }
     }
+
     public class GetEventList extends AsyncTask<String, Void, String> {
 
         @Override
@@ -461,7 +447,7 @@ public class PremiumDue_Fragment extends Fragment {
 
                                 EventListPojo eventMainObj = new EventListPojo();
                                 JSONObject jsonObj = jsonarr.getJSONObject(i);
-                                eventMainObj.setId(String.valueOf( i));
+                                eventMainObj.setId(String.valueOf(i));
                                 eventMainObj.setDescription(jsonObj.getString("description"));
                                 eventMainObj.setDate(jsonObj.getString("date"));
                                 eventMainObj.setClient_id(jsonObj.getString("id"));
@@ -473,22 +459,22 @@ public class PremiumDue_Fragment extends Fragment {
                             }
                             if (premiumDueList.size() == 0) {
                                 new PremiumDue_Fragment.GetEventListRTO().execute(user_id, date);
-                               // ll_nothingtoshow.setVisibility(View.VISIBLE);
-                               // rv_premiumdue.setVisibility(View.GONE);
-                               // cb_checkall.setVisibility(View.GONE);
+                                // ll_nothingtoshow.setVisibility(View.VISIBLE);
+                                // rv_premiumdue.setVisibility(View.GONE);
+                                // cb_checkall.setVisibility(View.GONE);
                             } else {
                                 new PremiumDue_Fragment.GetEventListRTO().execute(user_id, date);
-                               // rv_premiumdue.setVisibility(View.VISIBLE);
-                               // ll_nothingtoshow.setVisibility(View.GONE);
+                                // rv_premiumdue.setVisibility(View.VISIBLE);
+                                // ll_nothingtoshow.setVisibility(View.GONE);
                                 //cb_checkall.setVisibility(View.VISIBLE);
                             }
 
                         }
                     } else {
                         new PremiumDue_Fragment.GetEventListRTO().execute(user_id, date);
-                       // ll_nothingtoshow.setVisibility(View.VISIBLE);
+                        // ll_nothingtoshow.setVisibility(View.VISIBLE);
                         //rv_premiumdue.setVisibility(View.GONE);
-                       // cb_checkall.setVisibility(View.GONE);
+                        // cb_checkall.setVisibility(View.GONE);
                     }
                 }
             } catch (Exception e) {
@@ -499,6 +485,7 @@ public class PremiumDue_Fragment extends Fragment {
             }
         }
     }
+
     public class GetOtherVehicleEventList extends AsyncTask<String, Void, String> {
 
         @Override
@@ -542,7 +529,7 @@ public class PremiumDue_Fragment extends Fragment {
 
                                 EventListPojo eventMainObj = new EventListPojo();
                                 JSONObject jsonObj = jsonarr.getJSONObject(i);
-                                eventMainObj.setId(String.valueOf( i));
+                                eventMainObj.setId(String.valueOf(i));
                                 eventMainObj.setDescription(jsonObj.getString("description"));
                                 eventMainObj.setDate(jsonObj.getString("date"));
                                 eventMainObj.setClient_id(jsonObj.getString("id"));
@@ -553,21 +540,21 @@ public class PremiumDue_Fragment extends Fragment {
                                 premiumDueList.add(eventMainObj);
                             }
                             if (premiumDueList.size() == 0) {
-                                 ll_nothingtoshow.setVisibility(View.VISIBLE);
-                                 rv_premiumdue.setVisibility(View.GONE);
-                                 cb_checkall.setVisibility(View.GONE);
+                                ll_nothingtoshow.setVisibility(View.VISIBLE);
+                                rv_premiumdue.setVisibility(View.GONE);
+                                cb_checkall.setVisibility(View.GONE);
                             } else {
                                 prepareListData();
-                                 rv_premiumdue.setVisibility(View.VISIBLE);
-                                 ll_nothingtoshow.setVisibility(View.GONE);
+                                rv_premiumdue.setVisibility(View.VISIBLE);
+                                ll_nothingtoshow.setVisibility(View.GONE);
                                 cb_checkall.setVisibility(View.VISIBLE);
                             }
 
                         }
                     } else {
-                         ll_nothingtoshow.setVisibility(View.VISIBLE);
+                        ll_nothingtoshow.setVisibility(View.VISIBLE);
                         rv_premiumdue.setVisibility(View.GONE);
-                         cb_checkall.setVisibility(View.GONE);
+                        cb_checkall.setVisibility(View.GONE);
                     }
                 }
             } catch (Exception e) {
@@ -578,6 +565,7 @@ public class PremiumDue_Fragment extends Fragment {
             }
         }
     }
+
     public class GetEventListRTO extends AsyncTask<String, Void, String> {
 
         @Override
@@ -643,7 +631,7 @@ public class PremiumDue_Fragment extends Fragment {
                         if (premiumDueListRTO.size() == 0 && premiumDueList.size() == 0) {
                             ll_nothingtoshow.setVisibility(View.VISIBLE);
                             rv_premiumdue.setVisibility(View.GONE);
-                        }else {
+                        } else {
                             prepareListData();
                             rv_premiumdue.setVisibility(View.VISIBLE);
                             ll_nothingtoshow.setVisibility(View.GONE);
@@ -663,32 +651,32 @@ public class PremiumDue_Fragment extends Fragment {
     private void prepareListData() {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
-        if(role.equals("1")) {
+        if (role.equals("1")) {
             // Adding child data
             listDataHeader.add("Own");
             //listDataHeader.add("Vehicle Dealer");
-        }else if(role.equals("2")){
-            listDataHeader.add("Own");
-           //listDataHeader.add("RTO Agent");
-        }else if(role.equals("4")){
+        } else if (role.equals("2")) {
             listDataHeader.add("Own");
             //listDataHeader.add("RTO Agent");
-        }else if(role.equals("6")){
-        listDataHeader.add("Own");
-        //listDataHeader.add("RTO Agent");
+        } else if (role.equals("4")) {
+            listDataHeader.add("Own");
+            //listDataHeader.add("RTO Agent");
+        } else if (role.equals("6")) {
+            listDataHeader.add("Own");
+            //listDataHeader.add("RTO Agent");
         }
 
 
-        if(role.equals("4")){
+        if (role.equals("4")) {
             List list1 = new ArrayList();
             list1.addAll(premiumDueList);
             listDataChild.put(listDataHeader.get(0), list1); // Header, Child data
             // listDataChild.put(listDataHeader.get(1), list2); // Header, Child data
             // listDataChild.put(listDataHeader.get(2), list3);
-            listAdapter = new ExpandableListViewRTOAdapter(context,listDataHeader,listDataChild);
+            listAdapter = new ExpandableListViewRTOAdapter(context, listDataHeader, listDataChild);
             rv_premiumdue.setAdapter(listAdapter);
             rv_premiumdue.expandGroup(0);
-        }else {
+        } else {
             //  listDataHeader.add("RTO Agent");
             List list1 = new ArrayList();
             list1.addAll(premiumDueList);
@@ -720,11 +708,12 @@ public class PremiumDue_Fragment extends Fragment {
         private HashMap<String, List<String>> listDataChild;
 
         public ExpandableListViewRTOAdapter(Context context, List<String> listDataGroup,
-                                            HashMap<String, List<String>> listChildData)  {
+                                            HashMap<String, List<String>> listChildData) {
             this.context = context;
             this.listDataGroup = listDataGroup;
             this.listDataChild = listChildData;
         }
+
         @Override
         public int getGroupCount() {
             return this.listDataGroup.size();
@@ -780,38 +769,37 @@ public class PremiumDue_Fragment extends Fragment {
 
         @Override
         public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-         //   final String childText = (String) getChild(groupPosition, childPosition);
+            //   final String childText = (String) getChild(groupPosition, childPosition);
 
             EventListPojo ch = (EventListPojo) getChild(groupPosition, childPosition);
-           // EventListPojo annivarsaryDetails = new EventListPojo();
-           // annivarsaryDetails = premiumDueList.get(childPosition);
+            // EventListPojo annivarsaryDetails = new EventListPojo();
+            // annivarsaryDetails = premiumDueList.get(childPosition);
             //ch = premiumDueList.get(childPosition);
             if (convertView == null) {
                 LayoutInflater layoutInflater = (LayoutInflater) this.context
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = layoutInflater.inflate(R.layout.list_row_premium_due, null);
             }
-                TextView textViewChild = convertView
-                        .findViewById(R.id.tv_clientname);
+            TextView textViewChild = convertView
+                    .findViewById(R.id.tv_clientname);
             TextView textViewChild1 = convertView
                     .findViewById(R.id.tv_reminder);
 
             TextView textViewChild2 = convertView
                     .findViewById(R.id.tv_vehicle_no);
 
-                final ImageView imv_sms = convertView.findViewById(R.id.imv_sms);
-                final ImageView imv_whatsapp = convertView.findViewById(R.id.imv_whatsapp);
-                final ImageView img_call = convertView.findViewById(R.id.imv_call);
-                final ImageView img_share = convertView.findViewById(R.id.imv_share);
-                final ImageView img_notification = convertView.findViewById(R.id.imv_notification);
-                final CheckBox cb_wish = convertView.findViewById(R.id.cb_wish);
+            final ImageView imv_sms = convertView.findViewById(R.id.imv_sms);
+            final ImageView imv_whatsapp = convertView.findViewById(R.id.imv_whatsapp);
+            final ImageView img_call = convertView.findViewById(R.id.imv_call);
+            final ImageView img_share = convertView.findViewById(R.id.imv_share);
+            final ImageView img_notification = convertView.findViewById(R.id.imv_notification);
+            final CheckBox cb_wish = convertView.findViewById(R.id.cb_wish);
 
-                textViewChild.setText(ch.getClient_name());
-                textViewChild2.setText(ch.getVehicle_no());
-                textViewChild1.setText("Reminder For - "+ch.getDescription());
+            textViewChild.setText(ch.getClient_name());
+            textViewChild2.setText(ch.getVehicle_no());
+            textViewChild1.setText("Reminder For - " + ch.getDescription());
 
-            if(groupPosition == 1)
-            {
+            if (groupPosition == 1) {
                 imv_sms.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -820,17 +808,14 @@ public class PremiumDue_Fragment extends Fragment {
                             user_info = new JSONArray(session.getUserDetails().get(
                                     ApplicationConstants.KEY_LOGIN_INFO));
                             JSONObject json = user_info.getJSONObject(0);
-                            if (Integer.parseInt(json.getString("smsCount"))+ 1 <= Integer.parseInt(json.getString("maxSMSLimit")))
-                            {
+                            if (Integer.parseInt(json.getString("smsCount")) + 1 <= Integer.parseInt(json.getString("maxSMSLimit"))) {
                                 if (Utilities.isInternetAvailable(context)) {
-                                    sendSMS(premiumDueListRTO.get(childPosition).getClient_id(), premiumDueListRTO.get(childPosition).getDescription(),premiumDueList.get(childPosition).getVehicle_no(),premiumDueList.get(childPosition).getDuedate());
+                                    sendSMS(premiumDueListRTO.get(childPosition).getClient_id(), premiumDueListRTO.get(childPosition).getDescription(), premiumDueList.get(childPosition).getVehicle_no(), premiumDueList.get(childPosition).getDuedate());
                                 } else {
                                     Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                                 }
-                            }
-                            else
-                            {
-                                Utilities.buildDialogForSmsValidation(context,1);
+                            } else {
+                                Utilities.buildDialogForSmsValidation(context, 1);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -846,19 +831,14 @@ public class PremiumDue_Fragment extends Fragment {
                             user_info = new JSONArray(session.getUserDetails().get(
                                     ApplicationConstants.KEY_LOGIN_INFO));
                             JSONObject json = user_info.getJSONObject(0);
-                            if (Integer.parseInt(json.getString("whatsappCount"))+ 1 <= Integer.parseInt(json.getString("maxWhatsAppLimit")))
-                            {
-                                if (Utilities.isInternetAvailable(context))
-                                {
-                                    sendWhatsapp("message", premiumDueListRTO.get(childPosition).getClient_id(), premiumDueListRTO.get(childPosition).getDescription(), premiumDueList.get(childPosition).getDescription(),premiumDueList.get(childPosition).getDuedate(),"whatsapp");
-                                }
-                                else {
+                            if (Integer.parseInt(json.getString("whatsappCount")) + 1 <= Integer.parseInt(json.getString("maxWhatsAppLimit"))) {
+                                if (Utilities.isInternetAvailable(context)) {
+                                    sendWhatsapp("message", premiumDueListRTO.get(childPosition).getClient_id(), premiumDueListRTO.get(childPosition).getDescription(), premiumDueList.get(childPosition).getDescription(), premiumDueList.get(childPosition).getDuedate(), "whatsapp");
+                                } else {
                                     Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                                 }
-                            }
-                            else
-                            {
-                                Utilities.buildDialogForSmsValidation(context,1);
+                            } else {
+                                Utilities.buildDialogForSmsValidation(context, 1);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -871,8 +851,8 @@ public class PremiumDue_Fragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         if (Utilities.isInternetAvailable(context)) {
-                            sendWhatsapp("message", premiumDueListRTO.get(childPosition).getClient_id(), premiumDueListRTO.get(childPosition).getDescription(), premiumDueList.get(childPosition).getDescription(),premiumDueList.get(childPosition).getDuedate(),"notification");
-                      } else {
+                            sendWhatsapp("message", premiumDueListRTO.get(childPosition).getClient_id(), premiumDueListRTO.get(childPosition).getDescription(), premiumDueList.get(childPosition).getDescription(), premiumDueList.get(childPosition).getDuedate(), "notification");
+                        } else {
                             Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                         }
                     }
@@ -914,9 +894,8 @@ public class PremiumDue_Fragment extends Fragment {
                 });
 
 
-
             }
-            if(groupPosition == 0){
+            if (groupPosition == 0) {
                 imv_sms.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -925,18 +904,15 @@ public class PremiumDue_Fragment extends Fragment {
                             user_info = new JSONArray(session.getUserDetails().get(
                                     ApplicationConstants.KEY_LOGIN_INFO));
                             JSONObject json = user_info.getJSONObject(0);
-                            if (Integer.parseInt(json.getString("smsCount"))+ 1 <= Integer.parseInt(json.getString("maxSMSLimit")))
-                            {
+                            if (Integer.parseInt(json.getString("smsCount")) + 1 <= Integer.parseInt(json.getString("maxSMSLimit"))) {
                                 if (Utilities.isInternetAvailable(context)) {
-                                    sendSMS(premiumDueList.get(childPosition).getClient_id(), premiumDueList.get(childPosition).getDescription(),premiumDueList.get(childPosition).getVehicle_no(),premiumDueList.get(childPosition).getDuedate());
+                                    sendSMS(premiumDueList.get(childPosition).getClient_id(), premiumDueList.get(childPosition).getDescription(), premiumDueList.get(childPosition).getVehicle_no(), premiumDueList.get(childPosition).getDuedate());
                                     // new GetPremiumMessage().execute(user_id, premiumDueList.get(childPosition).getClient_id(), "SMS");
                                 } else {
                                     Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                                 }
-                            }
-                            else
-                            {
-                                Utilities.buildDialogForSmsValidation(context,1);
+                            } else {
+                                Utilities.buildDialogForSmsValidation(context, 1);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -954,17 +930,14 @@ public class PremiumDue_Fragment extends Fragment {
                             user_info = new JSONArray(session.getUserDetails().get(
                                     ApplicationConstants.KEY_LOGIN_INFO));
                             JSONObject json = user_info.getJSONObject(0);
-                            if (Integer.parseInt(json.getString("whatsappCount"))+ 1 <= Integer.parseInt(json.getString("maxWhatsAppLimit")))
-                            {
+                            if (Integer.parseInt(json.getString("whatsappCount")) + 1 <= Integer.parseInt(json.getString("maxWhatsAppLimit"))) {
                                 if (Utilities.isInternetAvailable(context)) {
-                                    sendWhatsapp("message", premiumDueList.get(childPosition).getClient_id(), premiumDueList.get(childPosition).getDescription(), premiumDueList.get(childPosition).getVehicle_no(), premiumDueList.get(childPosition).getDuedate(),"whatsapp");
-                                 } else {
+                                    sendWhatsapp("message", premiumDueList.get(childPosition).getClient_id(), premiumDueList.get(childPosition).getDescription(), premiumDueList.get(childPosition).getVehicle_no(), premiumDueList.get(childPosition).getDuedate(), "whatsapp");
+                                } else {
                                     Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                                 }
-                            }
-                            else
-                            {
-                                Utilities.buildDialogForSmsValidation(context,1);
+                            } else {
+                                Utilities.buildDialogForSmsValidation(context, 1);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -977,7 +950,7 @@ public class PremiumDue_Fragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         if (Utilities.isInternetAvailable(context)) {
-                            sendWhatsapp("message", premiumDueList.get(childPosition).getClient_id(), premiumDueList.get(childPosition).getDescription(), premiumDueList.get(childPosition).getVehicle_no(), premiumDueList.get(childPosition).getDuedate(),"notification");
+                            sendWhatsapp("message", premiumDueList.get(childPosition).getClient_id(), premiumDueList.get(childPosition).getDescription(), premiumDueList.get(childPosition).getVehicle_no(), premiumDueList.get(childPosition).getDuedate(), "notification");
 
                             // sendSMS( premiumDueList.get(childPosition).getClient_id(),premiumDueList.get(childPosition).getDescription());
                             // new GetPremiumMessage().execute(user_id, premiumDueList.get(childPosition).getClient_id(), "WHATSAPP");
@@ -1026,18 +999,18 @@ public class PremiumDue_Fragment extends Fragment {
                     @Override
 
                     public void onClick(View v) {
-                        ShareMessage(premiumDueList.get(childPosition).getClient_id(),premiumDueList.get(childPosition).getClient_name(),premiumDueList.get(childPosition).getDescription(),premiumDueList.get(childPosition).getVehicle_no(),premiumDueList.get(childPosition).getDuedate(),premiumDueList.get(childPosition).getClient_mobile());
-            }
+                        ShareMessage(premiumDueList.get(childPosition).getClient_id(), premiumDueList.get(childPosition).getClient_name(), premiumDueList.get(childPosition).getDescription(), premiumDueList.get(childPosition).getVehicle_no(), premiumDueList.get(childPosition).getDuedate(), premiumDueList.get(childPosition).getClient_mobile());
+                    }
                 });
 
             }
 
 
-                cb_wish.setChecked(ch.isChecked());
+            cb_wish.setChecked(ch.isChecked());
 
-                cb_wish.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+            cb_wish.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 //                        if(cb_wish.isChecked()){
 //                            EventListPojo ch = (EventListPojo) getChild(groupPosition, childPosition);
 //                            ch.setChecked(true);
@@ -1047,72 +1020,70 @@ public class PremiumDue_Fragment extends Fragment {
 //                        }
 
 
-                        if(groupPosition == 1)
-                        {
-                            if (cb_wish.isChecked()) {
-                                premiumDueListRTO.get(childPosition).setChecked(true);
+                    if (groupPosition == 1) {
+                        if (cb_wish.isChecked()) {
+                            premiumDueListRTO.get(childPosition).setChecked(true);
 
-                            } else {
-                                premiumDueListRTO.get(childPosition).setChecked(false);
-                            }
+                        } else {
+                            premiumDueListRTO.get(childPosition).setChecked(false);
+                        }
 
-                            if (isAllValuesCheckedRTO()) {
-                                cb_checkall.setChecked(true);
-                                fab_wish_whatsapp.setVisibility(View.VISIBLE);
-                                fab_wish_notification.setVisibility(View.VISIBLE);
-                                fab_wish_sms.setVisibility(View.VISIBLE);
+                        if (isAllValuesCheckedRTO()) {
+                            cb_checkall.setChecked(true);
+                            fab_wish_whatsapp.setVisibility(View.VISIBLE);
+                            fab_wish_notification.setVisibility(View.VISIBLE);
+                            fab_wish_sms.setVisibility(View.VISIBLE);
 
-                            } else {
-                                cb_checkall.setChecked(false);
-                                fab_wish_whatsapp.setVisibility(View.GONE);
-                                fab_wish_notification.setVisibility(View.GONE);
-                                fab_wish_sms.setVisibility(View.GONE);
-                            }
+                        } else {
+                            cb_checkall.setChecked(false);
+                            fab_wish_whatsapp.setVisibility(View.GONE);
+                            fab_wish_notification.setVisibility(View.GONE);
+                            fab_wish_sms.setVisibility(View.GONE);
+                        }
 
-                            if (isAtleastOneCheckedRTO(premiumDueListRTO)) {
-                                fab_wish_whatsapp.setVisibility(View.VISIBLE);
-                                fab_wish_notification.setVisibility(View.VISIBLE);
-                                fab_wish_sms.setVisibility(View.VISIBLE);
-                            } else {
-                                fab_wish_whatsapp.setVisibility(View.GONE);
-                                fab_wish_notification.setVisibility(View.GONE);
-                                fab_wish_sms.setVisibility(View.GONE);
-                            }
+                        if (isAtleastOneCheckedRTO(premiumDueListRTO)) {
+                            fab_wish_whatsapp.setVisibility(View.VISIBLE);
+                            fab_wish_notification.setVisibility(View.VISIBLE);
+                            fab_wish_sms.setVisibility(View.VISIBLE);
+                        } else {
+                            fab_wish_whatsapp.setVisibility(View.GONE);
+                            fab_wish_notification.setVisibility(View.GONE);
+                            fab_wish_sms.setVisibility(View.GONE);
+                        }
 
 
-                        }else if(groupPosition == 0)
-                        {
-                            if (cb_wish.isChecked()) {
-                                premiumDueList.get(childPosition).setChecked(true);
-                            } else {
-                                premiumDueList.get(childPosition).setChecked(false);
-                            }
+                    } else if (groupPosition == 0) {
+                        if (cb_wish.isChecked()) {
+                            premiumDueList.get(childPosition).setChecked(true);
+                        } else {
+                            premiumDueList.get(childPosition).setChecked(false);
+                        }
 
-                            if (isAllValuesCheckedRTO()) {
-                                cb_checkall.setChecked(true);
-                                fab_wish_whatsapp.setVisibility(View.VISIBLE);
-                                fab_wish_notification.setVisibility(View.VISIBLE);
-                                fab_wish_sms.setVisibility(View.VISIBLE);
+                        if (isAllValuesCheckedRTO()) {
+                            cb_checkall.setChecked(true);
+                            fab_wish_whatsapp.setVisibility(View.VISIBLE);
+                            fab_wish_notification.setVisibility(View.VISIBLE);
+                            fab_wish_sms.setVisibility(View.VISIBLE);
 
-                            } else {
-                                cb_checkall.setChecked(false);
-                                fab_wish_whatsapp.setVisibility(View.GONE);
-                                fab_wish_notification.setVisibility(View.GONE);
-                                fab_wish_sms.setVisibility(View.GONE);
-                            }
+                        } else {
+                            cb_checkall.setChecked(false);
+                            fab_wish_whatsapp.setVisibility(View.GONE);
+                            fab_wish_notification.setVisibility(View.GONE);
+                            fab_wish_sms.setVisibility(View.GONE);
+                        }
 
-                            if (isAtleastOneChecked(premiumDueList)) {
-                                fab_wish_whatsapp.setVisibility(View.VISIBLE);
-                                fab_wish_notification.setVisibility(View.VISIBLE);
-                                fab_wish_sms.setVisibility(View.VISIBLE);
-                            } else {
-                                fab_wish_whatsapp.setVisibility(View.GONE);
-                                fab_wish_notification.setVisibility(View.GONE);
-                                fab_wish_sms.setVisibility(View.GONE);
-                            }
+                        if (isAtleastOneChecked(premiumDueList)) {
+                            fab_wish_whatsapp.setVisibility(View.VISIBLE);
+                            fab_wish_notification.setVisibility(View.VISIBLE);
+                            fab_wish_sms.setVisibility(View.VISIBLE);
+                        } else {
+                            fab_wish_whatsapp.setVisibility(View.GONE);
+                            fab_wish_notification.setVisibility(View.GONE);
+                            fab_wish_sms.setVisibility(View.GONE);
                         }
                     }
-                });
+                }
+            });
 
             cb_checkall.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1151,7 +1122,7 @@ public class PremiumDue_Fragment extends Fragment {
                 }
             });
 
-                return convertView;
+            return convertView;
         }
 
         @Override
@@ -1182,23 +1153,22 @@ public class PremiumDue_Fragment extends Fragment {
         }
 
         private boolean isAllValuesCheckedRTO() {
-            boolean list1 = false,list2= false;
+            boolean list1 = false, list2 = false;
             for (int i = 0; i < premiumDueListRTO.size(); i++)
                 if (!premiumDueListRTO.get(i).isChecked())
                     return false;
-            list1= true;
+            list1 = true;
             for (int i = 0; i < premiumDueList.size(); i++)
                 if (!premiumDueList.get(i).isChecked())
                     return false;
-            list2= true;
-            if(list1 && list2)
+            list2 = true;
+            if (list1 && list2)
                 return true;
             else
                 return false;
         }
 
     }
-
 
 
     public class GetPremiumMessage extends AsyncTask<String, Void, String> {
@@ -1377,23 +1347,23 @@ public class PremiumDue_Fragment extends Fragment {
         }
     }
 
-  private void ShareMessage(String clientId,String clientName,String description,String vehicleNo,String duedate,String mobile){
-      clientMobile = mobile;
-      JsonObject mainObj = new JsonObject();
-      mainObj.addProperty("type", "sharePremiumMsg");
-      mainObj.addProperty("client_name", clientName);
-      mainObj.addProperty("description", description);
-      mainObj.addProperty("vahicle_no", vehicleNo);
-      mainObj.addProperty("due_date", duedate);
-      mainObj.addProperty("client_id", clientId);
-      mainObj.addProperty("user_name", name);
+    private void ShareMessage(String clientId, String clientName, String description, String vehicleNo, String duedate, String mobile) {
+        clientMobile = mobile;
+        JsonObject mainObj = new JsonObject();
+        mainObj.addProperty("type", "sharePremiumMsg");
+        mainObj.addProperty("client_name", clientName);
+        mainObj.addProperty("description", description);
+        mainObj.addProperty("vahicle_no", vehicleNo);
+        mainObj.addProperty("due_date", duedate);
+        mainObj.addProperty("client_id", clientId);
+        mainObj.addProperty("user_name", name);
 
-      if (Utilities.isInternetAvailable(context)) {
-          new SharePremiumMsg().execute(mainObj.toString());
-      } else {
-          Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
-      }
-  }
+        if (Utilities.isInternetAvailable(context)) {
+            new SharePremiumMsg().execute(mainObj.toString());
+        } else {
+            Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+        }
+    }
 
     public class SharePremiumMsg extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
@@ -1417,15 +1387,15 @@ public class PremiumDue_Fragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            String type = "", message = "",shareMsg = "";
+            String type = "", message = "", shareMsg = "";
             try {
                 pd.dismiss();
                 if (!result.equals("")) {
                     JSONObject mainObj = new JSONObject(result);
                     type = mainObj.getString("type");
-                   // message = mainObj.getString("message");
+                    // message = mainObj.getString("message");
                     if (type.equalsIgnoreCase("success")) {
-                       shareMsg = mainObj.getString("result");
+                        shareMsg = mainObj.getString("result");
 
 
                         try {
@@ -1434,7 +1404,7 @@ public class PremiumDue_Fragment extends Fragment {
                             Intent sendIntent = new Intent(Intent.ACTION_SEND);
                             sendIntent.setType("text/plain");
                             sendIntent.putExtra(Intent.EXTRA_TEXT, shareMsg);
-                            sendIntent.putExtra("jid", "91"+clientMobile + "@s.whatsapp.net"); //phone number without "+" prefix
+                            sendIntent.putExtra("jid", "91" + clientMobile + "@s.whatsapp.net"); //phone number without "+" prefix
                             sendIntent.setPackage("com.whatsapp");
                             startActivity(sendIntent);
                         } catch (PackageManager.NameNotFoundException e) {
@@ -1459,7 +1429,6 @@ public class PremiumDue_Fragment extends Fragment {
                         }
 
 
-
 //                           Intent shareIntent = new Intent();
 //                           shareIntent.setAction(Intent.ACTION_SENDTO);
 //                           shareIntent.setType("text/plain");
@@ -1477,12 +1446,12 @@ public class PremiumDue_Fragment extends Fragment {
     }
 
 
-    private void sendSMS(String singleReceiverID,String description,String vehicleNo,String dueDate) {
+    private void sendSMS(String singleReceiverID, String description, String vehicleNo, String dueDate) {
         JsonArray clientIdJSONArray = new JsonArray();
         JsonArray clientIdJSONArray1 = new JsonArray();
 
         if (singleReceiverID.equals("")) {
-            if(premiumDueList.size() > 0) {
+            if (premiumDueList.size() > 0) {
                 for (int i = 0; i < premiumDueList.size(); i++) {
                     if (premiumDueList.get(i).isChecked()) {
                         JsonObject childObj = new JsonObject();
@@ -1495,7 +1464,7 @@ public class PremiumDue_Fragment extends Fragment {
                     }
                 }
             }
-             if(premiumDueListRTO.size() > 0){
+            if (premiumDueListRTO.size() > 0) {
                 for (int i = 0; i < premiumDueListRTO.size(); i++) {
                     if (premiumDueListRTO.get(i).isChecked()) {
                         JsonObject childObj = new JsonObject();
@@ -1512,8 +1481,8 @@ public class PremiumDue_Fragment extends Fragment {
             JsonObject childObj = new JsonObject();
             childObj.addProperty("id", singleReceiverID);
             childObj.addProperty("description", description);
-            childObj.addProperty("vehicle_no",vehicleNo);
-            childObj.addProperty("date",dueDate);
+            childObj.addProperty("vehicle_no", vehicleNo);
+            childObj.addProperty("date", dueDate);
             clientIdJSONArray.add(childObj);
 
         }
@@ -1563,7 +1532,7 @@ public class PremiumDue_Fragment extends Fragment {
                     if (type.equalsIgnoreCase("success")) {
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         JSONObject obj = jsonarr.getJSONObject(0);
-                        changeSessionSMSCount(obj.getString("smsCount"),obj.getString("whatsappCount"),obj.getString("maxSMSLimit"),obj.getString("maxWhatsAppLimit"));
+                        changeSessionSMSCount(obj.getString("smsCount"), obj.getString("whatsappCount"), obj.getString("maxSMSLimit"), obj.getString("maxWhatsAppLimit"));
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                         builder.setMessage("SMS Sent Successfully");
@@ -1590,33 +1559,33 @@ public class PremiumDue_Fragment extends Fragment {
     }
 
 
-    private void sendWhatsapp(String message, String singleReceiverID , String description,String vehicleNo,String dueDate,String subtype) {
+    private void sendWhatsapp(String message, String singleReceiverID, String description, String vehicleNo, String dueDate, String subtype) {
         JsonArray clientIdJSONArray = new JsonArray();
         JsonArray clientIdJSONArray1 = new JsonArray();
 
         if (singleReceiverID.equals("")) {
-            if(premiumDueList.size() > 0) {
+            if (premiumDueList.size() > 0) {
                 for (int i = 0; i < premiumDueList.size(); i++) {
                     if (premiumDueList.get(i).isChecked()) {
                         JsonObject childObj = new JsonObject();
                         childObj.addProperty("id", premiumDueList.get(i).getClient_id());
-                        childObj.addProperty("description",premiumDueList.get(i).getDescription());
-                        childObj.addProperty("vehicle_no",premiumDueList.get(i).getVehicle_no());
-                        childObj.addProperty("date",premiumDueList.get(i).getDuedate());
+                        childObj.addProperty("description", premiumDueList.get(i).getDescription());
+                        childObj.addProperty("vehicle_no", premiumDueList.get(i).getVehicle_no());
+                        childObj.addProperty("date", premiumDueList.get(i).getDuedate());
                         clientIdJSONArray.add(childObj);
 
 
                     }
                 }
             }
-            if(premiumDueListRTO.size() > 0){
+            if (premiumDueListRTO.size() > 0) {
                 for (int i = 0; i < premiumDueListRTO.size(); i++) {
                     if (premiumDueListRTO.get(i).isChecked()) {
                         JsonObject childObj = new JsonObject();
                         childObj.addProperty("id", premiumDueListRTO.get(i).getClient_id());
-                        childObj.addProperty("description",premiumDueListRTO.get(i).getDescription());
-                        childObj.addProperty("vehicle_no",premiumDueListRTO.get(i).getVehicle_no());
-                        childObj.addProperty("date",premiumDueListRTO.get(i).getDuedate());
+                        childObj.addProperty("description", premiumDueListRTO.get(i).getDescription());
+                        childObj.addProperty("vehicle_no", premiumDueListRTO.get(i).getVehicle_no());
+                        childObj.addProperty("date", premiumDueListRTO.get(i).getDuedate());
                         clientIdJSONArray.add(childObj);
 
 
@@ -1632,13 +1601,12 @@ public class PremiumDue_Fragment extends Fragment {
             clientIdJSONArray.add(childObj);
 
 
-
         }
 
         JsonObject mainObj = new JsonObject();
-        if(subtype.equals("notification")){
+        if (subtype.equals("notification")) {
             mainObj.addProperty("type", "sendpremiumNotification");
-        }else {
+        } else {
             mainObj.addProperty("type", "sendPremiumWhtasAppMsg");
         }
         mainObj.add("id", clientIdJSONArray);
@@ -1685,7 +1653,7 @@ public class PremiumDue_Fragment extends Fragment {
                     if (type.equalsIgnoreCase("success")) {
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         JSONObject obj = jsonarr.getJSONObject(0);
-                        changeSessionSMSCount(obj.getString("smsCount"),obj.getString("whatsappCount"),obj.getString("maxSMSLimit"),obj.getString("maxWhatsAppLimit"));
+                        changeSessionSMSCount(obj.getString("smsCount"), obj.getString("whatsappCount"), obj.getString("maxSMSLimit"), obj.getString("maxWhatsAppLimit"));
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                         builder.setMessage(message);
@@ -1722,17 +1690,17 @@ public class PremiumDue_Fragment extends Fragment {
             }
         }
     }
-    public void changeSessionSMSCount(String smsCount,String whatsappCount,String maxSMS,String maxWhatsapp)
-    {
+
+    public void changeSessionSMSCount(String smsCount, String whatsappCount, String maxSMS, String maxWhatsapp) {
         JSONArray user_info = null;
         try {
             user_info = new JSONArray(session.getUserDetails().get(
                     ApplicationConstants.KEY_LOGIN_INFO));
             JSONObject json = user_info.getJSONObject(0);
-            json.put("smsCount",smsCount);
-            json.put("whatsappCount",whatsappCount);
-            json.put("maxSMSLimit",maxSMS);
-            json.put("maxWhatsAppLimit",maxWhatsapp);
+            json.put("smsCount", smsCount);
+            json.put("whatsappCount", whatsappCount);
+            json.put("maxSMSLimit", maxSMS);
+            json.put("maxWhatsAppLimit", maxWhatsapp);
             session.updateSession(user_info.toString());
         } catch (JSONException e) {
             e.printStackTrace();

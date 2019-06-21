@@ -1,33 +1,24 @@
 package in.rto.collections.fragments;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -35,8 +26,6 @@ import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -68,11 +57,11 @@ public class PremiumDueSecond_Fragment extends Fragment {
     private FloatingActionButton fab_wish_whatsapp, fab_wish_sms;
     private SwipeRefreshLayout swipeRefreshLayout;
     private LinearLayout ll_nothingtoshow;
-    private LinearLayoutManager layoutManager,layoutManager1;
+    private LinearLayoutManager layoutManager, layoutManager1;
     private UserSessionManager session;
     private int mYear, mMonth, mDay;
-    private String user_id, date,role;
-    private ArrayList<EventListPojo> premiumDueList,premiumDueListDealer,premiumDueListRTO;
+    private String user_id, date, role;
+    private ArrayList<EventListPojo> premiumDueList, premiumDueListDealer, premiumDueListRTO;
     private String id = "", message = "", whatsappPicUrl = "", whatsappPic = "";
     private EditText edt_date, dialog_edt_whatsappmessage;
     private CheckBox cb_checkall;
@@ -81,6 +70,7 @@ public class PremiumDueSecond_Fragment extends Fragment {
     ExpandableListAdapter listAdapter;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_premium_due_second, container, false);
@@ -105,9 +95,9 @@ public class PremiumDueSecond_Fragment extends Fragment {
         swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshLayout);
         cb_checkall = rootView.findViewById(R.id.cb_checkall);
         edt_date = rootView.findViewById(R.id.edt_date);
-       // layoutManager = new LinearLayoutManager(context);
+        // layoutManager = new LinearLayoutManager(context);
         // layoutManager1 = new LinearLayoutManager(context);
-       // rv_premiumdue.setLayoutManager(layoutManager);
+        // rv_premiumdue.setLayoutManager(layoutManager);
         // rv_premiumdue1.setLayoutManager(layoutManager1);
         // rv_premiumdue2.setLayoutManager(layoutManager);
 
@@ -183,8 +173,7 @@ public class PremiumDueSecond_Fragment extends Fragment {
             public void onClick(View view) {
                 JSONArray user_info = null;
                 int count = 0;
-                for (int i=0;i<premiumDueList.size();i++)
-                {
+                for (int i = 0; i < premiumDueList.size(); i++) {
                     if (premiumDueList.get(i).isChecked)
                         count = count + 1;
                 }
@@ -192,17 +181,14 @@ public class PremiumDueSecond_Fragment extends Fragment {
                     user_info = new JSONArray(session.getUserDetails().get(
                             ApplicationConstants.KEY_LOGIN_INFO));
                     JSONObject json = user_info.getJSONObject(0);
-                    if (Integer.parseInt(json.getString("whatsappCount"))+ count <= Integer.parseInt(json.getString("maxWhatsAppLimit")))
-                    {
+                    if (Integer.parseInt(json.getString("whatsappCount")) + count <= Integer.parseInt(json.getString("maxWhatsAppLimit"))) {
                         if (Utilities.isInternetAvailable(context)) {
                             new PremiumDueSecond_Fragment.GetPremiumMessage().execute(user_id, "", "WHATSAPP");
                         } else {
                             Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                         }
-                    }
-                    else
-                    {
-                        Utilities.buildDialogForSmsValidation(context,count);
+                    } else {
+                        Utilities.buildDialogForSmsValidation(context, count);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -216,8 +202,7 @@ public class PremiumDueSecond_Fragment extends Fragment {
             public void onClick(View view) {
                 JSONArray user_info = null;
                 int count = 0;
-                for (int i=0;i<premiumDueList.size();i++)
-                {
+                for (int i = 0; i < premiumDueList.size(); i++) {
                     if (premiumDueList.get(i).isChecked)
                         count = count + 1;
                 }
@@ -225,17 +210,14 @@ public class PremiumDueSecond_Fragment extends Fragment {
                     user_info = new JSONArray(session.getUserDetails().get(
                             ApplicationConstants.KEY_LOGIN_INFO));
                     JSONObject json = user_info.getJSONObject(0);
-                    if (Integer.parseInt(json.getString("smsCount"))+ count <= Integer.parseInt(json.getString("maxSMSLimit")))
-                    {
+                    if (Integer.parseInt(json.getString("smsCount")) + count <= Integer.parseInt(json.getString("maxSMSLimit"))) {
                         if (Utilities.isInternetAvailable(context)) {
                             new PremiumDueSecond_Fragment.GetPremiumMessage().execute(user_id, "", "SMS");
                         } else {
                             Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                         }
-                    }
-                    else
-                    {
-                        Utilities.buildDialogForSmsValidation(context,count);
+                    } else {
+                        Utilities.buildDialogForSmsValidation(context, count);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -290,7 +272,7 @@ public class PremiumDueSecond_Fragment extends Fragment {
             public void onClick(View v) {
                 for (int i = 0; i < premiumDueList.size(); i++) {
                     //GetEventListAdapter.MyViewHolder myViewHolder =
-                           // (GetEventListAdapter.MyViewHolder) rv_premiumdue.findViewHolderForAdapterPosition(i);
+                    // (GetEventListAdapter.MyViewHolder) rv_premiumdue.findViewHolderForAdapterPosition(i);
 
                     if (((CheckBox) v).isChecked()) {
                         //myViewHolder.cb_wish.setChecked(true);
@@ -298,7 +280,7 @@ public class PremiumDueSecond_Fragment extends Fragment {
                         fab_wish_whatsapp.setVisibility(View.VISIBLE);
                         fab_wish_sms.setVisibility(View.VISIBLE);
                     } else {
-                       // myViewHolder.cb_wish.setChecked(false);
+                        // myViewHolder.cb_wish.setChecked(false);
                         premiumDueList.get(i).setChecked(false);
                         fab_wish_whatsapp.setVisibility(View.GONE);
                         fab_wish_sms.setVisibility(View.GONE);
@@ -306,7 +288,6 @@ public class PremiumDueSecond_Fragment extends Fragment {
                 }
             }
         });
-
 
 
     }
@@ -366,19 +347,19 @@ public class PremiumDueSecond_Fragment extends Fragment {
                                 new PremiumDueSecond_Fragment.GetEventListDealer().execute(user_id, date);
                                 //ll_nothingtoshow.setVisibility(View.VISIBLE);
                                 //rv_premiumdue.setVisibility(View.GONE);
-                               // cb_checkall.setVisibility(View.GONE);
+                                // cb_checkall.setVisibility(View.GONE);
                             } else {
                                 new PremiumDueSecond_Fragment.GetEventListDealer().execute(user_id, date);
                                 //rv_premiumdue.setVisibility(View.VISIBLE);
                                 //ll_nothingtoshow.setVisibility(View.GONE);
-                               // cb_checkall.setVisibility(View.VISIBLE);
+                                // cb_checkall.setVisibility(View.VISIBLE);
                             }
                         }
                     } else {
                         new PremiumDueSecond_Fragment.GetEventListDealer().execute(user_id, date);
-                       // ll_nothingtoshow.setVisibility(View.VISIBLE);
-                       // rv_premiumdue.setVisibility(View.GONE);
-                       // cb_checkall.setVisibility(View.GONE);
+                        // ll_nothingtoshow.setVisibility(View.VISIBLE);
+                        // rv_premiumdue.setVisibility(View.GONE);
+                        // cb_checkall.setVisibility(View.GONE);
                     }
                 }
             } catch (Exception e) {
@@ -443,8 +424,8 @@ public class PremiumDueSecond_Fragment extends Fragment {
                             }
                             if (premiumDueListDealer.size() == 0) {
                                 new PremiumDueSecond_Fragment.GetEventListRTO().execute(user_id, date);
-                               // ll_nothingtoshow.setVisibility(View.VISIBLE);
-                               // rv_premiumdue.setVisibility(View.GONE);
+                                // ll_nothingtoshow.setVisibility(View.VISIBLE);
+                                // rv_premiumdue.setVisibility(View.GONE);
                                 //cb_checkall.setVisibility(View.GONE);
                             } else {
                                 new PremiumDueSecond_Fragment.GetEventListRTO().execute(user_id, date);
@@ -452,13 +433,13 @@ public class PremiumDueSecond_Fragment extends Fragment {
                                 //ll_nothingtoshow.setVisibility(View.GONE);
                                 //cb_checkall.setVisibility(View.VISIBLE);
                             }
-                           // rv_premiumdue.setAdapter(new DealerPremiumDue_Fragment.GetEventListAdapter());
+                            // rv_premiumdue.setAdapter(new DealerPremiumDue_Fragment.GetEventListAdapter());
                         }
                     } else {
                         new PremiumDueSecond_Fragment.GetEventListRTO().execute(user_id, date);
-                       // ll_nothingtoshow.setVisibility(View.VISIBLE);
-                       // rv_premiumdue.setVisibility(View.GONE);
-                       // cb_checkall.setVisibility(View.GONE);
+                        // ll_nothingtoshow.setVisibility(View.VISIBLE);
+                        // rv_premiumdue.setVisibility(View.GONE);
+                        // cb_checkall.setVisibility(View.GONE);
                     }
                 }
             } catch (Exception e) {
@@ -469,6 +450,7 @@ public class PremiumDueSecond_Fragment extends Fragment {
             }
         }
     }
+
     public class GetEventListRTO extends AsyncTask<String, Void, String> {
 
         @Override
@@ -521,7 +503,7 @@ public class PremiumDueSecond_Fragment extends Fragment {
                                 premiumDueListRTO.add(eventMainObj);
                             }
                             if (premiumDueListRTO.size() == 0 && premiumDueListDealer.size() == 0 && premiumDueList.size() == 0) {
-                               // prepareListData();
+                                // prepareListData();
                                 ll_nothingtoshow.setVisibility(View.VISIBLE);
                                 rv_premiumdue.setVisibility(View.GONE);
                             } else {
@@ -549,8 +531,6 @@ public class PremiumDueSecond_Fragment extends Fragment {
     }
 
 
-
-
     private void prepareListData() {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
@@ -570,7 +550,7 @@ public class PremiumDueSecond_Fragment extends Fragment {
         listDataChild.put(listDataHeader.get(0), list1); // Header, Child data
         listDataChild.put(listDataHeader.get(1), list2); // Header, Child data
         listDataChild.put(listDataHeader.get(2), list3);
-        rv_premiumdue.setAdapter(new ExpandableListViewAdapter(context,listDataHeader,listDataChild));
+        rv_premiumdue.setAdapter(new ExpandableListViewAdapter(context, listDataHeader, listDataChild));
         rv_premiumdue.expandGroup(0);
         //listDataChild.put(listDataHeader.get(1), nowShowing);
         //listDataChild.put(listDataHeader.get(2), comingSoon);
@@ -758,9 +738,6 @@ public class PremiumDueSecond_Fragment extends Fragment {
     }
 
 
-
-
-
     private void sendSMS(String message, String singleReceiverID) {
         JsonArray clientIdJSONArray = new JsonArray();
 
@@ -824,7 +801,7 @@ public class PremiumDueSecond_Fragment extends Fragment {
                     if (type.equalsIgnoreCase("success")) {
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         JSONObject obj = jsonarr.getJSONObject(0);
-                        changeSessionSMSCount(obj.getString("smsCount"),obj.getString("whatsappCount"),obj.getString("maxSMSLimit"),obj.getString("maxWhatsAppLimit"));
+                        changeSessionSMSCount(obj.getString("smsCount"), obj.getString("whatsappCount"), obj.getString("maxSMSLimit"), obj.getString("maxWhatsAppLimit"));
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                         builder.setMessage("SMS Sent Successfully");
@@ -915,7 +892,7 @@ public class PremiumDueSecond_Fragment extends Fragment {
                     if (type.equalsIgnoreCase("success")) {
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         JSONObject obj = jsonarr.getJSONObject(0);
-                        changeSessionSMSCount(obj.getString("smsCount"),obj.getString("whatsappCount"),obj.getString("maxSMSLimit"),obj.getString("maxWhatsAppLimit"));
+                        changeSessionSMSCount(obj.getString("smsCount"), obj.getString("whatsappCount"), obj.getString("maxSMSLimit"), obj.getString("maxWhatsAppLimit"));
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                         builder.setMessage("Whatsapp Message Sent Successfully");
@@ -940,17 +917,17 @@ public class PremiumDueSecond_Fragment extends Fragment {
             }
         }
     }
-    public void changeSessionSMSCount(String smsCount,String whatsappCount,String maxSMS,String maxWhatsapp)
-    {
+
+    public void changeSessionSMSCount(String smsCount, String whatsappCount, String maxSMS, String maxWhatsapp) {
         JSONArray user_info = null;
         try {
             user_info = new JSONArray(session.getUserDetails().get(
                     ApplicationConstants.KEY_LOGIN_INFO));
             JSONObject json = user_info.getJSONObject(0);
-            json.put("smsCount",smsCount);
-            json.put("whatsappCount",whatsappCount);
-            json.put("maxSMSLimit",maxSMS);
-            json.put("maxWhatsAppLimit",maxWhatsapp);
+            json.put("smsCount", smsCount);
+            json.put("whatsappCount", whatsappCount);
+            json.put("maxSMSLimit", maxSMS);
+            json.put("maxWhatsAppLimit", maxWhatsapp);
             session.updateSession(user_info.toString());
         } catch (JSONException e) {
             e.printStackTrace();

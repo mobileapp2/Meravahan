@@ -4,8 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="8dp"
-    android:background="@color/white"
-    >
+    android:background="@color/white">
+
     <TextView
         android:id="@+id/lblListHeader"
         android:layout_width="fill_parent"
@@ -13,9 +13,7 @@
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:textSize="16dp"
         android:textColor="@color/colorPrimary"
-        android:text="text"
-        />
-
+        android:text="text" />
 
 
 </LinearLayout>

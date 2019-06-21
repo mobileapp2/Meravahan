@@ -5,12 +5,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -26,12 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.rto.collections.R;
-import in.rto.collections.adapters.CustomerAdapter;
 import in.rto.collections.adapters.CustomerLinkAdapter;
-import in.rto.collections.fragments.Self_Fragment;
 import in.rto.collections.models.CustomerPojo;
 import in.rto.collections.models.LinkPojo;
-import in.rto.collections.models.VehicleDealerListPojo;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.ParamsPojo;
 import in.rto.collections.utilities.UserSessionManager;
@@ -47,7 +43,7 @@ public class LinkToCustomer_Activity extends Activity {
     private FloatingActionButton fab_add_customer;
     private LinearLayoutManager layoutManager;
     private UserSessionManager session;
-    private static  String user_id;
+    private static String user_id;
     private SearchView searchView;
     private static ArrayList<CustomerPojo> customerPojos;
     private static ArrayList<LinkPojo> linkPojos;
@@ -55,6 +51,7 @@ public class LinkToCustomer_Activity extends Activity {
     private static ArrayList<CustomerPojo> customerLinkPojos;
     public static int selectedposition = 0;
     private ImageView next;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +77,7 @@ public class LinkToCustomer_Activity extends Activity {
 //        shimmer_view_container = rootView.findViewById(R.id.shimmer_view_container);
         layoutManager = new LinearLayoutManager(context);
         customer_list.setLayoutManager(layoutManager);
-        linkPojo  = (LinkPojo) getIntent().getSerializableExtra("rtoDetails");
+        linkPojo = (LinkPojo) getIntent().getSerializableExtra("rtoDetails");
     }
 
     private void setDefault() {
@@ -93,7 +90,8 @@ public class LinkToCustomer_Activity extends Activity {
             customer_list.setVisibility(View.GONE);
         }
     }
-    public  void  setUpToolbar() {
+
+    public void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle("Link To");
         mToolbar.setNavigationIcon(R.drawable.icon_backarrow_16p);
@@ -115,6 +113,7 @@ public class LinkToCustomer_Activity extends Activity {
             e.printStackTrace();
         }
     }
+
     private void setEventHandlers() {
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -136,8 +135,8 @@ public class LinkToCustomer_Activity extends Activity {
             public boolean onQueryTextSubmit(String query) {
                 searchView.clearFocus();
                 ArrayList<CustomerPojo> customerSearchedList = new ArrayList<>();
-                for (CustomerPojo customer :  customerPojos) {
-                    String contactToBeSearched = customer.getVehicle_owner().toLowerCase()+ customer.getVehicle_no().toLowerCase();
+                for (CustomerPojo customer : customerPojos) {
+                    String contactToBeSearched = customer.getVehicle_owner().toLowerCase() + customer.getVehicle_no().toLowerCase();
                     if (contactToBeSearched.contains(query.toLowerCase())) {
                         customerSearchedList.add(customer);
                     }
@@ -149,7 +148,7 @@ public class LinkToCustomer_Activity extends Activity {
                     // bindRecyclerview(contactList);
                 } else {
                     customerLinkPojos = customerSearchedList;
-                    customer_list.setAdapter(new CustomerLinkAdapter(context, customerSearchedList,linkPojos));
+                    customer_list.setAdapter(new CustomerLinkAdapter(context, customerSearchedList, linkPojos));
                 }
 
                 return true;
@@ -160,7 +159,7 @@ public class LinkToCustomer_Activity extends Activity {
                 if (!newText.equals("")) {
                     ArrayList<CustomerPojo> customerSearchedList = new ArrayList<>();
                     for (CustomerPojo customer : customerPojos) {
-                        String contactToBeSearched = customer.getVehicle_owner().toLowerCase()+customer.getVehicle_no().toLowerCase();
+                        String contactToBeSearched = customer.getVehicle_owner().toLowerCase() + customer.getVehicle_no().toLowerCase();
                         if (contactToBeSearched.contains(newText.toLowerCase())) {
                             customerSearchedList.add(customer);
                         }
@@ -172,11 +171,11 @@ public class LinkToCustomer_Activity extends Activity {
                     } else {
                         //bindRecyclerview(contactsSearchedList);
                         customerLinkPojos = customerSearchedList;
-                        customer_list.setAdapter(new CustomerLinkAdapter(context,customerSearchedList,linkPojos));
+                        customer_list.setAdapter(new CustomerLinkAdapter(context, customerSearchedList, linkPojos));
                     }
                     return true;
                 } else if (newText.equals("")) {
-                    customer_list.setAdapter(new CustomerLinkAdapter(context,customerPojos,linkPojos));
+                    customer_list.setAdapter(new CustomerLinkAdapter(context, customerPojos, linkPojos));
                     //bindRecyclerview(contactList);
                 }
                 return true;
@@ -185,13 +184,13 @@ public class LinkToCustomer_Activity extends Activity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(selectedposition != -1) {
+                if (selectedposition != -1) {
                     CustomerPojo customerPojo = customerLinkPojos.get(selectedposition);
                     Intent intent = new Intent(context, Link_Edit_Customer.class);
                     intent.putExtra("customerDetails", customerPojo);
                     intent.putExtra("rtoDetails", linkPojo);
                     context.startActivity(intent);
-                }else{
+                } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                     builder.setMessage("Please Select Record To Link.");
                     builder.setIcon(R.drawable.ic_success_24dp);
@@ -249,7 +248,7 @@ public class LinkToCustomer_Activity extends Activity {
                     message = mainObj.getString("message");
                     customerPojos = new ArrayList<CustomerPojo>();
                     linkPojos = new ArrayList<LinkPojo>();
-                    customer_list.setAdapter(new CustomerLinkAdapter(context, customerPojos,linkPojos));
+                    customer_list.setAdapter(new CustomerLinkAdapter(context, customerPojos, linkPojos));
                     if (type.equalsIgnoreCase("success")) {
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
@@ -310,7 +309,6 @@ public class LinkToCustomer_Activity extends Activity {
                                 customerMainObj.setService_date(serviceDatesListPojos);
 
 
-
                                 ArrayList<CustomerPojo.OtherDatesListPojo> otherDatesListPojos = new ArrayList<>();
 
                                 for (int j = 0; j < jsonObj.getJSONArray("other_customer_dates").length(); j++) {
@@ -321,7 +319,6 @@ public class LinkToCustomer_Activity extends Activity {
                                     otherDatesListPojos.add(otherdateobj);
                                 }
                                 customerMainObj.setOther_date(otherDatesListPojos);
-
 
 
                                 ArrayList<CustomerPojo.DocumentListPojo> documentsList = new ArrayList<>();
@@ -345,7 +342,7 @@ public class LinkToCustomer_Activity extends Activity {
                                 ll_nothingtoshow.setVisibility(View.GONE);
                             }
                             customerLinkPojos = customerPojos;
-                            customer_list.setAdapter(new CustomerLinkAdapter(context, customerPojos,linkPojos));
+                            customer_list.setAdapter(new CustomerLinkAdapter(context, customerPojos, linkPojos));
 
                         }
                     } else if (type.equalsIgnoreCase("failure")) {

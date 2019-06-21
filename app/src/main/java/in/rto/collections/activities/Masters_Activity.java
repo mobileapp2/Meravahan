@@ -9,8 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
 
-//import com.insurance.todojee.R;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -18,12 +16,14 @@ import in.rto.collections.R;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.UserSessionManager;
 
+//import com.insurance.todojee.R;
+
 public class Masters_Activity extends Activity {
 
     private Context context;
     private UserSessionManager session;
-    private String user_id,role_id;
-    private CardView cc,rto_agent,vehicle_dealer;
+    private String user_id, role_id;
+    private CardView cc, rto_agent, vehicle_dealer;
     private LinearLayout banksection;
 
     @Override
@@ -44,26 +44,26 @@ public class Masters_Activity extends Activity {
             JSONObject json = user_info.getJSONObject(0);
             user_id = json.getString("id");
             role_id = json.getString("role_id");
-            if(role_id.equals("1")) {
+            if (role_id.equals("1")) {
                 rto_agent.setVisibility(View.GONE);
                 vehicle_dealer.setVisibility(View.VISIBLE);
                 cc.setVisibility(View.VISIBLE);
             }
-            if(role_id.equals("2")) {
+            if (role_id.equals("2")) {
                 rto_agent.setVisibility(View.VISIBLE);
                 vehicle_dealer.setVisibility(View.GONE);
                 cc.setVisibility(View.VISIBLE);
             }
-            if(role_id.equals("3")){
+            if (role_id.equals("3")) {
                 rto_agent.setVisibility(View.GONE);
                 vehicle_dealer.setVisibility(View.GONE);
-               // banksection.setVisibility(View.VISIBLE);
+                // banksection.setVisibility(View.VISIBLE);
             }
-            if(role_id.equals("4")){
+            if (role_id.equals("4")) {
                 rto_agent.setVisibility(View.GONE);
-              //  banksection.setVisibility(View.VISIBLE);
+                //  banksection.setVisibility(View.VISIBLE);
             }
-            if(role_id.equals("6")) {
+            if (role_id.equals("6")) {
                 rto_agent.setVisibility(View.GONE);
                 vehicle_dealer.setVisibility(View.GONE);
                 cc.setVisibility(View.VISIBLE);
@@ -89,16 +89,17 @@ public class Masters_Activity extends Activity {
     }
 
     public void openRtoAgent(View v) {
-       startActivity(new Intent(context, RtoAgent_Activity.class));
+        startActivity(new Intent(context, RtoAgent_Activity.class));
     }
 
     public void openVehicleDealer(View v) {
-       startActivity(new Intent(context, VehicleDealer_Activity.class));
+        startActivity(new Intent(context, VehicleDealer_Activity.class));
     }
 
     public void openFamilyCode(View v) {
-       // startActivity(new Intent(context, MastersFamiliyCode_Activity.class));
+        // startActivity(new Intent(context, MastersFamiliyCode_Activity.class));
     }
+
     public void openNewPoducts(View v) {
         startActivity(new Intent(context, MastersProductList_Activity.class));
     }
@@ -106,9 +107,11 @@ public class Masters_Activity extends Activity {
     public void openBank(View v) {
         startActivity(new Intent(context, Master_Bank.class));
     }
+
     public void openBranch(View v) {
         startActivity(new Intent(context, Master_branch_details.class));
     }
+
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle("Masters");

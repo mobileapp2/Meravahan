@@ -9,11 +9,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -42,7 +41,6 @@ import java.util.List;
 import in.rto.collections.R;
 import in.rto.collections.fragments.Self_Fragment;
 import in.rto.collections.models.BankPojo;
-import in.rto.collections.models.BankerDetailsPojo;
 import in.rto.collections.models.BranchPojo;
 import in.rto.collections.models.ClientMainListPojo;
 import in.rto.collections.models.CustomerPojo;
@@ -61,13 +59,13 @@ public class ViewImportCustomerBanker_Activity extends Activity {
     private ScrollView scrollView;
     private LinearLayout ll_parent;
     private static final int CAMERA_REQUEST = 100;
-    private LinearLayout ll_servicedates, ll_documents,ll_Otherdates;
-    private ImageView btn_addservicedates, btn_adddocuments,btn_addotherdates;
+    private LinearLayout ll_servicedates, ll_documents, ll_Otherdates;
+    private ImageView btn_addservicedates, btn_adddocuments, btn_addotherdates;
     private static final int GALLERY_REQUEST = 200;
     private EditText edt_bank, edt_branch, edt_clientname, edt_borrowername, edt_vehicledealer,
             edt_description, edt_loanamount, edt_accountnumber, edt_sactiondate, edt_installmentanount, edt_startdate,
-            edt_enddate, edt_frequency, edt_remark,edt_vehiclenumber,purchasedate,edt_selectVehicleImage;
-    private CheckBox isshow_to_dealer,isshow_to_customer;
+            edt_enddate, edt_frequency, edt_remark, edt_vehiclenumber, purchasedate, edt_selectVehicleImage;
+    private CheckBox isshow_to_dealer, isshow_to_customer;
     private int mYear, mMonth, mDay;
     private int mYear1, mMonth1, mDay1;
     private int mYear2, mMonth2, mDay2;
@@ -76,9 +74,9 @@ public class ViewImportCustomerBanker_Activity extends Activity {
     private int mYear5, mMonth5, mDay5;
     private int mYear6, mMonth6, mDay6;
     private int mYear7, mMonth7, mDay7;
-    private String isshowtocustomer , isshowtorto;
+    private String isshowtocustomer, isshowtorto;
 
-    private EditText edt_selectdocuments = null,edt_name = null;
+    private EditText edt_selectdocuments = null, edt_name = null;
     private ImageView img_save;
     private ArrayList<BankPojo> bankList;
     private ArrayList<BranchPojo> branchList;
@@ -89,12 +87,13 @@ public class ViewImportCustomerBanker_Activity extends Activity {
     private ArrayList<FrequencyPojo> frequencylist;
     private UserSessionManager session;
     private String companyAliasName = "";
-    private String user_id, stateId, clientId, typeId,dealerId,statename="",bankId,branchId,frequency;
+    private String user_id, stateId, clientId, typeId, dealerId, statename = "", bankId, branchId, frequency;
     private String[] PERMISSIONS = {android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
     private Uri photoURI;
     private File file, rtoagentPicFolder;
     private CustomerPojo customerPojo;
     private ImageView img_delete, img_edit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +103,7 @@ public class ViewImportCustomerBanker_Activity extends Activity {
         getSessionData();
         setDefaults();
     }
+
     private void init() {
         context = ViewImportCustomerBanker_Activity.this;
         session = new UserSessionManager(context);
@@ -144,6 +144,7 @@ public class ViewImportCustomerBanker_Activity extends Activity {
     protected void onPause() {
         super.onPause();
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -157,12 +158,12 @@ public class ViewImportCustomerBanker_Activity extends Activity {
 
     private void setDefaults() {
         documentsLayoutsList = new ArrayList<>();
-        customerPojo  = (CustomerPojo) getIntent().getSerializableExtra("bankerdetails");
+        customerPojo = (CustomerPojo) getIntent().getSerializableExtra("bankerdetails");
         edt_bank.setText(customerPojo.getBank_name());
         edt_branch.setText(customerPojo.getBranch_name());
         edt_description.setText(customerPojo.getDescription());
         edt_sactiondate.setText(changeDateFormat("yyyy-MM-dd",
-                "dd/MM/yyyy",customerPojo.getDate_to_section()));
+                "dd/MM/yyyy", customerPojo.getDate_to_section()));
         edt_enddate.setText(changeDateFormat("yyyy-MM-dd",
                 "dd/MM/yyyy",
                 customerPojo.getInstallment_end_date()));
@@ -177,7 +178,7 @@ public class ViewImportCustomerBanker_Activity extends Activity {
         edt_accountnumber.setText(customerPojo.getLoan_account_number());
         edt_installmentanount.setText(customerPojo.getInstallment_amount());
         edt_remark.setText(customerPojo.getRemark());
-       // edt_clientname.setText(customerPojo.getClient_name());
+        // edt_clientname.setText(customerPojo.getClient_name());
         edt_vehicledealer.setText(customerPojo.getVehicle_dealer_name());
         edt_frequency.setText(customerPojo.getFrequency());
         edt_borrowername.setText(customerPojo.getBorrower_name());
@@ -185,7 +186,7 @@ public class ViewImportCustomerBanker_Activity extends Activity {
         edt_vehiclenumber.setText(customerPojo.getVehicle_no());
         edt_selectVehicleImage.setText(customerPojo.getVehicle_image());
 
-        ArrayList< CustomerPojo.DocumentListPojo> documentsList = new ArrayList<>();
+        ArrayList<CustomerPojo.DocumentListPojo> documentsList = new ArrayList<>();
         documentsList = customerPojo.getDocument();
 
         if (documentsList.size() != 0) {
@@ -204,7 +205,7 @@ public class ViewImportCustomerBanker_Activity extends Activity {
                 ((EditText) documentsLayoutsList.get(i).findViewById(R.id.edt_selectdocuments)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                       // viewDocument(finalDocumentsList.get(finalI).getDocument());
+                        // viewDocument(finalDocumentsList.get(finalI).getDocument());
                     }
                 });
             }
@@ -220,7 +221,7 @@ public class ViewImportCustomerBanker_Activity extends Activity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 int id = item.getItemId();
-                if(id == R.id.img_edit){
+                if (id == R.id.img_edit) {
                     if (Utilities.isInternetAvailable(context)) {
                         if (Utilities.isInternetAvailable(context)) {
                             new ViewImportCustomerBanker_Activity.isImportDetails().execute(customerPojo.getId());
@@ -232,7 +233,7 @@ public class ViewImportCustomerBanker_Activity extends Activity {
                         Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                     }
 
-                }else if(id == R.id.img_link){
+                } else if (id == R.id.img_link) {
                     if (Utilities.isInternetAvailable(context)) {
                         Intent intent = new Intent(context, LinkCustomerBanker_Activity.class);
                         intent.putExtra("customerDetails", customerPojo);
@@ -240,7 +241,7 @@ public class ViewImportCustomerBanker_Activity extends Activity {
                     } else {
                         Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                     }
-                }else if(id == R.id.img_delete){
+                } else if (id == R.id.img_delete) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                     builder.setMessage("Are you sure you want to delete this item?");
                     builder.setTitle("Alert");
@@ -250,7 +251,7 @@ public class ViewImportCustomerBanker_Activity extends Activity {
                         public void onClick(DialogInterface dialog, int id) {
 
                             if (Utilities.isInternetAvailable(context)) {
-                               new ViewImportCustomerBanker_Activity.DeleteBankerDetails().execute(customerPojo.getId());
+                                new ViewImportCustomerBanker_Activity.DeleteBankerDetails().execute(customerPojo.getId());
                             } else {
                                 Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                             }
@@ -539,7 +540,6 @@ public class ViewImportCustomerBanker_Activity extends Activity {
             }
         }
     }
-
 
 
 }

@@ -17,73 +17,59 @@ public class BranchPojo {
 
     public boolean isChecked;
 
-    public String getCreated_by ()
-    {
+    public String getCreated_by() {
         return created_by;
     }
 
-    public void setCreated_by (String created_by)
-    {
+    public void setCreated_by(String created_by) {
         this.created_by = created_by;
     }
 
-    public String getId ()
-    {
+    public String getId() {
         return id;
     }
 
-    public void setId (String id)
-    {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getUpdated_at ()
-    {
+    public String getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at (String updated_at)
-    {
+    public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
     }
 
-    public String getCreated_at ()
-    {
+    public String getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at (String created_at)
-    {
+    public void setCreated_at(String created_at) {
         this.created_at = created_at;
     }
 
-    public String getUpdated_by ()
-    {
+    public String getUpdated_by() {
         return updated_by;
     }
 
-    public void setUpdated_by (String updated_by)
-    {
+    public void setUpdated_by(String updated_by) {
         this.updated_by = updated_by;
     }
 
-    public String getName ()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName (String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getAddress ()
-    {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress (String address)
-    {
+    public void setAddress(String address) {
         this.address = address;
     }
 

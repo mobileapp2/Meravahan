@@ -51,7 +51,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-
 import droidninja.filepicker.FilePickerBuilder;
 import droidninja.filepicker.FilePickerConst;
 import in.rto.collections.R;
@@ -79,14 +78,14 @@ public class AddvehicleDealer_Activity extends Activity {
     private ScrollView scrollView;
     private LinearLayout ll_parent;
     private static final int CAMERA_REQUEST = 100;
-    private LinearLayout ll_servicedates, ll_documents,ll_Otherdates;
-    private ImageView btn_addservicedates, btn_adddocuments,btn_addotherdates;
+    private LinearLayout ll_servicedates, ll_documents, ll_Otherdates;
+    private ImageView btn_addservicedates, btn_adddocuments, btn_addotherdates;
     private static final int GALLERY_REQUEST = 200;
     private EditText edt_state, edt_vehicleno, edt_clientname, edt_vehicleownername, edt_rtoagent,
             edt_description, edt_type, edt_engineno, edt_chassisno, edt_insurancepolicyno, edt_renewaldate,
-            edt_purcasedate, edt_temregno, edt_remark,edt_hypothecatedto,edt_bank, edt_branch, edt_borrowername,
+            edt_purcasedate, edt_temregno, edt_remark, edt_hypothecatedto, edt_bank, edt_branch, edt_borrowername,
             edt_loanamount, edt_accountnumber, edt_sactiondate, edt_installmentanount, edt_startdate,
-            edt_enddate, edt_frequency,edt_selectVehicleImage;
+            edt_enddate, edt_frequency, edt_selectVehicleImage;
 
     private int mYear, mMonth, mDay;
     private int mYear1, mMonth1, mDay1;
@@ -105,15 +104,16 @@ public class AddvehicleDealer_Activity extends Activity {
     private ArrayList<TypePojo> typelist;
     private ArrayList<StatePojo> statelist;
     private UserSessionManager session;
-    private String companyAliasName = "",documentType;
-    private String user_id, stateId, clientId, typeId,rtoId,statename="",frequency="0";
+    private String companyAliasName = "", documentType;
+    private String user_id, stateId, clientId, typeId, rtoId, statename = "", frequency = "0";
     private String[] PERMISSIONS = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
     private Uri photoURI;
     private File photoFile, vehicledealerPicFolder;
-    private CheckBox isshow_to_rto,isshow_to_customer;
-    private String isshowtocustomer , isshowtorto;
-    private LinearLayout bank_details,bank_feild;
+    private CheckBox isshow_to_rto, isshow_to_customer;
+    private String isshowtocustomer, isshowtorto;
+    private LinearLayout bank_details, bank_feild;
     private ArrayList<FrequencyPojo> frequencylist;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -189,6 +189,7 @@ public class AddvehicleDealer_Activity extends Activity {
     protected void onPause() {
         super.onPause();
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -246,6 +247,7 @@ public class AddvehicleDealer_Activity extends Activity {
         documentsLayoutsList = new ArrayList<>();
 
     }
+
     @SuppressLint("ClickableViewAccessibility")
     private void setEventHandler() {
         bank_details.setOnClickListener(new View.OnClickListener() {
@@ -351,30 +353,30 @@ public class AddvehicleDealer_Activity extends Activity {
         edt_purcasedate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    DatePickerDialog dpd1 = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
-                        @Override
-                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                            edt_purcasedate.setText(
-                                    changeDateFormat("yyyy-MM-dd",
-                                            "dd/MM/yyyy",
-                                            Utilities.ConvertDateFormat(Utilities.dfDate, dayOfMonth, monthOfYear + 1, year))
+                DatePickerDialog dpd1 = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        edt_purcasedate.setText(
+                                changeDateFormat("yyyy-MM-dd",
+                                        "dd/MM/yyyy",
+                                        Utilities.ConvertDateFormat(Utilities.dfDate, dayOfMonth, monthOfYear + 1, year))
 
-                            );
+                        );
 
-                            mYear1 = year;
-                            mMonth1 = monthOfYear;
-                            mDay1 = dayOfMonth;
-                        }
-                    }, mYear1, mMonth1, mDay1);
-                    try {
-                        dpd1.getDatePicker().setCalendarViewShown(false);
-                       // dpd1.getDatePicker().setMinDate(c.getTimeInMillis());
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                        mYear1 = year;
+                        mMonth1 = monthOfYear;
+                        mDay1 = dayOfMonth;
                     }
-                    dpd1.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
-                    dpd1.show();
+                }, mYear1, mMonth1, mDay1);
+                try {
+                    dpd1.getDatePicker().setCalendarViewShown(false);
+                    // dpd1.getDatePicker().setMinDate(c.getTimeInMillis());
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+                dpd1.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
+                dpd1.show();
+            }
 
         });
 
@@ -681,6 +683,7 @@ public class AddvehicleDealer_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetFrqList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -716,7 +719,7 @@ public class AddvehicleDealer_Activity extends Activity {
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
                     if (type.equalsIgnoreCase("success")) {
-                        frequencylist= new ArrayList<>();
+                        frequencylist = new ArrayList<>();
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
                             for (int i = 0; i < jsonarr.length(); i++) {
@@ -778,6 +781,7 @@ public class AddvehicleDealer_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetRTOAgentList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -876,6 +880,7 @@ public class AddvehicleDealer_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetTypeList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -1009,12 +1014,12 @@ public class AddvehicleDealer_Activity extends Activity {
         builderSingle.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ClientMainListPojo  selected_client = adapter[0].getSelected();
+                ClientMainListPojo selected_client = adapter[0].getSelected();
                 if (selected_client != null) {
 
                     edt_clientname.setText(selected_client.getName());
                     clientId = selected_client.getId();
-                }else{
+                } else {
                     Utilities.showSnackBar(ll_parent, "Please select client");
 
                 }
@@ -1038,6 +1043,7 @@ public class AddvehicleDealer_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetClientList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -1129,7 +1135,7 @@ public class AddvehicleDealer_Activity extends Activity {
             Utilities.showSnackBar(ll_parent, "Please Enter Valid Vehicle Number");
             return;
         }
-        if(!edt_bank.getText().toString().trim().equals("")){
+        if (!edt_bank.getText().toString().trim().equals("")) {
             if (edt_bank.getText().toString().trim().equals("")) {
                 Utilities.showSnackBar(ll_parent, "Please Enter Bank ");
                 return;
@@ -1180,7 +1186,7 @@ public class AddvehicleDealer_Activity extends Activity {
             JsonObject serviceDatesJSONObj = new JsonObject();
             serviceDatesJSONObj.addProperty("date", serviceDatesList.get(i).getService_date());
             serviceDatesJSONObj.addProperty("des", serviceDatesList.get(i).getText());
-           // maturityDatesJSONObj.addProperty("remark", maturityDatesList.get(i).getRemark());
+            // maturityDatesJSONObj.addProperty("remark", maturityDatesList.get(i).getRemark());
             serviceDatesJSONArray.add(serviceDatesJSONObj);
         }
 
@@ -1239,7 +1245,7 @@ public class AddvehicleDealer_Activity extends Activity {
 
         if (isshow_to_customer.isChecked()) {
             isshowtocustomer = "1";
-        } else{
+        } else {
             isshowtocustomer = "0";
         }
 
@@ -1255,7 +1261,7 @@ public class AddvehicleDealer_Activity extends Activity {
         mainObj.addProperty("state", stateId);
         mainObj.addProperty("client_name", clientId);
         mainObj.addProperty("vehicle_owner", edt_vehicleownername.getText().toString().trim());
-        mainObj.addProperty("rto_agent",rtoId);
+        mainObj.addProperty("rto_agent", rtoId);
         mainObj.addProperty("v_type", typeId);
         mainObj.addProperty("engine_no", edt_engineno.getText().toString().trim());
         mainObj.addProperty("chassis_no", edt_chassisno.getText().toString().trim());
@@ -1267,7 +1273,7 @@ public class AddvehicleDealer_Activity extends Activity {
                 edt_purcasedate.getText().toString().trim()));
         mainObj.addProperty("insu_policy_no", edt_insurancepolicyno.getText().toString().trim());
         mainObj.addProperty("tem_reg_no", edt_temregno.getText().toString().trim());
-        mainObj.addProperty("hypothecated_to",  edt_hypothecatedto.getText().toString().trim());
+        mainObj.addProperty("hypothecated_to", edt_hypothecatedto.getText().toString().trim());
         mainObj.add("documents", documentJSONArray);
         mainObj.addProperty("remark", edt_remark.getText().toString().trim());
         mainObj.addProperty("description", edt_description.getText().toString().trim());
@@ -1297,7 +1303,7 @@ public class AddvehicleDealer_Activity extends Activity {
         mainObj.addProperty("end_date", changeDateFormat("dd/MM/yyyy",
                 "yyyy/MM/dd",
                 edt_enddate.getText().toString().trim()));
-       // Log.i("LifeInsuranceJson", mainObj.toString());
+        // Log.i("LifeInsuranceJson", mainObj.toString());
 
         if (Utilities.isInternetAvailable(context)) {
             new AddvehicleDealerDetails().execute(mainObj.toString());
@@ -1395,6 +1401,7 @@ public class AddvehicleDealer_Activity extends Activity {
 
         }
     }
+
     public void selectDate(View view) {
         final EditText edt_servicedate = (EditText) view;
         final EditText edt_otheredate = (EditText) view;
@@ -1437,6 +1444,7 @@ public class AddvehicleDealer_Activity extends Activity {
         dpd1.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         dpd1.show();
     }
+
     public void selectVehicleImage(View view) {
         documentType = "vehicleImage";
         if (doesAppNeedPermissions()) {
@@ -1503,8 +1511,7 @@ public class AddvehicleDealer_Activity extends Activity {
                             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                             startActivityForResult(intent, CAMERA_REQUEST);
-                        }
-                        else if (options[item].equals("Choose from Gallery")) {
+                        } else if (options[item].equals("Choose from Gallery")) {
                             Intent intent = new Intent(Intent.ACTION_PICK);
                             intent.setType("image/*");
                             startActivityForResult(intent, GALLERY_REQUEST);
@@ -1713,9 +1720,9 @@ public class AddvehicleDealer_Activity extends Activity {
                     if (type.equalsIgnoreCase("Success")) {
                         JSONObject Obj1 = mainObj.getJSONObject("result");
                         String document_name = Obj1.getString("name");
-                        if(documentType.equals("selectedImage")) {
+                        if (documentType.equals("selectedImage")) {
                             edt_selectdocuments.setText(document_name);
-                        }else if(documentType.equals("vehicleImage")){
+                        } else if (documentType.equals("vehicleImage")) {
                             edt_selectVehicleImage.setText(document_name);
                         }
 
@@ -1730,7 +1737,6 @@ public class AddvehicleDealer_Activity extends Activity {
             }
         }
     }
-
 
 
     void savefile(Uri sourceuri) {
@@ -1771,12 +1777,12 @@ public class AddvehicleDealer_Activity extends Activity {
         otherLayoutsList.remove(view.getParent());
     }
 
-    public  void deleteDocument(View view){
+    public void deleteDocument(View view) {
         ll_documents.removeView((View) view.getParent());
         documentsLayoutsList.remove(view.getParent());
     }
 
-    public  void removeserviceDates(View view){
+    public void removeserviceDates(View view) {
         ll_servicedates.removeView((View) view.getParent());
         serviceDatesLayoutsList.remove(view.getParent());
     }

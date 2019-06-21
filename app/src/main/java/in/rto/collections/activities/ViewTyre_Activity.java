@@ -9,10 +9,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -56,12 +56,12 @@ public class ViewTyre_Activity extends Activity {
     private ScrollView scrollView;
     private LinearLayout ll_parent;
     private static final int CAMERA_REQUEST = 100;
-    private LinearLayout ll_servicedates, ll_documents,ll_Otherdates;
-    private ImageView btn_addservicedates, btn_adddocuments,btn_addotherdates;
+    private LinearLayout ll_servicedates, ll_documents, ll_Otherdates;
+    private ImageView btn_addservicedates, btn_adddocuments, btn_addotherdates;
     private static final int GALLERY_REQUEST = 200;
     private EditText edt_state, edt_vehicleno, edt_clientname,
             edt_description, edt_type, edt_replacementdate,
-            edt_remouning,edt_purchasedate,edt_remark,edt_tyreno;
+            edt_remouning, edt_purchasedate, edt_remark, edt_tyreno;
 
     private EditText edt_selectdocuments = null;
     private ImageView img_save;
@@ -73,12 +73,13 @@ public class ViewTyre_Activity extends Activity {
     private ArrayList<StatePojo> statelist;
     private UserSessionManager session;
     private String companyAliasName = "";
-    private String user_id, stateId, clientId, typeId,dealerId;
+    private String user_id, stateId, clientId, typeId, dealerId;
     private String[] PERMISSIONS = {android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
     private Uri photoURI;
     private File file, tyrePicFolder;
     private TyreDetailsPojo tyreDetailsPojo;
     private ImageView img_delete, img_edit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,8 +102,8 @@ public class ViewTyre_Activity extends Activity {
         edt_clientname = findViewById(R.id.edt_clientname);
         edt_description = findViewById(R.id.edt_description);
         edt_type = findViewById(R.id.edt_type);
-        edt_remark= findViewById(R.id.edt_remark);
-        edt_tyreno= findViewById(R.id.edt_tyreno);
+        edt_remark = findViewById(R.id.edt_remark);
+        edt_tyreno = findViewById(R.id.edt_tyreno);
 
         edt_replacementdate = findViewById(R.id.edt_tyrereplacementdate);
         edt_remouning = findViewById(R.id.edt_tyreremoundingdate);
@@ -130,6 +131,7 @@ public class ViewTyre_Activity extends Activity {
     protected void onPause() {
         super.onPause();
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -140,6 +142,7 @@ public class ViewTyre_Activity extends Activity {
             e.printStackTrace();
         }
     }
+
     private void setDefaults() {
         tyreDetailsPojo = (TyreDetailsPojo) getIntent().getSerializableExtra("tyreDetails");
 
@@ -200,6 +203,7 @@ public class ViewTyre_Activity extends Activity {
             // tv_documents.setText("No Documents Added");
         }
     }
+
     private void setEventHandler() {
 
     }
@@ -222,12 +226,12 @@ public class ViewTyre_Activity extends Activity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 int id = item.getItemId();
-                if(id == R.id.img_edit){
+                if (id == R.id.img_edit) {
                     Intent intent = new Intent(context, EditTyre_Activity.class);
                     intent.putExtra("tyreDetails", tyreDetailsPojo);
                     context.startActivity(intent);
                     finish();
-                }else if(id == R.id.img_delete){
+                } else if (id == R.id.img_delete) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                     builder.setMessage("Are you sure you want to delete this item?");
                     builder.setTitle("Alert");
@@ -258,7 +262,7 @@ public class ViewTyre_Activity extends Activity {
             }
         });
         //img_delete = findViewById(R.id.img_delete);
-       // img_edit = findViewById(R.id.img_edit);
+        // img_edit = findViewById(R.id.img_edit);
 
 
         mToolbar.setTitle("Tyre Details");
@@ -462,8 +466,6 @@ public class ViewTyre_Activity extends Activity {
             }
         }
     }
-
-
 
 
 }

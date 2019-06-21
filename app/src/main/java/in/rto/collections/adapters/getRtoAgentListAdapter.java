@@ -85,7 +85,7 @@ public class getRtoAgentListAdapter extends RecyclerView.Adapter<getRtoAgentList
                 edt_alias.setHint("Alias");
                 final EditText edt_mobile = new EditText(context);
                 edt_mobile.setHint("Mobile");
-                edt_mobile.setInputType(InputType.TYPE_CLASS_NUMBER );
+                edt_mobile.setInputType(InputType.TYPE_CLASS_NUMBER);
                 InputFilter[] filterArray = new InputFilter[1];
                 filterArray[0] = new InputFilter.LengthFilter(10);
                 edt_mobile.setFilters(filterArray);
@@ -103,9 +103,9 @@ public class getRtoAgentListAdapter extends RecyclerView.Adapter<getRtoAgentList
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         if (Utilities.isInternetAvailable(context)) {
-                            new getRtoAgentListAdapter.EditRtoAgent().execute(edt_name.getText().toString().trim(),edt_alias.getText().toString().trim(),
+                            new getRtoAgentListAdapter.EditRtoAgent().execute(edt_name.getText().toString().trim(), edt_alias.getText().toString().trim(),
                                     user_id,
-                                    finalrtoagentListDetails.getId(),edt_mobile.getText().toString().trim());
+                                    finalrtoagentListDetails.getId(), edt_mobile.getText().toString().trim());
                         } else {
                             Utilities.showMessageString(context, "Please Check Internet Connection");
                         }
@@ -130,7 +130,7 @@ public class getRtoAgentListAdapter extends RecyclerView.Adapter<getRtoAgentList
 
                 final AlertDialog alertD = builder.create();
 
-                LinearLayout ll=new LinearLayout(context);
+                LinearLayout ll = new LinearLayout(context);
                 ll.setOrientation(LinearLayout.VERTICAL);
                 ll.addView(edt_name);
                 ll.addView(edt_alias);
@@ -167,7 +167,6 @@ public class getRtoAgentListAdapter extends RecyclerView.Adapter<getRtoAgentList
     }
 
 
-
     @Override
     public int getItemCount() {
         return resultArrayList.size();
@@ -189,7 +188,7 @@ public class getRtoAgentListAdapter extends RecyclerView.Adapter<getRtoAgentList
         }
     }
 
-    public class EditRtoAgent  extends AsyncTask<String, Void, String> {
+    public class EditRtoAgent extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
 
@@ -215,6 +214,7 @@ public class getRtoAgentListAdapter extends RecyclerView.Adapter<getRtoAgentList
             res = WebServiceCalls.JSONAPICall(ApplicationConstants.MASTERAPI, obj.toString());
             return res.trim();
         }
+
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);

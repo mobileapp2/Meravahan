@@ -14,7 +14,6 @@
         android:layout_gravity="center">
 
 
-
         <EditText
             android:id="@+id/edt_date"
             android:layout_width="wrap_content"
@@ -92,7 +91,7 @@
             android:src="@drawable/icon_whatsapp"
             android:tint="@color/white"
             app:fab_size="mini"
-            android:backgroundTint="@color/colorPrimary"/>
+            android:backgroundTint="@color/colorPrimary" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_wish_sms"
@@ -104,7 +103,7 @@
             android:src="@drawable/icon_sms"
             android:tint="@color/white"
             app:fab_size="mini"
-            android:backgroundTint="@color/colorPrimary"/>
+            android:backgroundTint="@color/colorPrimary" />
 
         <include
             layout="@layout/shimmer_oneline_layout"

@@ -1,26 +1,14 @@
 package in.rto.collections.activities;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.provider.Settings;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,15 +17,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import in.rto.collections.R;
-import in.rto.collections.fragments.Birthday_Fragment;
-import in.rto.collections.models.BirthdayAnnivarsaryListPojo;
 import in.rto.collections.models.InformationListPojo;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.UserSessionManager;
-import in.rto.collections.utilities.Utilities;
 
 public class Information_activity extends Activity {
     public LinearLayout ll_parent;
@@ -112,7 +96,7 @@ public class Information_activity extends Activity {
             informationDetails = informationListPojos.get(position);
 
             holder.tv_text.setText(informationDetails.getName());
-           // holder.img_icon.setImageIcon(informationDetails.getName());
+            // holder.img_icon.setImageIcon(informationDetails.getName());
         }
 
         @Override
@@ -133,7 +117,6 @@ public class Information_activity extends Activity {
         }
 
     }
-
 
 
 }

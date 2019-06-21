@@ -38,10 +38,9 @@ public class Vehicle_Customer_Fragment extends Fragment {
     private static LinearLayout ll_nothingtoshow;
     private LinearLayoutManager layoutManager;
     private UserSessionManager session;
-    private static  String user_id,role;
+    private static String user_id, role;
     private SearchView searchView;
-    private static ArrayList<CustomerPojo> customerPojos2,customerPojos,customerPojos1,customerPojos3;
-
+    private static ArrayList<CustomerPojo> customerPojos2, customerPojos, customerPojos1, customerPojos3;
 
 
     @Override
@@ -70,8 +69,8 @@ public class Vehicle_Customer_Fragment extends Fragment {
     private void setDefault() {
         if (Utilities.isNetworkAvailable(getActivity())) {
             new Vehicle_Customer_Fragment.GetCustomerList().execute(user_id);
-            new Vehicle_Customer_Fragment.GetCustomerList1().execute(user_id,role);
-            new Vehicle_Customer_Fragment.GetBankerList().execute(user_id,role);
+            new Vehicle_Customer_Fragment.GetCustomerList1().execute(user_id, role);
+            new Vehicle_Customer_Fragment.GetBankerList().execute(user_id, role);
             new Vehicle_Customer_Fragment.GetOtherVehicleList().execute(user_id);
 
         } else {
@@ -100,8 +99,8 @@ public class Vehicle_Customer_Fragment extends Fragment {
             public void onRefresh() {
                 if (Utilities.isNetworkAvailable(context)) {
                     new Vehicle_Customer_Fragment.GetCustomerList().execute(user_id);
-                    new Vehicle_Customer_Fragment.GetCustomerList1().execute(user_id,role);
-                    new Vehicle_Customer_Fragment.GetBankerList().execute(user_id,role);
+                    new Vehicle_Customer_Fragment.GetCustomerList1().execute(user_id, role);
+                    new Vehicle_Customer_Fragment.GetBankerList().execute(user_id, role);
                     new Vehicle_Customer_Fragment.GetOtherVehicleList().execute(user_id);
                 } else {
                     Utilities.showSnackBar(drawerlayout, "Please Check Internet Connection");
@@ -117,17 +116,17 @@ public class Vehicle_Customer_Fragment extends Fragment {
             public boolean onQueryTextSubmit(String query) {
                 searchView.clearFocus();
                 ArrayList<CustomerPojo> customerSearchedList = new ArrayList<>();
-                for (CustomerPojo customer :  customerPojos) {
-                    String contactToBeSearched = customer.getVehicle_owner().toLowerCase()+ customer.getVehicle_no().toLowerCase();
+                for (CustomerPojo customer : customerPojos) {
+                    String contactToBeSearched = customer.getVehicle_owner().toLowerCase() + customer.getVehicle_no().toLowerCase();
                     if (contactToBeSearched.contains(query.toLowerCase())) {
                         customerSearchedList.add(customer);
                     }
                 }
 
                 if (customerSearchedList.size() == 0) {
-                    customer_list.setAdapter(new CustomerAdapter(context, customerSearchedList,user_id));
+                    customer_list.setAdapter(new CustomerAdapter(context, customerSearchedList, user_id));
                 } else {
-                    customer_list.setAdapter(new CustomerAdapter(context, customerSearchedList,user_id));
+                    customer_list.setAdapter(new CustomerAdapter(context, customerSearchedList, user_id));
                 }
 
                 return true;
@@ -138,20 +137,20 @@ public class Vehicle_Customer_Fragment extends Fragment {
                 if (!newText.equals("")) {
                     ArrayList<CustomerPojo> customerSearchedList = new ArrayList<>();
                     for (CustomerPojo customer : customerPojos) {
-                        String contactToBeSearched = customer.getVehicle_owner().toLowerCase()+customer.getVehicle_no().toLowerCase();
+                        String contactToBeSearched = customer.getVehicle_owner().toLowerCase() + customer.getVehicle_no().toLowerCase();
                         if (contactToBeSearched.contains(newText.toLowerCase())) {
                             customerSearchedList.add(customer);
                         }
                     }
                     if (customerSearchedList.size() == 0) {
-                        customer_list.setAdapter(new CustomerAdapter(context,customerSearchedList,user_id));
+                        customer_list.setAdapter(new CustomerAdapter(context, customerSearchedList, user_id));
                     } else {
                         //bindRecyclerview(contactsSearchedList);
-                        customer_list.setAdapter(new CustomerAdapter(context,customerSearchedList,user_id));
+                        customer_list.setAdapter(new CustomerAdapter(context, customerSearchedList, user_id));
                     }
                     return true;
                 } else if (newText.equals("")) {
-                    customer_list.setAdapter(new CustomerAdapter(context,customerPojos,user_id));
+                    customer_list.setAdapter(new CustomerAdapter(context, customerPojos, user_id));
                     //bindRecyclerview(contactList);
                 }
                 return true;
@@ -160,8 +159,9 @@ public class Vehicle_Customer_Fragment extends Fragment {
 
 
     }
+
     public static class GetCustomerList extends AsyncTask<String, Void, String> {
-       // private ArrayList<CustomerPojo> customerPojos;
+        // private ArrayList<CustomerPojo> customerPojos;
 
         @Override
         protected void onPreExecute() {
@@ -197,7 +197,7 @@ public class Vehicle_Customer_Fragment extends Fragment {
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
                     customerPojos = new ArrayList<CustomerPojo>();
-                    customer_list.setAdapter(new CustomerAdapter(context, customerPojos,user_id));
+                    customer_list.setAdapter(new CustomerAdapter(context, customerPojos, user_id));
                     if (type.equalsIgnoreCase("success")) {
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
@@ -254,7 +254,6 @@ public class Vehicle_Customer_Fragment extends Fragment {
                                 customerMainObj.setService_date(serviceDatesListPojos);
 
 
-
                                 ArrayList<CustomerPojo.OtherDatesListPojo> otherDatesListPojos = new ArrayList<>();
 
                                 for (int j = 0; j < jsonObj.getJSONArray("other_dates").length(); j++) {
@@ -265,7 +264,6 @@ public class Vehicle_Customer_Fragment extends Fragment {
                                     otherDatesListPojos.add(otherdateobj);
                                 }
                                 customerMainObj.setOther_date(otherDatesListPojos);
-
 
 
                                 ArrayList<CustomerPojo.DocumentListPojo> documentsList = new ArrayList<>();
@@ -287,28 +285,29 @@ public class Vehicle_Customer_Fragment extends Fragment {
                                 customer_list.setVisibility(View.VISIBLE);
                                 ll_nothingtoshow.setVisibility(View.GONE);
                             }
-                          //  new Vehicle_Customer_Fragment.GetCustomerList1().execute(user_id,role);
-                            customer_list.setAdapter(new CustomerAdapter(context, customerPojos,user_id));
+                            //  new Vehicle_Customer_Fragment.GetCustomerList1().execute(user_id,role);
+                            customer_list.setAdapter(new CustomerAdapter(context, customerPojos, user_id));
 
                         }
                     } else if (type.equalsIgnoreCase("failure")) {
-                        customer_list.setAdapter(new CustomerAdapter(context, customerPojos,user_id));
+                        customer_list.setAdapter(new CustomerAdapter(context, customerPojos, user_id));
 
                         // new Vehicle_Customer_Fragment.GetCustomerList1().execute(user_id,role);
-                       // ll_nothingtoshow.setVisibility(View.VISIBLE);
-                       // customer_list.setVisibility(View.GONE);
+                        // ll_nothingtoshow.setVisibility(View.VISIBLE);
+                        // customer_list.setVisibility(View.GONE);
                     }
                 }
             } catch (Exception e) {
-                customer_list.setAdapter(new CustomerAdapter(context, customerPojos,user_id));
+                customer_list.setAdapter(new CustomerAdapter(context, customerPojos, user_id));
 //                ll_nothingtoshow.setVisibility(View.VISIBLE);
 //                customer_list.setVisibility(View.GONE);
 //                e.printStackTrace();
             }
         }
-     }
+    }
+
     public static class GetCustomerList1 extends AsyncTask<String, Void, String> {
-      //  private ArrayList<CustomerPojo> customerPojos1;
+        //  private ArrayList<CustomerPojo> customerPojos1;
 
         @Override
         protected void onPreExecute() {
@@ -344,7 +343,7 @@ public class Vehicle_Customer_Fragment extends Fragment {
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
                     customerPojos1 = new ArrayList<CustomerPojo>();
-                    customer_list.setAdapter(new CustomerAdapter(context, customerPojos1,user_id));
+                    customer_list.setAdapter(new CustomerAdapter(context, customerPojos1, user_id));
                     if (type.equalsIgnoreCase("success")) {
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
@@ -381,7 +380,6 @@ public class Vehicle_Customer_Fragment extends Fragment {
                                 customerMainObj.setVehicle_image_url(jsonObj.getString("vehicleImageURL"));
 
 
-
                                 ArrayList<CustomerPojo.ServiceDatesListPojo> serviceDatesListPojos = new ArrayList<>();
 
                                 for (int j = 0; j < jsonObj.getJSONArray("service_dates").length(); j++) {
@@ -392,7 +390,6 @@ public class Vehicle_Customer_Fragment extends Fragment {
                                     serviceDatesListPojos.add(servicedateobj);
                                 }
                                 customerMainObj.setService_date(serviceDatesListPojos);
-
 
 
                                 ArrayList<CustomerPojo.OtherDatesListPojo> otherDatesListPojos = new ArrayList<>();
@@ -407,14 +404,14 @@ public class Vehicle_Customer_Fragment extends Fragment {
                                 customerMainObj.setOther_date(otherDatesListPojos);
 
 
-
                                 ArrayList<CustomerPojo.DocumentListPojo> documentsList = new ArrayList<>();
 
                                 for (int j = 0; j < jsonObj.getJSONArray("document").length(); j++) {
                                     CustomerPojo.DocumentListPojo documentObj = new CustomerPojo.DocumentListPojo();
                                     documentObj.setDocument(jsonObj.getJSONArray("document").getJSONObject(j).getString("document"));
                                     documentObj.setDocument_name(jsonObj.getJSONArray("document").getJSONObject(j).getString("document_name"));
-                                    documentObj.setOriginal_name(jsonObj.getJSONArray("document").getJSONObject(j).getString("original_name"));          documentsList.add(documentObj);
+                                    documentObj.setOriginal_name(jsonObj.getJSONArray("document").getJSONObject(j).getString("original_name"));
+                                    documentsList.add(documentObj);
                                 }
                                 customerMainObj.setDocument(documentsList);
                                 customerPojos1.add(customerMainObj);
@@ -428,22 +425,22 @@ public class Vehicle_Customer_Fragment extends Fragment {
                             }
                             customerPojos.addAll(customerPojos1);
                             //customerPojos2.addAll(customerPojos1);
-                           // customerPojos2.addAll(listTwo);
+                            // customerPojos2.addAll(listTwo);
 
-                            customer_list.setAdapter(new CustomerAdapter(context, customerPojos,user_id));
+                            customer_list.setAdapter(new CustomerAdapter(context, customerPojos, user_id));
 
                         }
                     } else if (type.equalsIgnoreCase("failure")) {
-                        if(customerPojos.size() == 0) {
+                        if (customerPojos.size() == 0) {
                             ll_nothingtoshow.setVisibility(View.VISIBLE);
                             customer_list.setVisibility(View.GONE);
-                        }else{
-                            customer_list.setAdapter(new CustomerAdapter(context, customerPojos,user_id));
+                        } else {
+                            customer_list.setAdapter(new CustomerAdapter(context, customerPojos, user_id));
                         }
                     }
                 }
             } catch (Exception e) {
-                customer_list.setAdapter(new CustomerAdapter(context, customerPojos,user_id));
+                customer_list.setAdapter(new CustomerAdapter(context, customerPojos, user_id));
 //                ll_nothingtoshow.setVisibility(View.VISIBLE);
 //                customer_list.setVisibility(View.GONE);
 //                e.printStackTrace();
@@ -488,7 +485,7 @@ public class Vehicle_Customer_Fragment extends Fragment {
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
                     customerPojos2 = new ArrayList<CustomerPojo>();
-                    customer_list.setAdapter(new CustomerAdapter(context, customerPojos2,user_id));
+                    customer_list.setAdapter(new CustomerAdapter(context, customerPojos2, user_id));
                     if (type.equalsIgnoreCase("success")) {
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
@@ -523,7 +520,6 @@ public class Vehicle_Customer_Fragment extends Fragment {
                                 customerMainObj.setVehicle_image_url(jsonObj.getString("vehicleImageURL"));
 
 
-
                                 ArrayList<CustomerPojo.DocumentListPojo> documentsList = new ArrayList<>();
 
                                 for (int j = 0; j < jsonObj.getJSONArray("document").length(); j++) {
@@ -547,26 +543,27 @@ public class Vehicle_Customer_Fragment extends Fragment {
                             }
                             customerPojos.addAll(customerPojos2);
 
-                            customer_list.setAdapter(new CustomerAdapter(context, customerPojos,user_id));
+                            customer_list.setAdapter(new CustomerAdapter(context, customerPojos, user_id));
 
                         }
                     } else if (type.equalsIgnoreCase("failure")) {
-                        if(customerPojos.size() == 0) {
+                        if (customerPojos.size() == 0) {
                             ll_nothingtoshow.setVisibility(View.VISIBLE);
                             customer_list.setVisibility(View.GONE);
-                        }else{
-                            customer_list.setAdapter(new CustomerAdapter(context, customerPojos,user_id));
+                        } else {
+                            customer_list.setAdapter(new CustomerAdapter(context, customerPojos, user_id));
                         }
                     }
                 }
             } catch (Exception e) {
-                customer_list.setAdapter(new CustomerAdapter(context, customerPojos,user_id));
+                customer_list.setAdapter(new CustomerAdapter(context, customerPojos, user_id));
 //                ll_nothingtoshow.setVisibility(View.VISIBLE);
 //                customer_list.setVisibility(View.GONE);
 //                e.printStackTrace();
             }
         }
     }
+
     public static class GetOtherVehicleList extends AsyncTask<String, Void, String> {
         // private ArrayList<CustomerPojo> customerPojos;
 
@@ -604,7 +601,7 @@ public class Vehicle_Customer_Fragment extends Fragment {
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
                     customerPojos3 = new ArrayList<CustomerPojo>();
-                    customer_list.setAdapter(new CustomerAdapter(context, customerPojos,user_id));
+                    customer_list.setAdapter(new CustomerAdapter(context, customerPojos, user_id));
                     if (type.equalsIgnoreCase("success")) {
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
@@ -651,7 +648,6 @@ public class Vehicle_Customer_Fragment extends Fragment {
                                 customerMainObj.setWheel_date(wheelDatesListPojos);
 
 
-
                                 ArrayList<CustomerPojo.OtherDatesListPojo> otherDatesListPojos = new ArrayList<>();
 
                                 for (int j = 0; j < jsonObj.getJSONArray("other_dates").length(); j++) {
@@ -662,7 +658,6 @@ public class Vehicle_Customer_Fragment extends Fragment {
                                     otherDatesListPojos.add(otherdateobj);
                                 }
                                 customerMainObj.setOther_date(otherDatesListPojos);
-
 
 
                                 ArrayList<CustomerPojo.DocumentListPojo> documentsList = new ArrayList<>();
@@ -686,11 +681,11 @@ public class Vehicle_Customer_Fragment extends Fragment {
                             }
                             customerPojos.addAll(customerPojos3);
                             //  new Vehicle_Customer_Fragment.GetCustomerList1().execute(user_id,role);
-                            customer_list.setAdapter(new CustomerAdapter(context, customerPojos,user_id));
+                            customer_list.setAdapter(new CustomerAdapter(context, customerPojos, user_id));
 
                         }
                     } else if (type.equalsIgnoreCase("failure")) {
-                        customer_list.setAdapter(new CustomerAdapter(context, customerPojos,user_id));
+                        customer_list.setAdapter(new CustomerAdapter(context, customerPojos, user_id));
 
                         // new Vehicle_Customer_Fragment.GetCustomerList1().execute(user_id,role);
                         // ll_nothingtoshow.setVisibility(View.VISIBLE);
@@ -698,7 +693,7 @@ public class Vehicle_Customer_Fragment extends Fragment {
                     }
                 }
             } catch (Exception e) {
-                customer_list.setAdapter(new CustomerAdapter(context, customerPojos,user_id));
+                customer_list.setAdapter(new CustomerAdapter(context, customerPojos, user_id));
 //                ll_nothingtoshow.setVisibility(View.VISIBLE);
 //                customer_list.setVisibility(View.GONE);
 //                e.printStackTrace();

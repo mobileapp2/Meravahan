@@ -47,14 +47,14 @@ public class Register_Activity extends Activity {
 
     private Context context;
     private ConstraintLayout cl_parent;
-    private EditText edt_name, edt_mobile, edt_password,edt_role;
+    private EditText edt_name, edt_mobile, edt_password, edt_role;
     private CheckBox edt_referral;
     private TextView tv_alreadyregister;
     private Button btn_register;
     private UserSessionManager session;
     private TextInputLayout textInputLayout;
     private ArrayList<RolesPojo> rolesPojoArrayList;
-    private String roleId = "0",refferalCode="";
+    private String roleId = "0", refferalCode = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,7 @@ public class Register_Activity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-      //  hideSoftKeyboard(Register_Activity.this);
+        //  hideSoftKeyboard(Register_Activity.this);
     }
 
     private void init() {
@@ -86,6 +86,7 @@ public class Register_Activity extends Activity {
         btn_register = findViewById(R.id.btn_register);
         //textInputLayout = findViewById(R.id.role);
     }
+
     private void setDefaults() {
         rolesPojoArrayList = new ArrayList<>();
 
@@ -99,7 +100,7 @@ public class Register_Activity extends Activity {
                     if (Utilities.isNetworkAvailable(context)) {
                         new GetRoleList().execute();
                     } else {
-                       // Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+                        // Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                     }
                 } else {
                     roleListDialog(rolesPojoArrayList);
@@ -109,7 +110,7 @@ public class Register_Activity extends Activity {
         edt_referral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(edt_referral.isChecked()){
+                if (edt_referral.isChecked()) {
                     createDialogForReferralCode();
                 }
             }
@@ -175,12 +176,12 @@ public class Register_Activity extends Activity {
             pd = new ProgressDialog(context, R.style.CustomDialogTheme);
             pd.setMessage("Please wait ...");
             pd.setCancelable(false);
-           // pd.show();
+            // pd.show();
         }
 
         @Override
         protected String doInBackground(String... params) {
-           // TYPE = params[1];
+            // TYPE = params[1];
 
             String res = "[]";
             List<ParamsPojo> param = new ArrayList<ParamsPojo>();
@@ -211,7 +212,7 @@ public class Register_Activity extends Activity {
                                 rolesPojoArrayList.add(summary);
                             }
                             if (rolesPojoArrayList.size() != 0) {
-                                    roleListDialog(rolesPojoArrayList);
+                                roleListDialog(rolesPojoArrayList);
 
                             }
                         }
@@ -224,8 +225,6 @@ public class Register_Activity extends Activity {
             }
         }
     }
-
-
 
 
     private void submitData() {
@@ -269,7 +268,7 @@ public class Register_Activity extends Activity {
                     if (Utilities.isNetworkAvailable(context)) {
                         new RegisterNewUser().execute(edt_name.getText().toString().trim(),
                                 edt_mobile.getText().toString().trim(),
-                                edt_password.getText().toString().trim(),roleId);
+                                edt_password.getText().toString().trim(), roleId);
                     } else {
                         Utilities.showSnackBar(cl_parent, "Please Check Internet Connection.");
                     }
@@ -334,12 +333,12 @@ public class Register_Activity extends Activity {
         alertDialogBuilder.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                    if (Utilities.isNetworkAvailable(context)) {
-                        refferalCode = edt_code.getText().toString().trim();
-                        new SendReferralCOde().execute(edt_code.getText().toString().trim());
-                    } else {
-                        Utilities.showSnackBar(cl_parent, "Please Check Internet Connection");
-                    }
+                if (Utilities.isNetworkAvailable(context)) {
+                    refferalCode = edt_code.getText().toString().trim();
+                    new SendReferralCOde().execute(edt_code.getText().toString().trim());
+                } else {
+                    Utilities.showSnackBar(cl_parent, "Please Check Internet Connection");
+                }
 
             }
         });
@@ -375,7 +374,6 @@ public class Register_Activity extends Activity {
             }
         });
     }
-
 
 
     private void saveRegistrationID() {
@@ -457,6 +455,7 @@ public class Register_Activity extends Activity {
             }
         }
     }
+
     public class SendReferralCOde extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -483,7 +482,7 @@ public class Register_Activity extends Activity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-pd.hide();
+            pd.hide();
             String type = "", message = "";
             try {
                 if (!result.equals("")) {
@@ -493,11 +492,11 @@ pd.hide();
                     if (type.equalsIgnoreCase("success")) {
 
                         //finish();
-                    }else{
+                    } else {
                         createDialogForReferralCode();
                     }
                 }
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -528,7 +527,7 @@ pd.hide();
                     .add("mobile", params[1])
                     .add("password", params[2])
                     .add("role_id", params[3])
-                    .add("referral_code",refferalCode)
+                    .add("referral_code", refferalCode)
                     .build();
             Request request = new Request.Builder()
                     .url(ApplicationConstants.REGISTERAPI)

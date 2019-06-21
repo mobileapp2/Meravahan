@@ -6,6 +6,7 @@
     android:background="@color/placeholder_bg"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -17,20 +18,22 @@
         card_view:cardUseCompatPadding="true"
         android:focusableInTouchMode="true"
         android:focusable="true">
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:drawableEnd="@drawable/ic_search"
-        android:drawableRight="@drawable/ic_search"
-        android:background="@color/white"
-        android:iconifiedByDefault="false"
-        android:inputType="textCapWords"
-        android:queryBackground="@android:color/white"
-        android:queryHint="Search Here"
 
-        />
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:drawableEnd="@drawable/ic_search"
+            android:drawableRight="@drawable/ic_search"
+            android:background="@color/white"
+            android:iconifiedByDefault="false"
+            android:inputType="textCapWords"
+            android:queryBackground="@android:color/white"
+            android:queryHint="Search Here"
+
+            />
     </android.support.v7.widget.CardView>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -73,7 +76,8 @@
                 android:text="Click on + button to add new customer"
                 android:textSize="16sp" />
         </LinearLayout>
-  <android.support.design.widget.FloatingActionButton
+
+        <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_add_customer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,7 +85,7 @@
             android:layout_margin="10dp"
             android:src="@drawable/icon_add"
             app:backgroundTint="@color/colorPrimary"
-            app:tint="@color/white"/>
+            app:tint="@color/white" />
 
         <include
             layout="@layout/shimmer_twolines_layout"

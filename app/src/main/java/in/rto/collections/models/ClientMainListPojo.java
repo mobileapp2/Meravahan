@@ -2,7 +2,7 @@ package in.rto.collections.models;
 
 import java.io.Serializable;
 
-public class ClientMainListPojo implements Serializable{
+public class ClientMainListPojo implements Serializable {
 
     private String created_by;
 
@@ -26,7 +26,7 @@ public class ClientMainListPojo implements Serializable{
 
     private String dob;
 
-   private String remark;
+    private String remark;
 
     private String created_at;
 

@@ -1,90 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ll_mainlayout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:elevation="3dp"
     android:layout_marginLeft="7dp"
-    android:layout_marginRight="7dp"
     android:layout_marginTop="7dp"
-    android:orientation="vertical"
+    android:layout_marginRight="7dp"
     android:background="@color/placeholder_bg"
-    >
-    <LinearLayout
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        >
-    <ImageView
-        android:layout_height="180dp"
-        android:layout_width="match_parent"
-        android:src="@drawable/houses"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        >
-    </ImageView>
-</LinearLayout>
+    android:elevation="3dp"
+    android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/tab_white"
+        android:orientation="vertical">
 
         <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/tab_white"
-            >
-            <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_marginBottom="5dp"
-                android:background="@color/colorPrimary">
+            android:layout_marginBottom="5dp"
+            android:background="@color/colorPrimary">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="RC Information"
-                android:textColor="@color/white"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
-                android:textSize="18dp"
-                />
-            </LinearLayout>
-            <HorizontalScrollView
-                android:id="@+id/hsv"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:fillViewport="true"
-                android:measureAllChildren="false"
-                android:scrollbars="none" >
+                android:text="RC Information"
+                android:textColor="@color/white"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:id="@+id/hsv"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:fillViewport="true"
+            android:measureAllChildren="false"
+            android:scrollbars="none">
 
             <LinearLayout
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:orientation="horizontal"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
-                >
+                android:orientation="horizontal">
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/first"
                     android:layout_width="90dp"
                     android:layout_height="150dp"
                     android:elevation="3dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="0dp"
-                    card_view:cardElevation="3dp"
-                    android:id="@+id/first"
-                    >
+                    card_view:cardElevation="3dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -96,11 +79,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="Temporary Registration"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/black"
                             android:layout_marginTop="10dp"
-                            android:textSize="12dp"/>
+                            android:gravity="center_horizontal"
+                            android:text="Temporary Registration"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
@@ -109,23 +92,22 @@
 
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/second"
                     android:layout_width="90dp"
                     android:layout_height="150dp"
+                    android:layout_gravity="center_vertical"
                     android:elevation="3dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="0dp"
-                    card_view:cardElevation="3dp"
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/second"
-                    >
+                    card_view:cardElevation="3dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:id="@+id/img_icon1"
@@ -139,11 +121,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="Permanent Registration"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/black"
                             android:layout_marginTop="10dp"
-                            android:textSize="12dp"/>
+                            android:gravity="center_horizontal"
+                            android:text="Permanent Registration"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
@@ -151,23 +133,22 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/third"
                     android:layout_width="90dp"
                     android:layout_height="150dp"
+                    android:layout_gravity="center_vertical"
                     android:elevation="3dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="0dp"
-                    card_view:cardElevation="3dp"
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/third"
-                    >
+                    card_view:cardElevation="3dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:id="@+id/img_icon2"
@@ -181,11 +162,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="Renewal Of Registration"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/black"
                             android:layout_marginTop="10dp"
-                            android:textSize="12dp"/>
+                            android:gravity="center_horizontal"
+                            android:text="Renewal Of Registration"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
@@ -224,7 +205,7 @@
                             android:gravity="center_horizontal"
                             android:text="No Objection Certificate"
                             android:textColor="@color/black"
-                            android:textSize="12dp"/>
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
@@ -232,23 +213,22 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/fourth"
                     android:layout_width="75dp"
                     android:layout_height="150dp"
+                    android:layout_gravity="center_vertical"
                     android:elevation="3dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="0dp"
-                    card_view:cardElevation="3dp"
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/fourth"
-                    >
+                    card_view:cardElevation="3dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -260,11 +240,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="Duplicate RC"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/black"
                             android:layout_marginTop="10dp"
-                            android:textSize="12dp"/>
+                            android:gravity="center_horizontal"
+                            android:text="Duplicate RC"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
@@ -272,23 +252,22 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/six"
                     android:layout_width="80dp"
                     android:layout_height="150dp"
+                    android:layout_gravity="center_vertical"
                     android:elevation="3dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="0dp"
-                    card_view:cardElevation="3dp"
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/six"
-                    >
+                    card_view:cardElevation="3dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -300,34 +279,34 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="HP Endorsement"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/black"
                             android:layout_marginTop="10dp"
-                            android:textSize="12dp"/>
+                            android:gravity="center_horizontal"
+                            android:text="HP Endorsement"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
 
                 </android.support.v7.widget.CardView>
+
                 <android.support.v7.widget.CardView
+                    android:id="@+id/seven"
                     android:layout_width="80dp"
                     android:layout_height="150dp"
+                    android:layout_gravity="center_vertical"
                     android:elevation="3dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="0dp"
-                    card_view:cardElevation="3dp"
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/seven"
-                    >
+                    card_view:cardElevation="3dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -339,34 +318,34 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="HP Termination"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/black"
                             android:layout_marginTop="10dp"
-                            android:textSize="12dp"/>
+                            android:gravity="center_horizontal"
+                            android:text="HP Termination"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
 
                 </android.support.v7.widget.CardView>
+
                 <android.support.v7.widget.CardView
+                    android:id="@+id/eight"
                     android:layout_width="80dp"
                     android:layout_height="150dp"
+                    android:layout_gravity="center_vertical"
                     android:elevation="3dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="0dp"
-                    card_view:cardElevation="3dp"
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/eight"
-                    >
+                    card_view:cardElevation="3dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -378,34 +357,34 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="Address Change"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/black"
                             android:layout_marginTop="10dp"
-                            android:textSize="12dp"/>
+                            android:gravity="center_horizontal"
+                            android:text="Address Change"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
 
                 </android.support.v7.widget.CardView>
+
                 <android.support.v7.widget.CardView
+                    android:id="@+id/nine"
                     android:layout_width="110dp"
                     android:layout_height="150dp"
+                    android:layout_gravity="center_vertical"
                     android:elevation="3dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="0dp"
-                    card_view:cardElevation="3dp"
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/nine"
-                    >
+                    card_view:cardElevation="3dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -417,34 +396,34 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="Reassignment Of Vehicle"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/black"
                             android:layout_marginTop="10dp"
-                            android:textSize="12dp"/>
+                            android:gravity="center_horizontal"
+                            android:text="Reassignment Of Vehicle"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
 
                 </android.support.v7.widget.CardView>
+
                 <android.support.v7.widget.CardView
+                    android:id="@+id/ten"
                     android:layout_width="80dp"
                     android:layout_height="150dp"
+                    android:layout_gravity="center_vertical"
                     android:elevation="3dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="0dp"
-                    card_view:cardElevation="3dp"
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/ten"
-                    >
+                    card_view:cardElevation="3dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -456,34 +435,34 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="Trade Certificate"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/black"
                             android:layout_marginTop="10dp"
-                            android:textSize="12dp"/>
+                            android:gravity="center_horizontal"
+                            android:text="Trade Certificate"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
 
                 </android.support.v7.widget.CardView>
+
                 <android.support.v7.widget.CardView
+                    android:id="@+id/eleven"
                     android:layout_width="90dp"
                     android:layout_height="150dp"
+                    android:layout_gravity="center_vertical"
                     android:elevation="3dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="0dp"
-                    card_view:cardElevation="3dp"
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/eleven"
-                    >
+                    card_view:cardElevation="3dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -495,34 +474,34 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="Certificate Issues"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/black"
                             android:layout_marginTop="10dp"
-                            android:textSize="12dp"/>
+                            android:gravity="center_horizontal"
+                            android:text="Certificate Issues"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
 
                 </android.support.v7.widget.CardView>
+
                 <android.support.v7.widget.CardView
+                    android:id="@+id/twele"
                     android:layout_width="90dp"
                     android:layout_height="150dp"
+                    android:layout_gravity="center_vertical"
                     android:elevation="3dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="0dp"
-                    card_view:cardElevation="3dp"
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/twele"
-                    >
+                    card_view:cardElevation="3dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -534,34 +513,34 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="Ownership Transfer"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/black"
                             android:layout_marginTop="10dp"
-                            android:textSize="12dp"/>
+                            android:gravity="center_horizontal"
+                            android:text="Ownership Transfer"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
 
                 </android.support.v7.widget.CardView>
+
                 <android.support.v7.widget.CardView
+                    android:id="@+id/thirteen"
                     android:layout_width="90dp"
                     android:layout_height="150dp"
+                    android:layout_gravity="center_vertical"
                     android:elevation="3dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="0dp"
-                    card_view:cardElevation="3dp"
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/thirteen"
-                    >
+                    card_view:cardElevation="3dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -573,11 +552,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="Diplomatic Vehicles"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/black"
                             android:layout_marginTop="10dp"
-                            android:textSize="12dp"/>
+                            android:gravity="center_horizontal"
+                            android:text="Diplomatic Vehicles"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
@@ -585,23 +564,22 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/fourteen"
                     android:layout_width="90dp"
                     android:layout_height="150dp"
+                    android:layout_gravity="center_vertical"
                     android:elevation="3dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="0dp"
-                    card_view:cardElevation="3dp"
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/fourteen"
-                    >
+                    card_view:cardElevation="3dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -613,10 +591,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="Registration Display"
                             android:gravity="center_horizontal"
+                            android:text="Registration Display"
                             android:textColor="@color/black"
-                            android:textSize="12dp"/>
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
@@ -625,70 +603,67 @@
 
 
             </LinearLayout>
-            </HorizontalScrollView>
-        </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
 
 
-
-
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/tab_white"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/tab_white"
-            >
-        <LinearLayout
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:background="@color/colorPrimary">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DL Information"
-                android:textColor="@color/white"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
-                android:textSize="18dp"
-                />
+                android:text="DL Information"
+                android:textColor="@color/white"
+                android:textSize="18dp" />
         </LinearLayout>
-            <HorizontalScrollView
-                android:id="@+id/hsv1"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:fillViewport="true"
-                android:measureAllChildren="false"
-                android:scrollbars="none" >
+
+        <HorizontalScrollView
+            android:id="@+id/hsv1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:fillViewport="true"
+            android:measureAllChildren="false"
+            android:scrollbars="none">
+
             <LinearLayout
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:orientation="horizontal"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
-                >
+                android:orientation="horizontal">
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/first1"
                     android:layout_width="75dp"
                     android:layout_height="150dp"
                     android:elevation="3dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="0dp"
-                    card_view:cardElevation="3dp"
-                    android:id="@+id/first1">
+                    card_view:cardElevation="3dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
-                        >
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -700,11 +675,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="Learner's DL"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/black"
                             android:layout_marginTop="10dp"
-                            android:textSize="12dp"/>
+                            android:gravity="center_horizontal"
+                            android:text="Learner's DL"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
@@ -713,23 +688,22 @@
 
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/second1"
                     android:layout_width="80dp"
                     android:layout_height="150dp"
+                    android:layout_gravity="center_vertical"
                     android:elevation="3dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="0dp"
-                    card_view:cardElevation="3dp"
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/second1"
-                    >
+                    card_view:cardElevation="3dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -741,11 +715,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="Permanent DL"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/black"
                             android:layout_marginTop="10dp"
-                            android:textSize="12dp"/>
+                            android:gravity="center_horizontal"
+                            android:text="Permanent DL"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
@@ -753,63 +727,61 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/third1"
                     android:layout_width="80dp"
                     android:layout_height="150dp"
+                    android:layout_gravity="center_vertical"
                     android:elevation="3dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="0dp"
-                    card_view:cardElevation="3dp"
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/third1"
-                    >
+                    card_view:cardElevation="3dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
-                            android:src="@drawable/ren_dl"
-                            />
+                            android:src="@drawable/ren_dl" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="Renewable Of DL"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/black"
                             android:layout_marginTop="10dp"
-                            android:textSize="12dp"/>
+                            android:gravity="center_horizontal"
+                            android:text="Renewable Of DL"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
 
                 </android.support.v7.widget.CardView>
+
                 <android.support.v7.widget.CardView
+                    android:id="@+id/fourth1"
                     android:layout_width="75dp"
                     android:layout_height="150dp"
+                    android:layout_gravity="center_vertical"
                     android:elevation="3dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="0dp"
-                    card_view:cardElevation="3dp"
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/fourth1"
-                    >
+                    card_view:cardElevation="3dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -821,11 +793,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="Duplicate DL"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/black"
                             android:layout_marginTop="10dp"
-                            android:textSize="12dp"/>
+                            android:gravity="center_horizontal"
+                            android:text="Duplicate DL"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
@@ -833,23 +805,22 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/five1"
                     android:layout_width="80dp"
                     android:layout_height="150dp"
+                    android:layout_gravity="center_vertical"
                     android:elevation="3dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="0dp"
-                    card_view:cardElevation="3dp"
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/five1"
-                    >
+                    card_view:cardElevation="3dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -861,34 +832,34 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="Addition Of Class"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/black"
                             android:layout_marginTop="10dp"
-                            android:textSize="12dp"/>
+                            android:gravity="center_horizontal"
+                            android:text="Addition Of Class"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
 
                 </android.support.v7.widget.CardView>
+
                 <android.support.v7.widget.CardView
+                    android:id="@+id/six1"
                     android:layout_width="110dp"
                     android:layout_height="150dp"
+                    android:layout_gravity="center_vertical"
                     android:elevation="3dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="0dp"
-                    card_view:cardElevation="3dp"
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/six1"
-                    >
+                    card_view:cardElevation="3dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -900,34 +871,34 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="International Driving Permit"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/black"
                             android:layout_marginTop="10dp"
-                            android:textSize="12dp"/>
+                            android:gravity="center_horizontal"
+                            android:text="International Driving Permit"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
 
                 </android.support.v7.widget.CardView>
+
                 <android.support.v7.widget.CardView
+                    android:id="@+id/seven1"
                     android:layout_width="110dp"
                     android:layout_height="150dp"
+                    android:layout_gravity="center_vertical"
                     android:elevation="3dp"
                     card_view:cardBackgroundColor="@color/white"
                     card_view:cardCornerRadius="0dp"
-                    card_view:cardElevation="3dp"
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/seven1"
-                    >
+                    card_view:cardElevation="3dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:orientation="vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp">
+                        android:layout_marginRight="5dp"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -939,11 +910,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="License Related Fees"
-                            android:gravity="center_horizontal"
-                            android:textColor="@color/black"
                             android:layout_marginTop="10dp"
-                            android:textSize="12dp"/>
+                            android:gravity="center_horizontal"
+                            android:text="License Related Fees"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
@@ -951,8 +922,8 @@
                 </android.support.v7.widget.CardView>
 
             </LinearLayout>
-            </HorizontalScrollView>
-        </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
 
 
 </LinearLayout>

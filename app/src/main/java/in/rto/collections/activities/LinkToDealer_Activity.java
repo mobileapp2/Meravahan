@@ -5,12 +5,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -27,8 +26,6 @@ import java.util.List;
 
 import in.rto.collections.R;
 import in.rto.collections.adapters.DealerLinkAdapter;
-import in.rto.collections.adapters.GetVehicleDealerDetailsListAdapter;
-import in.rto.collections.fragments.Fragment_vehicle_dealer;
 import in.rto.collections.models.LinkPojo;
 import in.rto.collections.models.VehicleDealerListPojo;
 import in.rto.collections.utilities.ApplicationConstants;
@@ -54,6 +51,7 @@ public class LinkToDealer_Activity extends Activity {
     private static ArrayList<VehicleDealerListPojo> vehicleDealerListToLinkPojos;
     public static int selectedposition = 0;
     private ImageView next;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,10 +76,11 @@ public class LinkToDealer_Activity extends Activity {
 //        shimmer_view_container = rootView.findViewById(R.id.shimmer_view_container);
         layoutManager = new LinearLayoutManager(context);
         vehicle_dealer_list.setLayoutManager(layoutManager);
-        linkPojo  = (LinkPojo) getIntent().getSerializableExtra("rtoDetails");
+        linkPojo = (LinkPojo) getIntent().getSerializableExtra("rtoDetails");
         vehicleDealerListToLinkPojos = new ArrayList<VehicleDealerListPojo>();
     }
-    public  void  setUpToolbar() {
+
+    public void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle("Link To");
         mToolbar.setNavigationIcon(R.drawable.icon_backarrow_16p);
@@ -92,6 +91,7 @@ public class LinkToDealer_Activity extends Activity {
             }
         });
     }
+
     private void setDefault() {
         if (Utilities.isNetworkAvailable(context)) {
             new LinkToDealer_Activity.GetVehicleDealerList().execute(user_id);
@@ -113,6 +113,7 @@ public class LinkToDealer_Activity extends Activity {
             e.printStackTrace();
         }
     }
+
     private void setEventHandlers() {
         fab_add_dealer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,8 +140,8 @@ public class LinkToDealer_Activity extends Activity {
             public boolean onQueryTextSubmit(String query) {
                 searchView.clearFocus();
                 ArrayList<VehicleDealerListPojo> dealerSearchedList = new ArrayList<>();
-                for (VehicleDealerListPojo dealer :  vehicleDealerListPojos) {
-                    String contactToBeSearched = dealer.getVehicle_owner().toLowerCase()+ dealer.getVehicle_no().toLowerCase();
+                for (VehicleDealerListPojo dealer : vehicleDealerListPojos) {
+                    String contactToBeSearched = dealer.getVehicle_owner().toLowerCase() + dealer.getVehicle_no().toLowerCase();
                     if (contactToBeSearched.contains(query.toLowerCase())) {
                         dealerSearchedList.add(dealer);
                     }
@@ -152,7 +153,7 @@ public class LinkToDealer_Activity extends Activity {
                     // bindRecyclerview(contactList);
                 } else {
                     vehicleDealerListToLinkPojos = dealerSearchedList;
-                    vehicle_dealer_list.setAdapter(new DealerLinkAdapter(context, dealerSearchedList,linkPojos));
+                    vehicle_dealer_list.setAdapter(new DealerLinkAdapter(context, dealerSearchedList, linkPojos));
                 }
 
                 return true;
@@ -163,7 +164,7 @@ public class LinkToDealer_Activity extends Activity {
                 if (!newText.equals("")) {
                     ArrayList<VehicleDealerListPojo> dealerSearchedList = new ArrayList<>();
                     for (VehicleDealerListPojo dealer : vehicleDealerListPojos) {
-                        String contactToBeSearched = dealer.getVehicle_owner().toLowerCase()+dealer.getVehicle_no().toLowerCase();
+                        String contactToBeSearched = dealer.getVehicle_owner().toLowerCase() + dealer.getVehicle_no().toLowerCase();
                         if (contactToBeSearched.contains(newText.toLowerCase())) {
                             dealerSearchedList.add(dealer);
                         }
@@ -175,45 +176,45 @@ public class LinkToDealer_Activity extends Activity {
                     } else {
                         //bindRecyclerview(contactsSearchedList);
                         vehicleDealerListToLinkPojos = dealerSearchedList;
-                        vehicle_dealer_list.setAdapter(new DealerLinkAdapter(context, dealerSearchedList,linkPojos));
+                        vehicle_dealer_list.setAdapter(new DealerLinkAdapter(context, dealerSearchedList, linkPojos));
                     }
                     return true;
                 } else if (newText.equals("")) {
                     vehicleDealerListToLinkPojos = vehicleDealerListPojos;
-                    vehicle_dealer_list.setAdapter(new DealerLinkAdapter(context, vehicleDealerListPojos,linkPojos));
+                    vehicle_dealer_list.setAdapter(new DealerLinkAdapter(context, vehicleDealerListPojos, linkPojos));
                     //bindRecyclerview(contactList);
                 }
                 return true;
             }
         });
- next.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        if(selectedposition != -1) {
-            VehicleDealerListPojo vehicleDealerListPojo = vehicleDealerListToLinkPojos.get(selectedposition);
-            Intent intent = new Intent(context, Link_Edit_Dealer.class);
-            intent.putExtra("vehicleDetails", vehicleDealerListPojo);
-            intent.putExtra("rtoDetails", linkPojo);
-            context.startActivity(intent);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (selectedposition != -1) {
+                    VehicleDealerListPojo vehicleDealerListPojo = vehicleDealerListToLinkPojos.get(selectedposition);
+                    Intent intent = new Intent(context, Link_Edit_Dealer.class);
+                    intent.putExtra("vehicleDetails", vehicleDealerListPojo);
+                    intent.putExtra("rtoDetails", linkPojo);
+                    context.startActivity(intent);
 
-        }else{
-            AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
-            builder.setMessage("Please Select Record To Link.");
-            builder.setIcon(R.drawable.ic_success_24dp);
-            builder.setTitle("Success");
-            builder.setCancelable(false);
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
+                    builder.setMessage("Please Select Record To Link.");
+                    builder.setIcon(R.drawable.ic_success_24dp);
+                    builder.setTitle("Success");
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
 
+                        }
+                    });
+                    AlertDialog alertD = builder.create();
+                    alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
+                    alertD.show();
                 }
-            });
-            AlertDialog alertD = builder.create();
-            alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
-            alertD.show();
-        }
 
-    }
- });
+            }
+        });
     }
 
     public static class GetVehicleDealerList extends AsyncTask<String, Void, String> {
@@ -254,7 +255,7 @@ public class LinkToDealer_Activity extends Activity {
                     message = mainObj.getString("message");
                     vehicleDealerListPojos = new ArrayList<VehicleDealerListPojo>();
                     linkPojos = new ArrayList<LinkPojo>();
-                    vehicle_dealer_list.setAdapter(new DealerLinkAdapter(context, vehicleDealerListPojos,linkPojos));
+                    vehicle_dealer_list.setAdapter(new DealerLinkAdapter(context, vehicleDealerListPojos, linkPojos));
                     if (type.equalsIgnoreCase("success")) {
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
@@ -309,7 +310,6 @@ public class LinkToDealer_Activity extends Activity {
                                 dealerMainObj.setService_date(serviceDatesListPojos);
 
 
-
                                 ArrayList<VehicleDealerListPojo.OtherDatesListPojo> otherDatesListPojos = new ArrayList<>();
 
                                 for (int j = 0; j < jsonObj.getJSONArray("other_dates").length(); j++) {
@@ -320,7 +320,6 @@ public class LinkToDealer_Activity extends Activity {
                                     otherDatesListPojos.add(otherdateobj);
                                 }
                                 dealerMainObj.setOther_date(otherDatesListPojos);
-
 
 
                                 ArrayList<VehicleDealerListPojo.DocumentListPojo> documentsList = new ArrayList<>();
@@ -345,7 +344,7 @@ public class LinkToDealer_Activity extends Activity {
                                 ll_nothingtoshow.setVisibility(View.GONE);
                             }
                             vehicleDealerListToLinkPojos = vehicleDealerListPojos;
-                            vehicle_dealer_list.setAdapter(new DealerLinkAdapter(context, vehicleDealerListPojos,linkPojos));
+                            vehicle_dealer_list.setAdapter(new DealerLinkAdapter(context, vehicleDealerListPojos, linkPojos));
 
                         }
                     } else if (type.equalsIgnoreCase("failure")) {

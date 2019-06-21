@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,10 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.google.gson.JsonObject;
 
@@ -30,7 +27,6 @@ import in.rto.collections.R;
 import in.rto.collections.activities.LanguageSetting_Activity;
 import in.rto.collections.activities.SMSAnniversarySettings_Activity;
 import in.rto.collections.activities.SMSBirthdaySettings_Activity;
-import in.rto.collections.activities.Settings_Activity;
 import in.rto.collections.activities.Signature_Settings;
 import in.rto.collections.activities.StateSetting_Activity;
 import in.rto.collections.activities.WhatsappAnniversarySettings_Activity;
@@ -44,42 +40,43 @@ import in.rto.collections.utilities.WebServiceCalls;
 public class Fragment_settings extends Fragment {
     private Context context;
     private UserSessionManager session;
-    private String user_id,role;
-    private CardView birthtext,annitext,premiumdue,languageCard;
-    LinearLayout openBirthdayWhatsappSettings,openBirthdaySMSSettings,openAnniversaryWhatsappSettings,openAnniversarySMSSettings,
-            openPremiumDueMessageSettings,openSignatureSettings,openAnniversaryNotificationSettings,openBirthdayNotificationSettings,
+    private String user_id, role;
+    private CardView birthtext, annitext, premiumdue, languageCard;
+    LinearLayout openBirthdayWhatsappSettings, openBirthdaySMSSettings, openAnniversaryWhatsappSettings, openAnniversarySMSSettings,
+            openPremiumDueMessageSettings, openSignatureSettings, openAnniversaryNotificationSettings, openBirthdayNotificationSettings,
             openLanguageSettings;
     LinearLayout ll_parent;
-    private SwitchCompat switchBirthdayWhatsappButton,switchBirthdaySMSButton,switchAnnniWhatsappButton,switchAnnniSMSButton,
-            switchPremiumDueButton,switchPremiumDueSMSButton,switchPremiumDueNotificationButton,switchBirthdayNotificationButton,switchAnnniNotificationButton;
-    int birthSMS,birthWhatsapp,birthNotification,anniSMS,anniWhatsapp,anniNotification,due,duesms,duenotification;
+    private SwitchCompat switchBirthdayWhatsappButton, switchBirthdaySMSButton, switchAnnniWhatsappButton, switchAnnniSMSButton,
+            switchPremiumDueButton, switchPremiumDueSMSButton, switchPremiumDueNotificationButton, switchBirthdayNotificationButton, switchAnnniNotificationButton;
+    int birthSMS, birthWhatsapp, birthNotification, anniSMS, anniWhatsapp, anniNotification, due, duesms, duenotification;
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
         context = getActivity();
         session = new UserSessionManager(context);
 
-        openBirthdayWhatsappSettings  = rootView.findViewById(R.id.openBirthdayWhatsappSettings);
+        openBirthdayWhatsappSettings = rootView.findViewById(R.id.openBirthdayWhatsappSettings);
         openBirthdayWhatsappSettings.setOnClickListener(mButtonClickListener);
 
         //openBirthdaySMSSettings  = rootView.findViewById(R.id.openBirthdaySMSSettings);
-       // openBirthdaySMSSettings.setOnClickListener(mButtonClickListener1);
+        // openBirthdaySMSSettings.setOnClickListener(mButtonClickListener1);
 
-       // openBirthdayNotificationSettings = rootView.findViewById(R.id.openBirthdayNotificationSettings);
-       // openBirthdayNotificationSettings.setOnClickListener(mButtonClickListener7);
+        // openBirthdayNotificationSettings = rootView.findViewById(R.id.openBirthdayNotificationSettings);
+        // openBirthdayNotificationSettings.setOnClickListener(mButtonClickListener7);
 
-        openAnniversaryWhatsappSettings  = rootView.findViewById(R.id.openAnniversaryWhatsappSettings);
+        openAnniversaryWhatsappSettings = rootView.findViewById(R.id.openAnniversaryWhatsappSettings);
         openAnniversaryWhatsappSettings.setOnClickListener(mButtonClickListener2);
 
         //openAnniversarySMSSettings  = rootView.findViewById(R.id.openAnniversarySMSSettings);
         //openAnniversarySMSSettings.setOnClickListener(mButtonClickListener3);
 
-        openPremiumDueMessageSettings  = rootView.findViewById(R.id.openPremiumDueMessageSettings);
+        openPremiumDueMessageSettings = rootView.findViewById(R.id.openPremiumDueMessageSettings);
         openPremiumDueMessageSettings.setOnClickListener(mButtonClickListener4);
 
-        openSignatureSettings  = rootView.findViewById(R.id.openSignatureSettings);
+        openSignatureSettings = rootView.findViewById(R.id.openSignatureSettings);
         openSignatureSettings.setOnClickListener(mButtonClickListener5);
 
-        openLanguageSettings  = rootView.findViewById(R.id.openLanguageSettings);
+        openLanguageSettings = rootView.findViewById(R.id.openLanguageSettings);
         openLanguageSettings.setOnClickListener(getmButtonClickListenerLanguage);
 
         birthtext = rootView.findViewById(R.id.birthtext);
@@ -87,7 +84,7 @@ public class Fragment_settings extends Fragment {
         premiumdue = rootView.findViewById(R.id.premiumdue);
         languageCard = rootView.findViewById(R.id.languageCard);
         getSessionData();
-        if(role.equals("3")){
+        if (role.equals("3")) {
             birthtext.setVisibility(View.GONE);
             annitext.setVisibility(View.GONE);
             premiumdue.setVisibility(View.GONE);
@@ -113,12 +110,14 @@ public class Fragment_settings extends Fragment {
 
         return rootView;
     }
+
     @Override
     public void onResume() {
         super.onResume();
         new getSettings().execute();
 
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -132,7 +131,6 @@ public class Fragment_settings extends Fragment {
 
 
     }
-
 
 
     private View.OnClickListener mButtonClickListener = new View.OnClickListener() {
@@ -194,9 +192,11 @@ public class Fragment_settings extends Fragment {
     public void openBirthdaySMSSettings(View view) {
         startActivity(new Intent(context, SMSBirthdaySettings_Activity.class));
     }
+
     public void openBirthdayNotificationSettings(View view) {
         startActivity(new Intent(context, SMSBirthdaySettings_Activity.class));
     }
+
     public void openAnniversaryWhatsappSettings(View view) {
         startActivity(new Intent(context, WhatsappAnniversarySettings_Activity.class));
     }
@@ -212,6 +212,7 @@ public class Fragment_settings extends Fragment {
     public void openPremiumDueMessageSettings(View view) {
         startActivity(new Intent(context, StateSetting_Activity.class));
     }
+
     public void openLanguageSettings(View view) {
         startActivity(new Intent(context, LanguageSetting_Activity.class));
     }
@@ -227,7 +228,7 @@ public class Fragment_settings extends Fragment {
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // finish();
+                // finish();
             }
         });
     }
@@ -240,14 +241,13 @@ public class Fragment_settings extends Fragment {
                 String checked;
                 if (isChecked) {
                     checked = "1";
-                    if (birthWhatsapp == 2)
-                    {
+                    if (birthWhatsapp == 2) {
                         checked = "0";
                         switchBirthdayWhatsappButton.setChecked(false);
                         showAlertDialog("birthWhats");
 
                     }
-                }else {
+                } else {
                     checked = "0";
                 }
                 new Fragment_settings.updateBirthdayWhatsApp().execute(checked);
@@ -260,14 +260,13 @@ public class Fragment_settings extends Fragment {
                 String checked;
                 if (isChecked) {
                     checked = "1";
-                    if (birthNotification == 2)
-                    {
+                    if (birthNotification == 2) {
                         checked = "0";
                         switchBirthdayNotificationButton.setChecked(false);
                         showAlertDialog("birthNotification");
 
                     }
-                }else {
+                } else {
                     checked = "0";
                 }
                 new Fragment_settings.updateBirthdayNotification().execute(checked);
@@ -280,20 +279,18 @@ public class Fragment_settings extends Fragment {
                 String checked;
                 if (isChecked) {
                     checked = "1";
-                    if (birthSMS == 2)
-                    {
+                    if (birthSMS == 2) {
                         checked = "0";
                         switchBirthdaySMSButton.setChecked(false);
                         showAlertDialog("birthSMS");
                     }
-                }else {
+                } else {
                     checked = "0";
                 }
 
                 new Fragment_settings.updateBirthdaySMS().execute(checked);
             }
         });
-
 
 
         switchAnnniWhatsappButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -303,14 +300,14 @@ public class Fragment_settings extends Fragment {
                 String checked;
                 if (isChecked) {
                     checked = "1";
-                    if (anniWhatsapp == 2)
-                    {
+                    if (anniWhatsapp == 2) {
                         checked = "0";
                         switchAnnniWhatsappButton.setChecked(false);
                         showAlertDialog("anniWhats");
                     }
-                } else{
-                    checked = "0";}
+                } else {
+                    checked = "0";
+                }
                 new Fragment_settings.updateAnniversaryWhatsApp().execute(checked);
             }
         });
@@ -321,14 +318,14 @@ public class Fragment_settings extends Fragment {
                 String checked;
                 if (isChecked) {
                     checked = "1";
-                    if (anniNotification == 2)
-                    {
+                    if (anniNotification == 2) {
                         checked = "0";
                         switchAnnniNotificationButton.setChecked(false);
                         showAlertDialog("anniNotification");
                     }
-                } else{
-                    checked = "0";}
+                } else {
+                    checked = "0";
+                }
                 new Fragment_settings.updateAnniversaryNotification().execute(checked);
             }
         });
@@ -341,15 +338,15 @@ public class Fragment_settings extends Fragment {
                 String checked;
                 if (isChecked) {
                     checked = "1";
-                    if (anniSMS == 2)
-                    {
+                    if (anniSMS == 2) {
                         checked = "0";
                         switchAnnniSMSButton.setChecked(false);
                         showAlertDialog("anniSMS");
 
                     }
-                } else{
-                    checked = "0";}
+                } else {
+                    checked = "0";
+                }
                 new Fragment_settings.updateAnniversarySMS().execute(checked);
             }
         });
@@ -361,8 +358,9 @@ public class Fragment_settings extends Fragment {
                 String checked;
                 if (isChecked) {
                     checked = "1";
-                } else{
-                    checked = "0";}
+                } else {
+                    checked = "0";
+                }
                 new Fragment_settings.updatePremiumDue().execute(checked);
             }
         });
@@ -374,8 +372,9 @@ public class Fragment_settings extends Fragment {
                 String checked;
                 if (isChecked) {
                     checked = "1";
-                } else{
-                    checked = "0";}
+                } else {
+                    checked = "0";
+                }
                 new Fragment_settings.updatePremiumDueSMS().execute(checked);
             }
         });
@@ -386,15 +385,16 @@ public class Fragment_settings extends Fragment {
                 String checked;
                 if (isChecked) {
                     checked = "1";
-                } else{
-                    checked = "0";}
+                } else {
+                    checked = "0";
+                }
                 new Fragment_settings.updatePremiumDueNotification().execute(checked);
             }
         });
 
     }
-    public void showAlertDialog(final String type)
-    {
+
+    public void showAlertDialog(final String type) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
         alertDialog.setTitle("Alert");
         alertDialog.setMessage("There are no default settings to send automated messages. Please add settings !");
@@ -403,15 +403,18 @@ public class Fragment_settings extends Fragment {
 
             public void onClick(DialogInterface dialog, int which) {
 
-                switch (type)
-                {
-                    case "birthWhats" : startActivity(new Intent(context, WhatsappBirthdaySettings_Activity.class));
+                switch (type) {
+                    case "birthWhats":
+                        startActivity(new Intent(context, WhatsappBirthdaySettings_Activity.class));
                         break;
-                    case "birthSMS"   : startActivity(new Intent(context, SMSBirthdaySettings_Activity.class));
+                    case "birthSMS":
+                        startActivity(new Intent(context, SMSBirthdaySettings_Activity.class));
                         break;
-                    case "anniWhats"  : startActivity(new Intent(context, WhatsappAnniversarySettings_Activity.class));
+                    case "anniWhats":
+                        startActivity(new Intent(context, WhatsappAnniversarySettings_Activity.class));
                         break;
-                    case "anniSMS"    : startActivity(new Intent(context, SMSAnniversarySettings_Activity.class));
+                    case "anniSMS":
+                        startActivity(new Intent(context, SMSAnniversarySettings_Activity.class));
                         break;
 
                 }
@@ -477,6 +480,7 @@ public class Fragment_settings extends Fragment {
             }
         }
     }
+
     public class updateBirthdayNotification extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 
@@ -576,6 +580,7 @@ public class Fragment_settings extends Fragment {
             }
         }
     }
+
     public class updateAnniversaryWhatsApp extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 
@@ -625,6 +630,7 @@ public class Fragment_settings extends Fragment {
             }
         }
     }
+
     public class updateAnniversarySMS extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 
@@ -674,6 +680,7 @@ public class Fragment_settings extends Fragment {
             }
         }
     }
+
     public class updateAnniversaryNotification extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 
@@ -773,6 +780,7 @@ public class Fragment_settings extends Fragment {
             }
         }
     }
+
     public class updatePremiumDueSMS extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 
@@ -822,6 +830,7 @@ public class Fragment_settings extends Fragment {
             }
         }
     }
+
     public class updatePremiumDueNotification extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 
@@ -873,7 +882,6 @@ public class Fragment_settings extends Fragment {
     }
 
 
-
     public class getSettings extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 
@@ -902,7 +910,7 @@ public class Fragment_settings extends Fragment {
             super.onPostExecute(result);
             String type = "", message = "";
             try {
-               // pd.dismiss();
+                // pd.dismiss();
                 if (!result.equals("")) {
                     JSONObject mainObj = new JSONObject(result);
                     type = mainObj.getString("type");
@@ -912,11 +920,9 @@ public class Fragment_settings extends Fragment {
                         if (data.getString("birthsms").equals("1")) {
                             birthSMS = 0;
                             switchBirthdaySMSButton.setChecked(true);
-                        }else if(data.getString("birthsms").equals("2"))
-                        {
+                        } else if (data.getString("birthsms").equals("2")) {
                             birthSMS = 2;
-                        }
-                        else{
+                        } else {
                             birthSMS = 0;
                             switchBirthdaySMSButton.setChecked(false);
                         }
@@ -925,11 +931,9 @@ public class Fragment_settings extends Fragment {
                         if (data.getString("birthapp").equals("1")) {
                             birthWhatsapp = 0;
                             switchBirthdayWhatsappButton.setChecked(true);
-                        }else if (data.getString("birthapp").equals("2"))
-                        {
+                        } else if (data.getString("birthapp").equals("2")) {
                             birthWhatsapp = 2;
-                        }
-                        else{
+                        } else {
                             birthWhatsapp = 0;
                             switchBirthdayWhatsappButton.setChecked(false);
                         }
@@ -937,11 +941,9 @@ public class Fragment_settings extends Fragment {
                         if (data.getString("birthnotification").equals("1")) {
                             birthNotification = 0;
                             switchBirthdayNotificationButton.setChecked(true);
-                        }else if (data.getString("birthnotification").equals("2"))
-                        {
+                        } else if (data.getString("birthnotification").equals("2")) {
                             birthNotification = 2;
-                        }
-                        else{
+                        } else {
                             birthNotification = 0;
                             switchBirthdayNotificationButton.setChecked(false);
                         }
@@ -950,11 +952,9 @@ public class Fragment_settings extends Fragment {
                         if (data.getString("annisms").equals("1")) {
                             anniSMS = 0;
                             switchAnnniSMSButton.setChecked(true);
-                        }else if(data.getString("annisms").equals("2"))
-                        {
+                        } else if (data.getString("annisms").equals("2")) {
                             anniSMS = 2;
-                        }
-                        else {
+                        } else {
                             anniSMS = 0;
                             switchAnnniSMSButton.setChecked(false);
                         }
@@ -962,58 +962,53 @@ public class Fragment_settings extends Fragment {
                         if (data.getString("anniapp").equals("1")) {
                             anniWhatsapp = 0;
                             switchAnnniWhatsappButton.setChecked(true);
-                        }else if (data.getString("anniapp").equals("2"))
-                        {
+                        } else if (data.getString("anniapp").equals("2")) {
                             anniWhatsapp = 2;
-                        }
-                        else{
+                        } else {
                             anniWhatsapp = 0;
-                            switchAnnniWhatsappButton.setChecked(false);}
+                            switchAnnniWhatsappButton.setChecked(false);
+                        }
 
                         if (data.getString("anninotification").equals("1")) {
                             anniNotification = 0;
                             switchAnnniNotificationButton.setChecked(true);
-                        }else if (data.getString("anninotification").equals("2"))
-                        {
+                        } else if (data.getString("anninotification").equals("2")) {
                             anniNotification = 2;
-                        }
-                        else{
+                        } else {
                             anniNotification = 0;
-                            switchAnnniNotificationButton.setChecked(false);}
+                            switchAnnniNotificationButton.setChecked(false);
+                        }
 
                         if (data.getString("due").equals("1")) {
                             due = 0;
                             switchPremiumDueButton.setChecked(true);
-                        }else if (data.getString("due").equals("2"))
-                        {
+                        } else if (data.getString("due").equals("2")) {
                             due = 2;
-                        }
-                        else{
+                        } else {
                             due = 0;
-                            switchPremiumDueButton.setChecked(false);}
+                            switchPremiumDueButton.setChecked(false);
+                        }
 
 
                         if (data.getString("duesms").equals("1")) {
                             due = 0;
                             switchPremiumDueSMSButton.setChecked(true);
-                        }else if (data.getString("duesms").equals("2"))
-                        {
+                        } else if (data.getString("duesms").equals("2")) {
                             due = 2;
-                        }
-                        else{
+                        } else {
                             due = 0;
-                            switchPremiumDueSMSButton.setChecked(false);}
+                            switchPremiumDueSMSButton.setChecked(false);
+                        }
 
                         if (data.getString("duenotification").equals("1")) {
                             due = 0;
                             switchPremiumDueNotificationButton.setChecked(true);
-                        }else if (data.getString("duenotification").equals("2"))
-                        {
+                        } else if (data.getString("duenotification").equals("2")) {
                             due = 2;
-                        }
-                        else{
+                        } else {
                             due = 0;
-                            switchPremiumDueNotificationButton.setChecked(false);}
+                            switchPremiumDueNotificationButton.setChecked(false);
+                        }
 
                     } else {
                         Utilities.showAlertDialog(context, "Alert", message, false);

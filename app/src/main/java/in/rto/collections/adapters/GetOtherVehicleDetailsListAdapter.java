@@ -23,18 +23,8 @@ import java.util.List;
 
 import in.rto.collections.R;
 import in.rto.collections.activities.EditOtherVehicle_Activity;
-import in.rto.collections.activities.EditVehicleDealer_Activity;
-import in.rto.collections.activities.Import_Banker_Dealer_Activity;
-import in.rto.collections.activities.Import_RTO_Agent_Activity;
-import in.rto.collections.activities.LInkDealerRTO_Activity;
-import in.rto.collections.activities.LinkDealerBanker_Activity;
 import in.rto.collections.activities.ShowOtherVehicleDetails_Activity;
-import in.rto.collections.activities.ViewImportDealerBanker_Activity;
-import in.rto.collections.activities.ViewRTODetails_Activity;
-import in.rto.collections.activities.ViewVehicleDetails_Activity;
 import in.rto.collections.fragments.Fragment_Other_Vehicle_Details;
-import in.rto.collections.fragments.Fragment_vehical_rto_details;
-import in.rto.collections.fragments.Fragment_vehicle_dealer;
 import in.rto.collections.models.VehicleDealerListPojo;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.Utilities;
@@ -42,28 +32,29 @@ import in.rto.collections.utilities.WebServiceCalls;
 
 public class GetOtherVehicleDetailsListAdapter extends RecyclerView.Adapter<GetOtherVehicleDetailsListAdapter.MyViewHolder> {
 
-private List<VehicleDealerListPojo> resultArrayList;
-private Context context;
-private  String user_id;
-public GetOtherVehicleDetailsListAdapter(Context context, List<VehicleDealerListPojo> resultArrayList, String user_id) {
+    private List<VehicleDealerListPojo> resultArrayList;
+    private Context context;
+    private String user_id;
+
+    public GetOtherVehicleDetailsListAdapter(Context context, List<VehicleDealerListPojo> resultArrayList, String user_id) {
         this.context = context;
         this.resultArrayList = resultArrayList;
         this.user_id = user_id;
-        }
+    }
 
-@Override
-public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.list_row_vehicle_dealer, parent, false);
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
-        }
+    }
 
-@Override
-public void onBindViewHolder(final MyViewHolder holder, final int position) {
+    @Override
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         VehicleDealerListPojo vehicleDetails = new VehicleDealerListPojo();
         vehicleDetails = resultArrayList.get(position);
-final VehicleDealerListPojo finalvehicleDetails = vehicleDetails;
+        final VehicleDealerListPojo finalvehicleDetails = vehicleDetails;
 
         holder.tv_vehicalownername.setText(vehicleDetails.getVehicle_owner());
         holder.tv_renewaldate.setText(vehicleDetails.getVehicle_no());
@@ -89,18 +80,18 @@ final VehicleDealerListPojo finalvehicleDetails = vehicleDetails;
         holder.ll_mainlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-        Intent intent = new Intent(context, ShowOtherVehicleDetails_Activity.class);
-        intent.putExtra("vehicleDetails", finalvehicleDetails);
-        context.startActivity(intent);
+                Intent intent = new Intent(context, ShowOtherVehicleDetails_Activity.class);
+                intent.putExtra("vehicleDetails", finalvehicleDetails);
+                context.startActivity(intent);
             }
         });
 
 
-    final VehicleDealerListPojo finalVehicleDetails = vehicleDetails;
-    holder.img_delete.setOnClickListener(new View.OnClickListener() {
+        final VehicleDealerListPojo finalVehicleDetails = vehicleDetails;
+        holder.img_delete.setOnClickListener(new View.OnClickListener() {
 
-        @Override
-        public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                 builder.setMessage("Are you sure you want to delete this item?");
@@ -128,85 +119,86 @@ final VehicleDealerListPojo finalvehicleDetails = vehicleDetails;
                 alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
                 alertD.show();
 
-        }
-    });
+            }
+        });
 
 
-    holder.img_edit.setOnClickListener(new View.OnClickListener() {
+        holder.img_edit.setOnClickListener(new View.OnClickListener() {
 
-        @Override
-        public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
 
                 Intent intent = new Intent(context, EditOtherVehicle_Activity.class);
                 intent.putExtra("vehicleDetails", finalVehicleDetails);
                 context.startActivity(intent);
 
-        }
-    });
-    holder.img_link.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if(finalVehicleDetails.getImportR().equals("ImportBanker")){
+            }
+        });
+        holder.img_link.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (finalVehicleDetails.getImportR().equals("ImportBanker")) {
                /* Intent intent = new Intent(context, LinkDealerBanker_Activity.class);
                 intent.putExtra("vehicleDetails", finalVehicleDetails);
                 context.startActivity(intent);*/
-            }else {
+                } else {
                /* Intent intent = new Intent(context, LInkDealerRTO_Activity.class);
                 intent.putExtra("vehicleDetails", finalVehicleDetails);
                 context.startActivity(intent);*/
+                }
             }
-        }
-    });
-    holder.img_show.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            LayoutInflater layoutInflater = LayoutInflater.from(context);
-            View promptView = layoutInflater.inflate(R.layout.prompt_fullvehiclepic, null);
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
-            alertDialogBuilder.setView(promptView);
+        });
+        holder.img_show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater layoutInflater = LayoutInflater.from(context);
+                View promptView = layoutInflater.inflate(R.layout.prompt_fullvehiclepic, null);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
+                alertDialogBuilder.setView(promptView);
 
-            ImageView imv_fullpic = promptView.findViewById(R.id.imv_fullpic);
-            TextView imv_text = promptView.findViewById(R.id.imv_text);
-            if (!finalVehicleDetails.getVehicle_image().equals("")) {
-                Picasso.with(context)
-                        .load(finalVehicleDetails.getVehicle_image_url())
-                        .placeholder(R.drawable.img_product)
-                        .into(imv_fullpic);
-            }else{
-                imv_fullpic.setVisibility(View.GONE);
-                imv_text.setVisibility(View.VISIBLE);
-                imv_text.setText("Image not available.");
+                ImageView imv_fullpic = promptView.findViewById(R.id.imv_fullpic);
+                TextView imv_text = promptView.findViewById(R.id.imv_text);
+                if (!finalVehicleDetails.getVehicle_image().equals("")) {
+                    Picasso.with(context)
+                            .load(finalVehicleDetails.getVehicle_image_url())
+                            .placeholder(R.drawable.img_product)
+                            .into(imv_fullpic);
+                } else {
+                    imv_fullpic.setVisibility(View.GONE);
+                    imv_text.setVisibility(View.VISIBLE);
+                    imv_text.setText("Image not available.");
+                }
+                AlertDialog alertD = alertDialogBuilder.create();
+                alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
+                alertD.show();
             }
-            AlertDialog alertD = alertDialogBuilder.create();
-            alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
-            alertD.show();
-        }
-    });
-}
+        });
+    }
 
-@Override
-public int getItemCount() {
+    @Override
+    public int getItemCount() {
         return resultArrayList.size();
-        }
+    }
 
-public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-    TextView tv_vehicalownername,tv_renewaldate,tv_identify;
-    private CardView ll_mainlayout;
-    ImageView img_delete,img_edit,img_vehicle,img_link,img_show;
-    public MyViewHolder(View view) {
-        super(view);
-            tv_vehicalownername = view.findViewById(R.id.tv_ownername   );
+        TextView tv_vehicalownername, tv_renewaldate, tv_identify;
+        private CardView ll_mainlayout;
+        ImageView img_delete, img_edit, img_vehicle, img_link, img_show;
+
+        public MyViewHolder(View view) {
+            super(view);
+            tv_vehicalownername = view.findViewById(R.id.tv_ownername);
             tv_renewaldate = view.findViewById(R.id.tv_renewaldate);
             ll_mainlayout = view.findViewById(R.id.ll_mainlayout);
-        img_delete =view.findViewById(R.id.img_delete);
-        img_edit =view.findViewById(R.id.img_edit);
-        img_link=view.findViewById(R.id.img_link);
-        img_vehicle =view.findViewById(R.id.img_vehicle);
-        tv_identify = view.findViewById(R.id.tv_identify);
-        img_show = view.findViewById(R.id.img_show);
+            img_delete = view.findViewById(R.id.img_delete);
+            img_edit = view.findViewById(R.id.img_edit);
+            img_link = view.findViewById(R.id.img_link);
+            img_vehicle = view.findViewById(R.id.img_vehicle);
+            tv_identify = view.findViewById(R.id.tv_identify);
+            img_show = view.findViewById(R.id.img_show);
+        }
     }
-}
 
     public class DeleteOtherVehicleDetails1 extends AsyncTask<String, Void, String> {
         ProgressDialog pd;

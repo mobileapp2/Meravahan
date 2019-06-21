@@ -2,7 +2,6 @@ package in.rto.collections.fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,17 +16,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import in.rto.collections.R;
-import in.rto.collections.activities.AddRTOAgent_Activity;
 import in.rto.collections.activities.Add_BankerDetails_Activity;
 import in.rto.collections.adapters.GetBankerDetailsListAdapter;
-import in.rto.collections.adapters.GetRTOAgentDetailListAdapter;
 import in.rto.collections.models.BankerDetailsPojo;
-import in.rto.collections.models.RTOAgentListPojo;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.ParamsPojo;
 import in.rto.collections.utilities.UserSessionManager;
@@ -47,6 +46,7 @@ public class Fragment_Banker_Vehicle_Details extends Fragment {
     private SearchView searchView;
     private static String role;
     private static ArrayList<BankerDetailsPojo> bankerDetailsPojos;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment__banker__vehicle__details, container, false);
@@ -93,6 +93,7 @@ public class Fragment_Banker_Vehicle_Details extends Fragment {
             e.printStackTrace();
         }
     }
+
     private void setEventHandlers() {
         fab_add_banker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +111,7 @@ public class Fragment_Banker_Vehicle_Details extends Fragment {
                     Utilities.showSnackBar(drawerlayout, "Please Check Internet Connection");
                     swipeRefreshLayout.setRefreshing(false);
                     ll_nothingtoshow.setVisibility(View.VISIBLE);
-                   banker_list.setVisibility(View.GONE);
+                    banker_list.setVisibility(View.GONE);
                 }
             }
         });
@@ -119,17 +120,17 @@ public class Fragment_Banker_Vehicle_Details extends Fragment {
             public boolean onQueryTextSubmit(String query) {
                 searchView.clearFocus();
                 ArrayList<BankerDetailsPojo> bankerSearchedList = new ArrayList<>();
-                for (BankerDetailsPojo banker : bankerDetailsPojos ) {
-                    String contactToBeSearched = banker.getBorrower_name().toLowerCase()+ banker.getVehicle_number().toLowerCase();
+                for (BankerDetailsPojo banker : bankerDetailsPojos) {
+                    String contactToBeSearched = banker.getBorrower_name().toLowerCase() + banker.getVehicle_number().toLowerCase();
                     if (contactToBeSearched.contains(query.toLowerCase())) {
                         bankerSearchedList.add(banker);
                     }
                 }
 
                 if (bankerSearchedList.size() == 0) {
-                    banker_list.setAdapter(new GetBankerDetailsListAdapter(context, bankerSearchedList,user_id));
+                    banker_list.setAdapter(new GetBankerDetailsListAdapter(context, bankerSearchedList, user_id));
                 } else {
-                    banker_list.setAdapter(new GetBankerDetailsListAdapter(context, bankerSearchedList,user_id));
+                    banker_list.setAdapter(new GetBankerDetailsListAdapter(context, bankerSearchedList, user_id));
 
                 }
 
@@ -141,21 +142,21 @@ public class Fragment_Banker_Vehicle_Details extends Fragment {
                 if (!newText.equals("")) {
                     ArrayList<BankerDetailsPojo> bankerearchedList = new ArrayList<>();
                     for (BankerDetailsPojo banker : bankerDetailsPojos) {
-                        String contactToBeSearched = banker.getBorrower_name().toLowerCase()+banker.getVehicle_number().toLowerCase();
+                        String contactToBeSearched = banker.getBorrower_name().toLowerCase() + banker.getVehicle_number().toLowerCase();
                         if (contactToBeSearched.contains(newText.toLowerCase())) {
                             bankerearchedList.add(banker);
                         }
                     }
                     if (bankerearchedList.size() == 0) {
-                        banker_list.setAdapter(new GetBankerDetailsListAdapter(context, bankerearchedList,user_id));
+                        banker_list.setAdapter(new GetBankerDetailsListAdapter(context, bankerearchedList, user_id));
                     } else {
                         //bindRecyclerview(contactsSearchedList);
-                        banker_list.setAdapter(new GetBankerDetailsListAdapter(context, bankerearchedList,user_id));
+                        banker_list.setAdapter(new GetBankerDetailsListAdapter(context, bankerearchedList, user_id));
 
                     }
                     return true;
                 } else if (newText.equals("")) {
-                    banker_list.setAdapter(new GetBankerDetailsListAdapter(context, bankerDetailsPojos,user_id));
+                    banker_list.setAdapter(new GetBankerDetailsListAdapter(context, bankerDetailsPojos, user_id));
                     //customer_list.setAdapter(new CustomerAdapter(context,customerPojos,user_id));
                     //bindRecyclerview(contactList);
                 }
@@ -165,7 +166,7 @@ public class Fragment_Banker_Vehicle_Details extends Fragment {
 
     }
 
-    public  static class GetBankerList extends AsyncTask<String, Void, String> {
+    public static class GetBankerList extends AsyncTask<String, Void, String> {
 
 
         @Override
@@ -202,7 +203,7 @@ public class Fragment_Banker_Vehicle_Details extends Fragment {
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
                     bankerDetailsPojos = new ArrayList<BankerDetailsPojo>();
-                    banker_list.setAdapter(new GetBankerDetailsListAdapter(context, bankerDetailsPojos,user_id));
+                    banker_list.setAdapter(new GetBankerDetailsListAdapter(context, bankerDetailsPojos, user_id));
                     if (type.equalsIgnoreCase("success")) {
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
@@ -253,7 +254,7 @@ public class Fragment_Banker_Vehicle_Details extends Fragment {
                                 banker_list.setVisibility(View.VISIBLE);
                                 ll_nothingtoshow.setVisibility(View.GONE);
                             }
-                            banker_list.setAdapter(new GetBankerDetailsListAdapter(context, bankerDetailsPojos,user_id));
+                            banker_list.setAdapter(new GetBankerDetailsListAdapter(context, bankerDetailsPojos, user_id));
 
                         }
                     } else if (type.equalsIgnoreCase("failure")) {

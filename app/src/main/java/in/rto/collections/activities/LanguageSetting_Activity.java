@@ -5,10 +5,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -26,7 +25,6 @@ import java.util.List;
 
 import in.rto.collections.R;
 import in.rto.collections.models.LanguagePojo;
-import in.rto.collections.models.StatePojo;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.ParamsPojo;
 import in.rto.collections.utilities.UserSessionManager;
@@ -39,7 +37,7 @@ public class LanguageSetting_Activity extends Activity {
     private FloatingActionButton fab_add_language;
     private LinearLayout ll_parent;
     private UserSessionManager session;
-    private String user_id, id = "", languageid,language="";
+    private String user_id, id = "", languageid, language = "";
     private ArrayList<LanguagePojo> languagelist;
 
     @Override
@@ -52,6 +50,7 @@ public class LanguageSetting_Activity extends Activity {
         setDefaults();
         setEventHandler();
     }
+
     private void init() {
         context = LanguageSetting_Activity.this;
         session = new UserSessionManager(context);
@@ -80,11 +79,12 @@ public class LanguageSetting_Activity extends Activity {
             Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
         }
     }
+
     private void setEventHandler() {
         fab_add_language.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final EditText  edt_languageame = new EditText(context);
+                final EditText edt_languageame = new EditText(context);
                 edt_languageame.setClickable(false);
                 edt_languageame.setFocusable(false);
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -168,6 +168,7 @@ public class LanguageSetting_Activity extends Activity {
             }
         });
     }
+
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle("Default Language Settings");
@@ -216,6 +217,7 @@ public class LanguageSetting_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetLanguageList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;

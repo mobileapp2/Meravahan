@@ -5,9 +5,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -37,7 +37,7 @@ public class StateSetting_Activity extends Activity {
     private FloatingActionButton fab_add_message;
     private LinearLayout ll_parent;
     private UserSessionManager session;
-    private String user_id, id = "", stateid,statenae="";
+    private String user_id, id = "", stateid, statenae = "";
     private ArrayList<StatePojo> statelist;
 
     @Override
@@ -51,6 +51,7 @@ public class StateSetting_Activity extends Activity {
         setEventHandler();
 
     }
+
     private void init() {
         context = StateSetting_Activity.this;
         session = new UserSessionManager(context);
@@ -79,11 +80,12 @@ public class StateSetting_Activity extends Activity {
             Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
         }
     }
+
     private void setEventHandler() {
         fab_add_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               final EditText  edt_statename = new EditText(context);
+                final EditText edt_statename = new EditText(context);
                 edt_statename.setClickable(false);
                 edt_statename.setFocusable(false);
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -91,7 +93,7 @@ public class StateSetting_Activity extends Activity {
                 float dpi = context.getResources().getDisplayMetrics().density;
                 edt_statename.setText(statenae);
                 //edt_statename.setFocusable(false);
-               // edt_statename.setClickable(true);
+                // edt_statename.setClickable(true);
                 //edt_smsmessage.setSelection(smsMessage.length());
                 AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                 builder.setTitle("Set State");
@@ -109,7 +111,7 @@ public class StateSetting_Activity extends Activity {
 
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                       dialog.dismiss();
+                        dialog.dismiss();
                     }
                 });
 
@@ -166,7 +168,8 @@ public class StateSetting_Activity extends Activity {
                 });
             }
         });
-}
+    }
+
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
 
@@ -216,6 +219,7 @@ public class StateSetting_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetStateList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -436,7 +440,6 @@ public class StateSetting_Activity extends Activity {
             }
         }
     }
-
 
 
 }

@@ -11,6 +11,7 @@
     android:layout_marginLeft="7dp"
     android:layout_marginRight="7dp"
     android:layout_marginTop="7dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,31 +19,30 @@
         android:layout_marginLeft="5dp"
         android:layout_gravity="center"
         android:paddingTop="5dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_weight="1"
             android:layout_gravity="right"
-            android:layout_marginRight="10dp"
-            >
+            android:layout_marginRight="10dp">
 
-        <TextView
-            android:id="@+id/tv_renewaldate"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:clickable="false"
-            android:text="MH23AE4140"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:background="@color/colorPrimary"
-            android:layout_weight="0.5"
-            />
+            <TextView
+                android:id="@+id/tv_renewaldate"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:clickable="false"
+                android:text="MH23AE4140"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:background="@color/colorPrimary"
+                android:layout_weight="0.5" />
 
             <ImageView
                 android:id="@+id/img_vehicle"
@@ -52,8 +52,7 @@
                 android:layout_marginLeft="5dp"
                 android:gravity="center"
                 android:textColor="@color/colorPrimary"
-                android:layout_weight="0.1"
-                />
+                android:layout_weight="0.1" />
 
             <ImageView
                 android:id="@+id/img_edit1"
@@ -66,8 +65,8 @@
                 android:src="@drawable/edit"
                 android:tint="@color/Gray"
                 android:layout_weight="0.1"
-                android:visibility="invisible"
-                />
+                android:visibility="invisible" />
+
             <ImageView
                 android:id="@+id/img_show"
                 android:layout_gravity="center_vertical"
@@ -77,8 +76,7 @@
                 android:layout_weight="0.1"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/show_image"
-                android:visibility="gone"
-                />
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/img_link"
@@ -89,32 +87,30 @@
                 android:tint="@color/black"
                 android:layout_weight="0.1"
                 android:layout_marginRight="10dp"
-                android:visibility="gone"
-                />
-        <ImageView
-            android:id="@+id/img_edit"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_vertical"
-            android:gravity="center"
-            android:textColor="@color/colorPrimary"
-            android:src="@drawable/edit"
-            android:tint="@color/black"
-            android:layout_weight="0.1"
-            />
+                android:visibility="gone" />
 
-        <ImageView
-            android:id="@+id/img_delete"
-            android:layout_gravity="center_vertical"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:gravity="center"
-            android:tint="@color/black"
-            android:src="@drawable/trash"
-            android:layout_weight="0.1"
-            android:layout_marginLeft="10dp"
-            />
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/img_edit"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:src="@drawable/edit"
+                android:tint="@color/black"
+                android:layout_weight="0.1" />
+
+            <ImageView
+                android:id="@+id/img_delete"
+                android:layout_gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:tint="@color/black"
+                android:src="@drawable/trash"
+                android:layout_weight="0.1"
+                android:layout_marginLeft="10dp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_ownername"
@@ -127,8 +123,8 @@
             android:textColor="@color/grey"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:textSize="18sp"
-            />
+            android:textSize="18sp" />
+
         <TextView
             android:id="@+id/tv_identify"
             android:layout_width="match_parent"
@@ -139,19 +135,15 @@
             android:maxLines="1"
             android:textColor="@color/grey"
             android:paddingBottom="5dp"
-            android:textSize="14sp"
-            />
+            android:textSize="14sp" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/placeholder_bg"
             android:layout_marginLeft="0dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="5dp"
-            ></View>
-
-
-
+            android:layout_marginTop="5dp"></View>
 
 
     </LinearLayout>

@@ -5,11 +5,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -30,9 +29,7 @@ import java.util.List;
 
 import in.rto.collections.R;
 import in.rto.collections.adapters.BankAdapter;
-import in.rto.collections.adapters.getClientCodeLIstAdapter;
 import in.rto.collections.models.BankPojo;
-import in.rto.collections.models.ClientCodePojo;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.ParamsPojo;
 import in.rto.collections.utilities.UserSessionManager;
@@ -50,6 +47,7 @@ public class Master_Bank extends Activity {
     private FloatingActionButton fab_add_bank;
     private UserSessionManager session;
     private String user_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +58,7 @@ public class Master_Bank extends Activity {
         setEventHandlers();
         setUpToolbar();
     }
+
     private void init() {
         context = Master_Bank.this;
         banklist = findViewById(R.id.banklist);
@@ -71,6 +70,7 @@ public class Master_Bank extends Activity {
         layoutManager = new LinearLayoutManager(context);
         banklist.setLayoutManager(layoutManager);
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -81,6 +81,7 @@ public class Master_Bank extends Activity {
             e.printStackTrace();
         }
     }
+
     private void setDefault() {
         if (Utilities.isNetworkAvailable(context)) {
             new Master_Bank.GetBankList().execute(user_id);
@@ -161,6 +162,7 @@ public class Master_Bank extends Activity {
 
 
     }
+
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle("Bank");
@@ -174,8 +176,7 @@ public class Master_Bank extends Activity {
     }
 
 
-
-    public static class GetBankList  extends AsyncTask<String , Void ,String> {
+    public static class GetBankList extends AsyncTask<String, Void, String> {
         private ArrayList<BankPojo> bankPojos;
 
         @Override
@@ -187,6 +188,7 @@ public class Master_Bank extends Activity {
 //            shimmer_view_container.setVisibility(View.VISIBLE);
 //            shimmer_view_container.startShimmer();
         }
+
         @Override
         protected String doInBackground(String... params) {
             String res = "[]";
@@ -196,6 +198,7 @@ public class Master_Bank extends Activity {
             res = WebServiceCalls.FORMDATAAPICall(ApplicationConstants.MASTERAPI, param);
             return res.trim();
         }
+
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
@@ -243,6 +246,7 @@ public class Master_Bank extends Activity {
         }
 
     }
+
     public class AddBank extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 

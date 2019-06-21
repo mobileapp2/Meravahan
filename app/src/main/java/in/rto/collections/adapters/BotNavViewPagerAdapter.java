@@ -16,7 +16,6 @@ import in.rto.collections.fragments.Fragment_Customer;
 import in.rto.collections.fragments.Fragment_Other_Vehicle_Details;
 import in.rto.collections.fragments.Fragment_RTO_Agent_Details;
 import in.rto.collections.fragments.Fragment_settings;
-import in.rto.collections.fragments.Fragment_tyre;
 import in.rto.collections.fragments.Fragment_vehicle_dealer_details;
 import in.rto.collections.fragments.Material_Fragment;
 import in.rto.collections.fragments.Reminder_Fragment;
@@ -32,42 +31,41 @@ public class BotNavViewPagerAdapter extends FragmentPagerAdapter {
     private String user_id;
     private String selectData;
 
-    public BotNavViewPagerAdapter(FragmentManager fm,String role_id,String selectDefault) {
+    public BotNavViewPagerAdapter(FragmentManager fm, String role_id, String selectDefault) {
         super(fm);
         role = role_id;
         selectData = selectDefault;
         fragments.clear();
-        if(role.equals("1")){
+        if (role.equals("1")) {
             fragments.add(new Client_Fragment());
             fragments.add(new Fragment_RTO_Agent_Details());
             fragments.add(new Reminder_Fragment());
             fragments.add(new Fragment_settings());
-        }else if(role.equals("2")){
+        } else if (role.equals("2")) {
             fragments.add(new Client_Fragment());
             fragments.add(new Fragment_vehicle_dealer_details());
             fragments.add(new Reminder_Fragment());
             fragments.add(new Fragment_settings());
-        }else if(role.equals("4")){
+        } else if (role.equals("4")) {
             fragments.add(new Client_Fragment());
             fragments.add(new Fragment_Banker_Vehicle_Details());
             fragments.add(new Reminder_Fragment());
             fragments.add(new Fragment_settings());
-        }else if(role.equals("6"))
-        {
+        } else if (role.equals("6")) {
             fragments.add(new Client_Fragment());
             fragments.add(new Fragment_Other_Vehicle_Details());
             fragments.add(new Reminder_Fragment());
             fragments.add(new Fragment_settings());
-        }
-        else{
+        } else {
             fragments.add(new Fragment_Customer());
             fragments.add(new Reminder_Fragment());
             fragments.add(new Fragment_settings());
             fragments.add(new Material_Fragment());
         }
 
-       // getSessionData();
+        // getSessionData();
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -79,9 +77,10 @@ public class BotNavViewPagerAdapter extends FragmentPagerAdapter {
             e.printStackTrace();
         }
     }
+
     @Override
     public Fragment getItem(int position) {
-            return fragments.get(position);
+        return fragments.get(position);
     }
 
     @Override

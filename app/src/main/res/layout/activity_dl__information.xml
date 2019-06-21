@@ -4,27 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.Tem_Registration_Activity"
-    >
+    tools:context=".activities.Tem_Registration_Activity">
+
     <android.support.design.widget.AppBarLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        >
+        android:theme="@style/AppTheme.AppBarOverlay">
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
-            app:titleTextColor="@color/white"
-            >
-        </android.support.v7.widget.Toolbar>
+            app:titleTextColor="@color/white"></android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_height="match_parent"
             android:layout_width="match_parent"
@@ -36,8 +36,7 @@
                 android:layout_width="wrap_content"
                 android:id="@+id/tem_reg"
                 android:text="sdfdfdfdfd"
-                android:layout_marginTop="60dp"
-                />
+                android:layout_marginTop="60dp" />
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>

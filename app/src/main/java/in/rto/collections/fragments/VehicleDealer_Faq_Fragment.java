@@ -1,7 +1,5 @@
 package in.rto.collections.fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -37,14 +35,15 @@ public class VehicleDealer_Faq_Fragment extends Fragment {
 
         return rootView;
     }
+
     private void init(View rootView) {
-        faq= MainDrawer_Activity.faqDealerLinksList;
+        faq = MainDrawer_Activity.faqDealerLinksList;
         String[] urls = new String[faq.size()];
         urls = faq.toArray(urls);
 
         // urls=(String[])faq.toArray();
         mPager = (ViewPager) rootView.findViewById(R.id.pager);
-        mPager.setAdapter(new SlidingImage_Adapter(getActivity(),urls));
+        mPager.setAdapter(new SlidingImage_Adapter(getActivity(), urls));
 
         CirclePageIndicator indicator = (CirclePageIndicator)
                 rootView.findViewById(R.id.indicator);

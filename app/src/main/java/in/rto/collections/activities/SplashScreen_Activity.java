@@ -7,8 +7,6 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import in.rto.collections.R;
@@ -19,7 +17,7 @@ public class SplashScreen_Activity extends AppCompatActivity {
     private Context context;
     private ImageView imv_slash;
     private int secondsDelayed = 1;
-   private UserSessionManager session;
+    private UserSessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,17 +34,17 @@ public class SplashScreen_Activity extends AppCompatActivity {
         context = SplashScreen_Activity.this;
         session = new UserSessionManager(context);
         //imv_slash = findViewById(R.id.imv_slash);
-      //  final Animation zoomAnimation = AnimationUtils.loadAnimation(this, R.anim.zoom);
+        //  final Animation zoomAnimation = AnimationUtils.loadAnimation(this, R.anim.zoom);
 //        imv_slash.startAnimation(zoomAnimation);
-    final String type = getIntent().getStringExtra("type");
+        final String type = getIntent().getStringExtra("type");
 
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 if (session.isUserLoggedIn()) {
-                    if(type != null) {
-                      Intent i = new Intent(context,Notification_Activity.class);
-                      startActivity(i);
-                    }else {
+                    if (type != null) {
+                        Intent i = new Intent(context, Notification_Activity.class);
+                        startActivity(i);
+                    } else {
                         startActivity(new Intent(context, MainDrawer_Activity.class));
                     }
 

@@ -24,7 +24,6 @@ import java.util.List;
 
 import in.rto.collections.R;
 import in.rto.collections.adapters.GetVehicleDealerDetailsListAdapter;
-import in.rto.collections.models.CustomerPojo;
 import in.rto.collections.models.VehicleDealerListPojo;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.ParamsPojo;
@@ -42,9 +41,9 @@ public class Fragment_vehical_rto_details extends Fragment {
     private FloatingActionButton fab_add_dealer;
     private LinearLayoutManager layoutManager;
     private UserSessionManager session;
-    static String user_id,role;
+    static String user_id, role;
     private SearchView searchView;
-    private static ArrayList<VehicleDealerListPojo> vehicleDealerListPojos,vehicleDealerListPojos1;
+    private static ArrayList<VehicleDealerListPojo> vehicleDealerListPojos, vehicleDealerListPojos1;
 
 
     @Override
@@ -57,6 +56,7 @@ public class Fragment_vehical_rto_details extends Fragment {
         setEventHandlers();
         return rootView;
     }
+
     private void init(View rootView) {
         session = new UserSessionManager(context);
         fab_add_dealer = rootView.findViewById(R.id.fab_add_client);
@@ -93,6 +93,7 @@ public class Fragment_vehical_rto_details extends Fragment {
             e.printStackTrace();
         }
     }
+
     private void setEventHandlers() {
 
 
@@ -115,17 +116,17 @@ public class Fragment_vehical_rto_details extends Fragment {
             public boolean onQueryTextSubmit(String query) {
                 searchView.clearFocus();
                 ArrayList<VehicleDealerListPojo> dealerSearchedList = new ArrayList<>();
-                for (VehicleDealerListPojo dealer :  vehicleDealerListPojos) {
-                    String contactToBeSearched = dealer.getVehicle_owner().toLowerCase()+ dealer.getVehicle_no().toLowerCase();
+                for (VehicleDealerListPojo dealer : vehicleDealerListPojos) {
+                    String contactToBeSearched = dealer.getVehicle_owner().toLowerCase() + dealer.getVehicle_no().toLowerCase();
                     if (contactToBeSearched.contains(query.toLowerCase())) {
                         dealerSearchedList.add(dealer);
                     }
                 }
 
                 if (dealerSearchedList.size() == 0) {
-                    vehicle_dealer_list.setAdapter(new GetVehicleDealerDetailsListAdapter(context, dealerSearchedList,user_id));
+                    vehicle_dealer_list.setAdapter(new GetVehicleDealerDetailsListAdapter(context, dealerSearchedList, user_id));
                 } else {
-                    vehicle_dealer_list.setAdapter(new GetVehicleDealerDetailsListAdapter(context, dealerSearchedList,user_id));
+                    vehicle_dealer_list.setAdapter(new GetVehicleDealerDetailsListAdapter(context, dealerSearchedList, user_id));
                 }
 
                 return true;
@@ -136,20 +137,20 @@ public class Fragment_vehical_rto_details extends Fragment {
                 if (!newText.equals("")) {
                     ArrayList<VehicleDealerListPojo> dealerSearchedList = new ArrayList<>();
                     for (VehicleDealerListPojo dealer : vehicleDealerListPojos) {
-                        String contactToBeSearched = dealer.getVehicle_owner().toLowerCase()+dealer.getVehicle_no().toLowerCase();
+                        String contactToBeSearched = dealer.getVehicle_owner().toLowerCase() + dealer.getVehicle_no().toLowerCase();
                         if (contactToBeSearched.contains(newText.toLowerCase())) {
                             dealerSearchedList.add(dealer);
                         }
                     }
                     if (dealerSearchedList.size() == 0) {
-                        vehicle_dealer_list.setAdapter(new GetVehicleDealerDetailsListAdapter(context, dealerSearchedList,user_id));
+                        vehicle_dealer_list.setAdapter(new GetVehicleDealerDetailsListAdapter(context, dealerSearchedList, user_id));
                     } else {
                         //bindRecyclerview(contactsSearchedList);
-                        vehicle_dealer_list.setAdapter(new GetVehicleDealerDetailsListAdapter(context, dealerSearchedList,user_id));
+                        vehicle_dealer_list.setAdapter(new GetVehicleDealerDetailsListAdapter(context, dealerSearchedList, user_id));
                     }
                     return true;
                 } else if (newText.equals("")) {
-                    vehicle_dealer_list.setAdapter(new GetVehicleDealerDetailsListAdapter(context, vehicleDealerListPojos,user_id));
+                    vehicle_dealer_list.setAdapter(new GetVehicleDealerDetailsListAdapter(context, vehicleDealerListPojos, user_id));
                     //bindRecyclerview(contactList);
                 }
                 return true;
@@ -194,7 +195,7 @@ public class Fragment_vehical_rto_details extends Fragment {
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
                     vehicleDealerListPojos = new ArrayList<VehicleDealerListPojo>();
-                    vehicle_dealer_list.setAdapter(new GetVehicleDealerDetailsListAdapter(context, vehicleDealerListPojos,user_id));
+                    vehicle_dealer_list.setAdapter(new GetVehicleDealerDetailsListAdapter(context, vehicleDealerListPojos, user_id));
                     if (type.equalsIgnoreCase("success")) {
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
@@ -212,10 +213,11 @@ public class Fragment_vehical_rto_details extends Fragment {
                                 dealerMainObj.setState_id(jsonObj.getString("state"));
                                 dealerMainObj.setStateName(jsonObj.getString("sateName"));
                                 dealerMainObj.setVehicle_owner(jsonObj.getString("vehicle_owner_name"));
-                                dealerMainObj.setVehicle_no(jsonObj.getString("vechicle_no"));;
+                                dealerMainObj.setVehicle_no(jsonObj.getString("vechicle_no"));
+                                ;
                                 dealerMainObj.setRemark(jsonObj.getString("remark"));
-                               // dealerMainObj.setClient_id(jsonObj.getString("client_name"));
-                               // dealerMainObj.setClient_name(jsonObj.getString("ClientName"));
+                                // dealerMainObj.setClient_id(jsonObj.getString("client_name"));
+                                // dealerMainObj.setClient_name(jsonObj.getString("ClientName"));
                                 dealerMainObj.setType_id(jsonObj.getString("rtotype"));
                                 dealerMainObj.setType_name(jsonObj.getString("vType"));
                                 dealerMainObj.setIsimport(jsonObj.getString("is_import_by_dealer"));
@@ -268,7 +270,7 @@ public class Fragment_vehical_rto_details extends Fragment {
                                 vehicle_dealer_list.setVisibility(View.VISIBLE);
                                 ll_nothingtoshow.setVisibility(View.GONE);
                             }
-                            vehicle_dealer_list.setAdapter(new GetVehicleDealerDetailsListAdapter(context, vehicleDealerListPojos,user_id));
+                            vehicle_dealer_list.setAdapter(new GetVehicleDealerDetailsListAdapter(context, vehicleDealerListPojos, user_id));
 
                         }
                     } else if (type.equalsIgnoreCase("failure")) {
@@ -283,6 +285,7 @@ public class Fragment_vehical_rto_details extends Fragment {
             }
         }
     }
+
     public static class GetBankerDealerList extends AsyncTask<String, Void, String> {
 
         @Override
@@ -319,7 +322,7 @@ public class Fragment_vehical_rto_details extends Fragment {
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
                     vehicleDealerListPojos1 = new ArrayList<VehicleDealerListPojo>();
-                    vehicle_dealer_list.setAdapter(new GetVehicleDealerDetailsListAdapter(context, vehicleDealerListPojos,user_id));
+                    vehicle_dealer_list.setAdapter(new GetVehicleDealerDetailsListAdapter(context, vehicleDealerListPojos, user_id));
                     if (type.equalsIgnoreCase("success")) {
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
@@ -376,13 +379,13 @@ public class Fragment_vehical_rto_details extends Fragment {
                                 ll_nothingtoshow.setVisibility(View.GONE);
                             }
                             vehicleDealerListPojos.addAll(vehicleDealerListPojos1);
-                            vehicle_dealer_list.setAdapter(new GetVehicleDealerDetailsListAdapter(context, vehicleDealerListPojos,user_id));
+                            vehicle_dealer_list.setAdapter(new GetVehicleDealerDetailsListAdapter(context, vehicleDealerListPojos, user_id));
 
                         }
                     } else if (type.equalsIgnoreCase("failure")) {
-                        if(vehicleDealerListPojos.size() > 0) {
+                        if (vehicleDealerListPojos.size() > 0) {
                             vehicle_dealer_list.setAdapter(new GetVehicleDealerDetailsListAdapter(context, vehicleDealerListPojos, user_id));
-                        }else {
+                        } else {
                             ll_nothingtoshow.setVisibility(View.VISIBLE);
                             vehicle_dealer_list.setVisibility(View.GONE);
                         }

@@ -5,10 +5,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -49,6 +49,7 @@ public class RtoAgent_Activity extends Activity {
     private FloatingActionButton fab_add_rtoagent;
     private UserSessionManager session;
     private String user_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +57,8 @@ public class RtoAgent_Activity extends Activity {
         init();
         getSessionData();
         setDefault();
-       setEventHandlers();
-       setUpToolbar();
+        setEventHandlers();
+        setUpToolbar();
 
     }
 
@@ -72,6 +73,7 @@ public class RtoAgent_Activity extends Activity {
         layoutManager = new LinearLayoutManager(context);
         rtoagentdetails.setLayoutManager(layoutManager);
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -82,16 +84,18 @@ public class RtoAgent_Activity extends Activity {
             e.printStackTrace();
         }
     }
+
     private void setDefault() {
         if (Utilities.isNetworkAvailable(context)) {
             new GetRtoAgentList().execute(user_id);
         } else {
             Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
             swipeRefreshLayout.setRefreshing(false);
-           // ll_nothingtoshow.setVisibility(View.VISIBLE);
+            // ll_nothingtoshow.setVisibility(View.VISIBLE);
             rtoagentdetails.setVisibility(View.GONE);
         }
     }
+
     private void setEventHandlers() {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -118,7 +122,7 @@ public class RtoAgent_Activity extends Activity {
                 edt_alias.setHint("Email");
                 final EditText edt_mobile = new EditText(context);
                 edt_mobile.setHint("Mobile No*.");
-                edt_mobile.setInputType(InputType.TYPE_CLASS_NUMBER );
+                edt_mobile.setInputType(InputType.TYPE_CLASS_NUMBER);
                 InputFilter[] filterArray = new InputFilter[1];
                 filterArray[0] = new InputFilter.LengthFilter(10);
                 edt_mobile.setFilters(filterArray);
@@ -139,7 +143,7 @@ public class RtoAgent_Activity extends Activity {
                                 Utilities.showSnackBar(ll_parent, "Please Enter Mobile No.");
                                 return;
                             }
-                            new AddRtoAgent().execute(edt_name.getText().toString().trim(), edt_alias.getText().toString().trim(),user_id,edt_mobile.getText().toString().trim());
+                            new AddRtoAgent().execute(edt_name.getText().toString().trim(), edt_alias.getText().toString().trim(), user_id, edt_mobile.getText().toString().trim());
                         } else {
                             Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                         }
@@ -154,7 +158,7 @@ public class RtoAgent_Activity extends Activity {
 
 
                 final AlertDialog alertD = builder.create();
-                LinearLayout ll=new LinearLayout(context);
+                LinearLayout ll = new LinearLayout(context);
                 ll.setOrientation(LinearLayout.VERTICAL);
                 ll.addView(edt_name);
                 ll.addView(edt_alias);
@@ -186,14 +190,13 @@ public class RtoAgent_Activity extends Activity {
                 });
 
 
-
             }
         });
 
 
     }
 
-    private class AddRtoAgent extends AsyncTask<String , Void , String>  {
+    private class AddRtoAgent extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 
         @Override
@@ -204,6 +207,7 @@ public class RtoAgent_Activity extends Activity {
             pd.setCancelable(false);
             pd.show();
         }
+
         @Override
         protected String doInBackground(String... params) {
             String res = "[]";
@@ -249,7 +253,7 @@ public class RtoAgent_Activity extends Activity {
         }
     }
 
-    public static class GetRtoAgentList extends AsyncTask<String , Void , String> {
+    public static class GetRtoAgentList extends AsyncTask<String, Void, String> {
         private ArrayList<RTOAgentPojo> rtoagentlist;
 
         @Override
@@ -261,6 +265,7 @@ public class RtoAgent_Activity extends Activity {
 //            shimmer_view_container.setVisibility(View.VISIBLE);
 //            shimmer_view_container.startShimmer();
         }
+
         @Override
         protected String doInBackground(String... params) {
             String res = "[]";
@@ -270,56 +275,57 @@ public class RtoAgent_Activity extends Activity {
             res = WebServiceCalls.FORMDATAAPICall(ApplicationConstants.MASTERAPI, param);
             return res.trim();
         }
+
         @Override
         protected void onPostExecute(String result) {
-         super.onPostExecute(result);
-        String type = "", message = "";
+            super.onPostExecute(result);
+            String type = "", message = "";
             try {
-            swipeRefreshLayout.setRefreshing(false);
+                swipeRefreshLayout.setRefreshing(false);
 //                shimmer_view_container.stopShimmer();
 //                shimmer_view_container.setVisibility(View.GONE);
-            rtoagentdetails.setVisibility(View.VISIBLE);
-            if (!result.equals("")) {
-                JSONObject mainObj = new JSONObject(result);
-                type = mainObj.getString("type");
-                message = mainObj.getString("message");
-                rtoagentlist = new ArrayList<>();
-                rtoagentdetails.setAdapter(new getRtoAgentListAdapter(context, rtoagentlist));
-                if (type.equalsIgnoreCase("success")) {
-                    JSONArray jsonarr = mainObj.getJSONArray("result");
-                    if (jsonarr.length() > 0) {
-                        for (int i = 0; i < jsonarr.length(); i++) {
-                            RTOAgentPojo summary = new RTOAgentPojo();
-                            JSONObject jsonObj = jsonarr.getJSONObject(i);
-                            if (!jsonObj.getString("name").equals("")) {
-                                summary.setId(jsonObj.getString("id"));
-                                summary.setName(jsonObj.getString("name"));
-                                summary.setAlias(jsonObj.getString("alias"));
-                                summary.setMobile(jsonObj.getString("mobile"));
-                                rtoagentlist.add(summary);
+                rtoagentdetails.setVisibility(View.VISIBLE);
+                if (!result.equals("")) {
+                    JSONObject mainObj = new JSONObject(result);
+                    type = mainObj.getString("type");
+                    message = mainObj.getString("message");
+                    rtoagentlist = new ArrayList<>();
+                    rtoagentdetails.setAdapter(new getRtoAgentListAdapter(context, rtoagentlist));
+                    if (type.equalsIgnoreCase("success")) {
+                        JSONArray jsonarr = mainObj.getJSONArray("result");
+                        if (jsonarr.length() > 0) {
+                            for (int i = 0; i < jsonarr.length(); i++) {
+                                RTOAgentPojo summary = new RTOAgentPojo();
+                                JSONObject jsonObj = jsonarr.getJSONObject(i);
+                                if (!jsonObj.getString("name").equals("")) {
+                                    summary.setId(jsonObj.getString("id"));
+                                    summary.setName(jsonObj.getString("name"));
+                                    summary.setAlias(jsonObj.getString("alias"));
+                                    summary.setMobile(jsonObj.getString("mobile"));
+                                    rtoagentlist.add(summary);
+                                }
                             }
+                            if (rtoagentlist.size() == 0) {
+                                ll_nothingtoshow.setVisibility(View.VISIBLE);
+                                rtoagentdetails.setVisibility(View.GONE);
+                            } else {
+                                rtoagentdetails.setVisibility(View.VISIBLE);
+                                ll_nothingtoshow.setVisibility(View.GONE);
+                            }
+                            rtoagentdetails.setAdapter(new getRtoAgentListAdapter(context, rtoagentlist));
                         }
-                        if (rtoagentlist.size() == 0) {
-                            ll_nothingtoshow.setVisibility(View.VISIBLE);
-                            rtoagentdetails.setVisibility(View.GONE);
-                        } else {
-                            rtoagentdetails.setVisibility(View.VISIBLE);
-                            ll_nothingtoshow.setVisibility(View.GONE);
-                        }
-                        rtoagentdetails.setAdapter(new getRtoAgentListAdapter(context, rtoagentlist));
+                    } else {
+                        ll_nothingtoshow.setVisibility(View.VISIBLE);
+                        rtoagentdetails.setVisibility(View.GONE);
                     }
-                } else {
-                    ll_nothingtoshow.setVisibility(View.VISIBLE);
-                    rtoagentdetails.setVisibility(View.GONE);
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+
+
     }
-
-
-}
 
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);

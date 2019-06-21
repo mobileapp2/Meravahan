@@ -12,12 +12,12 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -71,12 +71,12 @@ public class EditTyre_Activity extends Activity {
     private ScrollView scrollView;
     private LinearLayout ll_parent;
     private static final int CAMERA_REQUEST = 100;
-    private LinearLayout ll_servicedates, ll_documents,ll_Otherdates;
-    private ImageView btn_addservicedates, btn_adddocuments,btn_addotherdates;
+    private LinearLayout ll_servicedates, ll_documents, ll_Otherdates;
+    private ImageView btn_addservicedates, btn_adddocuments, btn_addotherdates;
     private static final int GALLERY_REQUEST = 200;
     private EditText edt_state, edt_vehicleno, edt_clientname,
             edt_description, edt_type, edt_replacementdate,
-            edt_remouning,edt_purchasedate,edt_remark,edt_tyreno;
+            edt_remouning, edt_purchasedate, edt_remark, edt_tyreno;
     private int mYear, mMonth, mDay;
     private int mYear1, mMonth1, mDay1;
     private int mYear2, mMonth2, mDay2;
@@ -91,11 +91,12 @@ public class EditTyre_Activity extends Activity {
     private ArrayList<StatePojo> statelist;
     private UserSessionManager session;
     private String companyAliasName = "";
-    private String user_id, stateId, clientId, typeId,dealerId,otherId,documentId,id;
+    private String user_id, stateId, clientId, typeId, dealerId, otherId, documentId, id;
     private String[] PERMISSIONS = {android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
     private Uri photoURI;
     private File photoFile, tyrePicFolder;
     private TyreDetailsPojo tyreDetailsPojo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,8 +120,8 @@ public class EditTyre_Activity extends Activity {
         edt_clientname = findViewById(R.id.edt_clientname);
         edt_description = findViewById(R.id.edt_description);
         edt_type = findViewById(R.id.edt_type);
-        edt_remark= findViewById(R.id.edt_remark);
-        edt_tyreno= findViewById(R.id.edt_tyreno);
+        edt_remark = findViewById(R.id.edt_remark);
+        edt_tyreno = findViewById(R.id.edt_tyreno);
 
         edt_replacementdate = findViewById(R.id.edt_tyrereplacementdate);
         edt_remouning = findViewById(R.id.edt_tyreremoundingdate);
@@ -147,6 +148,7 @@ public class EditTyre_Activity extends Activity {
     protected void onPause() {
         super.onPause();
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -165,7 +167,7 @@ public class EditTyre_Activity extends Activity {
         stateId = tyreDetailsPojo.getStateId();
         clientId = tyreDetailsPojo.getClient_id();
         typeId = tyreDetailsPojo.getType_id();
-       // otherId = tyreDetailsPojo.getOther_date();
+        // otherId = tyreDetailsPojo.getOther_date();
         edt_clientname.setText(tyreDetailsPojo.getClient_name());
         edt_state.setText(tyreDetailsPojo.getStateName());
         edt_description.setText(tyreDetailsPojo.getDescription());
@@ -249,6 +251,7 @@ public class EditTyre_Activity extends Activity {
         documentsLayoutsList = new ArrayList<>();
 
     }
+
     @SuppressLint("ClickableViewAccessibility")
     private void setEventHandler() {
 
@@ -297,7 +300,6 @@ public class EditTyre_Activity extends Activity {
                 }
             }
         });
-
 
 
         edt_purchasedate.setOnClickListener(new View.OnClickListener() {
@@ -398,7 +400,7 @@ public class EditTyre_Activity extends Activity {
                 }, mYear2, mMonth2, mDay2);
                 try {
                     dpd1.getDatePicker().setCalendarViewShown(false);
-                   // dpd1.getDatePicker().setMinDate(c.getTimeInMillis());
+                    // dpd1.getDatePicker().setMinDate(c.getTimeInMillis());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -555,8 +557,6 @@ public class EditTyre_Activity extends Activity {
     }
 
 
-
-
     private void typeListDialog(final ArrayList<TypePojo> typelist) {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
         builderSingle.setTitle("Select Type");
@@ -591,6 +591,7 @@ public class EditTyre_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetTypeList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -688,6 +689,7 @@ public class EditTyre_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetClientList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -775,8 +777,6 @@ public class EditTyre_Activity extends Activity {
             Utilities.showSnackBar(ll_parent, "Please Enter Vehicle No.");
             return;
         }
-
-
 
 
         ArrayList<TyreDetailsPojo.OtherDatesListPojo> otherDatesList = new ArrayList<>();
@@ -968,6 +968,7 @@ public class EditTyre_Activity extends Activity {
 
         }
     }
+
     public void selectDate(View view) {
         final EditText edt_otheredate = (EditText) view;
 
@@ -1184,7 +1185,6 @@ public class EditTyre_Activity extends Activity {
             }
         }
     }
-
 
 
     void savefile(Uri sourceuri) {

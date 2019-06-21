@@ -2,7 +2,6 @@ package in.rto.collections.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -63,7 +62,7 @@ public class Fragment_vehicle_dealer_details extends Fragment {
         // tabLayout.getTabAt(1).setIcon(R.drawable.icon_anniversaries);
 //        tabLayout.getTabAt(2).setIcon(R.drawable.icon_premium);
 //tabLayout.setBackgroundColor(getResources().getColor(R.color.black));
-  //      tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccent));
+        //      tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccent));
         // tabLayout.getTabAt(0).getIcon().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
         // tabLayout.getTabAt(1).getIcon().setColorFilter(getResources().getColor(R.color.Battleship_Gray), PorterDuff.Mode.SRC_IN);
         //  tabLayout.getTabAt(2).getIcon().setColorFilter(getResources().getColor(R.color.Battleship_Gray), PorterDuff.Mode.SRC_IN);
@@ -98,7 +97,7 @@ public class Fragment_vehicle_dealer_details extends Fragment {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                 // tab.getIcon().setColorFilter(getResources().getColor(R.color.Battleship_Gray), PorterDuff.Mode.SRC_IN);
+                // tab.getIcon().setColorFilter(getResources().getColor(R.color.Battleship_Gray), PorterDuff.Mode.SRC_IN);
             }
 
             @Override
@@ -137,8 +136,6 @@ public class Fragment_vehicle_dealer_details extends Fragment {
             return mFragmentTitleList.get(position);
         }
     }
-
-
 
 
 }

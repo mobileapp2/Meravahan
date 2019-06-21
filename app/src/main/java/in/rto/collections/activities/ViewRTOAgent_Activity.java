@@ -9,10 +9,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -57,13 +57,12 @@ public class ViewRTOAgent_Activity extends Activity {
     private ScrollView scrollView;
     private LinearLayout ll_parent;
     private static final int CAMERA_REQUEST = 100;
-    private LinearLayout ll_servicedates, ll_documents,ll_Otherdates;
-    private ImageView btn_addservicedates, btn_adddocuments,btn_addotherdates;
+    private LinearLayout ll_servicedates, ll_documents, ll_Otherdates;
+    private ImageView btn_addservicedates, btn_adddocuments, btn_addotherdates;
     private static final int GALLERY_REQUEST = 200;
     private EditText edt_state, edt_vehicleno, edt_clientname, edt_vehicleownername, edt_vehicledealer,
             edt_description, edt_type, edt_engineno, edt_chassisno, edt_insurancepolicyno, edt_renewaldate,
-            edt_taxvalidupto, edt_permitvalidupto, edt_remark,edt_satepermitvalidupto,nationalpermitvalidupto
-            ,pucrenewaldate,fitnessvalidupto,edt_selectVehicleImage;
+            edt_taxvalidupto, edt_permitvalidupto, edt_remark, edt_satepermitvalidupto, nationalpermitvalidupto, pucrenewaldate, fitnessvalidupto, edt_selectVehicleImage;
 
     private int mYear, mMonth, mDay;
     private int mYear1, mMonth1, mDay1;
@@ -73,7 +72,7 @@ public class ViewRTOAgent_Activity extends Activity {
     private int mYear5, mMonth5, mDay5;
     private int mYear6, mMonth6, mDay6;
     private int mYear7, mMonth7, mDay7;
-    private CheckBox isshow_to_dealer,isshow_to_customer;
+    private CheckBox isshow_to_dealer, isshow_to_customer;
 
     private EditText edt_selectdocuments = null;
     private ImageView img_save;
@@ -85,11 +84,11 @@ public class ViewRTOAgent_Activity extends Activity {
     private ArrayList<StatePojo> statelist;
     private UserSessionManager session;
     private String companyAliasName = "";
-    private String user_id, stateId, clientId, typeId,dealerId,role;
+    private String user_id, stateId, clientId, typeId, dealerId, role;
     private String[] PERMISSIONS = {android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
     private Uri photoURI;
     private File file, rtoagentPicFolder;
-    private RTOAgentListPojo  rtoAgentListPojo;
+    private RTOAgentListPojo rtoAgentListPojo;
     private ImageView img_delete, img_edit;
 
     @Override
@@ -155,6 +154,7 @@ public class ViewRTOAgent_Activity extends Activity {
     protected void onPause() {
         super.onPause();
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -166,6 +166,7 @@ public class ViewRTOAgent_Activity extends Activity {
             e.printStackTrace();
         }
     }
+
     private void setDefaults() {
         rtoAgentListPojo = (RTOAgentListPojo) getIntent().getSerializableExtra("rtoagentDetails");
         edt_clientname.setText(rtoAgentListPojo.getClient_name());
@@ -203,15 +204,14 @@ public class ViewRTOAgent_Activity extends Activity {
 
         if (rtoAgentListPojo.getIsshowto_customer().equals("1")) {
             isshow_to_customer.setChecked(true);
-        } else{
+        } else {
             isshow_to_customer.setChecked(false);
         }
         if (rtoAgentListPojo.getIsshowto_dealer().equals("1")) {
             isshow_to_dealer.setChecked(true);
-        }else{
+        } else {
             isshow_to_dealer.setChecked(false);
         }
-
 
 
         ArrayList<RTOAgentListPojo.OtherDatesListPojo> otherDatesList = new ArrayList<>();
@@ -263,6 +263,7 @@ public class ViewRTOAgent_Activity extends Activity {
             // tv_documents.setText("No Documents Added");
         }
     }
+
     private void setEventHandler() {
     }
 
@@ -278,7 +279,7 @@ public class ViewRTOAgent_Activity extends Activity {
 
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
-        if(!role.equals("3")) {
+        if (!role.equals("3")) {
             mToolbar.inflateMenu(R.menu.list_menu);
             mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
                 @Override
@@ -524,7 +525,6 @@ public class ViewRTOAgent_Activity extends Activity {
             }
         }
     }
-
 
 
 }

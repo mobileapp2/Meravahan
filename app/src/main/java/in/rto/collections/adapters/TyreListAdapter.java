@@ -15,7 +15,7 @@ import in.rto.collections.R;
 import in.rto.collections.activities.ViewTyre_Activity;
 import in.rto.collections.models.TyreDetailsPojo;
 
-public class TyreListAdapter  extends RecyclerView.Adapter<TyreListAdapter.MyViewHolder> {
+public class TyreListAdapter extends RecyclerView.Adapter<TyreListAdapter.MyViewHolder> {
 
     private List<TyreDetailsPojo> resultArrayList;
     private Context context;
@@ -53,8 +53,6 @@ public class TyreListAdapter  extends RecyclerView.Adapter<TyreListAdapter.MyVie
     }
 
 
-
-
     @Override
     public int getItemCount() {
         return resultArrayList.size();
@@ -62,11 +60,12 @@ public class TyreListAdapter  extends RecyclerView.Adapter<TyreListAdapter.MyVie
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tv_tyreno,tv_purchasedate;
+        TextView tv_tyreno, tv_purchasedate;
         private LinearLayout ll_mainlayout;
+
         public MyViewHolder(View view) {
             super(view);
-            tv_tyreno = view.findViewById(R.id.tv_tyreno   );
+            tv_tyreno = view.findViewById(R.id.tv_tyreno);
             tv_purchasedate = view.findViewById(R.id.tv_purchasedate);
             ll_mainlayout = view.findViewById(R.id.ll_mainlayout);
         }

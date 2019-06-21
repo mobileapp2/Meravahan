@@ -12,13 +12,12 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -57,12 +56,10 @@ import droidninja.filepicker.FilePickerConst;
 import in.rto.collections.R;
 import in.rto.collections.adapters.listClientsAdapter;
 import in.rto.collections.fragments.Fragment_Banker_Vehicle_Details;
-import in.rto.collections.fragments.Fragment_RTO_Agent;
 import in.rto.collections.models.BankPojo;
 import in.rto.collections.models.BankerDetailsPojo;
 import in.rto.collections.models.BranchPojo;
 import in.rto.collections.models.ClientMainListPojo;
-import in.rto.collections.models.CustomerPojo;
 import in.rto.collections.models.FrequencyPojo;
 import in.rto.collections.models.StatePojo;
 import in.rto.collections.models.VehicleDealerPojo;
@@ -81,13 +78,13 @@ public class Edit_BankerDetails_Activity extends Activity {
     private ScrollView scrollView;
     private LinearLayout ll_parent;
     private static final int CAMERA_REQUEST = 100;
-    private LinearLayout ll_servicedates, ll_documents,ll_Otherdates;
-    private ImageView btn_addservicedates, btn_adddocuments,btn_addotherdates;
+    private LinearLayout ll_servicedates, ll_documents, ll_Otherdates;
+    private ImageView btn_addservicedates, btn_adddocuments, btn_addotherdates;
     private static final int GALLERY_REQUEST = 200;
     private EditText edt_bank, edt_branch, edt_clientname, edt_borrowername, edt_vehicledealer,
             edt_description, edt_loanamount, edt_accountnumber, edt_sactiondate, edt_installmentanount, edt_startdate,
-            edt_enddate, edt_frequency, edt_remark,edt_vehiclenumber,purchasedate,edt_selectVehicleImage;
-    private CheckBox isshow_to_dealer,isshow_to_customer;
+            edt_enddate, edt_frequency, edt_remark, edt_vehiclenumber, purchasedate, edt_selectVehicleImage;
+    private CheckBox isshow_to_dealer, isshow_to_customer;
     private int mYear, mMonth, mDay;
     private int mYear1, mMonth1, mDay1;
     private int mYear2, mMonth2, mDay2;
@@ -96,9 +93,9 @@ public class Edit_BankerDetails_Activity extends Activity {
     private int mYear5, mMonth5, mDay5;
     private int mYear6, mMonth6, mDay6;
     private int mYear7, mMonth7, mDay7;
-    private String isshowtocustomer , isshowtorto;
+    private String isshowtocustomer, isshowtorto;
 
-    private EditText edt_selectdocuments = null,edt_name = null;
+    private EditText edt_selectdocuments = null, edt_name = null;
     private ImageView img_save;
     private List<LinearLayout> documentsLayoutsList;
     private ArrayList<VehicleDealerPojo> vehicleDealerPojos;
@@ -108,12 +105,13 @@ public class Edit_BankerDetails_Activity extends Activity {
     private ArrayList<BranchPojo> branchList;
     private ArrayList<FrequencyPojo> frequencylist;
     private UserSessionManager session;
-    private String companyAliasName = "",documentType;
-    private String user_id, stateId, clientId, typeId,dealerId,statename="",bankId,branchId,frequency,documentId,Id;
+    private String companyAliasName = "", documentType;
+    private String user_id, stateId, clientId, typeId, dealerId, statename = "", bankId, branchId, frequency, documentId, Id;
     private String[] PERMISSIONS = {android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
     private Uri photoURI;
     private File photoFile, rtoagentPicFolder;
     private BankerDetailsPojo bankerDetailsPojo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,6 +122,7 @@ public class Edit_BankerDetails_Activity extends Activity {
         setDefaults();
         setEventHandler();
     }
+
     private void init() {
         context = Edit_BankerDetails_Activity.this;
         session = new UserSessionManager(context);
@@ -169,6 +168,7 @@ public class Edit_BankerDetails_Activity extends Activity {
     protected void onPause() {
         super.onPause();
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
@@ -182,7 +182,7 @@ public class Edit_BankerDetails_Activity extends Activity {
 
     private void setDefaults() {
         documentsLayoutsList = new ArrayList<>();
-        bankerDetailsPojo  = (BankerDetailsPojo) getIntent().getSerializableExtra("bankerDetails");
+        bankerDetailsPojo = (BankerDetailsPojo) getIntent().getSerializableExtra("bankerDetails");
 
         frequency = bankerDetailsPojo.getFrequency_id();
         dealerId = bankerDetailsPojo.getVehicle_dealer_id();
@@ -192,7 +192,7 @@ public class Edit_BankerDetails_Activity extends Activity {
         edt_branch.setText(bankerDetailsPojo.getBranch_name());
         edt_description.setText(bankerDetailsPojo.getDescription());
         edt_sactiondate.setText(changeDateFormat("yyyy-MM-dd",
-                "dd/MM/yyyy",bankerDetailsPojo.getDate_to_section()));
+                "dd/MM/yyyy", bankerDetailsPojo.getDate_to_section()));
         edt_enddate.setText(changeDateFormat("yyyy-MM-dd",
                 "dd/MM/yyyy",
                 bankerDetailsPojo.getInstallment_end_date()));
@@ -216,15 +216,15 @@ public class Edit_BankerDetails_Activity extends Activity {
         edt_selectVehicleImage.setText(bankerDetailsPojo.getVehicle_image());
         if (bankerDetailsPojo.getIsshowto_customer().equals("1")) {
             isshow_to_customer.setChecked(true);
-        } else{
+        } else {
             isshow_to_customer.setChecked(false);
         }
         if (bankerDetailsPojo.getIsshowto_dealer().equals("1")) {
             isshow_to_dealer.setChecked(true);
-        }else{
+        } else {
             isshow_to_dealer.setChecked(false);
         }
-        ArrayList< BankerDetailsPojo.DocumentListPojo> documentsList = new ArrayList<>();
+        ArrayList<BankerDetailsPojo.DocumentListPojo> documentsList = new ArrayList<>();
         documentsList = bankerDetailsPojo.getDocument();
 
         if (documentsList.size() != 0) {
@@ -286,6 +286,7 @@ public class Edit_BankerDetails_Activity extends Activity {
         frequencylist = new ArrayList<>();
 
     }
+
     @SuppressLint("ClickableViewAccessibility")
     private void setEventHandler() {
 
@@ -487,6 +488,7 @@ public class Edit_BankerDetails_Activity extends Activity {
         });
 
     }
+
     private void vehicledelaerListDialog(final ArrayList<VehicleDealerPojo> vehicledealerlist) {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
         builderSingle.setTitle("Select Vehicle Dealer");
@@ -521,6 +523,7 @@ public class Edit_BankerDetails_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetVehicleDealerList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -583,6 +586,7 @@ public class Edit_BankerDetails_Activity extends Activity {
             }
         }
     }
+
     private void clientListDialog(final ArrayList<ClientMainListPojo> clientList) {
         final listClientsAdapter[] adapter = new listClientsAdapter[1];
 
@@ -653,12 +657,12 @@ public class Edit_BankerDetails_Activity extends Activity {
         builderSingle.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ClientMainListPojo  selected_client = adapter[0].getSelected();
+                ClientMainListPojo selected_client = adapter[0].getSelected();
                 if (selected_client != null) {
 
                     edt_clientname.setText(selected_client.getName());
                     clientId = selected_client.getId();
-                }else{
+                } else {
                     Utilities.showSnackBar(ll_parent, "Please select client");
 
                 }
@@ -682,6 +686,7 @@ public class Edit_BankerDetails_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetClientList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -842,6 +847,7 @@ public class Edit_BankerDetails_Activity extends Activity {
             }
         }
     }
+
     private void branchListDialog(final ArrayList<BranchPojo> branchList) {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
         builderSingle.setTitle("Select Branch");
@@ -876,6 +882,7 @@ public class Edit_BankerDetails_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetBranchList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -911,7 +918,7 @@ public class Edit_BankerDetails_Activity extends Activity {
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
                     if (type.equalsIgnoreCase("success")) {
-                        branchList= new ArrayList<>();
+                        branchList = new ArrayList<>();
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
                             for (int i = 0; i < jsonarr.length(); i++) {
@@ -973,6 +980,7 @@ public class Edit_BankerDetails_Activity extends Activity {
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
     }
+
     public class GetFrqList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -1008,7 +1016,7 @@ public class Edit_BankerDetails_Activity extends Activity {
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
                     if (type.equalsIgnoreCase("success")) {
-                        frequencylist= new ArrayList<>();
+                        frequencylist = new ArrayList<>();
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         if (jsonarr.length() > 0) {
                             for (int i = 0; i < jsonarr.length(); i++) {
@@ -1035,6 +1043,7 @@ public class Edit_BankerDetails_Activity extends Activity {
             }
         }
     }
+
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
         img_save = findViewById(R.id.img_save);
@@ -1084,7 +1093,7 @@ public class Edit_BankerDetails_Activity extends Activity {
         }
         if (isshow_to_customer.isChecked()) {
             isshowtocustomer = "1";
-        } else{
+        } else {
             isshowtocustomer = "0";
         }
 
@@ -1123,7 +1132,7 @@ public class Edit_BankerDetails_Activity extends Activity {
         }
         if (isshow_to_customer.isChecked()) {
             isshowtocustomer = "1";
-        } else{
+        } else {
             isshowtocustomer = "0";
         }
 
@@ -1141,7 +1150,7 @@ public class Edit_BankerDetails_Activity extends Activity {
         mainObj.addProperty("client_id", clientId);
         mainObj.addProperty("frequency", frequency);
         mainObj.addProperty("borrower_name", edt_borrowername.getText().toString().trim());
-        mainObj.addProperty("dealer_id",dealerId);
+        mainObj.addProperty("dealer_id", dealerId);
         mainObj.addProperty("description", edt_description.getText().toString().trim());
         mainObj.addProperty("loan_amount", edt_loanamount.getText().toString().trim());
         mainObj.addProperty("loan_account_number", edt_accountnumber.getText().toString().trim());
@@ -1181,6 +1190,7 @@ public class Edit_BankerDetails_Activity extends Activity {
 
 
     }
+
     public class updateBankerDetails extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 
@@ -1268,6 +1278,7 @@ public class Edit_BankerDetails_Activity extends Activity {
 
         }
     }
+
     public void selectDate(View view) {
         final EditText edt_otheredate = (EditText) view;
 
@@ -1359,8 +1370,7 @@ public class Edit_BankerDetails_Activity extends Activity {
                             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                             startActivityForResult(intent, CAMERA_REQUEST);
-                        }
-                        else if (options[item].equals("Choose from Gallery")) {
+                        } else if (options[item].equals("Choose from Gallery")) {
                             Intent intent = new Intent(Intent.ACTION_PICK);
                             intent.setType("image/*");
                             startActivityForResult(intent, GALLERY_REQUEST);
@@ -1454,8 +1464,7 @@ public class Edit_BankerDetails_Activity extends Activity {
                             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                             startActivityForResult(intent, CAMERA_REQUEST);
-                        }
-                        else if (options[item].equals("Choose from Gallery")) {
+                        } else if (options[item].equals("Choose from Gallery")) {
                             Intent intent = new Intent(Intent.ACTION_PICK);
                             intent.setType("image/*");
                             startActivityForResult(intent, GALLERY_REQUEST);
@@ -1563,9 +1572,9 @@ public class Edit_BankerDetails_Activity extends Activity {
                         JSONObject Obj1 = mainObj.getJSONObject("result");
                         String document_name = Obj1.getString("name");
                         String original_name = Obj1.getString("orignal_name");
-                        if(documentType.equals("selectedImage")) {
+                        if (documentType.equals("selectedImage")) {
                             edt_selectdocuments.setText(document_name);
-                        }else if(documentType.equals("vehicleImage")){
+                        } else if (documentType.equals("vehicleImage")) {
                             edt_selectVehicleImage.setText(document_name);
                         }
 
@@ -1581,6 +1590,7 @@ public class Edit_BankerDetails_Activity extends Activity {
             }
         }
     }
+
     void savefile(Uri sourceuri) {
         Log.i("sourceuri1", "" + sourceuri);
         String sourceFilename = sourceuri.getPath();
@@ -1612,7 +1622,8 @@ public class Edit_BankerDetails_Activity extends Activity {
         new Edit_BankerDetails_Activity.UploadProductPhoto().execute(photoFileToUpload);
 //        doc_image_uri = Uri.fromFile(imageFile);
     }
-    public  void deleteDocument(View view){
+
+    public void deleteDocument(View view) {
         ll_documents.removeView((View) view.getParent());
         documentsLayoutsList.remove(view.getParent());
     }

@@ -1,15 +1,10 @@
 package in.rto.collections.activities;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -19,24 +14,14 @@ import android.widget.LinearLayout;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import in.rto.collections.R;
 import in.rto.collections.adapters.GetNotificationListAdapter;
-import in.rto.collections.adapters.GetProductInfoListAdapter;
 import in.rto.collections.models.NotificationPojo;
-import in.rto.collections.models.ProductInfoListPojo;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.ParamsPojo;
-import in.rto.collections.utilities.RecyclerItemClickListener;
 import in.rto.collections.utilities.UserSessionManager;
 import in.rto.collections.utilities.Utilities;
 import in.rto.collections.utilities.WebServiceCalls;
@@ -52,6 +37,7 @@ public class Notification_Activity extends Activity {
     private UserSessionManager session;
     private String user_id;
     private static ArrayList<NotificationPojo> notificationInfoList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +48,7 @@ public class Notification_Activity extends Activity {
         setEventHandlers();
         setUpToolbar();
     }
+
     private void init() {
         context = Notification_Activity.this;
         session = new UserSessionManager(context);
@@ -74,6 +61,7 @@ public class Notification_Activity extends Activity {
 
         notificationInfoList = new ArrayList<>();
     }
+
     private void getSessionData() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(

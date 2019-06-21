@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -18,7 +17,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
-import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -49,7 +47,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -76,15 +73,15 @@ public class Anniversary_Fragment extends Fragment {
     public LinearLayout ll_parent;
     private Context context;
     private RecyclerView rv_annivarsary;
-    private FloatingActionButton fab_wish_whatsapp, fab_wish_sms,fab_wish_notification;
+    private FloatingActionButton fab_wish_whatsapp, fab_wish_sms, fab_wish_notification;
     private SwipeRefreshLayout swipeRefreshLayout;
     private LinearLayout ll_nothingtoshow;
     private LinearLayoutManager layoutManager;
     private UserSessionManager session;
     private int mYear, mMonth, mDay;
-    private String user_id, date,name;
+    private String user_id, date, name;
     private ArrayList<BirthdayAnnivarsaryListPojo> annivarsaryList;
-    private String id = "", smsMessage = "", whatsappMessage = "", whatsappPicUrl = "", whatsappPic = "",subtype;
+    private String id = "", smsMessage = "", whatsappMessage = "", whatsappPicUrl = "", whatsappPic = "", subtype;
     private EditText dialog_edt_whatsappmessage, edt_date;
     private ImageView dialog_imv_whatsapppic;
     private CheckBox cb_checkall;
@@ -100,10 +97,12 @@ public class Anniversary_Fragment extends Fragment {
         setEventHandlers();
         return rootView;
     }
+
     public void onResume() {
         setDefault();
         super.onResume();
     }
+
     private void init(View rootView) {
         session = new UserSessionManager(context);
         fab_wish_whatsapp = rootView.findViewById(R.id.fab_wish_whatsapp);
@@ -167,7 +166,7 @@ public class Anniversary_Fragment extends Fragment {
                 if (Utilities.isNetworkAvailable(context)) {
                     new GetAnniverasryList().execute(user_id, date);
                     swipeRefreshLayout.setRefreshing(true);
-                } else{
+                } else {
                     Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                     swipeRefreshLayout.setRefreshing(false);
                     ll_nothingtoshow.setVisibility(View.VISIBLE);
@@ -181,8 +180,7 @@ public class Anniversary_Fragment extends Fragment {
             public void onClick(View view) {
                 JSONArray user_info = null;
                 int count = 0;
-                for (int i= 0;i<annivarsaryList.size();i++)
-                {
+                for (int i = 0; i < annivarsaryList.size(); i++) {
                     if (annivarsaryList.get(i).isChecked)
                         count = count + 1;
                 }
@@ -190,17 +188,14 @@ public class Anniversary_Fragment extends Fragment {
                     user_info = new JSONArray(session.getUserDetails().get(
                             ApplicationConstants.KEY_LOGIN_INFO));
                     JSONObject json = user_info.getJSONObject(0);
-                    if (Integer.parseInt(json.getString("whatsappCount"))+ count <= Integer.parseInt(json.getString("maxWhatsAppLimit")))
-                    {
+                    if (Integer.parseInt(json.getString("whatsappCount")) + count <= Integer.parseInt(json.getString("maxWhatsAppLimit"))) {
                         if (Utilities.isInternetAvailable(context)) {
-                            new GetAnniWhatsappSettings().execute(user_id, "","whatsapp");
+                            new GetAnniWhatsappSettings().execute(user_id, "", "whatsapp");
                         } else {
                             Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                         }
-                    }
-                    else
-                    {
-                        Utilities.buildDialogForSmsValidation(context,count);
+                    } else {
+                        Utilities.buildDialogForSmsValidation(context, count);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -213,7 +208,7 @@ public class Anniversary_Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (Utilities.isInternetAvailable(context)) {
-                    new GetAnniWhatsappSettings().execute(user_id, "","notification");
+                    new GetAnniWhatsappSettings().execute(user_id, "", "notification");
                 } else {
                     Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                 }
@@ -224,8 +219,7 @@ public class Anniversary_Fragment extends Fragment {
             public void onClick(View view) {
                 JSONArray user_info = null;
                 int count = 0;
-                for (int i= 0;i<annivarsaryList.size();i++)
-                {
+                for (int i = 0; i < annivarsaryList.size(); i++) {
                     if (annivarsaryList.get(i).isChecked)
                         count = count + 1;
                 }
@@ -233,22 +227,18 @@ public class Anniversary_Fragment extends Fragment {
                     user_info = new JSONArray(session.getUserDetails().get(
                             ApplicationConstants.KEY_LOGIN_INFO));
                     JSONObject json = user_info.getJSONObject(0);
-                    if (Integer.parseInt(json.getString("smsCount"))+ count <= Integer.parseInt(json.getString("maxSMSLimit")))
-                    {
+                    if (Integer.parseInt(json.getString("smsCount")) + count <= Integer.parseInt(json.getString("maxSMSLimit"))) {
                         if (Utilities.isInternetAvailable(context)) {
                             new GetAnniSMSSettings().execute(user_id, "");
                         } else {
                             Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                         }
-                    }
-                    else
-                    {
-                        Utilities.buildDialogForSmsValidation(context,count);
+                    } else {
+                        Utilities.buildDialogForSmsValidation(context, count);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
 
 
             }
@@ -452,17 +442,14 @@ public class Anniversary_Fragment extends Fragment {
                         user_info = new JSONArray(session.getUserDetails().get(
                                 ApplicationConstants.KEY_LOGIN_INFO));
                         JSONObject json = user_info.getJSONObject(0);
-                        if (Integer.parseInt(json.getString("smsCount"))+ 1 <= Integer.parseInt(json.getString("maxSMSLimit")))
-                        {
+                        if (Integer.parseInt(json.getString("smsCount")) + 1 <= Integer.parseInt(json.getString("maxSMSLimit"))) {
                             if (Utilities.isInternetAvailable(context)) {
-                                new GetAnniSMSSettings().execute(user_id, annivarsaryList.get(position).getId(),"whatsapp");
+                                new GetAnniSMSSettings().execute(user_id, annivarsaryList.get(position).getId(), "whatsapp");
                             } else {
                                 Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                             }
-                        }
-                        else
-                        {
-                            Utilities.buildDialogForSmsValidation(context,1);
+                        } else {
+                            Utilities.buildDialogForSmsValidation(context, 1);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -479,17 +466,14 @@ public class Anniversary_Fragment extends Fragment {
                         user_info = new JSONArray(session.getUserDetails().get(
                                 ApplicationConstants.KEY_LOGIN_INFO));
                         JSONObject json = user_info.getJSONObject(0);
-                        if (Integer.parseInt(json.getString("whatsappCount"))+ 1 <= Integer.parseInt(json.getString("maxWhatsAppLimit")))
-                        {
+                        if (Integer.parseInt(json.getString("whatsappCount")) + 1 <= Integer.parseInt(json.getString("maxWhatsAppLimit"))) {
                             if (Utilities.isInternetAvailable(context)) {
-                                new GetAnniWhatsappSettings().execute(user_id, annivarsaryList.get(position).getId(),"whatsapp");
+                                new GetAnniWhatsappSettings().execute(user_id, annivarsaryList.get(position).getId(), "whatsapp");
                             } else {
                                 Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                             }
-                        }
-                        else
-                        {
-                            Utilities.buildDialogForSmsValidation(context,1);
+                        } else {
+                            Utilities.buildDialogForSmsValidation(context, 1);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -535,7 +519,7 @@ public class Anniversary_Fragment extends Fragment {
             holder.imv_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new Anniversary_Fragment.GetAnniWhatsappShare().execute(user_id, annivarsaryList.get(position).getId(),annivarsaryList.get(position).getMobile());
+                    new Anniversary_Fragment.GetAnniWhatsappShare().execute(user_id, annivarsaryList.get(position).getId(), annivarsaryList.get(position).getMobile());
                 }
             });
 
@@ -543,7 +527,7 @@ public class Anniversary_Fragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     if (Utilities.isInternetAvailable(context)) {
-                        new GetAnniWhatsappSettings().execute(user_id, annivarsaryList.get(position).getId(),"notification");
+                        new GetAnniWhatsappSettings().execute(user_id, annivarsaryList.get(position).getId(), "notification");
                     } else {
                         Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                     }
@@ -559,7 +543,7 @@ public class Anniversary_Fragment extends Fragment {
         public class MyViewHolder extends RecyclerView.ViewHolder {
 
             private TextView tv_clientname;
-            private ImageView imv_sms, imv_whatsapp,imv_call,imv_share,imv_notification;
+            private ImageView imv_sms, imv_whatsapp, imv_call, imv_share, imv_notification;
             private CheckBox cb_wish;
 
             public MyViewHolder(View view) {
@@ -748,7 +732,7 @@ public class Anniversary_Fragment extends Fragment {
                     if (type.equalsIgnoreCase("success")) {
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         JSONObject obj = jsonarr.getJSONObject(0);
-                        changeSessionSMSCount(obj.getString("smsCount"),obj.getString("whatsappCount"),obj.getString("maxSMSLimit"),obj.getString("maxWhatsAppLimit"));
+                        changeSessionSMSCount(obj.getString("smsCount"), obj.getString("whatsappCount"), obj.getString("maxSMSLimit"), obj.getString("maxWhatsAppLimit"));
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                         builder.setMessage("SMS Sent Successfully");
@@ -776,7 +760,7 @@ public class Anniversary_Fragment extends Fragment {
 
     public class GetAnniWhatsappShare extends AsyncTask<String, Void, String> {
         private ProgressDialog pd;
-        private String singleReceiverID = "",clientMobile = "";
+        private String singleReceiverID = "", clientMobile = "";
 
         @Override
         protected void onPreExecute() {
@@ -830,23 +814,23 @@ public class Anniversary_Fragment extends Fragment {
                         try {
                             PackageManager pm = getActivity().getPackageManager();
                             PackageInfo info = pm.getPackageInfo("com.whatsapp", PackageManager.GET_META_DATA);
-                            if(!whatsappPic.equals("")) {
+                            if (!whatsappPic.equals("")) {
                                 StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
                                 StrictMode.setVmPolicy(builder.build());
                                 File dfile = new Anniversary_Fragment.DownloadDocument().execute(whatsappPicUrl).get();
                                 Intent sendIntent = new Intent(Intent.ACTION_SEND);
                                 sendIntent.setType("*/*");
-                                sendIntent.putExtra("jid", "91"+clientMobile + "@s.whatsapp.net"); //phone number without "+" prefix
+                                sendIntent.putExtra("jid", "91" + clientMobile + "@s.whatsapp.net"); //phone number without "+" prefix
                                 sendIntent.setPackage("com.whatsapp");
                                 sendIntent.putExtra(Intent.EXTRA_TEXT, whatsappMessage);
                                 sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                                 sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(dfile));
                                 startActivity(sendIntent);
-                            }else{
+                            } else {
                                 Intent shareIntent = new Intent();
                                 shareIntent.setAction(Intent.ACTION_SEND);
                                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Title Of The Post");
-                                shareIntent.putExtra("jid", "91"+clientMobile + "@s.whatsapp.net"); //phone number without "+" prefix
+                                shareIntent.putExtra("jid", "91" + clientMobile + "@s.whatsapp.net"); //phone number without "+" prefix
                                 shareIntent.setPackage("com.whatsapp");
                                 shareIntent.putExtra(Intent.EXTRA_TEXT, whatsappMessage);
                                 shareIntent.setType("text/plain");
@@ -873,7 +857,7 @@ public class Anniversary_Fragment extends Fragment {
                             alert11.show();
                         }
 
-                    } else{
+                    } else {
 
 
                         try {
@@ -882,7 +866,7 @@ public class Anniversary_Fragment extends Fragment {
                             Intent shareIntent = new Intent();
                             shareIntent.setAction(Intent.ACTION_SEND);
                             shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Title Of The Post");
-                            shareIntent.putExtra("jid", "91"+clientMobile + "@s.whatsapp.net"); //phone number without "+" prefix
+                            shareIntent.putExtra("jid", "91" + clientMobile + "@s.whatsapp.net"); //phone number without "+" prefix
                             shareIntent.setPackage("com.whatsapp");
                             shareIntent.putExtra(Intent.EXTRA_TEXT, "Happy Anniversary");
                             shareIntent.setType("text/plain");
@@ -909,9 +893,9 @@ public class Anniversary_Fragment extends Fragment {
                         }
 
                     }
-                    }
+                }
 
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -920,7 +904,7 @@ public class Anniversary_Fragment extends Fragment {
     private Uri getLocalBitmapUri(ImageView dialog_imv_whatsapppic) {
         Drawable drawable = dialog_imv_whatsapppic.getDrawable();
         Bitmap bmp = null;
-        if (drawable instanceof BitmapDrawable){
+        if (drawable instanceof BitmapDrawable) {
             bmp = ((BitmapDrawable) dialog_imv_whatsapppic.getDrawable()).getBitmap();
         } else {
             return null;
@@ -928,7 +912,7 @@ public class Anniversary_Fragment extends Fragment {
         // Store image to default external storage directory
         Uri bmpUri = null;
         try {
-            File file =  new File(Environment.getExternalStoragePublicDirectory(
+            File file = new File(Environment.getExternalStoragePublicDirectory(
                     Environment.DIRECTORY_DOWNLOADS), "share_image_" + System.currentTimeMillis() + ".png");
             file.getParentFile().mkdirs();
             FileOutputStream out = new FileOutputStream(file);
@@ -940,7 +924,6 @@ public class Anniversary_Fragment extends Fragment {
         }
         return bmpUri;
     }
-
 
 
     public class GetAnniWhatsappSettings extends AsyncTask<String, Void, String> {
@@ -994,9 +977,9 @@ public class Anniversary_Fragment extends Fragment {
                     LayoutInflater layoutInflater = LayoutInflater.from(context);
                     View promptView = layoutInflater.inflate(R.layout.prompt_send_whatsappmsg, null);
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
-                    if(subtype.equals("notification")){
+                    if (subtype.equals("notification")) {
                         alertDialogBuilder.setTitle("Notification");
-                    }else {
+                    } else {
                         alertDialogBuilder.setTitle("Whatsapp Message");
                     }
                     alertDialogBuilder.setView(promptView);
@@ -1089,9 +1072,9 @@ public class Anniversary_Fragment extends Fragment {
         }
 
         JsonObject mainObj = new JsonObject();
-        if(subtype.equals("notification")){
+        if (subtype.equals("notification")) {
             mainObj.addProperty("type", "sendAnniNotification");
-        }else{
+        } else {
             mainObj.addProperty("type", "sendAnniversaryWhtasAppMsg");
         }
         mainObj.add("client_id", clientIdJSONArray);
@@ -1140,7 +1123,7 @@ public class Anniversary_Fragment extends Fragment {
                     if (type.equalsIgnoreCase("success")) {
                         JSONArray jsonarr = mainObj.getJSONArray("result");
                         JSONObject obj = jsonarr.getJSONObject(0);
-                        changeSessionSMSCount(obj.getString("smsCount"),obj.getString("whatsappCount"),obj.getString("maxSMSLimit"),obj.getString("maxWhatsAppLimit"));
+                        changeSessionSMSCount(obj.getString("smsCount"), obj.getString("whatsappCount"), obj.getString("maxSMSLimit"), obj.getString("maxWhatsAppLimit"));
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
                         builder.setMessage(message);
@@ -1177,17 +1160,17 @@ public class Anniversary_Fragment extends Fragment {
             }
         }
     }
-    public void changeSessionSMSCount(String smsCount,String whatsappCount,String maxSMS,String maxWhatsapp)
-    {
+
+    public void changeSessionSMSCount(String smsCount, String whatsappCount, String maxSMS, String maxWhatsapp) {
         JSONArray user_info = null;
         try {
             user_info = new JSONArray(session.getUserDetails().get(
                     ApplicationConstants.KEY_LOGIN_INFO));
             JSONObject json = user_info.getJSONObject(0);
-            json.put("smsCount",smsCount);
-            json.put("whatsappCount",whatsappCount);
-            json.put("maxSMSLimit",maxSMS);
-            json.put("maxWhatsAppLimit",maxWhatsapp);
+            json.put("smsCount", smsCount);
+            json.put("whatsappCount", whatsappCount);
+            json.put("maxSMSLimit", maxSMS);
+            json.put("maxWhatsAppLimit", maxWhatsapp);
             session.updateSession(user_info.toString());
         } catch (JSONException e) {
             e.printStackTrace();
@@ -1195,6 +1178,7 @@ public class Anniversary_Fragment extends Fragment {
 
 
     }
+
     public class DownloadDocument extends AsyncTask<String, Integer, File> {
         int lenghtOfFile = -1;
         int count = 0;
@@ -1255,7 +1239,6 @@ public class Anniversary_Fragment extends Fragment {
             }
             return null;
         }
-
 
 
     }

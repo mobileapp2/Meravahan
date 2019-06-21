@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -106,7 +105,7 @@
                             android:longClickable="false"
                             android:textColor="@color/black"
                             android:textSize="14sp"
-                            android:inputType="textCapCharacters"/>
+                            android:inputType="textCapCharacters" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -322,6 +321,7 @@
                             android:textSize="14sp" />
 
                     </android.support.design.widget.TextInputLayout>
+
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -341,7 +341,6 @@
                     </android.support.design.widget.TextInputLayout>
 
 
-
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -356,9 +355,10 @@
                             android:hint="Remark"
                             android:textColor="@color/black"
                             android:textSize="14sp"
-                            android:singleLine="true"/>
+                            android:singleLine="true" />
 
                     </android.support.design.widget.TextInputLayout>
+
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -369,7 +369,7 @@
                             android:id="@+id/is_show_rto"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="Share With RTO Agent"/>
+                            android:text="Share With RTO Agent" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -383,14 +383,16 @@
                             android:id="@+id/is_show_customer"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="Share With Customer"/>
+                            android:text="Share With Customer" />
 
                     </android.support.design.widget.TextInputLayout>
+
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp">
+
                         <EditText
                             android:id="@+id/edt_selectvehicle"
                             android:layout_width="match_parent"
@@ -409,19 +411,20 @@
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
+
             <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 card_view:cardBackgroundColor="@android:color/white"
                 card_view:cardCornerRadius="0dp"
-                card_view:cardUseCompatPadding="true"
-                >
+                card_view:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:id="@+id/bank_details"
                         android:layout_width="match_parent"
@@ -445,18 +448,21 @@
                             android:padding="10dp"
                             android:src="@drawable/drop_down_arrow"
                             android:tint="@color/black"
-                            android:visibility="gone"/>
+                            android:visibility="gone" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:id="@+id/bank_feild">
+
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
+
                             <EditText
                                 android:id="@+id/edt_bank"
                                 android:layout_width="match_parent"
@@ -464,15 +470,16 @@
                                 android:gravity="center_vertical"
                                 android:hint="Bank"
                                 android:textColor="@color/black"
-                                android:textSize="14sp"
-                                />
+                                android:textSize="14sp" />
 
                         </android.support.design.widget.TextInputLayout>
+
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp">
+
                             <EditText
                                 android:id="@+id/edt_branch"
                                 android:layout_width="match_parent"
@@ -480,10 +487,10 @@
                                 android:gravity="center_vertical"
                                 android:hint="Branch"
                                 android:textColor="@color/black"
-                                android:textSize="14sp"
-                                />
+                                android:textSize="14sp" />
 
                         </android.support.design.widget.TextInputLayout>
+
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -497,10 +504,10 @@
                                 android:gravity="center_vertical"
                                 android:hint="Name of the borrower"
                                 android:textColor="@color/black"
-                                android:textSize="14sp"
-                                />
+                                android:textSize="14sp" />
 
                         </android.support.design.widget.TextInputLayout>
+
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -516,10 +523,11 @@
                                 android:textColor="@color/black"
                                 android:inputType="date"
                                 android:textSize="14sp"
-                                android:focusable="false"/>
+                                android:focusable="false" />
 
 
                         </android.support.design.widget.TextInputLayout>
+
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -537,6 +545,7 @@
                                 android:textSize="14sp" />
 
                         </android.support.design.widget.TextInputLayout>
+
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -551,9 +560,10 @@
                                 android:hint="Loan Account Number"
                                 android:inputType="textCapWords|textNoSuggestions|textMultiLine"
                                 android:textColor="@color/black"
-                                android:textSize="14sp"/>
+                                android:textSize="14sp" />
 
                         </android.support.design.widget.TextInputLayout>
+
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -568,7 +578,7 @@
                                 android:hint="Installment Amount"
                                 android:inputType="textCapWords|textNoSuggestions|textMultiLine"
                                 android:textColor="@color/black"
-                                android:textSize="14sp"/>
+                                android:textSize="14sp" />
                         </android.support.design.widget.TextInputLayout>
 
                         <android.support.design.widget.TextInputLayout
@@ -586,10 +596,11 @@
                                 android:textColor="@color/black"
                                 android:inputType="date"
                                 android:textSize="14sp"
-                                android:focusable="false"/>
+                                android:focusable="false" />
 
 
                         </android.support.design.widget.TextInputLayout>
+
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -605,10 +616,11 @@
                                 android:textColor="@color/black"
                                 android:inputType="date"
                                 android:textSize="14sp"
-                                android:focusable="false"/>
+                                android:focusable="false" />
 
 
                         </android.support.design.widget.TextInputLayout>
+
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

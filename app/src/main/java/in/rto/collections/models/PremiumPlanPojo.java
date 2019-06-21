@@ -10,39 +10,32 @@ public class PremiumPlanPojo {
 
     private String message;
 
-    public ArrayList<PremiumPlanModel> getResult ()
-    {
+    public ArrayList<PremiumPlanModel> getResult() {
         return result;
     }
 
-    public void setResult (ArrayList<PremiumPlanModel> result)
-    {
+    public void setResult(ArrayList<PremiumPlanModel> result) {
         this.result = result;
     }
 
-    public String getType ()
-    {
+    public String getType() {
         return type;
     }
 
-    public void setType (String type)
-    {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public String getMessage ()
-    {
+    public String getMessage() {
         return message;
     }
 
-    public void setMessage (String message)
-    {
+    public void setMessage(String message) {
         this.message = message;
     }
 
     @Override
-    public String toString()
-    {
-        return "ClassPojo [result = "+result+", type = "+type+", message = "+message+"]";
+    public String toString() {
+        return "ClassPojo [result = " + result + ", type = " + type + ", message = " + message + "]";
     }
 }
