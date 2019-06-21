@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_profile"
+            android:icon="@drawable/profile_new"
+            android:title="Profile" />
+
+        <item
+            android:id="@+id/menu_pro"
+            android:icon="@drawable/invoice"
+            android:title="Buy Pro" />
+        <item
+            android:id="@+id/menu_masters"
+            android:icon="@drawable/master_new"
+            android:title="Masters"/>
+
+        <item
+            android:id="@+id/legal_info"
+            android:icon="@drawable/law"
+            android:title="Legal Info"/>
+
+        <item
+            android:id="@+id/menu_notification"
+            android:icon="@drawable/notifications_bell"
+            android:title="Notification"/>
+        <item
+            android:id="@+id/menu_faq"
+            android:icon="@drawable/icon_faq"
+            android:title="FAQ"/>
+        <item
+            android:id="@+id/menu_contact"
+            android:icon="@drawable/icon_contactus"
+            android:title="Contact Us"/>
+
+
+        <item
+            android:id="@+id/menu_logout"
+            android:icon="@drawable/logout_new"
+            android:title="Logout" />
+    </group>
+
+</menu>

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "905187676252",
+    "firebase_url": "https://meravahan-49127.firebaseio.com",
+    "project_id": "meravahan-49127",
+    "storage_bucket": "meravahan-49127.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:905187676252:android:7b1a35b941f23eca",
+        "android_client_info": {
+          "package_name": "in.rto.collections"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "905187676252-g28ss12mj6oejkan3e0f03ag65ticggj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAALgNPIzmoQbZjQeBB_Ujc8aS-MGlQNcs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

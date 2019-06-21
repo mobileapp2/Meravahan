@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout android:orientation="vertical" tools:context=".activities.ContactUs_Activity" android:layout_height="match_parent" android:layout_width="match_parent" xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/resauto" xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <android.support.design.widget.AppBarLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay">
+
+    <android.support.v7.widget.Toolbar android:layout_height="wrap_content" android:layout_width="match_parent" app:titleTextColor="@color/white" android:minHeight="?attr/actionBarSize" android:background="?attr/colorPrimary" android:id="@+id/toolbar"/>
+
+</android.support.design.widget.AppBarLayout>
+
+
+    <android.support.v7.widget.CardView android:layout_height="wrap_content" android:layout_width="match_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/ll_mainlayout" android:layout_marginTop="15dp" android:layout_marginRight="7dp" android:layout_marginLeft="7dp" card_view:cardElevation="3dp" android:elevation="3dp" card_view:cardCornerRadius="0dp" card_view:cardBackgroundColor="@color/white" xmlns:card_view="http://schemas.android.com/apk/resauto">
+
+
+    <LinearLayout android:orientation="vertical" android:layout_height="match_parent" android:layout_width="match_parent">
+
+    <ImageView android:layout_height="100dp" android:layout_width="match_parent" android:padding="15dp" android:src="@drawable/logo_new"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_marginLeft="20dp" android:padding="20dp" android:layout_marginStart="20dp" android:text="Thanks for using MeraVahan app! We are happy to help you. If you have any questions and looking for support please feel free to contact us."/>
+
+
+    <LinearLayout android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="wrap_content" android:padding="20dp" android:layout_gravity="center" android:weightSum="1">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginTop="3dp" android:text="Contact No. : "/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="0dp" android:layout_marginTop="3dp" android:text=" +91 9021158214" android:gravity="left" android:layout_weight="1"/>
+
+</LinearLayout>
+
+
+    <LinearLayout android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_gravity="center" android:layout_marginBottom="15dp">
+
+
+    <LinearLayout android:orientation="vertical" android:layout_height="wrap_content" android:layout_width="wrap_content">
+
+    <android.support.design.widget.FloatingActionButton android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/img_call" android:src="@drawable/icon_call_24dp" app:fab_size="mini" app:backgroundTint="@color/colorPrimary" android:tint="@color/white" android:layout_margin="5dp"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Call Us" android:layout_gravity="center"/>
+
+</LinearLayout>
+
+
+    <LinearLayout android:orientation="vertical" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="25dp" android:layout_marginStart="25dp">
+
+    <android.support.design.widget.FloatingActionButton android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/img_whatsapp" android:src="@drawable/icon_whatsapp" android:layout_gravity="center" app:fab_size="mini" app:backgroundTint="@color/colorPrimary" android:tint="@color/white" android:layout_margin="5dp"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="WhatsApp Us" android:layout_gravity="center"/>
+
+</LinearLayout>
+
+</LinearLayout>
+
+</LinearLayout>
+
+</android.support.v7.widget.CardView>
+
+</LinearLayout>
