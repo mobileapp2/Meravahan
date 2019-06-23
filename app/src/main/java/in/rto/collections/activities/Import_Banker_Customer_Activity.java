@@ -400,9 +400,7 @@ public class Import_Banker_Customer_Activity extends Activity {
                         edt_renewaldate.setText("");
 
                         edt_renewaldate.setText(
-                                changeDateFormat("yyyy-MM-dd",
-                                        "dd/MM/yyyy",
-                                        Utilities.ConvertDateFormat(Utilities.dfDate, dayOfMonth, monthOfYear + 1, year))
+                                changeDateFormat("yyyy-MM-dd", "dd/MM/yyyy", Utilities.ConvertDateFormat(Utilities.dfDate, dayOfMonth, monthOfYear + 1, year))
                         );
 
                         mYear = year;

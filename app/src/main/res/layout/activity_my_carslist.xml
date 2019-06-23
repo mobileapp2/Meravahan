@@ -31,7 +31,7 @@
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_productlist"
+                android:id="@+id/rv_carlist"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
@@ -60,16 +60,19 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:inputType="textMultiLine"
-                android:text="There are no notifications for you"
+                android:text="Click on + button to add new car"
                 android:textSize="16sp" />
         </LinearLayout>
 
-
-        <include
-            layout="@layout/shimmer_oneline_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_add_car"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="10dp"
+            android:src="@drawable/icon_add"
+            app:backgroundTint="@color/colorPrimary"
+            app:tint="@color/white" />
 
     </FrameLayout>
 </LinearLayout>

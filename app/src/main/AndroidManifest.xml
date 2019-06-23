@@ -63,9 +63,22 @@
             android:name=".activities.ClientCode"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activities.Material_Activity"
+        <activity
+            android:name=".activities.Material_Activity"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.MyCarsList_Activity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.AddMyCar_Activity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activities.CariqUserRegistration_Activity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".activities.RtoAgent_Activity" />
         <activity android:name=".activities.VehicleDealer_Activity" />
         <activity android:name=".activities.Add_Client_Activity" />

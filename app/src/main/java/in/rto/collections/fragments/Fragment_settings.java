@@ -18,20 +18,28 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import in.rto.collections.R;
+import in.rto.collections.activities.CariqUserRegistration_Activity;
 import in.rto.collections.activities.LanguageSetting_Activity;
+import in.rto.collections.activities.MyCarsList_Activity;
 import in.rto.collections.activities.SMSAnniversarySettings_Activity;
 import in.rto.collections.activities.SMSBirthdaySettings_Activity;
 import in.rto.collections.activities.Signature_Settings;
 import in.rto.collections.activities.StateSetting_Activity;
 import in.rto.collections.activities.WhatsappAnniversarySettings_Activity;
 import in.rto.collections.activities.WhatsappBirthdaySettings_Activity;
+import in.rto.collections.models.CarIqUserDetailsModel;
 import in.rto.collections.utilities.ApplicationConstants;
+import in.rto.collections.utilities.ParamsPojo;
 import in.rto.collections.utilities.UserSessionManager;
 import in.rto.collections.utilities.Utilities;
 import in.rto.collections.utilities.WebServiceCalls;
@@ -44,7 +52,7 @@ public class Fragment_settings extends Fragment {
     private CardView birthtext, annitext, premiumdue, languageCard;
     LinearLayout openBirthdayWhatsappSettings, openBirthdaySMSSettings, openAnniversaryWhatsappSettings, openAnniversarySMSSettings,
             openPremiumDueMessageSettings, openSignatureSettings, openAnniversaryNotificationSettings, openBirthdayNotificationSettings,
-            openLanguageSettings;
+            openLanguageSettings, openMyCars;
     LinearLayout ll_parent;
     private SwitchCompat switchBirthdayWhatsappButton, switchBirthdaySMSButton, switchAnnniWhatsappButton, switchAnnniSMSButton,
             switchPremiumDueButton, switchPremiumDueSMSButton, switchPremiumDueNotificationButton, switchBirthdayNotificationButton, switchAnnniNotificationButton;
@@ -78,6 +86,9 @@ public class Fragment_settings extends Fragment {
 
         openLanguageSettings = rootView.findViewById(R.id.openLanguageSettings);
         openLanguageSettings.setOnClickListener(getmButtonClickListenerLanguage);
+
+        openMyCars = rootView.findViewById(R.id.openMyCars);
+        openMyCars.setOnClickListener(openMyCarsListener);
 
         birthtext = rootView.findViewById(R.id.birthtext);
         annitext = rootView.findViewById(R.id.annitext);
@@ -179,6 +190,12 @@ public class Fragment_settings extends Fragment {
         }
     };
 
+    private View.OnClickListener openMyCarsListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            openMyCarsList(v);
+        }
+    };
+
     private View.OnClickListener mButtonClickListener5 = new View.OnClickListener() {
         public void onClick(View v) {
             openSignatureSettings(v);
@@ -219,6 +236,16 @@ public class Fragment_settings extends Fragment {
 
     public void openSignatureSettings(View view) {
         startActivity(new Intent(context, Signature_Settings.class));
+    }
+
+    public void openMyCarsList(View view) {
+
+        if (Utilities.isNetworkAvailable(context)) {
+            new CheckUserRegistration().execute(user_id);
+        } else {
+            Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+        }
+
     }
 
     private void setUpToolbar(View rootView) {
@@ -874,6 +901,57 @@ public class Fragment_settings extends Fragment {
                         Utilities.showAlertDialog(context, "Alert", message, false);
                     }
 
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private class CheckUserRegistration extends AsyncTask<String, Void, String> {
+
+        private ProgressDialog pd;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd = new ProgressDialog(context, R.style.CustomDialogTheme);
+            pd.setMessage("Please wait...");
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String res = "[]";
+            List<ParamsPojo> param = new ArrayList<ParamsPojo>();
+            param.add(new ParamsPojo("type", "getuser"));
+            param.add(new ParamsPojo("user_id", params[0]));
+//            param.add(new ParamsPojo("user_id", "10"));
+            res = WebServiceCalls.FORMDATAAPICall(ApplicationConstants.USECARIQRAPI, param);
+            return res.trim();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            pd.dismiss();
+            String type = "", message = "";
+            try {
+                if (!result.equals("")) {
+
+                    ArrayList<CarIqUserDetailsModel.ResultBean> myCarList = new ArrayList<>();
+                    CarIqUserDetailsModel pojoDetails = new Gson().fromJson(result, CarIqUserDetailsModel.class);
+                    type = pojoDetails.getType();
+                    if (type.equalsIgnoreCase("success")) {
+
+                        myCarList = pojoDetails.getResult();
+                        startActivity(new Intent(context, MyCarsList_Activity.class)
+                                .putExtra("cariqdetails", myCarList.get(0)));
+
+                    } else {
+                        startActivity(new Intent(context, CariqUserRegistration_Activity.class));
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
