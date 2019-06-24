@@ -47,7 +47,6 @@ public class ApplicationConstants {
     public static final String VEHICLETRACKINGAPI = "https://gstkhata.com/vehicle/Apis/vehicle_tracking_details.php";
     public static final String USECARIQRAPI = "https://gstkhata.com/vehicle/Apis/cariq.php";
 
-
     public static final String CARIQUSERREGAPI = "https://dev-ecu.mycariq.com/Cariq/cariqusers/registerUser/admin/abcd1234efgh5678";
     public static final String MAKERLISTAPI = "https://dev-ecu.mycariq.com/Cariq/carmakes/listAllMakes";
     public static final String MODELANDVARIANTLISTAPI = "https://dev-ecu.mycariq.com/Cariq/carmodels/listMakesModelinDetail/";

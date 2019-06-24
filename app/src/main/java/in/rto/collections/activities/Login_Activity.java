@@ -553,8 +553,6 @@ public class Login_Activity extends Activity {
                                 session.createUserLoginSession(jsonarr.toString());
                                 saveRegistrationID();
                             }
-                            startActivity(new Intent(context, MainDrawer_Activity.class));
-                            finish();
                         }
                     } else {
                         Utilities.showSnackBar(cl_parent, message);

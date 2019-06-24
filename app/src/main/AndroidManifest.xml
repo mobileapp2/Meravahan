@@ -23,6 +23,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDhtPVZM4-TPRF4KxU0SHp7pvqnAYmO7J8" />
+
         <activity
             android:name=".activities.SplashScreen_Activity"
             android:screenOrientation="portrait"

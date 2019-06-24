@@ -48,7 +48,7 @@ public class MainDrawer_Activity extends AppCompatActivity implements Navigation
     private Context context;
     private String name, photo, role;
     private AHBottomNavigation bottomNavigation;
-    private AHBottomNavigationItem botNavMessage, botNavTemplates, botNavSignature, botNavMaterial, botNavUsers, botNavReminder, botNavInfo;
+    private AHBottomNavigationItem botNavMessage, botNavTemplates, botNavSignature, botNavMaterial, botNavUsers, botNavReminder, botNavInfo, botNavTracking;
     private Fragment currentFragment;
     private BotNavViewPagerAdapter adapter;
     private AHBottomNavigationViewPager view_pager;
@@ -248,13 +248,15 @@ public class MainDrawer_Activity extends AppCompatActivity implements Navigation
             }*/
         } else {
             botNavMaterial = new AHBottomNavigationItem("Vehicle", R.drawable.client_new, R.color.Gunmetal);
-            botNavUsers = new AHBottomNavigationItem("Settings", R.drawable.settings_new, R.color.Gunmetal);
             botNavReminder = new AHBottomNavigationItem("Reminder", R.drawable.reminder_new, R.color.Gunmetal);
+            botNavUsers = new AHBottomNavigationItem("Settings", R.drawable.settings_new, R.color.Gunmetal);
+            botNavTracking = new AHBottomNavigationItem("Tracking", R.drawable.icon_tracking, R.color.Gunmetal);
 //            botNavInfo = new AHBottomNavigationItem("Information", R.drawable.information_new, R.color.Gunmetal);
 
             bottomNavigation.addItem(botNavMaterial);
             bottomNavigation.addItem(botNavReminder);
             bottomNavigation.addItem(botNavUsers);
+            bottomNavigation.addItem(botNavTracking);
 //            bottomNavigation.addItem(botNavInfo);
         }
         // Create items

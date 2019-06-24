@@ -17,8 +17,8 @@ import in.rto.collections.fragments.Fragment_Other_Vehicle_Details;
 import in.rto.collections.fragments.Fragment_RTO_Agent_Details;
 import in.rto.collections.fragments.Fragment_settings;
 import in.rto.collections.fragments.Fragment_vehicle_dealer_details;
-import in.rto.collections.fragments.Material_Fragment;
 import in.rto.collections.fragments.Reminder_Fragment;
+import in.rto.collections.fragments.Tracking_Fragment;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.UserSessionManager;
 
@@ -61,6 +61,7 @@ public class BotNavViewPagerAdapter extends FragmentPagerAdapter {
             fragments.add(new Reminder_Fragment());
             fragments.add(new Fragment_settings());
 //            fragments.add(new Material_Fragment());
+            fragments.add(new Tracking_Fragment());
         }
 
         // getSessionData();

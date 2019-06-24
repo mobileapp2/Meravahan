@@ -55,7 +55,7 @@ public class AddMyCar_Activity extends AppCompatActivity {
     private Context context;
     private ProgressDialog pd;
     private LinearLayout ll_parent;
-    private EditText edt_name, edt_carplate, edt_maker, edt_model, edt_variant, edt_date, edt_kmcovered;
+    private EditText edt_name, edt_carplate, edt_maker, edt_model, edt_variant, edt_date, edt_kmcovered, edt_deviceid;
     private Button btn_register;
 
     private CarIqUserDetailsModel.ResultBean cariqdetails;
@@ -90,6 +90,7 @@ public class AddMyCar_Activity extends AppCompatActivity {
         edt_variant = findViewById(R.id.edt_variant);
         edt_date = findViewById(R.id.edt_date);
         edt_kmcovered = findViewById(R.id.edt_kmcovered);
+        edt_deviceid = findViewById(R.id.edt_deviceid);
         btn_register = findViewById(R.id.btn_register);
 
         regNumList = new ArrayList<>();
@@ -277,6 +278,12 @@ public class AddMyCar_Activity extends AppCompatActivity {
                     return;
                 }
 
+                if (edt_deviceid.getText().toString().trim().isEmpty()) {
+                    edt_deviceid.setError("Please enter device id");
+                    edt_deviceid.requestFocus();
+                    return;
+                }
+
 
                 JsonObject mainObj = new JsonObject();
 
@@ -288,7 +295,7 @@ public class AddMyCar_Activity extends AppCompatActivity {
                 mainObj.addProperty("variant", variant);
                 mainObj.addProperty("model", edt_model.getText().toString().trim());
                 mainObj.addProperty("vin", "dummyvin");
-                mainObj.addProperty("deviceId", "dgdevdummy0137");
+                mainObj.addProperty("deviceId", edt_deviceid.getText().toString().trim());
                 mainObj.addProperty("make", edt_maker.getText().toString().trim());
 
                 if (Utilities.isInternetAvailable(context)) {
@@ -714,7 +721,7 @@ public class AddMyCar_Activity extends AppCompatActivity {
                         regObj.addProperty("variant", variant);
                         regObj.addProperty("model", edt_model.getText().toString().trim());
                         regObj.addProperty("vin", "dummyvin");
-                        regObj.addProperty("deviceId", "dgdevdummy013");
+                        regObj.addProperty("deviceId", edt_deviceid.getText().toString().trim());
                         regObj.addProperty("make", edt_maker.getText().toString().trim());
                         regObj.addProperty("user_id", user_id);
                         regObj.addProperty("vehicleDetailsId", id);
