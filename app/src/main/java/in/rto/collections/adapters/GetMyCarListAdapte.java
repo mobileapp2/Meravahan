@@ -34,7 +34,7 @@ public class GetMyCarListAdapte extends RecyclerView.Adapter<GetMyCarListAdapte.
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         MyCarListModel.ResultBean cardetails = resultArrayList.get(position);
 
-        holder.tv_carname.setText(cardetails.getMake());
+        holder.tv_carname.setText(cardetails.getMake() + " (" + cardetails.getModel() + " " + cardetails.getVariant() + ")");
         holder.tv_carnumber.setText(cardetails.getRegistration_number());
 
         holder.ll_mainlayout.setOnClickListener(new View.OnClickListener() {

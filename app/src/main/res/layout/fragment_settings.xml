@@ -665,7 +665,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="My Cars"
+                        android:text="My Vehicles"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -684,7 +684,7 @@
                             android:layout_marginLeft="15dp"
                             android:layout_weight="0.95"
                             android:clickable="false"
-                            android:text="List of your registered cars"
+                            android:text="List of your registered vehicles"
                             android:textColor="@color/Gray"
                             android:textSize="16sp" />
 

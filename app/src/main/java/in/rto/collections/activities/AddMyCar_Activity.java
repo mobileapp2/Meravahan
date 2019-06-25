@@ -1,15 +1,21 @@
 package in.rto.collections.activities;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -47,6 +53,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static in.rto.collections.utilities.Utilities.changeDateFormat;
 import static in.rto.collections.utilities.Utilities.getMd5;
 
@@ -120,6 +129,7 @@ public class AddMyCar_Activity extends AppCompatActivity {
         mDay = cal.get(Calendar.DAY_OF_MONTH);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void setEventHandler() {
         edt_carplate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -234,6 +244,30 @@ public class AddMyCar_Activity extends AppCompatActivity {
                 }
                 dpd1.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
                 dpd1.show();
+            }
+        });
+
+        edt_deviceid.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (edt_deviceid.getRight() - edt_deviceid.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions((Activity) context, new String[]{CAMERA, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE}, 1);
+                            return true;
+                        }
+
+                        Intent i = new Intent(context, BarcodeScanner_Activity.class);
+                        startActivityForResult(i, 10001);
+                        return true;
+                    }
+                }
+                return false;
             }
         });
 
@@ -653,6 +687,39 @@ public class AddMyCar_Activity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        try {
+            super.onActivityResult(requestCode, resultCode, data);
+            if (resultCode == RESULT_OK) {
+                if (requestCode == 10001) {
+                    String requiredValue = data.getStringExtra("key");
+                    edt_deviceid.setText(requiredValue.trim());
+
+                }
+            }
+
+//            if (resultCode == RESULT_OK) {
+//                if (requestCode == CAMERA_REQUEST) {
+//                    CropImage.activity(photoURI).setGuidelines(CropImageView.Guidelines.ON).start(HealthDetailsForm_Activity.this);
+//                }
+//            }
+//
+//            if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+//                CropImage.ActivityResult result = CropImage.getActivityResult(data);
+//                if (resultCode == RESULT_OK) {
+//                    Uri resultUri = result.getUri();
+//                    savefile(resultUri);
+//                } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+//                    Exception error = result.getError();
+//                }
+//            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     private class CarRegistration extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -712,7 +779,7 @@ public class AddMyCar_Activity extends AppCompatActivity {
 
                         JsonObject regObj = new JsonObject();
 
-                        regObj.addProperty("type", "type");
+                        regObj.addProperty("type", "add");
                         regObj.addProperty("mfgYear", String.valueOf(mYear));
                         regObj.addProperty("purchaseDate", purchaseDate);
                         regObj.addProperty("kmsCovered", edt_kmcovered.getText().toString().trim());
@@ -761,16 +828,15 @@ public class AddMyCar_Activity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            String type = "", message = "";
+            String type = "";
             try {
                 pd.dismiss();
                 if (!result.equals("")) {
                     JSONObject mainObj = new JSONObject(result);
                     type = mainObj.getString("type");
-                    message = mainObj.getString("message");
                     if (type.equalsIgnoreCase("success")) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
-                        builder.setMessage("Car registered Successfully.");
+                        builder.setMessage("Vehicle registered Successfully.");
                         builder.setIcon(R.drawable.ic_success_24dp);
                         builder.setTitle("Success");
                         builder.setCancelable(false);
@@ -796,7 +862,7 @@ public class AddMyCar_Activity extends AppCompatActivity {
 
     private void setUpToolbar() {
         Toolbar toolbar = findViewById(R.id.anim_toolbar);
-        toolbar.setTitle("Car Registration");
+        toolbar.setTitle("Vehicle Registration");
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.icon_backarrow_16p);
 

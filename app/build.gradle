@@ -63,6 +63,7 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.0'
     implementation 'org.jsoup:jsoup:1.11.3'
     implementation 'com.airbnb.android:lottie:2.5.0-rc1'
+    implementation 'me.dm7.barcodescanner:zxing:1.9.8'
 
 }
 apply plugin: 'com.google.gms.google-services'

@@ -217,7 +217,7 @@ public class MyCarsList_Activity extends AppCompatActivity {
 
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
-        mToolbar.setTitle("My Cars");
+        mToolbar.setTitle("My Vehicles");
         mToolbar.setNavigationIcon(R.drawable.icon_backarrow_16p);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
