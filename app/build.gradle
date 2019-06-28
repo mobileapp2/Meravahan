@@ -63,6 +63,10 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.0'
     implementation 'org.jsoup:jsoup:1.11.3'
     implementation 'com.airbnb.android:lottie:2.5.0-rc1'
+    // paytm dependency
+    implementation('com.paytm:pgplussdk:1.2.3') {
+        transitive = true;
+    }
     implementation 'me.dm7.barcodescanner:zxing:1.9.8'
 
 }

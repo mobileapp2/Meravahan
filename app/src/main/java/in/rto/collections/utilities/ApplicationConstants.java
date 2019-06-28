@@ -7,6 +7,7 @@ public class ApplicationConstants {
     public static final String PREFER_NAME = "MERAVAHAN";
     public static final String KEY_APPOPENEDFORFIRST = "KEY_APPOPENEDFORFIRST";
     public static final String IS_USER_LOGIN = "IS_USER_LOGIN";
+    public static final String CARIQ_LOGIN = "CARIQ_LOGIN";
     public static final String KEY_LOGIN_INFO = "KEY_LOGIN_INFO";
     public static final String KEY_ANDROIDTOKETID = "KEY_ANDROIDTOKETID";
 
@@ -18,6 +19,15 @@ public class ApplicationConstants {
     public static final String CANCEL_URL = "https://www.todojeeinsurance.in/includes/ccavResponseHandler.php";
     public static final String RSA_KEY_URL = "https://www.todojeeinsurance.in/includes/GetRSA.php";
     public static final String TRANS_URL = "https://secure.ccavenue.com/transaction/initTrans";
+
+
+    //PATYM CONSTANTS
+
+
+//    public static final String MID = "PRMKGv83773380184951"; /// your merchant key
+    public static final String MID = "Empowe17975052653030"; /// your merchant key
+    public static final String PAYTMURL = "https://gstkhata.com/vehicle/paytm/generateChecksum.php";
+    public static final String PAYTMVERIFYURL = "https://pguat.paytm.com/paytmchecksum/paytmCallback.jsp";
 
 
     //TEST API LINK LIST
@@ -51,6 +61,7 @@ public class ApplicationConstants {
     public static final String MAKERLISTAPI = "https://dev-ecu.mycariq.com/Cariq/carmakes/listAllMakes";
     public static final String MODELANDVARIANTLISTAPI = "https://dev-ecu.mycariq.com/Cariq/carmodels/listMakesModelinDetail/";
     public static final String CARREGAPI = "https://dev-ecu.mycariq.com/Cariq/cars/registerCarAndDevice_V2";
+    public static final String LIVETRACKINGAPI = "https://dev-ecu.mycariq.com/Cariq/dynamicshare/permanent/";
 
 
     //LIVE API LINK LIST

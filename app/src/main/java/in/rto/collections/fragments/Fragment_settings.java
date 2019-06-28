@@ -241,7 +241,7 @@ public class Fragment_settings extends Fragment {
     public void openMyCarsList(View view) {
 
         if (Utilities.isNetworkAvailable(context)) {
-            new CheckUserRegistration().execute(user_id);
+            new CheckCarIqUserRegistration().execute(user_id);
         } else {
             Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
         }
@@ -908,7 +908,7 @@ public class Fragment_settings extends Fragment {
         }
     }
 
-    private class CheckUserRegistration extends AsyncTask<String, Void, String> {
+    private class CheckCarIqUserRegistration extends AsyncTask<String, Void, String> {
 
         private ProgressDialog pd;
 
@@ -944,7 +944,7 @@ public class Fragment_settings extends Fragment {
                     CarIqUserDetailsModel pojoDetails = new Gson().fromJson(result, CarIqUserDetailsModel.class);
                     type = pojoDetails.getType();
                     if (type.equalsIgnoreCase("success")) {
-
+                        session.createCarIqSession(result);
                         myCarList = pojoDetails.getResult();
                         startActivity(new Intent(context, MyCarsList_Activity.class)
                                 .putExtra("cariqdetails", myCarList.get(0)));

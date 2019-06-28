@@ -27,11 +27,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.rto.collections.R;
-import in.rto.collections.ccavenue.AvenuesParams;
-import in.rto.collections.ccavenue.CCAvenueWebViewActivity;
 import in.rto.collections.ccavenue.ServiceUtility;
 import in.rto.collections.models.PremiumPlanModel;
 import in.rto.collections.models.PremiumPlanPojo;
+import in.rto.collections.paytm.checksum;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.ParamsPojo;
 import in.rto.collections.utilities.UserSessionManager;
@@ -52,7 +51,7 @@ public class SelectPremiumPlan_Activity extends Activity {
     private ProgressDialog pd;
     private static int lastSelectedPosition = -1;
     private ArrayList<PremiumPlanModel> plansList;
-    Integer randomNum;
+    String randomNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,23 +101,48 @@ public class SelectPremiumPlan_Activity extends Activity {
     }
 
     private void setEventHandlers() {
+//        fab_next.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (lastSelectedPosition == -1) {
+//                    Utilities.showAlertDialog(context, "Alert", "Please Select Any One Details", false);
+//                } else {
+//                    Intent intent = new Intent(context, CCAvenueWebViewActivity.class);
+//                    intent.putExtra(AvenuesParams.ACCESS_CODE, ApplicationConstants.ACCESS_CODE);
+//                    intent.putExtra(AvenuesParams.MERCHANT_ID, ApplicationConstants.MERCHANT_ID);
+//                    intent.putExtra(AvenuesParams.ORDER_ID, randomNum.toString());
+//                    intent.putExtra(AvenuesParams.CURRENCY, ApplicationConstants.CURRENCY);
+//                    intent.putExtra(AvenuesParams.AMOUNT, plansList.get(lastSelectedPosition).getAmount());
+//                    intent.putExtra(AvenuesParams.REDIRECT_URL, ApplicationConstants.REDIRECT_URL);
+//                    intent.putExtra(AvenuesParams.CANCEL_URL, ApplicationConstants.CANCEL_URL);
+//                    intent.putExtra(AvenuesParams.RSA_KEY_URL, ApplicationConstants.RSA_KEY_URL);
+//
+//                    intent.putExtra("type", plansList.get(lastSelectedPosition).getPlan());
+//                    intent.putExtra("user_id", user_id);
+//                    intent.putExtra("plan_id", plansList.get(lastSelectedPosition).getId());
+//                    intent.putExtra("space", plansList.get(lastSelectedPosition).getSpace());
+//                    intent.putExtra("sms", plansList.get(lastSelectedPosition).getSms());
+//                    intent.putExtra("whatsApp_msg", plansList.get(lastSelectedPosition).getWhtasApp_msg());
+//                    intent.putExtra("expire_date", plansList.get(lastSelectedPosition).getEnd_date());
+//                    intent.putExtra("validity", plansList.get(lastSelectedPosition).getValidity());
+//                    intent.putExtra("clients", plansList.get(lastSelectedPosition).getCustomers());
+//                    intent.putExtra("policies", plansList.get(lastSelectedPosition).getPolicies());
+//                    startActivity(intent);
+//                    finish();
+//                }
+//
+//            }
+//        });
+
         fab_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if (lastSelectedPosition == -1) {
                     Utilities.showAlertDialog(context, "Alert", "Please Select Any One Details", false);
                 } else {
-                    Intent intent = new Intent(context, CCAvenueWebViewActivity.class);
-                    intent.putExtra(AvenuesParams.ACCESS_CODE, ApplicationConstants.ACCESS_CODE);
-                    intent.putExtra(AvenuesParams.MERCHANT_ID, ApplicationConstants.MERCHANT_ID);
-                    intent.putExtra(AvenuesParams.ORDER_ID, randomNum.toString());
-                    intent.putExtra(AvenuesParams.CURRENCY, ApplicationConstants.CURRENCY);
-                    intent.putExtra(AvenuesParams.AMOUNT, plansList.get(lastSelectedPosition).getAmount());
-                    intent.putExtra(AvenuesParams.REDIRECT_URL, ApplicationConstants.REDIRECT_URL);
-                    intent.putExtra(AvenuesParams.CANCEL_URL, ApplicationConstants.CANCEL_URL);
-                    intent.putExtra(AvenuesParams.RSA_KEY_URL, ApplicationConstants.RSA_KEY_URL);
-
+                    Intent intent = new Intent(context, checksum.class);
+                    intent.putExtra("orderid", randomNum);
+                    intent.putExtra("custid", "632541" + user_id);
                     intent.putExtra("type", plansList.get(lastSelectedPosition).getPlan());
                     intent.putExtra("user_id", user_id);
                     intent.putExtra("plan_id", plansList.get(lastSelectedPosition).getId());
@@ -129,13 +153,14 @@ public class SelectPremiumPlan_Activity extends Activity {
                     intent.putExtra("validity", plansList.get(lastSelectedPosition).getValidity());
                     intent.putExtra("clients", plansList.get(lastSelectedPosition).getCustomers());
                     intent.putExtra("policies", plansList.get(lastSelectedPosition).getPolicies());
-
+                    intent.putExtra("amount", plansList.get(lastSelectedPosition).getAmount());
                     startActivity(intent);
                     finish();
                 }
 
             }
         });
+
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -317,7 +342,7 @@ public class SelectPremiumPlan_Activity extends Activity {
     protected void onStart() {
         super.onStart();
         //generating new order number for every transaction
-        randomNum = ServiceUtility.randInt(0, 9999999);
+        randomNum = String.valueOf(ServiceUtility.randInt(0, 9999999));
     }
 
 }

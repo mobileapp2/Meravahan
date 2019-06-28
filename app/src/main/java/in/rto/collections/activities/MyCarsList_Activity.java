@@ -41,6 +41,7 @@ public class MyCarsList_Activity extends AppCompatActivity {
     private FloatingActionButton fab_add_car;
     private String user_id;
     private CarIqUserDetailsModel.ResultBean cariqdetails;
+    private UserSessionManager session;
 
     @Override
 
@@ -57,6 +58,7 @@ public class MyCarsList_Activity extends AppCompatActivity {
 
     private void init() {
         context = MyCarsList_Activity.this;
+        session = new UserSessionManager(context);
         ll_parent = findViewById(R.id.ll_parent);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         rv_carlist = findViewById(R.id.rv_carlist);
@@ -66,7 +68,6 @@ public class MyCarsList_Activity extends AppCompatActivity {
 
     private void getSessionDetails() {
         try {
-            UserSessionManager session = new UserSessionManager(context);
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
                     ApplicationConstants.KEY_LOGIN_INFO));
             JSONObject json = user_info.getJSONObject(0);
@@ -201,7 +202,7 @@ public class MyCarsList_Activity extends AppCompatActivity {
                     CarIqUserDetailsModel pojoDetails = new Gson().fromJson(result, CarIqUserDetailsModel.class);
                     type = pojoDetails.getType();
                     if (type.equalsIgnoreCase("success")) {
-
+                        session.createCarIqSession(result);
                         myCarList = pojoDetails.getResult();
                         cariqdetails = myCarList.get(0);
 
