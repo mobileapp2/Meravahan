@@ -2,6 +2,7 @@ package in.rto.collections.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -13,17 +14,34 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import in.rto.collections.R;
+import in.rto.collections.models.CarIqUserDetailsModel;
+import in.rto.collections.utilities.ApplicationConstants;
+import in.rto.collections.utilities.ParamsPojo;
+import in.rto.collections.utilities.UserSessionManager;
+import in.rto.collections.utilities.Utilities;
+import in.rto.collections.utilities.WebServiceCalls;
 
 public class Tracking_Fragment extends Fragment {
 
     private Context context;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private LinearLayout ll_tablayout, ll_nothingtoshow;
+    private String user_id;
+    private UserSessionManager session;
+    private ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -35,21 +53,52 @@ public class Tracking_Fragment extends Fragment {
         return rootView;
     }
 
-
     private void init(View rootView) {
+        session = new UserSessionManager(context);
         viewPager = rootView.findViewById(R.id.viewPager);
         tabLayout = rootView.findViewById(R.id.tl_tabnames);
-        viewPager = rootView.findViewById(R.id.viewPager);
+        ll_tablayout = rootView.findViewById(R.id.ll_tablayout);
+        ll_nothingtoshow = rootView.findViewById(R.id.ll_nothingtoshow);
+        progressBar = rootView.findViewById(R.id.progressBar);
         viewPager.setOffscreenPageLimit(3);
     }
 
     private void setDefault() {
-        setupViewPager(viewPager);
-        tabLayout.setupWithViewPager(viewPager);
+        try {
+            JSONArray user_info = new JSONArray(session.getUserDetails().get(
+                    ApplicationConstants.KEY_LOGIN_INFO));
+            JSONObject json = user_info.getJSONObject(0);
+            user_id = json.getString("id");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            String user_info = session.getCarIqUserDetails().get(
+                    ApplicationConstants.CARIQ_LOGIN);
+
+            if (user_info == null) {
+                if (Utilities.isNetworkAvailable(context)) {
+                    new CheckCarIqUserRegistration().execute(user_id);
+                } else {
+                    ll_tablayout.setVisibility(View.GONE);
+                    ll_nothingtoshow.setVisibility(View.VISIBLE);
+                }
+            } else {
+                ll_tablayout.setVisibility(View.VISIBLE);
+                ll_nothingtoshow.setVisibility(View.GONE);
+                setupViewPager(viewPager);
+                tabLayout.setupWithViewPager(viewPager);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
+        adapter.addFrag(new VehicleForTracking_Fragment(), "VEHICLES");
         adapter.addFrag(new LiveTracking_Fragment(), "LIVE");
         adapter.addFrag(new LastSeenTracking_Fragment(), "LAST SEEN");
         viewPager.setAdapter(adapter);
@@ -113,4 +162,53 @@ public class Tracking_Fragment extends Fragment {
             return mFragmentTitleList.get(position);
         }
     }
+
+    private class CheckCarIqUserRegistration extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String res = "[]";
+            List<ParamsPojo> param = new ArrayList<ParamsPojo>();
+            param.add(new ParamsPojo("type", "getuser"));
+            param.add(new ParamsPojo("user_id", params[0]));
+//            param.add(new ParamsPojo("user_id", "10"));
+            res = WebServiceCalls.FORMDATAAPICall(ApplicationConstants.USECARIQRAPI, param);
+            return res.trim();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            progressBar.setVisibility(View.GONE);
+            String type = "", message = "";
+            try {
+                if (!result.equals("")) {
+
+                    ArrayList<CarIqUserDetailsModel.ResultBean> myCarList = new ArrayList<>();
+                    CarIqUserDetailsModel pojoDetails = new Gson().fromJson(result, CarIqUserDetailsModel.class);
+                    type = pojoDetails.getType();
+                    if (type.equalsIgnoreCase("success")) {
+                        session.createCarIqSession(result);
+                        ll_tablayout.setVisibility(View.VISIBLE);
+                        ll_nothingtoshow.setVisibility(View.GONE);
+
+                        setupViewPager(viewPager);
+                        tabLayout.setupWithViewPager(viewPager);
+                    } else {
+                        ll_tablayout.setVisibility(View.GONE);
+                        ll_nothingtoshow.setVisibility(View.VISIBLE);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

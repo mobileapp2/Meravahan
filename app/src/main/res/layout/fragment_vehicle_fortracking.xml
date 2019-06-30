@@ -1,36 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/ll_maplayout"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_lastseen"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_carlist"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="80dp" />
 
-        <fragment
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
-
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <LinearLayout
         android:id="@+id/ll_nothingtoshow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_gravity="center_vertical"
         android:orientation="vertical"
         android:visibility="gone">
 
@@ -47,16 +40,18 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:inputType="textMultiLine"
-            android:text="Please enable tracking for your veichle"
+            android:text="Click on + button to add new vehicle"
             android:textSize="16sp" />
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add_car"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone" />
+        android:layout_gravity="bottom|end"
+        android:layout_margin="10dp"
+        android:src="@drawable/icon_add"
+        app:backgroundTint="@color/colorPrimary"
+        app:tint="@color/white" />
 
-
-</RelativeLayout>
+</FrameLayout>

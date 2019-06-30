@@ -51,17 +51,6 @@ public class UserSessionManager {
         editor.commit();
     }
 
-    public void createCarIqSession(String login) {
-        pref = _context.getSharedPreferences(ApplicationConstants.PREFER_NAME,
-                Context.MODE_PRIVATE);
-        editor = pref.edit();
-        editor.remove(ApplicationConstants.CARIQ_LOGIN);
-        editor.apply();
-        editor.commit();
-        editor.putString(ApplicationConstants.CARIQ_LOGIN, login);
-        editor.commit();
-    }
-
     public boolean isUserLoggedIn() {
         return pref.getBoolean(ApplicationConstants.IS_USER_LOGIN, false);
     }
@@ -75,14 +64,6 @@ public class UserSessionManager {
         return user;
     }
 
-    public HashMap<String, String> getCarIqUserDetails() {
-        pref = _context.getSharedPreferences(ApplicationConstants.PREFER_NAME,
-                Context.MODE_PRIVATE);
-        HashMap<String, String> user = new HashMap<String, String>();
-        user.put(ApplicationConstants.CARIQ_LOGIN,
-                pref.getString(ApplicationConstants.CARIQ_LOGIN, null));
-        return user;
-    }
 
     public void updateSession(String loginInfo) {
         editor = pref.edit();
@@ -111,6 +92,7 @@ public class UserSessionManager {
         editor.remove(ApplicationConstants.KEY_LOGIN_INFO);
         editor.remove(ApplicationConstants.IS_USER_LOGIN);
         editor.remove(ApplicationConstants.CARIQ_LOGIN);
+        editor.remove(ApplicationConstants.CARIQ_ENABLED_CARID);
         editor.apply();
         editor.commit();
     }
@@ -129,6 +111,48 @@ public class UserSessionManager {
         androidTokenID.put(ApplicationConstants.KEY_ANDROIDTOKETID,
                 pref.getString(ApplicationConstants.KEY_ANDROIDTOKETID, ""));
         return androidTokenID;
+    }
+
+
+    public void createCarIqSession(String login) {
+        pref = _context.getSharedPreferences(ApplicationConstants.PREFER_NAME,
+                Context.MODE_PRIVATE);
+        editor = pref.edit();
+        editor.remove(ApplicationConstants.CARIQ_LOGIN);
+        editor.apply();
+        editor.commit();
+        editor.putString(ApplicationConstants.CARIQ_LOGIN, login);
+        editor.commit();
+    }
+
+    public HashMap<String, String> getCarIqUserDetails() {
+        pref = _context.getSharedPreferences(ApplicationConstants.PREFER_NAME,
+                Context.MODE_PRIVATE);
+        HashMap<String, String> user = new HashMap<String, String>();
+        user.put(ApplicationConstants.CARIQ_LOGIN,
+                pref.getString(ApplicationConstants.CARIQ_LOGIN, null));
+        return user;
+    }
+
+
+    public void createEnableCarTrackingSession(String login) {
+        pref = _context.getSharedPreferences(ApplicationConstants.PREFER_NAME,
+                Context.MODE_PRIVATE);
+        editor = pref.edit();
+        editor.remove(ApplicationConstants.CARIQ_ENABLED_CARID);
+        editor.apply();
+        editor.commit();
+        editor.putString(ApplicationConstants.CARIQ_ENABLED_CARID, login);
+        editor.commit();
+    }
+
+    public HashMap<String, String> getEnableCarTrackingDetails() {
+        pref = _context.getSharedPreferences(ApplicationConstants.PREFER_NAME,
+                Context.MODE_PRIVATE);
+        HashMap<String, String> user = new HashMap<String, String>();
+        user.put(ApplicationConstants.CARIQ_ENABLED_CARID,
+                pref.getString(ApplicationConstants.CARIQ_ENABLED_CARID, null));
+        return user;
     }
 
 

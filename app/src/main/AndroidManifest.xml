@@ -137,7 +137,6 @@
         <activity android:name=".activities.DL_Information_Activity" />
         <activity android:name=".activities.Signature_Settings" />
         <activity android:name=".activities.LinkCustomerRto_Activity" />
-        <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.LinkToCustomer_Activity" />
         <activity android:name=".activities.Link_Edit_Customer" />
         <activity android:name=".activities.LinkCustomerDealer_Activity" />

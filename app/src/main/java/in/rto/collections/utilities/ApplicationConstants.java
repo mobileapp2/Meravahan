@@ -8,6 +8,7 @@ public class ApplicationConstants {
     public static final String KEY_APPOPENEDFORFIRST = "KEY_APPOPENEDFORFIRST";
     public static final String IS_USER_LOGIN = "IS_USER_LOGIN";
     public static final String CARIQ_LOGIN = "CARIQ_LOGIN";
+    public static final String CARIQ_ENABLED_CARID= "CARIQ_ENABLED_CARID";
     public static final String KEY_LOGIN_INFO = "KEY_LOGIN_INFO";
     public static final String KEY_ANDROIDTOKETID = "KEY_ANDROIDTOKETID";
 
@@ -26,6 +27,7 @@ public class ApplicationConstants {
 
 //    public static final String MID = "PRMKGv83773380184951"; /// your merchant key
     public static final String MID = "Empowe17975052653030"; /// your merchant key
+//    public static final String PAYTMURL = "https://todojeeinsurance.in/paytm/generateChecksum.php";
     public static final String PAYTMURL = "https://gstkhata.com/vehicle/paytm/generateChecksum.php";
     public static final String PAYTMVERIFYURL = "https://pguat.paytm.com/paytmchecksum/paytmCallback.jsp";
 
@@ -62,6 +64,7 @@ public class ApplicationConstants {
     public static final String MODELANDVARIANTLISTAPI = "https://dev-ecu.mycariq.com/Cariq/carmodels/listMakesModelinDetail/";
     public static final String CARREGAPI = "https://dev-ecu.mycariq.com/Cariq/cars/registerCarAndDevice_V2";
     public static final String LIVETRACKINGAPI = "https://dev-ecu.mycariq.com/Cariq/dynamicshare/permanent/";
+    public static final String LASTSEENAPI = "https://dev-ecu.mycariq.com/Cariq/cars/dashboard/carLastLocationDetails/";
 
 
     //LIVE API LINK LIST

@@ -9,10 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 
@@ -34,13 +33,16 @@ import okhttp3.Response;
 
 import static in.rto.collections.utilities.Utilities.getMd5;
 
-public class LiveTracking_Fragment extends Fragment/* implements OnMapReadyCallback */{
+public class LiveTracking_Fragment extends Fragment/* implements OnMapReadyCallback */ {
 
-    private Context context;
-//    private GoogleMap mMap;
-    private WebView webview;
-    private CarIqUserDetailsModel.ResultBean cariqdetails;
+    private static Context context;
+    //    private GoogleMap mMap;
+    private static WebView webview;
+    private static LinearLayout ll_nothingtoshow;
+    private static ProgressBar progressBar;
+    private static CarIqUserDetailsModel.ResultBean cariqdetails;
     private LatLng latLng;
+    private static UserSessionManager session;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -52,14 +54,21 @@ public class LiveTracking_Fragment extends Fragment/* implements OnMapReadyCallb
 
         init(rootView);
         getSessionDetails();
-        setDefault();
+//        setDefault();
         setEventListner();
         return rootView;
     }
 
-    private void getSessionDetails() {
+
+    private void init(View rootView) {
+        session = new UserSessionManager(context);
+        webview = rootView.findViewById(R.id.webview);
+        ll_nothingtoshow = rootView.findViewById(R.id.ll_nothingtoshow);
+        progressBar = rootView.findViewById(R.id.progressBar);
+    }
+
+    public static void getSessionDetails() {
         try {
-            UserSessionManager session = new UserSessionManager(context);
             String user_info = session.getCarIqUserDetails().get(
                     ApplicationConstants.CARIQ_LOGIN);
             CarIqUserDetailsModel pojoDetails = new Gson().fromJson(user_info, CarIqUserDetailsModel.class);
@@ -67,31 +76,32 @@ public class LiveTracking_Fragment extends Fragment/* implements OnMapReadyCallb
             ArrayList<CarIqUserDetailsModel.ResultBean> myCarList = new ArrayList<>();
             myCarList = pojoDetails.getResult();
             cariqdetails = myCarList.get(0);
+
+            String enabledCarIq = session.getEnableCarTrackingDetails().get(
+                    ApplicationConstants.CARIQ_ENABLED_CARID);
+
+            if (enabledCarIq == null) {
+                ll_nothingtoshow.setVisibility(View.VISIBLE);
+                webview.setVisibility(View.GONE);
+            } else {
+                if (Utilities.isNetworkAvailable(context)) {
+                    new startLiveTracking().execute(enabledCarIq);
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    private void init(View rootView) {
-        webview = rootView.findViewById(R.id.webview);
-    }
-
-    private void setDefault() {
-//        addMapMarker();
-        if (Utilities.isNetworkAvailable(context)) {
-            new GetMakerList().execute();
         }
     }
 
     private void setEventListner() {
     }
 
-
-    private class GetMakerList extends AsyncTask<String, Void, String> {
+    private static class startLiveTracking extends AsyncTask<String, Void, String> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -105,7 +115,7 @@ public class LiveTracking_Fragment extends Fragment/* implements OnMapReadyCallb
                     .build();
 
             Request request = new Request.Builder()
-                    .url(ApplicationConstants.LIVETRACKINGAPI + "5057")
+                    .url(ApplicationConstants.LIVETRACKINGAPI + params[0])
                     .addHeader("content-type", "application/json")
                     .header("Authorization", Credentials.basic(cariqdetails.getUser_name(), getMd5(cariqdetails.getPassword())))
                     .build();
@@ -122,11 +132,15 @@ public class LiveTracking_Fragment extends Fragment/* implements OnMapReadyCallb
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            progressBar.setVisibility(View.GONE);
+
             try {
                 if (!result.equals("")) {
                     JSONObject jsonObject = new JSONObject(result);
                     String trackingUrl = jsonObject.getString("url");
 
+                    ll_nothingtoshow.setVisibility(View.GONE);
+                    webview.setVisibility(View.VISIBLE);
 //                    wv_form.setWebViewClient(new MyWebViewClient());
                     webview.getSettings().setJavaScriptEnabled(true);
                     webview.loadUrl(trackingUrl);
