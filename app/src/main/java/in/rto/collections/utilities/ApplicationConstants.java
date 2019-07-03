@@ -59,12 +59,12 @@ public class ApplicationConstants {
     public static final String VEHICLETRACKINGAPI = "https://gstkhata.com/vehicle/Apis/vehicle_tracking_details.php";
     public static final String USECARIQRAPI = "https://gstkhata.com/vehicle/Apis/cariq.php";
 
-    public static final String CARIQUSERREGAPI = "https://dev-ecu.mycariq.com/Cariq/cariqusers/registerUser/admin/abcd1234efgh5678";
-    public static final String MAKERLISTAPI = "https://dev-ecu.mycariq.com/Cariq/carmakes/listAllMakes";
-    public static final String MODELANDVARIANTLISTAPI = "https://dev-ecu.mycariq.com/Cariq/carmodels/listMakesModelinDetail/";
-    public static final String CARREGAPI = "https://dev-ecu.mycariq.com/Cariq/cars/registerCarAndDevice_V2";
-    public static final String LIVETRACKINGAPI = "https://dev-ecu.mycariq.com/Cariq/dynamicshare/permanent/";
-    public static final String LASTSEENAPI = "https://dev-ecu.mycariq.com/Cariq/cars/dashboard/carLastLocationDetails/";
+//    public static final String CARIQUSERREGAPI = "https://dev-ecu.mycariq.com/Cariq/cariqusers/registerUser/admin/abcd1234efgh5678";
+//    public static final String MAKERLISTAPI = "https://dev-ecu.mycariq.com/Cariq/carmakes/listAllMakes";
+//    public static final String MODELANDVARIANTLISTAPI = "https://dev-ecu.mycariq.com/Cariq/carmodels/listMakesModelinDetail/";
+//    public static final String CARREGAPI = "https://dev-ecu.mycariq.com/Cariq/cars/registerCarAndDevice_V2";
+//    public static final String LIVETRACKINGAPI = "https://dev-ecu.mycariq.com/Cariq/dynamicshare/permanent/";
+//    public static final String LASTSEENAPI = "https://dev-ecu.mycariq.com/Cariq/cars/dashboard/carLastLocationDetails/";
 
 
     //LIVE API LINK LIST
@@ -91,8 +91,16 @@ public class ApplicationConstants {
 //    public static final String PLANLISTAPI = "https://meravahan.in/Apis/buy_plan.php";
 
 
-//    public static final String VEHICLETRACKINGAPI = "https://gstkhata.com/vehicle/Apis/vehicle_tracking_details.php";
-//    public static final String USECARIQRAPI = "https://gstkhata.com/vehicle/Apis/cariq.php";
+//    public static final String VEHICLETRACKINGAPI = "https://meravahan.in/Apis/vehicle_tracking_details.php";
+//    public static final String USECARIQRAPI = "https://meravahan.in/Apis/cariq.php";
+
+
+    public static final String CARIQUSERREGAPI = "https://ecu.mycariq.com/Cariq/cariqusers/registerUser/admin/abcd1234efgh5678";
+    public static final String MAKERLISTAPI = "https://ecu.mycariq.com/Cariq/carmakes/listAllMakes";
+    public static final String MODELANDVARIANTLISTAPI = "https://ecu.mycariq.com/Cariq/carmodels/listMakesModelinDetail/";
+    public static final String CARREGAPI = "https://ecu.mycariq.com/Cariq/cars/registerCarAndDevice_V2";
+    public static final String LIVETRACKINGAPI = "https://ecu.mycariq.com/Cariq/dynamicshare/permanent/";
+    public static final String LASTSEENAPI = "https://ecu.mycariq.com/Cariq/cars/dashboard/carLastLocationDetails/";
 
 
 }
