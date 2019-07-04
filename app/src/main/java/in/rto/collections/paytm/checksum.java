@@ -1,15 +1,13 @@
 package in.rto.collections.paytm;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.paytm.pgsdk.PaytmOrder;
 import com.paytm.pgsdk.PaytmPGService;
@@ -18,15 +16,27 @@ import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import in.rto.collections.R;
+import in.rto.collections.utilities.ApplicationConstants;
+import in.rto.collections.utilities.Utilities;
+import in.rto.collections.utilities.WebServiceCalls;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 import static in.rto.collections.utilities.ApplicationConstants.MID;
 import static in.rto.collections.utilities.ApplicationConstants.PAYTMURL;
-import static in.rto.collections.utilities.ApplicationConstants.PAYTMVERIFYURL;
+import static in.rto.collections.utilities.ApplicationConstants.TRANSSTATUSURL;
 
 public class checksum extends AppCompatActivity implements PaytmPaymentTransactionCallback {
 
+    private Context context;
     String custid = "", orderId = "";
 
     @Override
@@ -34,6 +44,7 @@ public class checksum extends AppCompatActivity implements PaytmPaymentTransacti
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
         //initOrderId();
+        context = checksum.this;
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         Intent intent = getIntent();
@@ -48,8 +59,8 @@ public class checksum extends AppCompatActivity implements PaytmPaymentTransacti
 
         private ProgressDialog dialog = new ProgressDialog(checksum.this);
 
-        //private String orderId , MID, custid, amt;
-        // "https://securegw-stage.paytm.in/theia/paytmCallback?ORDER_ID"+orderId;
+
+        String PAYTMVERIFYURL = "https://securegw-stage.paytm.in/theia/paytmCallback?ORDER_ID" + orderId;
         String CHECKSUMHASH = "";
 
         @Override
@@ -64,7 +75,7 @@ public class checksum extends AppCompatActivity implements PaytmPaymentTransacti
                     "MID=" + MID +
                             "&ORDER_ID=" + orderId +
                             "&CUST_ID=" + custid +
-                            "&CHANNEL_ID=WAP&TXN_AMOUNT=" + getIntent().getExtras().getString("amount") + "&WEBSITE=WEBSTAGING" +
+                            "&CHANNEL_ID=WAP&TXN_AMOUNT=" + getIntent().getExtras().getString("amount") + "&WEBSITE=APPSTAGING" +
                             "&CALLBACK_URL=" + PAYTMVERIFYURL + "&INDUSTRY_TYPE_ID=Retail";
 
             JSONObject jsonObject = jsonParser.makeHttpRequest(PAYTMURL, "POST", param);
@@ -93,7 +104,7 @@ public class checksum extends AppCompatActivity implements PaytmPaymentTransacti
 
 //            PaytmPGService Service = PaytmPGService.getStagingService();
             // when app is ready to publish use production service
-             PaytmPGService  Service = PaytmPGService.getProductionService();
+            PaytmPGService Service = PaytmPGService.getProductionService();
 
             // now call paytm service here
             //below parameter map is required to construct PaytmOrder object, Merchant should replace below map values with his own values
@@ -104,8 +115,7 @@ public class checksum extends AppCompatActivity implements PaytmPaymentTransacti
             paramMap.put("CUST_ID", custid);
             paramMap.put("CHANNEL_ID", "WAP");
             paramMap.put("TXN_AMOUNT", getIntent().getExtras().getString("amount"));
-            paramMap.put("WEBSITE", "WEBSTAGING");
-//            paramMap.put("WEBSITE", "APPSTAGING");
+            paramMap.put("WEBSITE", "APPSTAGING");
             paramMap.put("CALLBACK_URL", PAYTMVERIFYURL);
             //paramMap.put( "EMAIL" , "");   // no need
             // paramMap.put( "MOBILE_NO" , "");  // no need
@@ -128,26 +138,104 @@ public class checksum extends AppCompatActivity implements PaytmPaymentTransacti
     @Override
     public void onTransactionResponse(Bundle bundle) {
         Log.e("checksum ", " respon true " + bundle.toString());
-        Toast.makeText(getApplicationContext(), "Payment Transaction response " + bundle.toString(), Toast.LENGTH_LONG).show();
+        String response = bundle.toString();
 
-        // yaha per checksum ke saht order id or status receive hoga..
-        try {
-            JSONObject jsonObject = new JSONObject(bundle.toString());
-            String STATUS = jsonObject.has("CHECKSUMHASH") ? jsonObject.getString("CHECKSUMHASH") : "";
-            Log.e("CheckSum result >>", STATUS);
+        if (response.contains("TXN_SUCCESS")) {
+            new TransactionStatusAPI().execute(MID, orderId);
+        }
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(STATUS);
-            builder.setCancelable(false);
-            builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    finish();
+    }
+
+    private class TransactionStatusAPI extends AsyncTask<String, Void, String> {
+
+        ProgressDialog pd;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd = new ProgressDialog(context);
+            pd.setMessage("Please wait ...");
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String res = "[]";
+
+            OkHttpClient client = new OkHttpClient();
+
+            RequestBody formBody = new FormBody.Builder()
+                    .add("MID", params[0])
+                    .add("ORDERID", params[1])
+                    .build();
+            Request request = new Request.Builder()
+                    .url(TRANSSTATUSURL)
+                    .post(formBody)
+                    .build();
+
+            try {
+                Response response = client.newCall(request).execute();
+                res = response.body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return res.trim();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+        }
+    }
+
+    public class BuyPlan extends AsyncTask<String, Void, String> {
+        ProgressDialog pd;
+        private String JSONString = "";
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd = new ProgressDialog(context, R.style.CustomDialogTheme);
+            pd.setMessage("Please wait ...");
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String res = "[]";
+
+            JSONString = params[0];
+            res = WebServiceCalls.JSONAPICall(ApplicationConstants.PLANLISTAPI, params[0]);
+            return res.trim();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            String type = "", message = "";
+            try {
+                pd.dismiss();
+                if (!result.equals("")) {
+                    JSONObject mainObj = new JSONObject(result);
+                    type = mainObj.getString("type");
+                    message = mainObj.getString("message");
+                    if (type.equalsIgnoreCase("success")) {
+//                        if (Utilities.isInternetAvailable(context)) {
+//                            new UpdateCounts().execute(JSONString);
+//                        } else {
+//                            Utilities.showMessageString(context, "Please Check Internet Connection");
+//                        }
+
+
+                    }
+
                 }
-            });
-            builder.show();
-        } catch (JSONException e) {
-            e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+                finish();
+            }
         }
     }
 
@@ -165,21 +253,25 @@ public class checksum extends AppCompatActivity implements PaytmPaymentTransacti
     @Override
     public void someUIErrorOccurred(String s) {
         Log.e("checksum ", " ui fail respon  " + s);
+        finish();
     }
 
     @Override
     public void onErrorLoadingWebPage(int i, String s, String s1) {
         Log.e("checksum ", " error loading pagerespon true " + s + "  s1 " + s1);
+        finish();
     }
 
     @Override
     public void onBackPressedCancelTransaction() {
         Log.e("checksum ", " cancel call back respon  ");
+        finish();
     }
 
     @Override
     public void onTransactionCancel(String s, Bundle bundle) {
         Log.e("checksum ", "  transaction cancel ");
+        finish();
     }
 
 

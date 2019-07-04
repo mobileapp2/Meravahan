@@ -1,21 +1,16 @@
 package in.rto.collections.activities;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -53,9 +48,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static android.Manifest.permission.CAMERA;
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static in.rto.collections.utilities.Utilities.changeDateFormat;
 import static in.rto.collections.utilities.Utilities.getMd5;
 
@@ -247,29 +239,29 @@ public class AddMyCar_Activity extends AppCompatActivity {
             }
         });
 
-        edt_deviceid.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                final int DRAWABLE_LEFT = 0;
-                final int DRAWABLE_TOP = 1;
-                final int DRAWABLE_RIGHT = 2;
-                final int DRAWABLE_BOTTOM = 3;
-
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    if (event.getRawX() >= (edt_deviceid.getRight() - edt_deviceid.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                            ActivityCompat.requestPermissions((Activity) context, new String[]{CAMERA, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE}, 1);
-                            return true;
-                        }
-
-                        Intent i = new Intent(context, BarcodeScanner_Activity.class);
-                        startActivityForResult(i, 10001);
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });
+//        edt_deviceid.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                final int DRAWABLE_LEFT = 0;
+//                final int DRAWABLE_TOP = 1;
+//                final int DRAWABLE_RIGHT = 2;
+//                final int DRAWABLE_BOTTOM = 3;
+//
+//                if (event.getAction() == MotionEvent.ACTION_UP) {
+//                    if (event.getRawX() >= (edt_deviceid.getRight() - edt_deviceid.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+//                        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//                            ActivityCompat.requestPermissions((Activity) context, new String[]{CAMERA, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE}, 1);
+//                            return true;
+//                        }
+//
+//                        Intent i = new Intent(context, BarcodeScanner_Activity.class);
+//                        startActivityForResult(i, 10001);
+//                        return true;
+//                    }
+//                }
+//                return false;
+//            }
+//        });
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
