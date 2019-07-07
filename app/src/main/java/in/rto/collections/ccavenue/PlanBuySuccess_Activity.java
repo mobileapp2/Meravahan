@@ -72,7 +72,7 @@ public class PlanBuySuccess_Activity extends Activity {
         try {
             JSONObject jsonObject = new JSONObject(JSONString);
 
-            tv_orderid.setText(jsonObject.getString("order_id"));
+            tv_orderid.setText(jsonObject.getString("ORDERID"));
             tv_validity.setText(getIntent().getStringExtra("validity"));
             tv_space.setText(jsonObject.getString("space"));
             tv_whatsapp.setText(jsonObject.getString("whatsApp_msg"));

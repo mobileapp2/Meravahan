@@ -399,7 +399,6 @@ public class ViewProductInfo_Activity extends Activity {
         }
     }
 
-
     public class GetCodeList extends AsyncTask<String, Void, String> {
 
         ProgressDialog pd;
@@ -477,7 +476,6 @@ public class ViewProductInfo_Activity extends Activity {
             }
         }
     }
-
 
 //    private void clientListDialog(final ArrayList<ClientMainListPojo> clientList) {
 //        final String[] clientNameList = new String[clientList.size()];
@@ -569,8 +567,7 @@ public class ViewProductInfo_Activity extends Activity {
             public void onClick(View v) {
                 for (int i = 0; i < clientList.size(); i++) {
 
-                    ClientListAdapter.MyViewHolder myViewHolder =
-                            (ClientListAdapter.MyViewHolder) lv_checkboxlist.findViewHolderForAdapterPosition(i);
+                    ClientListAdapter.MyViewHolder myViewHolder = (ClientListAdapter.MyViewHolder) lv_checkboxlist.findViewHolderForAdapterPosition(i);
 
                     if (((CheckBox) v).isChecked()) {
                         myViewHolder.cb_check.setChecked(true);
@@ -618,7 +615,6 @@ public class ViewProductInfo_Activity extends Activity {
                 }
             }
         });
-        lv_checkboxlist.setAdapter(new ClientListAdapter());
         alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -641,7 +637,7 @@ public class ViewProductInfo_Activity extends Activity {
                         clientIdJSONArray.add(childObj);
                     }
                     if (Utilities.isInternetAvailable(context)) {
-                        if (whatssapp.equals("1")) {
+                        if (cb_whtasapp.isChecked()) {
                             JsonObject mainObj = new JsonObject();
                             mainObj.addProperty("type", "shareProduct");
                             mainObj.add("client-id", clientIdJSONArray);
@@ -649,7 +645,7 @@ public class ViewProductInfo_Activity extends Activity {
                             mainObj.addProperty("user_id", user_id);
                             new ShareProductDetails().execute(mainObj.toString());
                         }
-                        if (sms.equals("1")) {
+                        if (cb_sms.isChecked()) {
                             JsonObject mainObj = new JsonObject();
                             mainObj.addProperty("type", "smsProduct");
                             mainObj.add("client-id", clientIdJSONArray);
@@ -657,7 +653,7 @@ public class ViewProductInfo_Activity extends Activity {
                             mainObj.addProperty("user_id", user_id);
                             new ShareProductDetails().execute(mainObj.toString());
                         }
-                        if (notification.equals("1")) {
+                        if (cb_notification.isChecked()) {
                             JsonObject mainObj = new JsonObject();
                             mainObj.addProperty("type", "NotificationProduct");
                             mainObj.add("client-id", clientIdJSONArray);
@@ -683,13 +679,13 @@ public class ViewProductInfo_Activity extends Activity {
             }
         });
 
+        lv_checkboxlist.setAdapter(new ClientListAdapter());
         AlertDialog alertD = alertDialogBuilder.create();
         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
         alertD.show();
 
 
     }
-
 
     private void codeListDialog() {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
@@ -786,7 +782,7 @@ public class ViewProductInfo_Activity extends Activity {
 
 
                     if (Utilities.isInternetAvailable(context)) {
-                        if (whatssapp.equals("1")) {
+                        if (cb_whtasapp.isChecked()) {
                             JsonObject mainObj = new JsonObject();
                             mainObj.addProperty("type", "shareProductCode");
                             mainObj.add("code-id", clientIdJSONArray);
@@ -794,7 +790,7 @@ public class ViewProductInfo_Activity extends Activity {
                             mainObj.addProperty("user_id", user_id);
                             new ShareProductDetails().execute(mainObj.toString());
                         }
-                        if (sms.equals("1")) {
+                        if (cb_sms.isChecked()) {
                             JsonObject mainObj = new JsonObject();
                             mainObj.addProperty("type", "smsProductCode");
                             mainObj.add("code-id", clientIdJSONArray);
@@ -802,7 +798,7 @@ public class ViewProductInfo_Activity extends Activity {
                             mainObj.addProperty("user_id", user_id);
                             new ShareProductDetails().execute(mainObj.toString());
                         }
-                        if (notification.equals("1")) {
+                        if (cb_notification.isChecked()) {
                             JsonObject mainObj = new JsonObject();
                             mainObj.addProperty("type", "NotificationProductCode");
                             mainObj.add("code-id", clientIdJSONArray);
@@ -836,7 +832,6 @@ public class ViewProductInfo_Activity extends Activity {
 
     }
 
-
     public class ClientListAdapter extends RecyclerView.Adapter<ClientListAdapter.MyViewHolder> {
 
         @Override
@@ -848,9 +843,10 @@ public class ViewProductInfo_Activity extends Activity {
         }
 
         @Override
-        public void onBindViewHolder(final MyViewHolder holder, final int position) {
-            ClientMainListPojo annivarsaryDetails = new ClientMainListPojo();
-            annivarsaryDetails = clientList.get(position);
+        public void onBindViewHolder(final MyViewHolder holder, int pos) {
+            final int position = holder.getAdapterPosition();
+            ClientMainListPojo annivarsaryDetails = clientList.get(position);
+
 
             holder.tv_itemname.setText(annivarsaryDetails.getName());
 
@@ -899,6 +895,11 @@ public class ViewProductInfo_Activity extends Activity {
                 if (!clientList.get(i).isChecked())
                     return false;
             return true;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            return position;
         }
     }
 
@@ -966,7 +967,6 @@ public class ViewProductInfo_Activity extends Activity {
             return true;
         }
     }
-
 
     public class ShareProductDetails extends AsyncTask<String, Void, String> {
         ProgressDialog pd;

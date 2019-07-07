@@ -30,7 +30,7 @@ import in.rto.collections.R;
 import in.rto.collections.ccavenue.ServiceUtility;
 import in.rto.collections.models.PremiumPlanModel;
 import in.rto.collections.models.PremiumPlanPojo;
-import in.rto.collections.paytm.checksum;
+import in.rto.collections.paytm.PaytmPayment_Activity;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.ParamsPojo;
 import in.rto.collections.utilities.UserSessionManager;
@@ -140,7 +140,7 @@ public class SelectPremiumPlan_Activity extends Activity {
                 if (lastSelectedPosition == -1) {
                     Utilities.showAlertDialog(context, "Alert", "Please Select Any One Details", false);
                 } else {
-                    Intent intent = new Intent(context, checksum.class);
+                    Intent intent = new Intent(context, PaytmPayment_Activity.class);
                     intent.putExtra("orderid", randomNum);
                     intent.putExtra("custid", "632541" + user_id);
                     intent.putExtra("type", plansList.get(lastSelectedPosition).getPlan());
@@ -196,8 +196,8 @@ public class SelectPremiumPlan_Activity extends Activity {
             param.add(new ParamsPojo("type", "givePlanDetails"));
             param.add(new ParamsPojo("role_id", role_id));
 
-//            res = WebServiceCalls.FORMDATAAPICall(ApplicationConstants.PLANLISTAPI, param);
-            res = WebServiceCalls.FORMDATAAPICall("https://gstkhata.com/vehicle/Apis/buy_plan.php", param);
+            res = WebServiceCalls.FORMDATAAPICall(ApplicationConstants.PLANLISTAPI, param);
+//            res = WebServiceCalls.FORMDATAAPICall("https://gstkhata.com/vehicle/Apis/buy_plan.php", param);
             return res;
         }
 
