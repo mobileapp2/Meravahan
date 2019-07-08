@@ -1,6 +1,8 @@
 package in.rto.collections.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,7 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.rto.collections.R;
+import in.rto.collections.activities.AddMyCar_Activity;
+import in.rto.collections.activities.CariqUserRegistration_Activity;
 import in.rto.collections.adapters.GetMyCarListAdapter;
+import in.rto.collections.models.CarIqUserDetailsModel;
 import in.rto.collections.models.MyCarListModel;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.ParamsPojo;
@@ -37,6 +42,7 @@ public class VehicleForTracking_Fragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView rv_carlist;
     private LinearLayout ll_nothingtoshow;
+    private FloatingActionButton fab_add_car;
     private String user_id;
     private UserSessionManager session;
 
@@ -57,6 +63,7 @@ public class VehicleForTracking_Fragment extends Fragment {
         swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshLayout);
         rv_carlist = rootView.findViewById(R.id.rv_carlist);
         ll_nothingtoshow = rootView.findViewById(R.id.ll_nothingtoshow);
+        fab_add_car = rootView.findViewById(R.id.fab_add_car);
     }
 
     private void getSessionDetails() {
@@ -83,13 +90,16 @@ public class VehicleForTracking_Fragment extends Fragment {
     }
 
     private void setEventListner() {
-//        fab_add_car.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(context, AddMyCar_Activity.class)
-//                        .putExtra("cariqdetails", cariqdetails));
-//            }
-//        });
+        fab_add_car.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Utilities.isNetworkAvailable(context)) {
+                    new CheckUserRegistration().execute(user_id);
+                } else {
+                    Utilities.showMessageString(context, "Please check internet connection");
+                }
+            }
+        });
 
     }
 
@@ -148,5 +158,53 @@ public class VehicleForTracking_Fragment extends Fragment {
         }
     }
 
+    private class CheckUserRegistration extends AsyncTask<String, Void, String> {
 
+        private ProgressDialog pd;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd = new ProgressDialog(context, R.style.CustomDialogTheme);
+            pd.setMessage("Please wait...");
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String res = "[]";
+            List<ParamsPojo> param = new ArrayList<ParamsPojo>();
+            param.add(new ParamsPojo("type", "getuser"));
+            param.add(new ParamsPojo("user_id", params[0]));
+            res = WebServiceCalls.FORMDATAAPICall(ApplicationConstants.USECARIQRAPI, param);
+            return res.trim();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            pd.dismiss();
+            String type = "", message = "";
+            try {
+                if (!result.equals("")) {
+
+                    ArrayList<CarIqUserDetailsModel.ResultBean> myCarList = new ArrayList<>();
+                    CarIqUserDetailsModel pojoDetails = new Gson().fromJson(result, CarIqUserDetailsModel.class);
+                    type = pojoDetails.getType();
+                    if (type.equalsIgnoreCase("success")) {
+                        session.createCarIqSession(result);
+                        myCarList = pojoDetails.getResult();
+                        CarIqUserDetailsModel.ResultBean cariqdetails = myCarList.get(0);
+                        startActivity(new Intent(context, AddMyCar_Activity.class)
+                                .putExtra("cariqdetails", cariqdetails));
+                    } else {
+                        startActivity(new Intent(context, CariqUserRegistration_Activity.class));
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

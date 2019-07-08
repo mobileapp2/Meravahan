@@ -131,7 +131,7 @@
                             android:id="@+id/edt_referralcode"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="Do you have a refferal code?" />
+                            android:text="Do you have a referral code?" />
 
 
                     </android.support.design.widget.TextInputLayout>

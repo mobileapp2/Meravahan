@@ -43,4 +43,14 @@
             android:textSize="16sp" />
     </LinearLayout>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add_car"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="10dp"
+        android:src="@drawable/icon_add"
+        app:backgroundTint="@color/colorPrimary"
+        app:tint="@color/white" />
+
 </FrameLayout>
