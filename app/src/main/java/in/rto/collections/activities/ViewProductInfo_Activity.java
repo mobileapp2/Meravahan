@@ -567,16 +567,18 @@ public class ViewProductInfo_Activity extends Activity {
             public void onClick(View v) {
                 for (int i = 0; i < clientList.size(); i++) {
 
-                    ClientListAdapter.MyViewHolder myViewHolder = (ClientListAdapter.MyViewHolder) lv_checkboxlist.findViewHolderForAdapterPosition(i);
-
+//                    ClientListAdapter.MyViewHolder myViewHolder = (ClientListAdapter.MyViewHolder) lv_checkboxlist.findViewHolderForAdapterPosition(i);
+//
                     if (((CheckBox) v).isChecked()) {
-                        myViewHolder.cb_check.setChecked(true);
                         clientList.get(i).setChecked(true);
                     } else {
-                        myViewHolder.cb_check.setChecked(false);
                         clientList.get(i).setChecked(false);
                     }
+
                 }
+
+                lv_checkboxlist.setAdapter(new ClientListAdapter());
+
             }
         });
         cb_notification.setOnClickListener(new View.OnClickListener() {
@@ -705,17 +707,17 @@ public class ViewProductInfo_Activity extends Activity {
             public void onClick(View v) {
                 for (int i = 0; i < codeList.size(); i++) {
 
-                    CodeListAdapter.MyViewHolder myViewHolder =
-                            (CodeListAdapter.MyViewHolder) lv_checkboxlist.findViewHolderForAdapterPosition(i);
+//                    CodeListAdapter.MyViewHolder myViewHolder =
+//                            (CodeListAdapter.MyViewHolder) lv_checkboxlist.findViewHolderForAdapterPosition(i);
 
                     if (((CheckBox) v).isChecked()) {
-                        myViewHolder.cb_check.setChecked(true);
                         codeList.get(i).setChecked(true);
                     } else {
-                        myViewHolder.cb_check.setChecked(false);
                         codeList.get(i).setChecked(false);
                     }
                 }
+
+                lv_checkboxlist.setAdapter(new CodeListAdapter());
             }
         });
         cb_notification.setOnClickListener(new View.OnClickListener() {
@@ -847,7 +849,7 @@ public class ViewProductInfo_Activity extends Activity {
             final int position = holder.getAdapterPosition();
             ClientMainListPojo annivarsaryDetails = clientList.get(position);
 
-
+            holder.cb_check.setChecked(annivarsaryDetails.isChecked());
             holder.tv_itemname.setText(annivarsaryDetails.getName());
 
             holder.cb_check.setOnClickListener(new View.OnClickListener() {
@@ -914,10 +916,12 @@ public class ViewProductInfo_Activity extends Activity {
         }
 
         @Override
-        public void onBindViewHolder(final MyViewHolder holder, final int position) {
+        public void onBindViewHolder(final MyViewHolder holder, int pos) {
+            final int position = holder.getAdapterPosition();
             ClientCodePojo annivarsaryDetails = new ClientCodePojo();
             annivarsaryDetails = codeList.get(position);
 
+            holder.cb_check.setChecked(annivarsaryDetails.isChecked());
             holder.tv_itemname.setText(annivarsaryDetails.getCode());
 
             holder.cb_check.setOnClickListener(new View.OnClickListener() {
@@ -965,6 +969,11 @@ public class ViewProductInfo_Activity extends Activity {
                 if (!codeList.get(i).isChecked())
                     return false;
             return true;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            return position;
         }
     }
 

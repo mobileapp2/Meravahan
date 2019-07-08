@@ -36,8 +36,7 @@ public class VehicleForTracking_Fragment extends Fragment {
     private Context context;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView rv_carlist;
-    private LinearLayout ll_parent, ll_nothingtoshow;
-    private FloatingActionButton fab_add_car;
+    private LinearLayout ll_nothingtoshow;
     private String user_id;
     private UserSessionManager session;
 
@@ -55,11 +54,9 @@ public class VehicleForTracking_Fragment extends Fragment {
 
     private void init(View rootView) {
         session = new UserSessionManager(context);
-        ll_parent = rootView.findViewById(R.id.ll_parent);
         swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshLayout);
         rv_carlist = rootView.findViewById(R.id.rv_carlist);
         ll_nothingtoshow = rootView.findViewById(R.id.ll_nothingtoshow);
-        fab_add_car = rootView.findViewById(R.id.fab_add_car);
     }
 
     private void getSessionDetails() {
@@ -79,7 +76,6 @@ public class VehicleForTracking_Fragment extends Fragment {
         if (Utilities.isNetworkAvailable(context)) {
             new GetCarList().execute(user_id);
         } else {
-            Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
             swipeRefreshLayout.setRefreshing(false);
             ll_nothingtoshow.setVisibility(View.VISIBLE);
             rv_carlist.setVisibility(View.GONE);

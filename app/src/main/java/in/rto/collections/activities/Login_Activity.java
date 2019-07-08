@@ -316,6 +316,10 @@ public class Login_Activity extends Activity {
 
             if (regToken != null && !regToken.isEmpty() && !regToken.equals("null") && !regToken.equals(""))
                 new SendRegistrationToken().execute(user_id, regToken);
+            else {
+                startActivity(new Intent(context, MainDrawer_Activity.class));
+                finish();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

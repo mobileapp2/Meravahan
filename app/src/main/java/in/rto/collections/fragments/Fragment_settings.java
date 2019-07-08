@@ -49,7 +49,7 @@ public class Fragment_settings extends Fragment {
     private Context context;
     private UserSessionManager session;
     private String user_id, role;
-    private CardView birthtext, annitext, premiumdue, languageCard;
+    private CardView birthtext, annitext, premiumdue, languageCard, cv_myvehicles;
     LinearLayout openBirthdayWhatsappSettings, openBirthdaySMSSettings, openAnniversaryWhatsappSettings, openAnniversarySMSSettings,
             openPremiumDueMessageSettings, openSignatureSettings, openAnniversaryNotificationSettings, openBirthdayNotificationSettings,
             openLanguageSettings, openMyCars;
@@ -87,6 +87,7 @@ public class Fragment_settings extends Fragment {
         openLanguageSettings = rootView.findViewById(R.id.openLanguageSettings);
         openLanguageSettings.setOnClickListener(getmButtonClickListenerLanguage);
 
+        cv_myvehicles = rootView.findViewById(R.id.cv_myvehicles);
         openMyCars = rootView.findViewById(R.id.openMyCars);
         openMyCars.setOnClickListener(openMyCarsListener);
 
@@ -100,7 +101,9 @@ public class Fragment_settings extends Fragment {
             annitext.setVisibility(View.GONE);
             premiumdue.setVisibility(View.GONE);
             languageCard.setVisibility(View.GONE);
-
+            cv_myvehicles.setVisibility(View.VISIBLE);
+        } else {
+            cv_myvehicles.setVisibility(View.GONE);
         }
         ll_parent = rootView.findViewById(R.id.ll_parent);
         switchBirthdayWhatsappButton = rootView.findViewById(R.id.switchBirthdayWhatsappButton);

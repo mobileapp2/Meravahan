@@ -28,20 +28,18 @@
 
     </LinearLayout>
 
-    <android.support.v4.widget.NestedScrollView
+    <!--<android.support.v4.widget.NestedScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0px"-->
+    <!--android:layout_weight="1">-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/lv_checkboxlist"
         android:layout_width="match_parent"
         android:layout_height="0px"
-        android:layout_weight="1">
+        android:layout_weight="1" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/lv_checkboxlist"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:choiceMode="multipleChoice"
-            android:divider="@null"
-            android:dividerHeight="0dp" />
-
-    </android.support.v4.widget.NestedScrollView>
+    <!--</android.support.v4.widget.NestedScrollView>-->
 
     <View
         android:layout_width="match_parent"

@@ -78,14 +78,18 @@ public class ContactUs_Activity extends Activity {
             @Override
             public void onClick(View v) {
 
-                Intent sendIntent = new Intent("android.intent.action.MAIN");
-                sendIntent.setComponent(new ComponentName("com.whatsapp", "com.whatsapp.Conversation"));
-                sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.setType("text/plain");
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "");
-                sendIntent.putExtra("jid", "9021158214" + "@s.whatsapp.net");
-                sendIntent.setPackage("com.whatsapp");
-                startActivity(sendIntent);
+//                Intent sendIntent = new Intent("android.intent.action.MAIN");
+//                sendIntent.setComponent(new ComponentName("com.whatsapp", "com.whatsapp.Conversation"));
+//                sendIntent.setAction(Intent.ACTION_SEND);
+//                sendIntent.setType("text/plain");
+//                sendIntent.putExtra(Intent.EXTRA_TEXT, "");
+//                sendIntent.putExtra("jid", "9021158214" + "@s.whatsapp.net");
+//                sendIntent.setPackage("com.whatsapp");
+//                startActivity(sendIntent);
+
+                String phoneno = "919021158214";
+                String URL = "https://wa.me/" + phoneno;
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(URL)));
             }
         });
     }
