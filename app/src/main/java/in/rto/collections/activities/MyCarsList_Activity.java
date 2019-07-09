@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -37,6 +38,7 @@ public class MyCarsList_Activity extends AppCompatActivity {
     private Context context;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView rv_carlist;
+    private TextView tv_resourcename, tv_mobile, tv_email;
     private LinearLayout ll_parent, ll_nothingtoshow;
     private FloatingActionButton fab_add_car;
     private String user_id;
@@ -44,7 +46,6 @@ public class MyCarsList_Activity extends AppCompatActivity {
     private UserSessionManager session;
 
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_carslist);
@@ -64,6 +65,9 @@ public class MyCarsList_Activity extends AppCompatActivity {
         rv_carlist = findViewById(R.id.rv_carlist);
         ll_nothingtoshow = findViewById(R.id.ll_nothingtoshow);
         fab_add_car = findViewById(R.id.fab_add_car);
+        tv_resourcename = findViewById(R.id.tv_resourcename);
+        tv_mobile = findViewById(R.id.tv_mobile);
+        tv_email = findViewById(R.id.tv_email);
     }
 
     private void getSessionDetails() {
@@ -87,6 +91,10 @@ public class MyCarsList_Activity extends AppCompatActivity {
             } else {
                 Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
             }
+        } else {
+            tv_resourcename.setText(cariqdetails.getFirst_name() + " " + cariqdetails.getLast_name() + " (" + cariqdetails.getUser_name() + ")");
+            tv_mobile.setText(cariqdetails.getCell_number());
+            tv_email.setText(cariqdetails.getEmail());
         }
 
         rv_carlist.setLayoutManager(new LinearLayoutManager(context));
@@ -205,7 +213,9 @@ public class MyCarsList_Activity extends AppCompatActivity {
                         session.createCarIqSession(result);
                         myCarList = pojoDetails.getResult();
                         cariqdetails = myCarList.get(0);
-
+                        tv_resourcename.setText(cariqdetails.getFirst_name() + " " + cariqdetails.getLast_name() + " (" + cariqdetails.getUser_name() + ")");
+                        tv_mobile.setText(cariqdetails.getCell_number());
+                        tv_email.setText(cariqdetails.getEmail());
                     } else {
                         startActivity(new Intent(context, CariqUserRegistration_Activity.class));
                     }
