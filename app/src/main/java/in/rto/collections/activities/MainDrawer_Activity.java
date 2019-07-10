@@ -47,11 +47,11 @@ public class MainDrawer_Activity extends AppCompatActivity implements Navigation
     private ImageView imv_profile;
     private Context context;
     private String name, photo, role;
-    private AHBottomNavigation bottomNavigation;
+    private static AHBottomNavigation bottomNavigation;
     private AHBottomNavigationItem botNavMessage, botNavTemplates, botNavSignature, botNavMaterial, botNavUsers, botNavReminder, botNavInfo, botNavTracking;
     private Fragment currentFragment;
     private BotNavViewPagerAdapter adapter;
-    private AHBottomNavigationViewPager view_pager;
+    private static AHBottomNavigationViewPager view_pager;
     private UserSessionManager session;
     private ImageView yimg_todolist, img_notifications;
     NavigationView navigationView;
@@ -577,4 +577,10 @@ public class MainDrawer_Activity extends AppCompatActivity implements Navigation
             }
         }
     }
+
+    public static void changePage() {
+//        view_pager.setCurrentItem(3);
+        bottomNavigation.setCurrentItem(3);
+    }
+
 }

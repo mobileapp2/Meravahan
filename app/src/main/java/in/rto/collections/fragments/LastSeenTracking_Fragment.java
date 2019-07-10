@@ -53,7 +53,7 @@ public class LastSeenTracking_Fragment extends Fragment implements OnMapReadyCal
     private static GoogleMap mMap;
     private static LinearLayout ll_nothingtoshow, ll_maplayout;
     private static ProgressBar progressBar;
-    private static TextView tv_lastseen;
+    private static TextView tv_lastseen, tv_message;
     private static CarIqUserDetailsModel.ResultBean cariqdetails;
 
     @Override
@@ -77,6 +77,7 @@ public class LastSeenTracking_Fragment extends Fragment implements OnMapReadyCal
         ll_maplayout = rootView.findViewById(R.id.ll_maplayout);
         progressBar = rootView.findViewById(R.id.progressBar);
         tv_lastseen = rootView.findViewById(R.id.tv_lastseen);
+        tv_message = rootView.findViewById(R.id.tv_message);
     }
 
     public static void getSessionDetails() {
@@ -147,19 +148,23 @@ public class LastSeenTracking_Fragment extends Fragment implements OnMapReadyCal
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             progressBar.setVisibility(View.GONE);
-
             try {
                 if (!result.equals("")) {
                     JSONObject jsonObject = new JSONObject(result);
                     String latitude = jsonObject.getString("latitude");
                     String longitude = jsonObject.getString("longitude");
 
-
-                    LatLng latLng = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
-                    addMapMarker(latLng);
-                    new GetAddress().execute(latitude, longitude);
-                    ll_nothingtoshow.setVisibility(View.GONE);
-                    ll_maplayout.setVisibility(View.VISIBLE);
+                    if (latitude.equals("null") || longitude.equals("null")) {
+                        ll_nothingtoshow.setVisibility(View.VISIBLE);
+                        ll_maplayout.setVisibility(View.GONE);
+                        tv_message.setText("Last seen location is not available");
+                    } else {
+                        LatLng latLng = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
+                        addMapMarker(latLng);
+                        new GetAddress().execute(latitude, longitude);
+                        ll_nothingtoshow.setVisibility(View.GONE);
+                        ll_maplayout.setVisibility(View.VISIBLE);
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();

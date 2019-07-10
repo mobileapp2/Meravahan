@@ -14,9 +14,11 @@ import android.widget.TextView;
 import java.util.List;
 
 import in.rto.collections.R;
+import in.rto.collections.activities.MainDrawer_Activity;
 import in.rto.collections.activities.MyCarsList_Activity;
 import in.rto.collections.fragments.LastSeenTracking_Fragment;
 import in.rto.collections.fragments.LiveTracking_Fragment;
+import in.rto.collections.fragments.Tracking_Fragment;
 import in.rto.collections.fragments.VehicleForTracking_Fragment;
 import in.rto.collections.models.MyCarListModel;
 import in.rto.collections.utilities.ApplicationConstants;
@@ -28,7 +30,7 @@ public class GetMyCarListAdapter extends RecyclerView.Adapter<GetMyCarListAdapte
     private Context context;
     private String type;
     private UserSessionManager session;
-    String enabledCarIq;
+    private String enabledCarIq;
 
     public GetMyCarListAdapter(Context context, List<MyCarListModel.ResultBean> resultArrayList, String type) {
         this.context = context;
@@ -52,11 +54,6 @@ public class GetMyCarListAdapter extends RecyclerView.Adapter<GetMyCarListAdapte
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final MyCarListModel.ResultBean cardetails = resultArrayList.get(position);
 
-        if (type.equals("1"))
-            holder.ll_enable.setVisibility(View.GONE);
-        else
-            holder.ll_enable.setVisibility(View.VISIBLE);
-
         if (enabledCarIq != null) {
             if (enabledCarIq.equals(cardetails.getVehicle_details_id())) {
                 holder.btn_enabletrack.setText("Tracking Enabled");
@@ -70,11 +67,21 @@ public class GetMyCarListAdapter extends RecyclerView.Adapter<GetMyCarListAdapte
         holder.btn_enabletrack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                holder.btn_enabletrack.setText("Tracking Enabled");
                 session.createEnableCarTrackingSession(cardetails.getVehicle_details_id());
-                new MyCarsList_Activity.GetCarList().execute();
+//                new MyCarsList_Activity.GetCarList().execute();
                 VehicleForTracking_Fragment.setDefault();
                 LiveTracking_Fragment.getSessionDetails();
                 LastSeenTracking_Fragment.getSessionDetails();
+
+                if (type.equals("1")) {
+                    MyCarsList_Activity.activity.finish();
+                    MainDrawer_Activity.changePage();
+                    Tracking_Fragment.changePage();
+                } else if (type.equals("2")) {
+                    Tracking_Fragment.changePage();
+                }
+
             }
         });
 

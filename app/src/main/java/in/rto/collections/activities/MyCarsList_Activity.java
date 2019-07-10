@@ -1,5 +1,6 @@
 package in.rto.collections.activities;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -45,12 +46,13 @@ public class MyCarsList_Activity extends AppCompatActivity {
     private static String user_id;
     private CarIqUserDetailsModel.ResultBean cariqdetails;
     private UserSessionManager session;
+    public static Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_carslist);
-
+        activity = this;
         init();
         getSessionDetails();
         setDefault();
@@ -177,7 +179,7 @@ public class MyCarsList_Activity extends AppCompatActivity {
                             rv_carlist.setVisibility(View.VISIBLE);
                             ll_nothingtoshow.setVisibility(View.GONE);
                         }
-                        rv_carlist.setAdapter(new GetMyCarListAdapter(context, myCarList, "2"));
+                        rv_carlist.setAdapter(new GetMyCarListAdapter(context, myCarList, "1"));
                     } else {
                         ll_nothingtoshow.setVisibility(View.VISIBLE);
                         rv_carlist.setVisibility(View.GONE);

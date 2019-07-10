@@ -46,7 +46,6 @@ public class VehicleForTracking_Fragment extends Fragment {
     private static String user_id;
     private UserSessionManager session;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_vehicle_fortracking, container, false);

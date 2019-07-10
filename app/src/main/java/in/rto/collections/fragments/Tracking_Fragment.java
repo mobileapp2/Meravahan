@@ -107,6 +107,10 @@ public class Tracking_Fragment extends Fragment {
         viewPager.setAdapter(adapter);
     }
 
+    public static void changePage() {
+        viewPager.setCurrentItem(1);
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     private void setEventListner() {
 
