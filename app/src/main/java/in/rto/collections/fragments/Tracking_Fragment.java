@@ -35,13 +35,14 @@ import in.rto.collections.utilities.WebServiceCalls;
 
 public class Tracking_Fragment extends Fragment {
 
-    private Context context;
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
-    private LinearLayout ll_tablayout, ll_nothingtoshow;
-    private String user_id;
-    private UserSessionManager session;
-    private ProgressBar progressBar;
+    private static Context context;
+    private static TabLayout tabLayout;
+    private static ViewPager viewPager;
+    private static LinearLayout ll_tablayout, ll_nothingtoshow;
+    private static String user_id;
+    private static UserSessionManager session;
+    private static ProgressBar progressBar;
+    private static ViewPagerAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -61,9 +62,12 @@ public class Tracking_Fragment extends Fragment {
         ll_nothingtoshow = rootView.findViewById(R.id.ll_nothingtoshow);
         progressBar = rootView.findViewById(R.id.progressBar);
         viewPager.setOffscreenPageLimit(3);
+
+
+        adapter = new ViewPagerAdapter(getChildFragmentManager());
     }
 
-    private void setDefault() {
+    public static void setDefault() {
         try {
             JSONArray user_info = new JSONArray(session.getUserDetails().get(
                     ApplicationConstants.KEY_LOGIN_INFO));
@@ -96,8 +100,7 @@ public class Tracking_Fragment extends Fragment {
         }
     }
 
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
+    private static void setupViewPager(ViewPager viewPager) {
         adapter.addFrag(new VehicleForTracking_Fragment(), "VEHICLES");
         adapter.addFrag(new LiveTracking_Fragment(), "LIVE");
         adapter.addFrag(new LastSeenTracking_Fragment(), "LAST SEEN");
@@ -163,7 +166,7 @@ public class Tracking_Fragment extends Fragment {
         }
     }
 
-    private class CheckCarIqUserRegistration extends AsyncTask<String, Void, String> {
+    private static class CheckCarIqUserRegistration extends AsyncTask<String, Void, String> {
 
         @Override
         protected void onPreExecute() {

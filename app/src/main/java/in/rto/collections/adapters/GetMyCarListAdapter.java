@@ -14,8 +14,10 @@ import android.widget.TextView;
 import java.util.List;
 
 import in.rto.collections.R;
+import in.rto.collections.activities.MyCarsList_Activity;
 import in.rto.collections.fragments.LastSeenTracking_Fragment;
 import in.rto.collections.fragments.LiveTracking_Fragment;
+import in.rto.collections.fragments.VehicleForTracking_Fragment;
 import in.rto.collections.models.MyCarListModel;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.UserSessionManager;
@@ -68,8 +70,9 @@ public class GetMyCarListAdapter extends RecyclerView.Adapter<GetMyCarListAdapte
         holder.btn_enabletrack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.btn_enabletrack.setText("Tracking Enabled");
                 session.createEnableCarTrackingSession(cardetails.getVehicle_details_id());
+                new MyCarsList_Activity.GetCarList().execute();
+                VehicleForTracking_Fragment.setDefault();
                 LiveTracking_Fragment.getSessionDetails();
                 LastSeenTracking_Fragment.getSessionDetails();
             }

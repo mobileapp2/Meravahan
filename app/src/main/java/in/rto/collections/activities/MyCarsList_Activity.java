@@ -35,13 +35,14 @@ import in.rto.collections.utilities.WebServiceCalls;
 
 public class MyCarsList_Activity extends AppCompatActivity {
 
-    private Context context;
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private RecyclerView rv_carlist;
+    private static Context context;
+    private static SwipeRefreshLayout swipeRefreshLayout;
+    private static RecyclerView rv_carlist;
     private TextView tv_resourcename, tv_mobile, tv_email;
-    private LinearLayout ll_parent, ll_nothingtoshow;
+    private LinearLayout ll_parent;
+    private static LinearLayout ll_nothingtoshow;
     private FloatingActionButton fab_add_car;
-    private String user_id;
+    private static String user_id;
     private CarIqUserDetailsModel.ResultBean cariqdetails;
     private UserSessionManager session;
 
@@ -119,7 +120,7 @@ public class MyCarsList_Activity extends AppCompatActivity {
         });
     }
 
-    private class GetCarList extends AsyncTask<String, Void, String> {
+    public static class GetCarList extends AsyncTask<String, Void, String> {
 
         @Override
         protected void onPreExecute() {
@@ -134,7 +135,7 @@ public class MyCarsList_Activity extends AppCompatActivity {
             String res = "[]";
             List<ParamsPojo> param = new ArrayList<ParamsPojo>();
             param.add(new ParamsPojo("type", "getDetails"));
-            param.add(new ParamsPojo("user_id", params[0]));
+            param.add(new ParamsPojo("user_id", user_id));
             res = WebServiceCalls.FORMDATAAPICall(ApplicationConstants.VEHICLETRACKINGAPI, param);
             return res.trim();
         }
@@ -162,7 +163,7 @@ public class MyCarsList_Activity extends AppCompatActivity {
                             rv_carlist.setVisibility(View.VISIBLE);
                             ll_nothingtoshow.setVisibility(View.GONE);
                         }
-                        rv_carlist.setAdapter(new GetMyCarListAdapter(context, myCarList, "1"));
+                        rv_carlist.setAdapter(new GetMyCarListAdapter(context, myCarList, "2"));
                     } else {
                         ll_nothingtoshow.setVisibility(View.VISIBLE);
                         rv_carlist.setVisibility(View.GONE);

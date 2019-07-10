@@ -38,12 +38,12 @@ import in.rto.collections.utilities.WebServiceCalls;
 
 public class VehicleForTracking_Fragment extends Fragment {
 
-    private Context context;
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private RecyclerView rv_carlist;
-    private LinearLayout ll_nothingtoshow;
+    private static Context context;
+    private static SwipeRefreshLayout swipeRefreshLayout;
+    private static RecyclerView rv_carlist;
+    private static LinearLayout ll_nothingtoshow;
     private FloatingActionButton fab_add_car;
-    private String user_id;
+    private static String user_id;
     private UserSessionManager session;
 
 
@@ -77,7 +77,7 @@ public class VehicleForTracking_Fragment extends Fragment {
         }
     }
 
-    private void setDefault() {
+    public static void setDefault() {
         rv_carlist.setLayoutManager(new LinearLayoutManager(context));
 
         if (Utilities.isNetworkAvailable(context)) {
@@ -103,7 +103,7 @@ public class VehicleForTracking_Fragment extends Fragment {
 
     }
 
-    private class GetCarList extends AsyncTask<String, Void, String> {
+    private static class GetCarList extends AsyncTask<String, Void, String> {
 
         @Override
         protected void onPreExecute() {

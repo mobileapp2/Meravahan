@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import in.rto.collections.R;
+import in.rto.collections.fragments.Tracking_Fragment;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.ParamsPojo;
 import in.rto.collections.utilities.UserSessionManager;
@@ -332,6 +333,7 @@ public class CariqUserRegistration_Activity extends AppCompatActivity {
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 startActivity(new Intent(context, MyCarsList_Activity.class));
+                                Tracking_Fragment.setDefault();
                                 finish();
                             }
                         });

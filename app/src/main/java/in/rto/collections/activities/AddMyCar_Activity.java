@@ -32,6 +32,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import in.rto.collections.R;
+import in.rto.collections.fragments.VehicleForTracking_Fragment;
 import in.rto.collections.models.CarIqUserDetailsModel;
 import in.rto.collections.models.CarMakerListModel;
 import in.rto.collections.models.CarModelAndVariantListModel;
@@ -797,7 +798,6 @@ public class AddMyCar_Activity extends AppCompatActivity {
         }
     }
 
-
     public class RegisterCar extends AsyncTask<String, Void, String> {
         ProgressDialog pd;
 
@@ -834,13 +834,14 @@ public class AddMyCar_Activity extends AppCompatActivity {
                         builder.setCancelable(false);
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                startActivity(new Intent(context, MyCarsList_Activity.class));
                                 finish();
                             }
                         });
                         AlertDialog alertD = builder.create();
                         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
                         alertD.show();
+                        new MyCarsList_Activity.GetCarList().execute();
+                        VehicleForTracking_Fragment.setDefault();
                     } else {
 
                     }
