@@ -3,7 +3,6 @@ package in.rto.collections.utilities;
 public class ApplicationConstants {
 
     //USER SESSION MANAGER CONSTANTS DON'T CHANGE THESE CONSTANTS
-
     public static final String PREFER_NAME = "MERAVAHAN";
     public static final String KEY_APPOPENEDFORFIRST = "KEY_APPOPENEDFORFIRST";
     public static final String IS_USER_LOGIN = "IS_USER_LOGIN";
@@ -23,15 +22,12 @@ public class ApplicationConstants {
 
 
     //PATYM CONSTANTS
-
-
     public static final String MID = "zTsnTb54694269714218"; /// your merchant key
     public static final String PAYTMURL = "https://meravahan.in/paytm/generateChecksum.php";
     public static final String TRANSSTATUSURL = "https://meravahan.in/paytm/transaction_status.php";
 
 
     //TEST API LINK LIST
-
     public static final String CLIENTAPI = "https://gstkhata.com/vehicle/Apis/client.php";
     public static final String MASTERAPI = "https://gstkhata.com/vehicle/Apis/master.php";
     public static final String VEHICLEDEALER = "https://gstkhata.com/vehicle/Apis/vehicle_details.php";
