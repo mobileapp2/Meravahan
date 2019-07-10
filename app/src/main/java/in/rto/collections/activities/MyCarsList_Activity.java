@@ -118,6 +118,20 @@ public class MyCarsList_Activity extends AppCompatActivity {
                         .putExtra("cariqdetails", cariqdetails));
             }
         });
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (Utilities.isNetworkAvailable(context)) {
+                    new GetCarList().execute(user_id);
+                } else {
+                    Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+                    swipeRefreshLayout.setRefreshing(false);
+                    ll_nothingtoshow.setVisibility(View.VISIBLE);
+                    rv_carlist.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     public static class GetCarList extends AsyncTask<String, Void, String> {

@@ -101,6 +101,21 @@ public class VehicleForTracking_Fragment extends Fragment {
             }
         });
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (Utilities.isNetworkAvailable(context)) {
+                    new GetCarList().execute(user_id);
+                } else {
+                    Utilities.showMessageString(context, "Please check internet connection");
+                    swipeRefreshLayout.setRefreshing(false);
+                    ll_nothingtoshow.setVisibility(View.VISIBLE);
+                    rv_carlist.setVisibility(View.GONE);
+                }
+            }
+        });
+
+
     }
 
     private static class GetCarList extends AsyncTask<String, Void, String> {
