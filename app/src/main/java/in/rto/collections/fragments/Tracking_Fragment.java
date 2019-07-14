@@ -104,6 +104,7 @@ public class Tracking_Fragment extends Fragment {
         adapter.addFrag(new VehicleForTracking_Fragment(), "VEHICLES");
         adapter.addFrag(new LiveTracking_Fragment(), "LIVE");
         adapter.addFrag(new LastSeenTracking_Fragment(), "LAST SEEN");
+        adapter.addFrag(new VehicleTripList_Fragment(), "ACTIVITY");
         viewPager.setAdapter(adapter);
     }
 

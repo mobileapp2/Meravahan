@@ -56,7 +56,8 @@ public class ApplicationConstants {
     public static final String CARREGAPI = "https://dev-ecu.mycariq.com/Cariq/cars/registerCarAndDevice_V2";
     public static final String LIVETRACKINGAPI = "https://dev-ecu.mycariq.com/Cariq/dynamicshare/permanent/";
     public static final String LASTSEENAPI = "https://dev-ecu.mycariq.com/Cariq/cars/dashboard/carLastLocationDetails/";
-
+    public static final String TRIPSAPI = "https://dev-ecu.mycariq.com/Cariq/cars/tripList/";
+    public static final String TRIPSDETAILSAPI = "https://dev-ecu.mycariq.com/Cariq/cars/tripDetail/";
 
     //LIVE API LINK LIST
 
