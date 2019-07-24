@@ -840,7 +840,7 @@ public class AddMyCar_Activity extends AppCompatActivity {
                         AlertDialog alertD = builder.create();
                         alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
                         alertD.show();
-                        new MyCarsList_Activity.GetCarList().execute();
+                        new CarIqCarsList_Activity.GetCarList().execute();
                         VehicleForTracking_Fragment.setDefault();
                     } else {
 

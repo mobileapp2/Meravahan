@@ -1,154 +1,249 @@
 package in.rto.collections.models;
 
-import java.util.ArrayList;
-
 public class MyCarListModel {
 
-    private String type;
-    private String message;
-    private ArrayList<ResultBean> result;
+    
+    private String nickName;
+    private String registrationNumber;
+    private String make;
+    private String model;
+    private String fuelType;
+    private String id;
+    private String modelId;
+    private String kmCovered;
+    private String makeId;
+    private String itsYear;
+    private String deviceId;
+    private String purchaseDate;
+    private String deviceSerial;
+    private String imageUrl;
+    private String registerOn;
+    private String userId;
+    private String deviceNumber;
+    private String workshopId;
+    private String serviceId;
+    private String smartPlugSignature;
+    private String agent;
+    private String hasDevice;
+    private String isDeviceRegistered;
+    private String subscriptionSignature;
+    private String vehicleType;
+    private String applicationType;
+    private String vin;
 
-    public String getType() {
-        return type;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
-    public String getMessage() {
-        return message;
+    public String getRegistrationNumber() {
+        return registrationNumber;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
     }
 
-    public ArrayList<ResultBean> getResult() {
-        return result;
+    public String getMake() {
+        return make;
     }
 
-    public void setResult(ArrayList<ResultBean> result) {
-        this.result = result;
+    public void setMake(String make) {
+        this.make = make;
     }
 
-    public static class ResultBean {
-        private String id;
-        private String mfg_year;
-        private String purchase_date;
-        private String kms_covered;
-        private String fuel_type;
-        private String registration_number;
-        private String variant;
-        private String model;
-        private String vin;
-        private String device_id;
-        private String make;
-        private String vehicle_details_id;
-        private String user_id;
+    public String getModel() {
+        return model;
+    }
 
-        public String getId() {
-            return id;
-        }
+    public void setModel(String model) {
+        this.model = model;
+    }
 
-        public void setId(String id) {
-            this.id = id;
-        }
+    public String getFuelType() {
+        return fuelType;
+    }
 
-        public String getMfg_year() {
-            return mfg_year;
-        }
+    public void setFuelType(String fuelType) {
+        this.fuelType = fuelType;
+    }
 
-        public void setMfg_year(String mfg_year) {
-            this.mfg_year = mfg_year;
-        }
+    public String getId() {
+        return id;
+    }
 
-        public String getPurchase_date() {
-            return purchase_date;
-        }
+    public void setId(String id) {
+        this.id = id;
+    }
 
-        public void setPurchase_date(String purchase_date) {
-            this.purchase_date = purchase_date;
-        }
+    public String getModelId() {
+        return modelId;
+    }
 
-        public String getKms_covered() {
-            return kms_covered;
-        }
+    public void setModelId(String modelId) {
+        this.modelId = modelId;
+    }
 
-        public void setKms_covered(String kms_covered) {
-            this.kms_covered = kms_covered;
-        }
+    public String getKmCovered() {
+        return kmCovered;
+    }
 
-        public String getFuel_type() {
-            return fuel_type;
-        }
+    public void setKmCovered(String kmCovered) {
+        this.kmCovered = kmCovered;
+    }
 
-        public void setFuel_type(String fuel_type) {
-            this.fuel_type = fuel_type;
-        }
+    public String getMakeId() {
+        return makeId;
+    }
 
-        public String getRegistration_number() {
-            return registration_number;
-        }
+    public void setMakeId(String makeId) {
+        this.makeId = makeId;
+    }
 
-        public void setRegistration_number(String registration_number) {
-            this.registration_number = registration_number;
-        }
+    public String getItsYear() {
+        return itsYear;
+    }
 
-        public String getVariant() {
-            return variant;
-        }
+    public void setItsYear(String itsYear) {
+        this.itsYear = itsYear;
+    }
 
-        public void setVariant(String variant) {
-            this.variant = variant;
-        }
+    public String getDeviceId() {
+        return deviceId;
+    }
 
-        public String getModel() {
-            return model;
-        }
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
 
-        public void setModel(String model) {
-            this.model = model;
-        }
+    public String getPurchaseDate() {
+        return purchaseDate;
+    }
 
-        public String getVin() {
-            return vin;
-        }
+    public void setPurchaseDate(String purchaseDate) {
+        this.purchaseDate = purchaseDate;
+    }
 
-        public void setVin(String vin) {
-            this.vin = vin;
-        }
+    public String getDeviceSerial() {
+        return deviceSerial;
+    }
 
-        public String getDevice_id() {
-            return device_id;
-        }
+    public void setDeviceSerial(String deviceSerial) {
+        this.deviceSerial = deviceSerial;
+    }
 
-        public void setDevice_id(String device_id) {
-            this.device_id = device_id;
-        }
+    public String getImageUrl() {
+        return imageUrl;
+    }
 
-        public String getMake() {
-            return make;
-        }
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
-        public void setMake(String make) {
-            this.make = make;
-        }
+    public String getRegisterOn() {
+        return registerOn;
+    }
 
-        public String getVehicle_details_id() {
-            return vehicle_details_id;
-        }
+    public void setRegisterOn(String registerOn) {
+        this.registerOn = registerOn;
+    }
 
-        public void setVehicle_details_id(String vehicle_details_id) {
-            this.vehicle_details_id = vehicle_details_id;
-        }
+    public String getUserId() {
+        return userId;
+    }
 
-        public String getUser_id() {
-            return user_id;
-        }
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
-        public void setUser_id(String user_id) {
-            this.user_id = user_id;
-        }
+    public String getDeviceNumber() {
+        return deviceNumber;
+    }
+
+    public void setDeviceNumber(String deviceNumber) {
+        this.deviceNumber = deviceNumber;
+    }
+
+    public String getWorkshopId() {
+        return workshopId;
+    }
+
+    public void setWorkshopId(String workshopId) {
+        this.workshopId = workshopId;
+    }
+
+    public String getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId;
+    }
+
+    public String getSmartPlugSignature() {
+        return smartPlugSignature;
+    }
+
+    public void setSmartPlugSignature(String smartPlugSignature) {
+        this.smartPlugSignature = smartPlugSignature;
+    }
+
+    public String getAgent() {
+        return agent;
+    }
+
+    public void setAgent(String agent) {
+        this.agent = agent;
+    }
+
+    public String isHasDevice() {
+        return hasDevice;
+    }
+
+    public void setHasDevice(String hasDevice) {
+        this.hasDevice = hasDevice;
+    }
+
+    public String isIsDeviceRegistered() {
+        return isDeviceRegistered;
+    }
+
+    public void setIsDeviceRegistered(String isDeviceRegistered) {
+        this.isDeviceRegistered = isDeviceRegistered;
+    }
+
+    public String getSubscriptionSignature() {
+        return subscriptionSignature;
+    }
+
+    public void setSubscriptionSignature(String subscriptionSignature) {
+        this.subscriptionSignature = subscriptionSignature;
+    }
+
+    public String getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(String vehicleType) {
+        this.vehicleType = vehicleType;
+    }
+
+    public String getApplicationType() {
+        return applicationType;
+    }
+
+    public void setApplicationType(String applicationType) {
+        this.applicationType = applicationType;
+    }
+
+    public String getVin() {
+        return vin;
+    }
+
+    public void setVin(String vin) {
+        this.vin = vin;
     }
 }

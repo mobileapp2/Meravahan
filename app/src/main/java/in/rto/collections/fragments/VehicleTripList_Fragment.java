@@ -41,14 +41,14 @@ import static in.rto.collections.utilities.Utilities.getMd5;
 
 public class VehicleTripList_Fragment extends Fragment {
 
-    private Context context;
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private RecyclerView rv_triplist;
-    private LinearLayout ll_nothingtoshow;
-    private ProgressBar progressBar;
-    private UserSessionManager session;
-    private CarIqUserDetailsModel.ResultBean cariqdetails;
-    private String enabledCarIq;
+    private static Context context;
+    private static SwipeRefreshLayout swipeRefreshLayout;
+    private static RecyclerView rv_triplist;
+    private static LinearLayout ll_nothingtoshow;
+    private static ProgressBar progressBar;
+    private static UserSessionManager session;
+    private static CarIqUserDetailsModel.ResultBean cariqdetails;
+    private static String enabledCarIq;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -70,7 +70,7 @@ public class VehicleTripList_Fragment extends Fragment {
         rv_triplist.setLayoutManager(new LinearLayoutManager(context));
     }
 
-    private void getSessionDetails() {
+    public static void getSessionDetails() {
 
         try {
             String user_info = session.getCarIqUserDetails().get(
@@ -124,7 +124,7 @@ public class VehicleTripList_Fragment extends Fragment {
         });
     }
 
-    private class GetTripList extends AsyncTask<String, Void, String> {
+    private static class GetTripList extends AsyncTask<String, Void, String> {
 
         @Override
         protected void onPreExecute() {

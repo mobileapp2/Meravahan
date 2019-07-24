@@ -21,8 +21,10 @@ import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import in.rto.collections.R;
 import in.rto.collections.adapters.GetMyCarListAdapter;
@@ -33,8 +35,14 @@ import in.rto.collections.utilities.ParamsPojo;
 import in.rto.collections.utilities.UserSessionManager;
 import in.rto.collections.utilities.Utilities;
 import in.rto.collections.utilities.WebServiceCalls;
+import okhttp3.Credentials;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
-public class MyCarsList_Activity extends AppCompatActivity {
+import static in.rto.collections.utilities.Utilities.getMd5;
+
+public class CarIqCarsList_Activity extends AppCompatActivity {
 
     private static Context context;
     private static SwipeRefreshLayout swipeRefreshLayout;
@@ -44,14 +52,14 @@ public class MyCarsList_Activity extends AppCompatActivity {
     private static LinearLayout ll_nothingtoshow;
     private FloatingActionButton fab_add_car;
     private static String user_id;
-    private CarIqUserDetailsModel.ResultBean cariqdetails;
+    private static CarIqUserDetailsModel.ResultBean cariqdetails;
     private UserSessionManager session;
     public static Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_carslist);
+        setContentView(R.layout.activity_cariq_carslist);
         activity = this;
         init();
         getSessionDetails();
@@ -61,7 +69,7 @@ public class MyCarsList_Activity extends AppCompatActivity {
     }
 
     private void init() {
-        context = MyCarsList_Activity.this;
+        context = CarIqCarsList_Activity.this;
         session = new UserSessionManager(context);
         ll_parent = findViewById(R.id.ll_parent);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
@@ -79,6 +87,29 @@ public class MyCarsList_Activity extends AppCompatActivity {
                     ApplicationConstants.KEY_LOGIN_INFO));
             JSONObject json = user_info.getJSONObject(0);
             user_id = json.getString("id");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            String user_info = session.getCarIqUserDetails().get(
+                    ApplicationConstants.CARIQ_LOGIN);
+            CarIqUserDetailsModel pojoDetails = new Gson().fromJson(user_info, CarIqUserDetailsModel.class);
+
+            ArrayList<CarIqUserDetailsModel.ResultBean> myCarList = new ArrayList<>();
+            myCarList = pojoDetails.getResult();
+            cariqdetails = myCarList.get(0);
+
+            String enabledCarIq = session.getEnableCarTrackingDetails().get(
+                    ApplicationConstants.CARIQ_ENABLED_CARID);
+
+            if (enabledCarIq == null) {
+                ll_nothingtoshow.setVisibility(View.VISIBLE);
+            } else {
+                if (Utilities.isNetworkAvailable(context)) {
+                    new GetCarList().execute(user_id);
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -149,43 +180,64 @@ public class MyCarsList_Activity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             String res = "[]";
-            List<ParamsPojo> param = new ArrayList<ParamsPojo>();
-            param.add(new ParamsPojo("type", "getDetails"));
-            param.add(new ParamsPojo("user_id", user_id));
-            res = WebServiceCalls.FORMDATAAPICall(ApplicationConstants.VEHICLETRACKINGAPI, param);
+
+            OkHttpClient client = new OkHttpClient.Builder()
+                    .connectTimeout(5, TimeUnit.MINUTES)
+                    .writeTimeout(5, TimeUnit.MINUTES)
+                    .readTimeout(5, TimeUnit.MINUTES)
+                    .build();
+
+            Request request = new Request.Builder()
+                    .url(ApplicationConstants.CARIQCARLISTAPI)
+                    .addHeader("content-type", "application/json")
+                    .header("Authorization", Credentials.basic(cariqdetails.getUser_name(), getMd5(cariqdetails.getPassword())))
+                    .build();
+
+            try {
+                Response response = client.newCall(request).execute();
+                res = response.body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             return res.trim();
         }
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            String type = "", message = "";
+
+            swipeRefreshLayout.setRefreshing(false);
             try {
-                swipeRefreshLayout.setRefreshing(false);
-                rv_carlist.setVisibility(View.VISIBLE);
                 if (!result.equals("")) {
+                    JSONArray jsonarr = new JSONArray(result);
+                    ArrayList<MyCarListModel> myCarList = new ArrayList<>();
+                    if (jsonarr.length() > 0) {
+                        for (int i = 0; i < jsonarr.length(); i++) {
+                            MyCarListModel customerMainObj = new MyCarListModel();
+                            JSONObject jsonObj = jsonarr.getJSONObject(i);
+                            customerMainObj.setId(jsonObj.getString("id"));
+                            customerMainObj.setMake(jsonObj.getString("make"));
+                            customerMainObj.setModel(jsonObj.getString("model"));
+                            customerMainObj.setFuelType(jsonObj.getString("fuelType"));
+                            customerMainObj.setRegistrationNumber(jsonObj.getString("registrationNumber"));
+                            myCarList.add(customerMainObj);
+                        }
 
-                    ArrayList<MyCarListModel.ResultBean> myCarList = new ArrayList<>();
-                    MyCarListModel pojoDetails = new Gson().fromJson(result, MyCarListModel.class);
-                    type = pojoDetails.getType();
-                    if (type.equalsIgnoreCase("success")) {
+                        if (myCarList.size() != 0) {
 
-                        myCarList = pojoDetails.getResult();
-
-                        if (myCarList.size() == 0) {
-                            ll_nothingtoshow.setVisibility(View.VISIBLE);
-                            rv_carlist.setVisibility(View.GONE);
-                        } else {
                             rv_carlist.setVisibility(View.VISIBLE);
                             ll_nothingtoshow.setVisibility(View.GONE);
+                            rv_carlist.setAdapter(new GetMyCarListAdapter(context, myCarList, "1"));
+                        } else {
+                            ll_nothingtoshow.setVisibility(View.VISIBLE);
+                            rv_carlist.setVisibility(View.GONE);
                         }
-                        rv_carlist.setAdapter(new GetMyCarListAdapter(context, myCarList, "1"));
-                    } else {
-                        ll_nothingtoshow.setVisibility(View.VISIBLE);
-                        rv_carlist.setVisibility(View.GONE);
+
                     }
                 }
             } catch (Exception e) {
+                ll_nothingtoshow.setVisibility(View.VISIBLE);
+                rv_carlist.setVisibility(View.GONE);
                 e.printStackTrace();
             }
         }

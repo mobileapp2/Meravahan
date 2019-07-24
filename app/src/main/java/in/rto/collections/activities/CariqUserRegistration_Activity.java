@@ -332,7 +332,7 @@ public class CariqUserRegistration_Activity extends AppCompatActivity {
                         builder.setCancelable(false);
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                startActivity(new Intent(context, MyCarsList_Activity.class));
+                                startActivity(new Intent(context, CarIqCarsList_Activity.class));
                                 Tracking_Fragment.setDefault();
                                 finish();
                             }

@@ -14,25 +14,26 @@ import android.widget.TextView;
 import java.util.List;
 
 import in.rto.collections.R;
+import in.rto.collections.activities.CarIqCarsList_Activity;
 import in.rto.collections.activities.MainDrawer_Activity;
-import in.rto.collections.activities.MyCarsList_Activity;
 import in.rto.collections.fragments.LastSeenTracking_Fragment;
 import in.rto.collections.fragments.LiveTracking_Fragment;
 import in.rto.collections.fragments.Tracking_Fragment;
 import in.rto.collections.fragments.VehicleForTracking_Fragment;
+import in.rto.collections.fragments.VehicleTripList_Fragment;
 import in.rto.collections.models.MyCarListModel;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.UserSessionManager;
 
 public class GetMyCarListAdapter extends RecyclerView.Adapter<GetMyCarListAdapter.MyViewHolder> {
 
-    private List<MyCarListModel.ResultBean> resultArrayList;
+    private List<MyCarListModel> resultArrayList;
     private Context context;
     private String type;
     private UserSessionManager session;
     private String enabledCarIq;
 
-    public GetMyCarListAdapter(Context context, List<MyCarListModel.ResultBean> resultArrayList, String type) {
+    public GetMyCarListAdapter(Context context, List<MyCarListModel> resultArrayList, String type) {
         this.context = context;
         this.resultArrayList = resultArrayList;
         this.type = type;
@@ -52,30 +53,31 @@ public class GetMyCarListAdapter extends RecyclerView.Adapter<GetMyCarListAdapte
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        final MyCarListModel.ResultBean cardetails = resultArrayList.get(position);
+        final MyCarListModel cardetails = resultArrayList.get(position);
 
         if (enabledCarIq != null) {
-            if (enabledCarIq.equals(cardetails.getVehicle_details_id())) {
+            if (enabledCarIq.equals(cardetails.getId())) {
                 holder.btn_enabletrack.setText("Tracking Enabled");
             }
         }
 
-        holder.tv_carname.setText(cardetails.getMake() + " (" + cardetails.getModel() + " " + cardetails.getVariant() + ")");
-        holder.tv_carnumber.setText(cardetails.getRegistration_number());
+        holder.tv_carname.setText(cardetails.getMake() + " (" + cardetails.getModel() + " " + cardetails.getFuelType() + ")");
+        holder.tv_carnumber.setText(cardetails.getRegistrationNumber());
         holder.tv_poweredbycariq.setText(Html.fromHtml("Powered by " + "<b>" + "cariq" + "</b>"));
 
         holder.btn_enabletrack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 holder.btn_enabletrack.setText("Tracking Enabled");
-                session.createEnableCarTrackingSession(cardetails.getVehicle_details_id());
-//                new MyCarsList_Activity.GetCarList().execute();
+                session.createEnableCarTrackingSession(cardetails.getId());
+//                new CarIqCarsList_Activity.GetCarList().execute();
                 VehicleForTracking_Fragment.setDefault();
                 LiveTracking_Fragment.getSessionDetails();
                 LastSeenTracking_Fragment.getSessionDetails();
+                VehicleTripList_Fragment.getSessionDetails();
 
                 if (type.equals("1")) {
-                    MyCarsList_Activity.activity.finish();
+                    CarIqCarsList_Activity.activity.finish();
                     MainDrawer_Activity.changePage();
                     Tracking_Fragment.changePage();
                 } else if (type.equals("2")) {

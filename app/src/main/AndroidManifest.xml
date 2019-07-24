@@ -73,7 +73,7 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activities.MyCarsList_Activity"
+            android:name=".activities.CarIqCarsList_Activity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
         <activity

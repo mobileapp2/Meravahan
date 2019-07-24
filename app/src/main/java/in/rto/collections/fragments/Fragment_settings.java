@@ -30,7 +30,7 @@ import java.util.List;
 import in.rto.collections.R;
 import in.rto.collections.activities.CariqUserRegistration_Activity;
 import in.rto.collections.activities.LanguageSetting_Activity;
-import in.rto.collections.activities.MyCarsList_Activity;
+import in.rto.collections.activities.CarIqCarsList_Activity;
 import in.rto.collections.activities.SMSAnniversarySettings_Activity;
 import in.rto.collections.activities.SMSBirthdaySettings_Activity;
 import in.rto.collections.activities.Signature_Settings;
@@ -949,7 +949,7 @@ public class Fragment_settings extends Fragment {
                     if (type.equalsIgnoreCase("success")) {
                         session.createCarIqSession(result);
                         myCarList = pojoDetails.getResult();
-                        startActivity(new Intent(context, MyCarsList_Activity.class)
+                        startActivity(new Intent(context, CarIqCarsList_Activity.class)
                                 .putExtra("cariqdetails", myCarList.get(0)));
 
                     } else {
