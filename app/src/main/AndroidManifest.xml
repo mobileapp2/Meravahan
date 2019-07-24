@@ -104,6 +104,18 @@
             android:name=".activities.TripDetailsOnMap_Activity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activities.NotificationMeravahanCariq_Activity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activities.CarIqMapViewFromNotification_Activity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activities.CarIqWeeklySummary_Activity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".activities.RtoAgent_Activity" />
         <activity android:name=".activities.VehicleDealer_Activity" />
         <activity android:name=".activities.Add_Client_Activity" />

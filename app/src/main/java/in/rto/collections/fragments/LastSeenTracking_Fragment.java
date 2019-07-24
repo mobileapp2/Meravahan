@@ -106,7 +106,6 @@ public class LastSeenTracking_Fragment extends Fragment implements OnMapReadyCal
         }
     }
 
-
     private void setEventListner() {
 
     }

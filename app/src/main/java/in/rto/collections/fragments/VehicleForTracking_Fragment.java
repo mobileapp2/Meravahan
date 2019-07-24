@@ -28,7 +28,6 @@ import java.util.concurrent.TimeUnit;
 
 import in.rto.collections.R;
 import in.rto.collections.activities.AddMyCar_Activity;
-import in.rto.collections.activities.CarIqCarsList_Activity;
 import in.rto.collections.activities.CariqUserRegistration_Activity;
 import in.rto.collections.adapters.GetMyCarListAdapter;
 import in.rto.collections.models.CarIqUserDetailsModel;
@@ -102,7 +101,7 @@ public class VehicleForTracking_Fragment extends Fragment {
                 ll_nothingtoshow.setVisibility(View.VISIBLE);
             } else {
                 if (Utilities.isNetworkAvailable(context)) {
-                    new CarIqCarsList_Activity.GetCarList().execute(user_id);
+                    new GetCarList().execute(user_id);
                 }
             }
         } catch (Exception e) {

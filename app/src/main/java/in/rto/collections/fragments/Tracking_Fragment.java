@@ -62,8 +62,6 @@ public class Tracking_Fragment extends Fragment {
         ll_nothingtoshow = rootView.findViewById(R.id.ll_nothingtoshow);
         progressBar = rootView.findViewById(R.id.progressBar);
         viewPager.setOffscreenPageLimit(3);
-
-
         adapter = new ViewPagerAdapter(getChildFragmentManager());
     }
 

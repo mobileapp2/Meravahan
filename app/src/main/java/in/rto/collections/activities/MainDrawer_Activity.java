@@ -143,7 +143,11 @@ public class MainDrawer_Activity extends AppCompatActivity implements Navigation
         img_notifications.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(context, Notification_Activity.class));
+                if (role.equals("3")) {
+                    startActivity(new Intent(context, NotificationMeravahanCariq_Activity.class));
+                } else {
+                    startActivity(new Intent(context, Notification_Activity.class));
+                }
             }
         });
 //        img_todolist.setOnClickListener(new View.OnClickListener() {
@@ -451,7 +455,45 @@ public class MainDrawer_Activity extends AppCompatActivity implements Navigation
                     alertD.show();
                 }
                 break;
+            case "3":
+                nav_Menu.findItem(R.id.menu_information).setVisible(true);
+                if (id == R.id.menu_profile) {
+                    startActivity(new Intent(context, Profile_Activity.class));
+                } else if (id == R.id.menu_pro) {
+                    startActivity(new Intent(context, SelectPremiumPlan_Activity.class));
+                } else if (id == R.id.menu_notification) {
+                    startActivity(new Intent(context, NotificationMeravahanCariq_Activity.class));
+                } else if (id == R.id.menu_masters) {
+                    startActivity(new Intent(context, Masters_Activity.class));
+                } else if (id == R.id.menu_contact) {
+                    startActivity(new Intent(context, ContactUs_Activity.class));
+                } else if (id == R.id.menu_faq) {
+                    startActivity(new Intent(context, FAQ_Activity.class));
+                } else if (id == R.id.legal_info) {
+                    startActivity(new Intent(context, LegalInfo_Activity.class));
+                } else if (id == R.id.menu_logout) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage("Are you sure you want to log out?");
+                    builder.setTitle("Alert");
+                    builder.setIcon(R.drawable.ic_alert_red_24dp);
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            session.logoutUser();
+                        }
+                    });
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog alertD = builder.create();
+                    alertD.show();
+                }
+                break;
             default:
+                nav_Menu.findItem(R.id.menu_information).setVisible(true);
                 if (id == R.id.menu_profile) {
                     startActivity(new Intent(context, Profile_Activity.class));
                 } else if (id == R.id.menu_pro) {
