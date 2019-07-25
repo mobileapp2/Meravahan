@@ -1,12 +1,11 @@
 package in.rto.collections.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -18,25 +17,26 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import in.rto.collections.R;
-import in.rto.collections.adapters.GetNotificationCarIqListAdapter;
 import in.rto.collections.models.CarIqUserDetailsModel;
 import in.rto.collections.models.CariqAlertSettingsModel;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.UserSessionManager;
 import in.rto.collections.utilities.Utilities;
 import okhttp3.Credentials;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static in.rto.collections.utilities.Utilities.getMd5;
@@ -217,7 +217,7 @@ public class CariqCarAlertSettings_Activity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if (Utilities.isNetworkAvailable(context)) {
-//                        new SetAlertSettings().execute(cardetails.getType(), getIntent().getStringExtra("carId"));
+                        new SetAlertSettings().execute(cardetails.getType(), getIntent().getStringExtra("carId"), String.valueOf(holder.sw_onoff.isChecked()));
                     } else {
                         Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                     }
@@ -248,6 +248,59 @@ public class CariqCarAlertSettings_Activity extends AppCompatActivity {
             return position;
         }
     }
+
+
+    private class SetAlertSettings extends AsyncTask<String, Void, String> {
+
+        private ProgressDialog pd;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd = new ProgressDialog(context, R.style.CustomDialogTheme);
+            pd.setMessage("Saving changes...");
+            pd.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String res = "[]";
+
+            OkHttpClient client = new OkHttpClient.Builder()
+                    .connectTimeout(5, TimeUnit.MINUTES)
+                    .writeTimeout(5, TimeUnit.MINUTES)
+                    .readTimeout(5, TimeUnit.MINUTES)
+                    .build();
+
+            JsonObject regObj = new JsonObject();
+            regObj.addProperty("isOn", params[2]);
+
+            MediaType mediaType = MediaType.parse("application/json");
+            RequestBody body = RequestBody.create(mediaType, regObj.toString());
+            Request request = new Request.Builder()
+                    .url(ApplicationConstants.CARIQSETALERTSETTINGSAPI + "/" + params[0] + "/" + params[1])
+                    .put(body)
+                    .addHeader("content-type", "application/json")
+                    .header("Authorization", Credentials.basic(cariqdetails.getUser_name(), getMd5(cariqdetails.getPassword())))
+                    .build();
+
+            try {
+                Response response = client.newCall(request).execute();
+                res = response.body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return res.trim();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            pd.dismiss();
+            super.onPostExecute(result);
+
+        }
+    }
+
 
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
