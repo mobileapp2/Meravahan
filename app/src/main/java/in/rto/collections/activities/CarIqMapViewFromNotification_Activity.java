@@ -26,6 +26,8 @@ import java.util.Locale;
 
 import in.rto.collections.R;
 
+import static in.rto.collections.utilities.Utilities.splitCamelCase;
+
 public class CarIqMapViewFromNotification_Activity extends AppCompatActivity implements OnMapReadyCallback {
 
     private Context context;
@@ -116,7 +118,7 @@ public class CarIqMapViewFromNotification_Activity extends AppCompatActivity imp
 
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
-        mToolbar.setTitle(getIntent().getStringExtra("type"));
+        mToolbar.setTitle(splitCamelCase(getIntent().getStringExtra("type")));
         mToolbar.setNavigationIcon(R.drawable.icon_backarrow_16p);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

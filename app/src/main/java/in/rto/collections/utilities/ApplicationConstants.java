@@ -51,6 +51,7 @@ public class ApplicationConstants {
     public static final String PLANLISTAPI = "https://gstkhata.com/vehicle/Apis/buy_plan.php";
     public static final String VEHICLETRACKINGAPI = "https://gstkhata.com/vehicle/Apis/vehicle_tracking_details.php";
     public static final String USECARIQRAPI = "https://gstkhata.com/vehicle/Apis/cariq.php";
+
     public static final String CARIQUSERREGAPI = "https://dev-ecu.mycariq.com/Cariq/cariqusers/registerUser/admin/abcd1234efgh5678";
     public static final String MAKERLISTAPI = "https://dev-ecu.mycariq.com/Cariq/carmakes/listAllMakes";
     public static final String MODELANDVARIANTLISTAPI = "https://dev-ecu.mycariq.com/Cariq/carmodels/listMakesModelinDetail/";
@@ -61,6 +62,8 @@ public class ApplicationConstants {
     public static final String TRIPSDETAILSAPI = "https://dev-ecu.mycariq.com/Cariq/cars/tripDetail/";
     public static final String CARIQCARLISTAPI = "https://dev-ecu.mycariq.com/Cariq/cars/getCarList";
     public static final String CARIQNOTIFICATIONAPI = "https://dev-ecu.mycariq.com/Cariq/alerts/alertsDetail/";
+    public static final String CARIQALERTSETTINGSAPI = "https://dev-ecu.mycariq.com/Cariq/settings/get/Alert/";
+    public static final String CARIQSETALERTSETTINGSAPI = "https://dev-ecu.mycariq.com/Cariq/settings/set/Alert/";
 
     //LIVE API LINK LIST
 
@@ -96,6 +99,6 @@ public class ApplicationConstants {
 //    public static final String TRIPSDETAILSAPI = "https://ecu.mycariq.com/Cariq/cars/tripDetail/";
 //    public static final String CARIQCARLISTAPI = "https://ecu.mycariq.com/Cariq/cars/getCarList";
 //    public static final String CARIQNOTIFICATIONAPI = "https://ecu.mycariq.com/Cariq/alerts/alertsDetail/";
-
-
+//    public static final String CARIQALERTSETTINGSAPI = "https://ecu.mycariq.com/Cariq/settings/get/Alert/";
+//    public static final String CARIQSETALERTSETTINGSAPI = "https://ecu.mycariq.com/Cariq/settings/set/Alert/";
 }

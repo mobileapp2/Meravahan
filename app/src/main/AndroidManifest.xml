@@ -116,6 +116,16 @@
             android:name=".activities.CarIqWeeklySummary_Activity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activities.CarIqCarListAlertsSettings_Activity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activities.CariqCarAlertSettings_Activity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".activities.RtoAgent_Activity" />
         <activity android:name=".activities.VehicleDealer_Activity" />
         <activity android:name=".activities.Add_Client_Activity" />

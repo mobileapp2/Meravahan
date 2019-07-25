@@ -199,8 +199,7 @@ public class Utilities {
         alertD.show();
     }
 
-    public static String getMd5(String input)
-    {
+    public static String getMd5(String input) {
         try {
 
             // Static getInstance method is called with hashing MD5
@@ -226,5 +225,17 @@ public class Utilities {
             throw new RuntimeException(e);
         }
     }
+
+    public static String splitCamelCase(String s) {
+        return s.replaceAll(
+                String.format("%s|%s|%s",
+                        "(?<=[A-Z])(?=[A-Z][a-z])",
+                        "(?<=[^A-Z])(?=[A-Z])",
+                        "(?<=[A-Za-z])(?=[^A-Za-z])"
+                ),
+                " "
+        );
+    }
+
 
 }
