@@ -249,7 +249,6 @@ public class CariqCarAlertSettings_Activity extends AppCompatActivity {
         }
     }
 
-
     private class SetAlertSettings extends AsyncTask<String, Void, String> {
 
         private ProgressDialog pd;
@@ -273,7 +272,7 @@ public class CariqCarAlertSettings_Activity extends AppCompatActivity {
                     .build();
 
             JsonObject regObj = new JsonObject();
-            regObj.addProperty("isOn", params[2]);
+            regObj.addProperty("isOn", Boolean.valueOf(params[2]));
 
             MediaType mediaType = MediaType.parse("application/json");
             RequestBody body = RequestBody.create(mediaType, regObj.toString());
@@ -300,7 +299,6 @@ public class CariqCarAlertSettings_Activity extends AppCompatActivity {
 
         }
     }
-
 
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
