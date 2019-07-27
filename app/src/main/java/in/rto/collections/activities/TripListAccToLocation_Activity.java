@@ -178,7 +178,6 @@ public class TripListAccToLocation_Activity extends AppCompatActivity {
 
                     tripsList = pojoDetails.getItsLastLocationList();
 
-
                     ArrayList<ArrayList<TripDetailsListModel.ItsLastLocationListBean>> arrayLists = new ArrayList<>();
 
                     ArrayList<TripDetailsListModel.ItsLastLocationListBean> arratTripList = new ArrayList<>();
@@ -199,8 +198,6 @@ public class TripListAccToLocation_Activity extends AppCompatActivity {
                                     arrayLists.add(arratTripList);
                                     arratTripList = new ArrayList<>();
                                 }
-
-
                             }
                         }
                     }

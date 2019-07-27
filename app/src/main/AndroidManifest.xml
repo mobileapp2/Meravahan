@@ -23,7 +23,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDhtPVZM4-TPRF4KxU0SHp7pvqnAYmO7J8" />
@@ -123,9 +122,18 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".activities.CariqCarAlertSettings_Activity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activities.ValueAddedServices_Activity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activities.CariqProfileEdit_Activity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
+
         <activity android:name=".activities.RtoAgent_Activity" />
         <activity android:name=".activities.VehicleDealer_Activity" />
         <activity android:name=".activities.Add_Client_Activity" />

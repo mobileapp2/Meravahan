@@ -323,7 +323,7 @@ public class CarIqCarsList_Activity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_profile) {
-            Utilities.showMessageString(context, "Under Development");
+            startActivity(new Intent(context, CariqProfileEdit_Activity.class));
         } else if (id == R.id.action_settings) {
             startActivity(new Intent(context, CarIqCarListAlertsSettings_Activity.class));
         }

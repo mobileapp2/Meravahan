@@ -188,10 +188,10 @@
                 <Button
                     android:id="@+id/btn_register"
                     android:layout_width="100dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/style_button"
                     android:text="Register"
                     android:textColor="@color/white" />
             </LinearLayout>

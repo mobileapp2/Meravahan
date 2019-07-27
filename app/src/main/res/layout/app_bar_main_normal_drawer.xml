@@ -32,6 +32,15 @@
                 android:src="@drawable/icon_notification"
                 android:tint="@color/white" />
 
+            <ImageView
+                android:id="@+id/img_service"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="end"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/icon_vas"
+                android:tint="@color/white" />
+
             <!--        <ImageView
                        android:id="@+id/img_todolist"
                        android:layout_width="wrap_content"

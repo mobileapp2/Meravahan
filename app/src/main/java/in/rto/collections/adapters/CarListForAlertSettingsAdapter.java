@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -68,7 +69,7 @@ public class CarListForAlertSettingsAdapter extends RecyclerView.Adapter<CarList
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         private CardView ll_mainlayout;
-        private LinearLayout ll_enable;
+        private RelativeLayout ll_enable;
         private TextView tv_carname, tv_carnumber;
 
         public MyViewHolder(View view) {

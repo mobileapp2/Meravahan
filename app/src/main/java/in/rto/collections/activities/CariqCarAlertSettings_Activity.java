@@ -17,6 +17,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
@@ -179,7 +180,7 @@ public class CariqCarAlertSettings_Activity extends AppCompatActivity {
                     if (alertSettingsList.size() > 0) {
                         rv_alertlist.setVisibility(View.VISIBLE);
                         ll_nothingtoshow.setVisibility(View.GONE);
-                        rv_alertlist.setAdapter(new AlertSettingsListAdapter());
+                        rv_alertlist.setAdapter(new AlertSettingsListAdapter(alertSettingsList));
                     } else {
                         rv_alertlist.setVisibility(View.GONE);
                         ll_nothingtoshow.setVisibility(View.VISIBLE);
@@ -195,8 +196,10 @@ public class CariqCarAlertSettings_Activity extends AppCompatActivity {
 
     private class AlertSettingsListAdapter extends RecyclerView.Adapter<AlertSettingsListAdapter.MyViewHolder> {
 
-        private AlertSettingsListAdapter() {
+        ArrayList<CariqAlertSettingsModel.TypesBean> alertSettingsList;
 
+        private AlertSettingsListAdapter(ArrayList<CariqAlertSettingsModel.TypesBean> alertSettingsList) {
+            this.alertSettingsList = alertSettingsList;
         }
 
         @Override
@@ -216,8 +219,22 @@ public class CariqCarAlertSettings_Activity extends AppCompatActivity {
             holder.sw_onoff.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    alertSettingsList.get(position).setIsOn(holder.sw_onoff.isChecked());
+
                     if (Utilities.isNetworkAvailable(context)) {
-                        new SetAlertSettings().execute(cardetails.getType(), getIntent().getStringExtra("carId"), String.valueOf(holder.sw_onoff.isChecked()));
+                        JsonObject jsonObject = new JsonObject();
+                        JsonArray jsonArray = new JsonArray();
+
+
+                        for (int i = 0; i < alertSettingsList.size(); i++) {
+                            JsonObject object = new JsonObject();
+                            object.addProperty("type", alertSettingsList.get(i).getType());
+                            object.addProperty("isOn", alertSettingsList.get(i).isIsOn());
+                            jsonArray.add(object);
+                        }
+                        jsonObject.add("types", jsonArray);
+
+                        new SetAlertSettings().execute(getIntent().getStringExtra("carId"), jsonObject.toString());
                     } else {
                         Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                     }
@@ -271,14 +288,11 @@ public class CariqCarAlertSettings_Activity extends AppCompatActivity {
                     .readTimeout(5, TimeUnit.MINUTES)
                     .build();
 
-            JsonObject regObj = new JsonObject();
-            regObj.addProperty("isOn", Boolean.valueOf(params[2]));
-
             MediaType mediaType = MediaType.parse("application/json");
-            RequestBody body = RequestBody.create(mediaType, regObj.toString());
+            RequestBody body = RequestBody.create(mediaType, params[1]);
             Request request = new Request.Builder()
-                    .url(ApplicationConstants.CARIQSETALERTSETTINGSAPI + "/" + params[0] + "/" + params[1])
-                    .put(body)
+                    .url(ApplicationConstants.CARIQSETALERTSETTINGSAPI + "/" + params[0])
+                    .post(body)
                     .addHeader("content-type", "application/json")
                     .header("Authorization", Credentials.basic(cariqdetails.getUser_name(), getMd5(cariqdetails.getPassword())))
                     .build();

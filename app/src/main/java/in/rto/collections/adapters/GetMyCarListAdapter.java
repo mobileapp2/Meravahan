@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -63,7 +64,6 @@ public class GetMyCarListAdapter extends RecyclerView.Adapter<GetMyCarListAdapte
 
         holder.tv_carname.setText(cardetails.getMake() + " (" + cardetails.getModel() + " " + cardetails.getFuelType() + ")");
         holder.tv_carnumber.setText(cardetails.getRegistrationNumber());
-        holder.tv_poweredbycariq.setText(Html.fromHtml("Powered by " + "<b>" + "cariq" + "</b>"));
 
         holder.btn_enabletrack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,15 +99,14 @@ public class GetMyCarListAdapter extends RecyclerView.Adapter<GetMyCarListAdapte
 
         private CardView ll_mainlayout;
         private Button btn_enabletrack;
-        private LinearLayout ll_enable;
-        private TextView tv_carname, tv_carnumber, tv_poweredbycariq;
+        private RelativeLayout ll_enable;
+        private TextView tv_carname, tv_carnumber;
 
         public MyViewHolder(View view) {
             super(view);
             tv_carname = view.findViewById(R.id.tv_carname);
             tv_carnumber = view.findViewById(R.id.tv_carnumber);
             ll_mainlayout = view.findViewById(R.id.ll_mainlayout);
-            tv_poweredbycariq = view.findViewById(R.id.tv_poweredbycariq);
             ll_enable = view.findViewById(R.id.ll_enable);
             btn_enabletrack = view.findViewById(R.id.btn_enabletrack);
         }

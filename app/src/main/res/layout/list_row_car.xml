@@ -42,39 +42,44 @@
             android:textColor="@color/grey"
             android:textSize="16sp" />
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/ll_enable"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/tv_poweredbycariq"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.6"
-                android:clickable="false"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:padding="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="5dp"
+                android:text="Powered by"
                 android:textColor="@color/grey"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/tv_poweredbycariq"
+                android:src="@drawable/icon_cariq" />
+
 
             <Button
                 android:id="@+id/btn_enabletrack"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_weight="0.4"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:background="@color/white"
-                android:clickable="false"
-                android:ellipsize="end"
-                android:maxLines="1"
                 android:padding="5dp"
                 android:text="Enable Tracking"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </LinearLayout>
 

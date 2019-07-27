@@ -53,7 +53,7 @@ public class MainDrawer_Activity extends AppCompatActivity implements Navigation
     private BotNavViewPagerAdapter adapter;
     private static AHBottomNavigationViewPager view_pager;
     private UserSessionManager session;
-    private ImageView yimg_todolist, img_notifications;
+    private ImageView yimg_todolist, img_notifications, img_service;
     NavigationView navigationView;
     private String selcteddata;
     public static ArrayList<String> faqCustomerLinksList = new ArrayList<>();
@@ -110,6 +110,7 @@ public class MainDrawer_Activity extends AppCompatActivity implements Navigation
         new GetFaq().execute();
         session = new UserSessionManager(context);
         bottomNavigation = findViewById(R.id.bottom_navigation);
+        img_service = findViewById(R.id.img_service);
         view_pager = findViewById(R.id.view_pager);
         view_pager.setOffscreenPageLimit(4);
         selcteddata = getIntent().getStringExtra("linking");
@@ -148,6 +149,13 @@ public class MainDrawer_Activity extends AppCompatActivity implements Navigation
                 } else {
                     startActivity(new Intent(context, Notification_Activity.class));
                 }
+            }
+        });
+
+        img_service.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(context, ValueAddedServices_Activity.class));
             }
         });
 //        img_todolist.setOnClickListener(new View.OnClickListener() {

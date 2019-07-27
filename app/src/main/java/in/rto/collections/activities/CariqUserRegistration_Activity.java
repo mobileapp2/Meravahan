@@ -242,7 +242,6 @@ public class CariqUserRegistration_Activity extends AppCompatActivity {
                     .url(ApplicationConstants.CARIQUSERREGAPI)
                     .post(body)
                     .addHeader("content-type", "application/json")
-//                    .addHeader("Authorization", "Basic bWVyYXZhaGFuOmY1ZTIzOWVlNWQ2M2UyODIxY2IxMzkzOGZjODUzYjJk")
                     .header("Authorization", Credentials.basic(adminUsername, adminPassword))
                     .build();
 
