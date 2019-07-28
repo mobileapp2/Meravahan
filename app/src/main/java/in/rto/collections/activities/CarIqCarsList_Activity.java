@@ -12,10 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -50,6 +48,7 @@ public class CarIqCarsList_Activity extends AppCompatActivity {
     private static Context context;
     private static SwipeRefreshLayout swipeRefreshLayout;
     private static RecyclerView rv_carlist;
+    private ImageView img_profile, img_notification;
     private TextView tv_resourcename, tv_mobile, tv_email;
     private LinearLayout ll_parent;
     private static LinearLayout ll_nothingtoshow;
@@ -82,6 +81,8 @@ public class CarIqCarsList_Activity extends AppCompatActivity {
         tv_resourcename = findViewById(R.id.tv_resourcename);
         tv_mobile = findViewById(R.id.tv_mobile);
         tv_email = findViewById(R.id.tv_email);
+        img_profile = findViewById(R.id.img_profile);
+        img_notification = findViewById(R.id.img_notification);
     }
 
     private void getSessionDetails() {
@@ -166,6 +167,20 @@ public class CarIqCarsList_Activity extends AppCompatActivity {
                     ll_nothingtoshow.setVisibility(View.VISIBLE);
                     rv_carlist.setVisibility(View.GONE);
                 }
+            }
+        });
+
+        img_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(context, CariqProfileEdit_Activity.class));
+            }
+        });
+
+        img_notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(context, CarIqCarListAlertsSettings_Activity.class));
             }
         });
     }
@@ -309,24 +324,5 @@ public class CarIqCarsList_Activity extends AppCompatActivity {
             }
         });
         setSupportActionBar(mToolbar);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_cariq, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_profile) {
-            startActivity(new Intent(context, CariqProfileEdit_Activity.class));
-        } else if (id == R.id.action_settings) {
-            startActivity(new Intent(context, CarIqCarListAlertsSettings_Activity.class));
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -18,7 +18,28 @@
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
-            app:titleTextColor="@color/white" />
+            app:titleTextColor="@color/white" >
+
+            <ImageView
+                android:id="@+id/img_profile"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="end"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/icon_cariq_profile"
+                android:tint="@color/white" />
+
+            <ImageView
+                android:id="@+id/img_notification"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="end"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/icon_cariq_notifi_settings"
+                android:tint="@color/white" />
+
+
+        </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v7.widget.CardView

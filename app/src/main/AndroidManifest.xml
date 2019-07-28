@@ -117,7 +117,6 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".activities.CarIqCarListAlertsSettings_Activity"
-            android:label=""
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
