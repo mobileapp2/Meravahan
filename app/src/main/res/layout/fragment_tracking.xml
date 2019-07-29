@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:inputType="textMultiLine"
-                android:text="Please register to Cariq in My Vehicles option from settings tab"
+                android:text="Please register or login to Cariq in My Vehicles option from settings tab"
                 android:textSize="16sp" />
         </LinearLayout>
 

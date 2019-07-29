@@ -15,7 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -49,7 +48,6 @@ public class CarIqCarsList_Activity extends AppCompatActivity {
     private static SwipeRefreshLayout swipeRefreshLayout;
     private static RecyclerView rv_carlist;
     private ImageView img_profile, img_notification;
-    private TextView tv_resourcename, tv_mobile, tv_email;
     private LinearLayout ll_parent;
     private static LinearLayout ll_nothingtoshow;
     private FloatingActionButton fab_add_car;
@@ -78,11 +76,10 @@ public class CarIqCarsList_Activity extends AppCompatActivity {
         rv_carlist = findViewById(R.id.rv_carlist);
         ll_nothingtoshow = findViewById(R.id.ll_nothingtoshow);
         fab_add_car = findViewById(R.id.fab_add_car);
-        tv_resourcename = findViewById(R.id.tv_resourcename);
-        tv_mobile = findViewById(R.id.tv_mobile);
-        tv_email = findViewById(R.id.tv_email);
         img_profile = findViewById(R.id.img_profile);
         img_notification = findViewById(R.id.img_notification);
+
+        rv_carlist.setLayoutManager(new LinearLayoutManager(context));
     }
 
     private void getSessionDetails() {
@@ -98,21 +95,13 @@ public class CarIqCarsList_Activity extends AppCompatActivity {
         try {
             String user_info = session.getCarIqUserDetails().get(
                     ApplicationConstants.CARIQ_LOGIN);
-            CarIqUserDetailsModel pojoDetails = new Gson().fromJson(user_info, CarIqUserDetailsModel.class);
 
-            ArrayList<CarIqUserDetailsModel.ResultBean> myCarList = new ArrayList<>();
-            myCarList = pojoDetails.getResult();
-            cariqdetails = myCarList.get(0);
+            if (user_info != null) {
+                CarIqUserDetailsModel pojoDetails = new Gson().fromJson(user_info, CarIqUserDetailsModel.class);
 
-            String enabledCarIq = session.getEnableCarTrackingDetails().get(
-                    ApplicationConstants.CARIQ_ENABLED_CARID);
-
-            if (enabledCarIq == null) {
-                ll_nothingtoshow.setVisibility(View.VISIBLE);
-            } else {
-                if (Utilities.isNetworkAvailable(context)) {
-                    new GetCarList().execute();
-                }
+                ArrayList<CarIqUserDetailsModel.ResultBean> myCarList = new ArrayList<>();
+                myCarList = pojoDetails.getResult();
+                cariqdetails = myCarList.get(0);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -123,28 +112,23 @@ public class CarIqCarsList_Activity extends AppCompatActivity {
         cariqdetails = (CarIqUserDetailsModel.ResultBean) getIntent().getSerializableExtra("cariqdetails");
 
         if (cariqdetails == null) {
-
             if (Utilities.isNetworkAvailable(context)) {
                 new CheckUserRegistration().execute(user_id);
             } else {
                 Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
             }
         } else {
-            tv_resourcename.setText(cariqdetails.getFirst_name() + " " + cariqdetails.getLast_name() + " (" + cariqdetails.getUser_name() + ")");
-            tv_mobile.setText(cariqdetails.getCell_number());
-            tv_email.setText(cariqdetails.getEmail());
+
+            if (Utilities.isNetworkAvailable(context)) {
+                new GetCarList().execute();
+            } else {
+                Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+                swipeRefreshLayout.setRefreshing(false);
+                ll_nothingtoshow.setVisibility(View.VISIBLE);
+                rv_carlist.setVisibility(View.GONE);
+            }
         }
 
-        rv_carlist.setLayoutManager(new LinearLayoutManager(context));
-
-        if (Utilities.isNetworkAvailable(context)) {
-            new GetCarList().execute();
-        } else {
-            Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
-            swipeRefreshLayout.setRefreshing(false);
-            ll_nothingtoshow.setVisibility(View.VISIBLE);
-            rv_carlist.setVisibility(View.GONE);
-        }
     }
 
     private void setEventHandler() {
@@ -292,17 +276,36 @@ public class CarIqCarsList_Activity extends AppCompatActivity {
             String type = "", message = "";
             try {
                 if (!result.equals("")) {
-
-                    ArrayList<CarIqUserDetailsModel.ResultBean> myCarList = new ArrayList<>();
                     CarIqUserDetailsModel pojoDetails = new Gson().fromJson(result, CarIqUserDetailsModel.class);
                     type = pojoDetails.getType();
                     if (type.equalsIgnoreCase("success")) {
                         session.createCarIqSession(result);
-                        myCarList = pojoDetails.getResult();
-                        cariqdetails = myCarList.get(0);
-                        tv_resourcename.setText(cariqdetails.getFirst_name() + " " + cariqdetails.getLast_name() + " (" + cariqdetails.getUser_name() + ")");
-                        tv_mobile.setText(cariqdetails.getCell_number());
-                        tv_email.setText(cariqdetails.getEmail());
+
+                        try {
+                            String user_info = session.getCarIqUserDetails().get(
+                                    ApplicationConstants.CARIQ_LOGIN);
+
+                            if (user_info != null) {
+                                CarIqUserDetailsModel pojo = new Gson().fromJson(user_info, CarIqUserDetailsModel.class);
+
+                                ArrayList<CarIqUserDetailsModel.ResultBean> cariqdetailsList = new ArrayList<>();
+                                cariqdetailsList = pojo.getResult();
+                                cariqdetails = cariqdetailsList.get(0);
+
+                                if (Utilities.isNetworkAvailable(context)) {
+                                    new GetCarList().execute();
+                                } else {
+                                    Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+                                    swipeRefreshLayout.setRefreshing(false);
+                                    ll_nothingtoshow.setVisibility(View.VISIBLE);
+                                    rv_carlist.setVisibility(View.GONE);
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+
                     } else {
                         startActivity(new Intent(context, CariqUserRegistration_Activity.class));
                     }

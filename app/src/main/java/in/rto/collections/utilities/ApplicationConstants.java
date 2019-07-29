@@ -67,6 +67,7 @@ public class ApplicationConstants {
     public static final String CARIQALERTSETTINGSAPI = "https://dev-ecu.mycariq.com/Cariq/settings/get/Alert/";
     public static final String CARIQSETALERTSETTINGSAPI = "https://dev-ecu.mycariq.com/Cariq/settings/set/Alert/";
     public static final String CARIQPOFILEUPDATEAPI = "https://dev-ecu.mycariq.com/Cariq//cariqusers/updateUser";
+    public static final String CARIQLOGINAPI = "https://dev-ecu.mycariq.com/Cariq/authenticate";
 
     //LIVE API LINK LIST
 
@@ -105,4 +106,5 @@ public class ApplicationConstants {
 //    public static final String CARIQALERTSETTINGSAPI = "https://ecu.mycariq.com/Cariq/settings/get/Alert/";
 //    public static final String CARIQSETALERTSETTINGSAPI = "https://ecu.mycariq.com/Cariq/settings/set/Alert/";
 //    public static final String CARIQPOFILEUPDATEAPI = "https://ecu.mycariq.com/Cariq//cariqusers/updateUser";
+//    public static final String CARIQLOGINAPI = "https://dev-ecu.mycariq.com/Cariq/authenticate";
 }

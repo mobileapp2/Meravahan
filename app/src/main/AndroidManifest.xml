@@ -129,7 +129,10 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".activities.CariqProfileEdit_Activity"
-            android:label=""
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activities.CariqLogin_Activity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
