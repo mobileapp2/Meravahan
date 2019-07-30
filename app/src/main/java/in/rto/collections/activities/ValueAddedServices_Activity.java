@@ -1,7 +1,9 @@
 package in.rto.collections.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,13 +26,18 @@ import in.rto.collections.R;
 import in.rto.collections.models.VASListModel;
 import in.rto.collections.utilities.ApplicationConstants;
 import in.rto.collections.utilities.UserSessionManager;
+import in.rto.collections.utilities.Utilities;
+import in.rto.collections.utilities.WebServiceCalls;
 
 public class ValueAddedServices_Activity extends AppCompatActivity {
 
     private Context context;
     private UserSessionManager session;
+    private LinearLayout ll_parent;
     private EditText edt_type, edt_mobile, edt_description;
     private Button btn_send;
+
+    private String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +54,7 @@ public class ValueAddedServices_Activity extends AppCompatActivity {
     private void init() {
         context = ValueAddedServices_Activity.this;
         session = new UserSessionManager(context);
+        ll_parent = findViewById(R.id.ll_parent);
         edt_type = findViewById(R.id.edt_type);
         edt_mobile = findViewById(R.id.edt_mobile);
         edt_description = findViewById(R.id.edt_description);
@@ -55,6 +67,8 @@ public class ValueAddedServices_Activity extends AppCompatActivity {
                     ApplicationConstants.KEY_LOGIN_INFO));
             JSONObject json = user_info.getJSONObject(0);
             edt_mobile.setText(json.getString("mobile"));
+            user_id = json.getString("id");
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -69,7 +83,6 @@ public class ValueAddedServices_Activity extends AppCompatActivity {
                 vasList.add(new VASListModel("1", "Request for tracking device"));
                 vasList.add(new VASListModel("2", "Request for fuel card"));
                 vasList.add(new VASListModel("3", "Request for Fuel efficiency"));
-
                 showRequestListDialog(vasList);
             }
         });
@@ -79,15 +92,43 @@ public class ValueAddedServices_Activity extends AppCompatActivity {
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (edt_type.getText().toString().trim().isEmpty()) {
+                    Utilities.showSnackBar(ll_parent, "Please select request type");
+                    return;
+                }
+
+                if (!Utilities.isMobileNo(edt_mobile)) {
+                    Utilities.showSnackBar(ll_parent, "Please enter valid mobile no.");
+                    return;
+                }
+
+                if (edt_description.getText().toString().trim().isEmpty()) {
+                    Utilities.showSnackBar(ll_parent, "Please enter request message");
+                    return;
+                }
+
+                String message = edt_type.getText().toString().trim() + System.getProperty("line.separator") + edt_description.getText().toString().trim();
+
+                if (Utilities.isInternetAvailable(context)) {
+                    JsonObject mainObj = new JsonObject();
+                    mainObj.addProperty("type", "sendSms");
+                    mainObj.addProperty("mobile", edt_mobile.getText().toString().trim());
+                    mainObj.addProperty("message", message);
+                    mainObj.addProperty("user_id", "0");
+                    mainObj.addProperty("client_id", user_id);
+                    new sendSms().execute(mainObj.toString());
+                } else {
+                    Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
+                }
+
 
             }
         });
     }
 
-
     private void showRequestListDialog(final ArrayList<VASListModel> makerList) {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
-        builderSingle.setTitle("Select Maker");
+        builderSingle.setTitle("Select Request Type");
         builderSingle.setCancelable(false);
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, R.layout.list_row);
@@ -118,6 +159,107 @@ public class ValueAddedServices_Activity extends AppCompatActivity {
         alertD.show();
     }
 
+    public class sendSms extends AsyncTask<String, Void, String> {
+        ProgressDialog pd;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd = new ProgressDialog(context, R.style.CustomDialogTheme);
+            pd.setMessage("Please wait ...");
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String res = "[]";
+            res = WebServiceCalls.JSONAPICall(ApplicationConstants.SENDVASMSGAPI, params[0]);
+            return res.trim();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            String type = "", message = "";
+            try {
+                pd.dismiss();
+                if (!result.equals("")) {
+                    JSONObject mainObj = new JSONObject(result);
+                    type = mainObj.getString("type");
+                    message = mainObj.getString("message");
+                    if (type.equalsIgnoreCase("success")) {
+                        JsonObject mainObj1 = new JsonObject();
+                        mainObj1.addProperty("type", "sendWhatsappMessage");
+                        mainObj1.addProperty("mobile", edt_mobile.getText().toString().trim());
+                        mainObj1.addProperty("message", edt_type.getText().toString().trim() + "\n" + edt_description.getText().toString().trim());
+                        mainObj1.addProperty("user_id", "0");
+                        mainObj1.addProperty("client_id", user_id);
+                        new sendWhatsappMessage().execute(mainObj1.toString());
+                    } else {
+                        Utilities.showAlertDialog(context, "Fail", "Failed to send sms message", false);
+                    }
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public class sendWhatsappMessage extends AsyncTask<String, Void, String> {
+        ProgressDialog pd;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd = new ProgressDialog(context, R.style.CustomDialogTheme);
+            pd.setMessage("Please wait ...");
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String res = "[]";
+            res = WebServiceCalls.JSONAPICall(ApplicationConstants.SENDVASMSGAPI, params[0]);
+            return res.trim();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            String type = "", message = "";
+            try {
+                pd.dismiss();
+                if (!result.equals("")) {
+                    JSONObject mainObj = new JSONObject(result);
+                    type = mainObj.getString("type");
+                    message = mainObj.getString("message");
+                    if (type.equalsIgnoreCase("success")) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialogTheme);
+                        builder.setMessage("Your request is submitted successfully");
+                        builder.setIcon(R.drawable.ic_success_24dp);
+                        builder.setTitle("Success");
+                        builder.setCancelable(false);
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                finish();
+                            }
+                        });
+                        AlertDialog alertD = builder.create();
+                        alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationTheme;
+                        alertD.show();
+                    } else {
+
+                    }
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     private void setUpToolbar() {
         Toolbar mToolbar = findViewById(R.id.toolbar);
