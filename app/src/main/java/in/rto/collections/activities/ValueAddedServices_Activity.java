@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.google.gson.JsonObject;
 
@@ -37,7 +36,7 @@ public class ValueAddedServices_Activity extends AppCompatActivity {
     private EditText edt_type, edt_mobile, edt_description;
     private Button btn_send;
 
-    private String user_id;
+    private String user_id, name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +67,7 @@ public class ValueAddedServices_Activity extends AppCompatActivity {
             JSONObject json = user_info.getJSONObject(0);
             edt_mobile.setText(json.getString("mobile"));
             user_id = json.getString("id");
+            name = json.getString("name");
 
 
         } catch (Exception e) {
@@ -80,9 +80,9 @@ public class ValueAddedServices_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ArrayList<VASListModel> vasList = new ArrayList<>();
-                vasList.add(new VASListModel("1", "Request for tracking device"));
-                vasList.add(new VASListModel("2", "Request for fuel card"));
-                vasList.add(new VASListModel("3", "Request for Fuel efficiency"));
+                vasList.add(new VASListModel("1", "Tracking Device"));
+                vasList.add(new VASListModel("2", "Fuel Card"));
+                vasList.add(new VASListModel("3", "Fuel Efficiency"));
                 showRequestListDialog(vasList);
             }
         });
@@ -107,13 +107,20 @@ public class ValueAddedServices_Activity extends AppCompatActivity {
                     return;
                 }
 
-                String message = edt_type.getText().toString().trim() + System.getProperty("line.separator") + edt_description.getText().toString().trim();
+                String messageStr = "Dear Team," + System.getProperty("line.separator") +
+                        "There is an enquiry for" + edt_type.getText().toString().trim() + System.getProperty("line.separator") +
+                        "Customer Name - " + name + System.getProperty("line.separator") +
+                        "Customer Mobile - " + edt_mobile.getText().toString().trim() + System.getProperty("line.separator") +
+                        "Customer Message - " + edt_description.getText().toString().trim() + System.getProperty("line.separator") +
+                        "Please contact customer for further details" + System.getProperty("line.separator") +
+                        "Thanks - MERAVAHAN Team";
+
 
                 if (Utilities.isInternetAvailable(context)) {
                     JsonObject mainObj = new JsonObject();
                     mainObj.addProperty("type", "sendSms");
                     mainObj.addProperty("mobile", edt_mobile.getText().toString().trim());
-                    mainObj.addProperty("message", message);
+                    mainObj.addProperty("message", messageStr);
                     mainObj.addProperty("user_id", "0");
                     mainObj.addProperty("client_id", user_id);
                     new sendSms().execute(mainObj.toString());
@@ -189,10 +196,19 @@ public class ValueAddedServices_Activity extends AppCompatActivity {
                     type = mainObj.getString("type");
                     message = mainObj.getString("message");
                     if (type.equalsIgnoreCase("success")) {
+                        String messageStr = "Dear Team," + System.getProperty("line.separator") +
+                                "There is an enquiry for" + edt_type.getText().toString().trim() + System.getProperty("line.separator") +
+                                "Customer Name - " + name + System.getProperty("line.separator") +
+                                "Customer Mobile - " + edt_mobile.getText().toString().trim() + System.getProperty("line.separator") +
+                                "Customer Message - " + edt_description.getText().toString().trim() + System.getProperty("line.separator") +
+                                "Please contact customer for further details" + System.getProperty("line.separator") +
+                                "Thanks - MERAVAHAN Team";
+
+
                         JsonObject mainObj1 = new JsonObject();
                         mainObj1.addProperty("type", "sendWhatsappMessage");
                         mainObj1.addProperty("mobile", edt_mobile.getText().toString().trim());
-                        mainObj1.addProperty("message", edt_type.getText().toString().trim() + "\n" + edt_description.getText().toString().trim());
+                        mainObj1.addProperty("message", messageStr);
                         mainObj1.addProperty("user_id", "0");
                         mainObj1.addProperty("client_id", user_id);
                         new sendWhatsappMessage().execute(mainObj1.toString());
