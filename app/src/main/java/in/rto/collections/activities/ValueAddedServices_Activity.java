@@ -28,6 +28,8 @@ import in.rto.collections.utilities.UserSessionManager;
 import in.rto.collections.utilities.Utilities;
 import in.rto.collections.utilities.WebServiceCalls;
 
+import static in.rto.collections.utilities.ApplicationConstants.ADMINMOBILE;
+
 public class ValueAddedServices_Activity extends AppCompatActivity {
 
     private Context context;
@@ -119,7 +121,7 @@ public class ValueAddedServices_Activity extends AppCompatActivity {
                 if (Utilities.isInternetAvailable(context)) {
                     JsonObject mainObj = new JsonObject();
                     mainObj.addProperty("type", "sendSms");
-                    mainObj.addProperty("mobile", edt_mobile.getText().toString().trim());
+                    mainObj.addProperty("mobile", ADMINMOBILE);
                     mainObj.addProperty("message", messageStr);
                     mainObj.addProperty("user_id", "0");
                     mainObj.addProperty("client_id", user_id);
@@ -207,7 +209,7 @@ public class ValueAddedServices_Activity extends AppCompatActivity {
 
                         JsonObject mainObj1 = new JsonObject();
                         mainObj1.addProperty("type", "sendWhatsappMessage");
-                        mainObj1.addProperty("mobile", edt_mobile.getText().toString().trim());
+                        mainObj1.addProperty("mobile", ADMINMOBILE);
                         mainObj1.addProperty("message", messageStr);
                         mainObj1.addProperty("user_id", "0");
                         mainObj1.addProperty("client_id", user_id);

@@ -54,7 +54,7 @@ public class NotificationsCariq_Activity extends Fragment {
         context = getActivity();
         init(rootView);
         getSessionData();
-        setDefault();
+//        setDefault();
         setEventHandlers();
         return rootView;
     }
@@ -98,6 +98,7 @@ public class NotificationsCariq_Activity extends Fragment {
             ArrayList<CarIqUserDetailsModel.ResultBean> myCarList = new ArrayList<>();
             myCarList = pojoDetails.getResult();
             cariqdetails = myCarList.get(0);
+
             if (Utilities.isNetworkAvailable(context)) {
                 new GetNotificationsInfoList().execute();
             } else {
@@ -128,8 +129,16 @@ public class NotificationsCariq_Activity extends Fragment {
             @Override
             public void onRefresh() {
                 if (Utilities.isNetworkAvailable(context)) {
+
+                    if (cariqdetails == null) {
+                        ll_nothingtoshow.setVisibility(View.VISIBLE);
+                        rv_productlist.setVisibility(View.GONE);
+                        swipeRefreshLayout.setRefreshing(false);
+                        return;
+                    }
+
+
                     new GetNotificationsInfoList().execute();
-                    swipeRefreshLayout.setRefreshing(true);
                 } else {
                     Utilities.showSnackBar(ll_parent, "Please Check Internet Connection");
                     swipeRefreshLayout.setRefreshing(false);

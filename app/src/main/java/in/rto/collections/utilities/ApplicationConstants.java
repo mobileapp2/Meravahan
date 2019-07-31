@@ -30,6 +30,13 @@ public class ApplicationConstants {
     public static final String TRANSSTATUSURL = "https://meravahan.in/paytm/transaction_status.php";
 
 
+    public static final String ADMINMOBILE = "9175326801";
+//    public static final String ADMINMOBILE = "8149115089";
+
+
+
+
+
     //TEST API LINK LIST
 
 //    public static final String CLIENTAPI = "https://gstkhata.com/vehicle/Apis/client.php";
