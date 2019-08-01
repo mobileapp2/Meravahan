@@ -326,6 +326,5 @@ public class CarIqCarsList_Activity extends AppCompatActivity {
                 finish();
             }
         });
-        setSupportActionBar(mToolbar);
     }
 }

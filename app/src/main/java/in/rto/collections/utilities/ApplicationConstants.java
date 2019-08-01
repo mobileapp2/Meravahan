@@ -31,7 +31,6 @@ public class ApplicationConstants {
 
 
     public static final String ADMINMOBILE = "9175326801";
-//    public static final String ADMINMOBILE = "8149115089";
 
 
 

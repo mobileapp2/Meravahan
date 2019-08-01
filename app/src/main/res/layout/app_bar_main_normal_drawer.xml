@@ -34,7 +34,7 @@
 
             <ImageView
                 android:id="@+id/img_service"
-                android:layout_width="25dp"
+                android:layout_width="30dp"
                 android:layout_height="25dp"
                 android:layout_gravity="end"
                 android:layout_marginRight="20dp"
