@@ -479,6 +479,8 @@ public class MainDrawer_Activity extends AppCompatActivity implements Navigation
                     startActivity(new Intent(context, FAQ_Activity.class));
                 } else if (id == R.id.legal_info) {
                     startActivity(new Intent(context, LegalInfo_Activity.class));
+                } else if (id == R.id.menu_information) {
+                    startActivity(new Intent(context, Material_Activity.class));
                 } else if (id == R.id.menu_logout) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setMessage("Are you sure you want to log out?");
